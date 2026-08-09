@@ -49,7 +49,8 @@ deploy** → copy into `public/documents/[semester]/[course]/` and `public/image
    `D:\Projects\GitHub\packet-tracer-security-plus-lab` (has `topology.png`).
 3. **Kali/Metasploitable/Wazuh SIEM Lab Series** — source: `D:\Projects\GitHub\linux-learning`
    (hands-on-labs sub-project).
-4. **SOC Dashboard (Grafana + Postgres)** — source: `D:\Projects\GitHub\soc-dashboard-grafana`.
+4. **SOC Dashboard (Grafana + Postgres)** — source: `D:\Projects\Portfolio\soc-dashboard-grafana`
+   (moved from `D:\Projects\GitHub\` 2026-08-08 — local only, not pushed to GitHub).
    Needs a dashboard screenshot captured before use as media.
 5. **Cisco Linux Unhatched — Command Report** — same repo as #3 (course-report sub-project).
 6. **Physics 2A "ICE vs EV Mechanics" Final Project** — source:
@@ -69,8 +70,11 @@ repeated here to avoid drift between the two.
 As of 2026-08-08: repo scaffolding complete, all 7 curated content items ingested into
 `data/highlights.json` (7 entries) and `data/coursework.json` (1 self-study entry,
 3 documents), and all five components (`HeroView`, `HighlightGrid`, `LightboxModal`,
-`ExplorerModal`, `PdfViewerModal`) built out in `index.html`/`style.css`/`app.js`. Not
-deployed, nothing committed or pushed.
+`ExplorerModal`, `PdfViewerModal`) built out in `index.html`/`style.css`/`app.js`. **Live
+on Vercel** at https://jared-lomeli-portfolio.vercel.app (deployed via Vercel CLI, not
+GitHub — nothing has been pushed to GitHub). Repo now lives at
+`D:\Projects\Portfolio\jared-lomeli-portfolio\` (moved from `D:\Projects\GitHub\`
+2026-08-08 since it isn't a GitHub-pushed repo).
 
 **Build verified 2026-08-08** via a local static server (`python -m http.server`) plus a
 headless jsdom smoke test (fetch polyfilled, `<dialog>` stubbed): all 7 cards render with
@@ -99,12 +103,22 @@ link health. Found and fixed 2 real bugs:
 All 9 tests pass, confirmed stable across 3 repeats. `.lightbox-dialog` didn't have this
 bug (never overrides `display`).
 
+**Deployed to Vercel 2026-08-08** via the Vercel CLI (`vercel deploy` / `--prod`), at
+Jared's explicit request to push to Vercel only, not GitHub. First deploy 404'd on `/` —
+Vercel's zero-config default treats a `public/` folder as the output directory when one
+exists, silently excluding the real site root from the deployment. Fixed by pinning
+`"outputDirectory": "."` in `vercel.json`. Also fixed the long-standing repo-name
+mismatch: the Kali/Metasploitable/Wazuh card's `github` link now points to
+`linux-learning/tree/main/kali-metasploitable-wazuh-linux` (verified via `gh api`)
+instead of the bare `linux-learning` repo root.
+
 **Packaging done alongside ingestion:**
 
-- Cybersecurity Python Toolkit → new local-only repo `D:\Projects\GitHub\cybersecurity-python-toolkit`
-  (README + 3 privacy-fixed scripts + sample log). Not pushed to GitHub — hold until told.
+- Cybersecurity Python Toolkit → new local-only repo `D:\Projects\Portfolio\cybersecurity-python-toolkit`
+  (moved from `D:\Projects\GitHub\` 2026-08-08; README + 3 privacy-fixed scripts + sample
+  log). Not pushed to GitHub — hold until told.
 - `soc-dashboard-grafana` had no git repo — initialized locally (`git init`, branch `main`,
-  nothing committed). Not pushed.
+  nothing committed). Not pushed. Now at `D:\Projects\Portfolio\soc-dashboard-grafana`.
 - Packet Tracer's `topology.png` copied into `public/images/`.
 - Cisco Linux Unhatched's 3 HTML pages copied into
   `public/documents/self-study/cisco-linux-unhatched/`.
