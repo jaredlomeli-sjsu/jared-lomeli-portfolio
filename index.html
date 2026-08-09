@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jared Lomeli — Portfolio</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header id="hero">
+      <div class="hero-inner">
+        <p class="hero-eyebrow">Jared Lomeli</p>
+        <h1>CompTIA Security+ Certified &amp; SJSU CNSM Student</h1>
+        <p class="hero-tagline">
+          Engineering Technology (Computer Network System Management) student at
+          San José State University, building hands-on projects in networking,
+          security operations, and AI agents. Seeking IT Support, Network/NOC,
+          and SOC Analyst opportunities.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#highlight-grid">
+            <svg viewBox="0 0 24 24" aria-hidden="true" class="btn-icon">
+              <path
+                d="M4 4h6l2 2h8v12H4z"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linejoin="round"
+              />
+            </svg>
+            View Projects
+          </a>
+          <button
+            class="btn btn-secondary"
+            id="open-explorer-btn"
+            type="button"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true" class="btn-icon">
+              <path
+                d="M4 19V5a2 2 0 0 1 2-2h5l2 2h7v14z"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linejoin="round"
+              />
+            </svg>
+            Browse Coursework
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section
+        id="highlight-grid"
+        class="highlight-grid"
+        aria-label="Project highlights"
+      >
+        <!-- HighlightGrid cards rendered here by app.js -->
+      </section>
+    </main>
+
+    <dialog id="lightbox" class="lightbox-dialog" aria-label="Image preview">
+      <button
+        class="dialog-close"
+        data-close="lightbox"
+        type="button"
+        aria-label="Close image preview"
+      >
+        ✕
+      </button>
+      <img id="lightbox-image" src="" alt="" />
+      <p id="lightbox-caption" class="lightbox-caption"></p>
+    </dialog>
+
+    <dialog
+      id="vault-explorer"
+      class="explorer-dialog"
+      aria-label="Coursework explorer"
+    >
+      <div class="explorer-header">
+        <h2>Coursework Vault</h2>
+        <button
+          class="dialog-close"
+          data-close="vault-explorer"
+          type="button"
+          aria-label="Close coursework explorer"
+        >
+          ✕
+        </button>
+      </div>
+      <select
+        id="explorer-semester-mobile"
+        class="explorer-mobile-select"
+        aria-label="Select semester"
+      ></select>
+      <input
+        id="explorer-search"
+        class="explorer-search"
+        type="search"
+        placeholder="Search coursework…"
+        aria-label="Search coursework"
+      />
+      <div class="explorer-container">
+        <nav
+          id="explorer-sidebar"
+          class="explorer-sidebar"
+          aria-label="Semesters"
+        ></nav>
+        <div
+          id="explorer-documents"
+          class="explorer-documents"
+          role="listbox"
+          aria-label="Documents"
+        ></div>
+      </div>
+    </dialog>
+
+    <dialog
+      id="pdf-viewer"
+      class="pdf-viewer-dialog"
+      aria-label="Document preview"
+    >
+      <div class="pdf-viewer-header">
+        <h2 id="pdf-viewer-title"></h2>
+        <button
+          class="dialog-close"
+          data-close="pdf-viewer"
+          type="button"
+          aria-label="Close document preview"
+        >
+          ✕
+        </button>
+      </div>
+      <iframe
+        id="pdf-viewer-frame"
+        loading="lazy"
+        title="Document preview"
+        src="about:blank"
+      ></iframe>
+    </dialog>
+
+    <script src="app.js"></script>
+  </body>
+</html>

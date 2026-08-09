@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Command Cheat Sheet - CISCO Linux Unhatched</title>
+<style>
+  :root {
+    --bg: #282a36;
+    --bg-code: #21222c;
+    --text: #f8f8f2;
+    --muted: #8892b0;
+    --border: #44475a;
+    --accent: #bd93f9;
+    --sysadmin: #8be9fd;
+    --sysadmin-bg: rgba(139, 233, 253, 0.10);
+    --security: #ff5555;
+    --security-bg: rgba(255, 85, 85, 0.10);
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+    color: var(--text);
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem 4rem;
+    line-height: 1.5;
+    background: var(--bg);
+  }
+  header { border-bottom: 3px solid var(--accent); padding-bottom: 1rem; margin-bottom: 2rem; }
+  header h1 { margin: 0 0 0.15rem; font-size: 1.9rem; }
+  header .subtitle { margin: 0 0 1rem; color: var(--muted); font-size: 1rem; }
+  nav.pages { display: flex; gap: 1rem; flex-wrap: wrap; font-size: 0.95rem; }
+  nav.pages a {
+    color: var(--accent);
+    text-decoration: none;
+    border: 1px solid var(--border);
+    padding: 0.35rem 0.8rem;
+    border-radius: 4px;
+  }
+  nav.pages a.active { background: var(--accent); color: #282a36; border-color: var(--accent); }
+  nav.pages a:hover { background: var(--border); }
+
+  h2 { font-size: 1.4rem; margin-top: 2.5rem; border-bottom: 1px solid var(--border); padding-bottom: 0.3rem; }
+  h3.category { font-size: 1.1rem; color: var(--accent); margin: 2rem 0 0.6rem; }
+
+  code { font-family: "Consolas", "Courier New", monospace; font-size: 0.88rem; }
+
+  p.intro { color: var(--muted); font-size: 0.95rem; margin-top: -0.4rem; }
+
+  table.cheat {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+  }
+  table.cheat th, table.cheat td {
+    text-align: left;
+    padding: 0.55rem 0.7rem;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  table.cheat th {
+    color: var(--accent);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    border-bottom: 2px solid var(--border);
+  }
+  table.cheat td.command-name { white-space: nowrap; font-weight: 600; }
+  table.cheat td code {
+    background: var(--bg-code);
+    padding: 0.1rem 0.35rem;
+    border-radius: 3px;
+    border: 1px solid var(--border);
+  }
+  table.cheat tr:hover td { background: var(--bg-code); }
+
+  footer { margin-top: 3rem; border-top: 1px solid var(--border); padding-top: 1rem; font-size: 0.85rem; color: var(--muted); }
+
+  @media print {
+    :root {
+      --bg: #ffffff;
+      --bg-code: #f4f4f4;
+      --text: #1c1c1c;
+      --muted: #5a5a5a;
+      --border: #d7d7d7;
+      --accent: #2c5f8a;
+    }
+    body { max-width: 100%; padding: 0; background: #fff; }
+    nav.pages { display: none; }
+    table.cheat { break-inside: auto; }
+    tr { break-inside: avoid; }
+    a { color: inherit; text-decoration: none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>CISCO Linux Unhatched</h1>
+  <p class="subtitle">Command Cheat Sheet &mdash; Jared Lomeli</p>
+  <nav class="pages">
+    <a href="Course Report - CISCO Linux Unhatched.html">Course Report</a>
+    <a href="Command Cheat Sheet.html" class="active">Command Cheat Sheet</a>
+    <a href="SEC+ Exam Mapping.html">SEC+ Exam Mapping</a>
+  </nav>
+</header>
+
+<p class="intro">Condensed quick-reference for fast review &mdash; full explanations and real-life implications are on the <a href="Course Report - CISCO Linux Unhatched.html" style="color:var(--accent);">Course Report</a> page.</p>
+
+<h3 class="category" id="nav-paths">Navigation &amp; Paths</h3>
+<table class="cheat">
+  <tr><th>Command</th><th>What it does</th><th>Key flags / notes</th><th>Example</th></tr>
+  <tr><td class="command-name"><code>ls</code></td><td>List files in a directory</td><td><code>-l</code> long listing &middot; <code>-r</code> reverse order &middot; <code>-v</code> verbose</td><td><code>ls -lr Documents</code></td></tr>
+  <tr><td class="command-name"><code>pwd</code></td><td>Print the current working directory</td><td><code>~</code> = home directory</td><td><code>pwd</code></td></tr>
+  <tr><td class="command-name"><code>cd</code></td><td>Change directory</td><td><code>/</code> = root &middot; <code>cd ..</code> = go back one level</td><td><code>cd /</code></td></tr>
+  <tr><td class="command-name">Absolute Path</td><td>Exact full location, always starts with <code>/</code></td><td>e.g. <code>/home/sysadmin</code> = <code>~</code></td><td><code>/School/Art</code></td></tr>
+  <tr><td class="command-name">Relative Path</td><td>Location relative to where you are now</td><td>starts with a name, not <code>/</code></td><td><code>School/Art</code></td></tr>
+  <tr><td class="command-name">File Types</td><td>First character of <code>ls -l</code> output</td><td><code>d</code> dir &middot; <code>-</code> file &middot; <code>l</code> symlink &middot; <code>s</code> socket &middot; <code>p</code> pipe &middot; <code>b</code>/<code>c</code> device</td><td><code>drwxr-xr-x</code></td></tr>
+</table>
+
+<h3 class="category" id="permissions">Permissions &amp; Ownership</h3>
+<table class="cheat">
+  <tr><th>Command</th><th>What it does</th><th>Key flags / notes</th><th>Example</th></tr>
+  <tr><td class="command-name">Permission Bits</td><td><code>rwx</code> for owner / group / other</td><td>r=read, w=write, x=execute</td><td><code>drwxrwxrwx</code></td></tr>
+  <tr><td class="command-name"><code>su</code> / <code>sudo</code></td><td>Switch user / run one command as super user</td><td><code>sudo -u [user] [cmd]</code></td><td><code>sudo apt-get update</code></td></tr>
+  <tr><td class="command-name"><code>chmod</code></td><td>Change read/write/execute permissions</td><td><code>u/g/o/a</code> + <code>+/-/=</code> + <code>r/w/x</code></td><td><code>chmod u+x hello.sh</code></td></tr>
+  <tr><td class="command-name">Execute a File</td><td>Run a script/program in the current directory</td><td>requires <code>./</code> prefix</td><td><code>./hello.sh</code></td></tr>
+  <tr><td class="command-name"><code>chown</code></td><td>Change file/directory owner</td><td><code>chown [owner] FILE</code></td><td><code>chown sysadmin file.txt</code></td></tr>
+</table>
+
+<h3 class="category" id="viewing">Viewing &amp; Searching</h3>
+<table class="cheat">
+  <tr><th>Command</th><th>What it does</th><th>Key flags / notes</th><th>Example</th></tr>
+  <tr><td class="command-name"><code>cat</code></td><td>Display a file's entire contents</td><td>&mdash;</td><td><code>cat notes.txt</code></td></tr>
+  <tr><td class="command-name"><code>head</code></td><td>Show the first N lines of a file</td><td>default 10 lines</td><td><code>head -5 alpha.txt</code></td></tr>
+  <tr><td class="command-name"><code>tail</code></td><td>Show the last N lines of a file</td><td><code>-f</code> follow (live updates)</td><td><code>tail -5 alpha.txt</code></td></tr>
+  <tr><td class="command-name"><code>grep</code></td><td>Search text for a pattern</td><td><code>-E</code> extended regex (egrep)</td><td><code>grep "Failed password" auth.log</code></td></tr>
+  <tr><td class="command-name">Regex (BRE/ERE)</td><td>Pattern-matching syntax used by <code>grep</code></td><td>Basic: <code>. [ ] * ^ $</code> &middot; Extended: <code>+ ? {} | ( )</code></td><td><code>grep 'r..f' red.txt</code></td></tr>
+</table>
+
+<h3 class="category" id="fileops">File Operations</h3>
+<table class="cheat">
+  <tr><th>Command</th><th>What it does</th><th>Key flags / notes</th><th>Example</th></tr>
+  <tr><td class="command-name"><code>cp</code></td><td>Copy a file to a new location</td><td><code>.</code> = current directory</td><td><code>cp /etc/passwd .</code></td></tr>
+  <tr><td class="command-name"><code>dd</code></td><td>Low-level, block-by-block copy</td><td><code>if=</code> <code>of=</code> <code>bs=</code> <code>count=</code></td><td><code>dd if=/dev/zero of=/tmp/x bs=1M count=50</code></td></tr>
+  <tr><td class="command-name"><code>mv</code></td><td>Move a file, or rename it in place</td><td>&mdash;</td><td><code>mv file.txt School/</code></td></tr>
+  <tr><td class="command-name"><code>rm</code></td><td>Delete files or directories</td><td><code>-r</code> / <code>-R</code> recursive (no recycle bin)</td><td><code>rm -r OldFolder</code></td></tr>
+</table>
+
+<h3 class="category" id="sysnet">System &amp; Network</h3>
+<table class="cheat">
+  <tr><th>Command</th><th>What it does</th><th>Key flags / notes</th><th>Example</th></tr>
+  <tr><td class="command-name"><code>shutdown</code></td><td>Safely bring the system down</td><td><code>shutdown TIME [MESSAGE]</code></td><td><code>shutdown now "Goodbye"</code></td></tr>
+  <tr><td class="command-name"><code>ifconfig</code> / <code>ping</code></td><td>Show network config / test host reachability</td><td><code>ping -c [count]</code></td><td><code>ping -c 4 192.168.1.2</code></td></tr>
+  <tr><td class="command-name"><code>ps</code></td><td>List running processes</td><td><code>-e</code> all &middot; <code>-f</code> full detail &middot; <code>-ef</code> both</td><td><code>ps -ef</code></td></tr>
+</table>
+
+<h3 class="category" id="pkgusers">Package &amp; User Management</h3>
+<table class="cheat">
+  <tr><th>Command</th><th>What it does</th><th>Key flags / notes</th><th>Example</th></tr>
+  <tr><td class="command-name"><code>dpkg</code> / <code>apt-get</code></td><td>Debian package management</td><td><code>update</code> &middot; <code>install</code> &middot; <code>upgrade</code> &middot; <code>remove</code> &middot; <code>purge</code></td><td><code>sudo apt-get update</code></td></tr>
+  <tr><td class="command-name"><code>passwd</code></td><td>Update or check a user's password</td><td><code>-S</code> status (P/L/NP)</td><td><code>passwd -S sysadmin</code></td></tr>
+  <tr><td class="command-name">I/O Redirection</td><td>Send command output to a file</td><td><code>&gt;</code> overwrite &middot; <code>&gt;&gt;</code> append</td><td><code>echo "hi" &gt;&gt; log.txt</code></td></tr>
+</table>
+
+<footer>
+  <p>Condensed from <code>Learning Linux.pdf</code> (handwritten course notes). Full detail on the <a href="Course Report - CISCO Linux Unhatched.html" style="color:var(--accent);">Course Report</a> page.</p>
+  <nav class="pages">
+    <a href="Course Report - CISCO Linux Unhatched.html">&larr; Course Report</a>
+    <a href="SEC+ Exam Mapping.html">&rarr; SEC+ Exam Mapping</a>
+  </nav>
+</footer>
+
+</body>
+</html>

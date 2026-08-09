@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SEC+ Exam Mapping - CISCO Linux Unhatched</title>
+<style>
+  :root {
+    --bg: #282a36;
+    --bg-code: #21222c;
+    --text: #f8f8f2;
+    --muted: #8892b0;
+    --border: #44475a;
+    --accent: #bd93f9;
+    --sysadmin: #8be9fd;
+    --sysadmin-bg: rgba(139, 233, 253, 0.10);
+    --security: #ff5555;
+    --security-bg: rgba(255, 85, 85, 0.10);
+    --green: #50fa7b;
+    --green-bg: rgba(80, 250, 123, 0.10);
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+    color: var(--text);
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem 4rem;
+    line-height: 1.55;
+    background: var(--bg);
+  }
+  header { border-bottom: 3px solid var(--accent); padding-bottom: 1rem; margin-bottom: 2rem; }
+  header h1 { margin: 0 0 0.15rem; font-size: 1.9rem; }
+  header .subtitle { margin: 0 0 1rem; color: var(--muted); font-size: 1rem; }
+  nav.pages { display: flex; gap: 1rem; flex-wrap: wrap; font-size: 0.95rem; }
+  nav.pages a {
+    color: var(--accent);
+    text-decoration: none;
+    border: 1px solid var(--border);
+    padding: 0.35rem 0.8rem;
+    border-radius: 4px;
+  }
+  nav.pages a.active { background: var(--accent); color: #282a36; border-color: var(--accent); }
+  nav.pages a:hover { background: var(--border); }
+
+  h2 { font-size: 1.4rem; margin-top: 2.5rem; border-bottom: 1px solid var(--border); padding-bottom: 0.3rem; }
+  h3 { font-size: 1.1rem; color: var(--accent); margin: 1.6rem 0 0.5rem; }
+
+  code { font-family: "Consolas", "Courier New", monospace; font-size: 0.9rem; background: var(--bg-code); padding: 0.1rem 0.35rem; border-radius: 3px; border: 1px solid var(--border); }
+
+  .callout {
+    background: var(--green-bg);
+    border-left: 3px solid var(--green);
+    border-radius: 4px;
+    padding: 0.9rem 1.1rem;
+    margin: 1rem 0;
+    font-size: 0.95rem;
+  }
+  .callout strong { color: var(--green); }
+
+  .foundation {
+    background: rgba(189, 147, 249, 0.10);
+    border-left: 3px solid var(--accent);
+    border-radius: 4px;
+    padding: 0.9rem 1.1rem;
+    margin: 1rem 0;
+    font-size: 0.95rem;
+  }
+  .foundation strong { color: var(--accent); }
+
+  table.domains {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+    margin: 1rem 0 2rem;
+  }
+  table.domains th, table.domains td {
+    text-align: left;
+    padding: 0.6rem 0.7rem;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  table.domains th {
+    color: var(--accent);
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    border-bottom: 2px solid var(--border);
+  }
+  table.domains td.domain-name { font-weight: 600; white-space: nowrap; color: var(--sysadmin); }
+  table.domains tr:hover td { background: var(--bg-code); }
+
+  ul.commands-used { margin: 0; padding-left: 1.1rem; font-size: 0.9rem; }
+  ul.commands-used li { margin-bottom: 0.15rem; }
+
+  p.note { font-size: 0.85rem; color: var(--muted); }
+
+  footer { margin-top: 3rem; border-top: 1px solid var(--border); padding-top: 1rem; font-size: 0.85rem; color: var(--muted); }
+  footer a { color: var(--accent); }
+
+  @media print {
+    :root {
+      --bg: #ffffff;
+      --bg-code: #f4f4f4;
+      --text: #1c1c1c;
+      --muted: #5a5a5a;
+      --border: #d7d7d7;
+      --accent: #2c5f8a;
+      --sysadmin: #2c5f8a;
+      --green: #2f7d43;
+      --green-bg: #eef9f1;
+    }
+    body { max-width: 100%; padding: 0; background: #fff; }
+    nav.pages { display: none; }
+    .callout, .foundation, table.domains { break-inside: avoid; }
+    a { color: inherit; text-decoration: none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>CISCO Linux Unhatched</h1>
+  <p class="subtitle">SEC+ Exam Mapping &mdash; Jared Lomeli</p>
+  <nav class="pages">
+    <a href="Course Report - CISCO Linux Unhatched.html">Course Report</a>
+    <a href="Command Cheat Sheet.html">Command Cheat Sheet</a>
+    <a href="SEC+ Exam Mapping.html" class="active">SEC+ Exam Mapping</a>
+  </nav>
+</header>
+
+<section>
+  <h2>Why This Page Exists</h2>
+  <p>
+    I'm studying for <strong>CompTIA Security+ (SY0-701)</strong>, not A+ &mdash; this page connects
+    what Linux Unhatched taught to the actual SEC+ exam domains and to the hands-on work I've already
+    done in my <code>kali-metasploitable-wazuh-linux</code> SEC+ labs. Command-line fluency isn't a
+    SEC+ topic by itself, but almost every SEC+ domain assumes you can actually operate at a Linux
+    shell &mdash; this is where that assumption gets satisfied.
+  </p>
+  <div class="foundation">
+    <strong>Completion order note:</strong> I technically finished this course <em>after</em> some of
+    the SEC+ labs, but that's backwards from how the material actually builds. Linux Unhatched is the
+    prerequisite foundation for the <code>kali-metasploitable-wazuh-linux</code> labs, not a follow-up
+    to them &mdash; every lab in that folder assumes the command-line skills documented here.
+  </div>
+</section>
+
+<section>
+  <h2>Direct Reuse &mdash; Lab 4.1: Log Analysis</h2>
+  <p>This is the clearest, most literal overlap &mdash; not a stretch mapping. <strong>Lab 4.1 (Security Operations)</strong> reused Linux Unhatched commands verbatim to hunt brute-force login activity:</p>
+  <div class="callout">
+    <p style="margin:0 0 0.5rem;"><code>sudo cat /var/log/auth.log | head -50</code> &mdash; read the first 50 lines of the auth log to learn the normal shape of an entry, using <strong>cat</strong> and <strong>head</strong> exactly as taught in this course.</p>
+    <p style="margin:0;"><code>sudo grep "Failed password" /var/log/auth.log</code> &mdash; filtered the same log down to failed-login events using <strong>grep</strong>, isolating the exact pattern a brute-force attack produces.</p>
+  </div>
+  <p>
+    This is the hand-run version of the query logic a SIEM platform like Wazuh automates: a human
+    scanning <code>auth.log</code> with <code>grep</code> is doing, manually, what a detection rule
+    does automatically. Learning <code>grep</code> and regex in Linux Unhatched is directly learning
+    how that automation is expressed under the hood.
+  </p>
+</section>
+
+<section>
+  <h2>Domain-by-Domain Relevance</h2>
+  <p class="note">Domain numbers and weights below follow the current SY0-701 exam objectives.</p>
+  <table class="domains">
+    <tr><th>Domain</th><th>Commands from this course</th><th>Why it matters</th></tr>
+    <tr>
+      <td class="domain-name">2.0 Threats, Vulnerabilities &amp; Mitigations</td>
+      <td>
+        <ul class="commands-used">
+          <li><code>ls -la</code>, File Types</li>
+          <li><code>grep</code>, Regex (BRE/ERE)</li>
+        </ul>
+      </td>
+      <td>Spotting recon indicators &mdash; hidden dotfiles, unexpected SUID bits, a regular file where a symlink should be &mdash; and writing search patterns that describe "what suspicious looks like," the same logic behind IDS/AV signatures.</td>
+    </tr>
+    <tr>
+      <td class="domain-name">3.0 Security Architecture</td>
+      <td>
+        <ul class="commands-used">
+          <li>Permission Bits, <code>chmod</code>, <code>chown</code></li>
+          <li><code>su</code> / <code>sudo</code></li>
+          <li><code>ifconfig</code> / <code>ping</code></li>
+        </ul>
+      </td>
+      <td>Least privilege in practice &mdash; correct permission bits instead of <code>chmod 777</code>, <code>sudo</code> over <code>su</code> for auditable privilege escalation. <code>ifconfig</code>/<code>ping</code> are the same pair used in Lab 2.1 to prove network segmentation actually held.</td>
+    </tr>
+    <tr>
+      <td class="domain-name">4.0 Security Operations</td>
+      <td>
+        <ul class="commands-used">
+          <li><code>cat</code>, <code>head</code>, <code>tail</code>, <code>grep</code></li>
+          <li><code>ps</code></li>
+          <li><code>dd</code>, <code>rm</code></li>
+          <li><code>dpkg</code> / <code>apt-get</code></li>
+          <li><code>passwd -S</code>, I/O Redirection</li>
+        </ul>
+      </td>
+      <td>Log analysis (direct Lab 4.1 reuse), live process/malware triage (<code>ps -ef</code>), evidence handling (<code>dd</code> for forensic imaging vs. <code>rm</code> as an anti-forensics red flag), patch management (<code>apt-get</code>), and account/password policy &mdash; <code>passwd -S</code>'s lockout/expiration fields map directly to objective <strong>4.6 (Identity &amp; Access Management)</strong>.</td>
+    </tr>
+    <tr>
+      <td class="domain-name">5.0 Security Program Mgmt &amp; Oversight</td>
+      <td>
+        <ul class="commands-used">
+          <li><code>ls -l</code> (ownership), <code>passwd -S</code></li>
+        </ul>
+      </td>
+      <td>File ownership listings and account-status checks are the raw data behind access-control audits and policy-compliance reviews &mdash; the kind of evidence this domain expects you to be able to pull and read.</td>
+    </tr>
+  </table>
+</section>
+
+<footer>
+  <p>Mapping based on my own <code>kali-metasploitable-wazuh-linux</code> SEC+ lab reports and the current CompTIA Security+ (SY0-701) exam objectives.</p>
+  <nav class="pages">
+    <a href="Course Report - CISCO Linux Unhatched.html">&larr; Course Report</a>
+    <a href="Command Cheat Sheet.html">&larr; Command Cheat Sheet</a>
+  </nav>
+</footer>
+
+</body>
+</html>

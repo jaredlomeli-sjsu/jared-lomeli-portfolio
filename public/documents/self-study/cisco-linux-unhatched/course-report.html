@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Course Report - CISCO Linux Unhatched</title>
+<style>
+  :root {
+    --bg: #282a36;
+    --bg-code: #21222c;
+    --text: #f8f8f2;
+    --muted: #8892b0;
+    --border: #44475a;
+    --accent: #bd93f9;
+    --sysadmin: #8be9fd;
+    --sysadmin-bg: rgba(139, 233, 253, 0.10);
+    --security: #ff5555;
+    --security-bg: rgba(255, 85, 85, 0.10);
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+    color: var(--text);
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem 4rem;
+    line-height: 1.55;
+    background: var(--bg);
+  }
+  header { border-bottom: 3px solid var(--accent); padding-bottom: 1rem; margin-bottom: 2rem; }
+  header h1 { margin: 0 0 0.15rem; font-size: 1.9rem; }
+  header .subtitle { margin: 0 0 1rem; color: var(--muted); font-size: 1rem; }
+  nav.pages { display: flex; gap: 1rem; flex-wrap: wrap; font-size: 0.95rem; }
+  nav.pages a {
+    color: var(--accent);
+    text-decoration: none;
+    border: 1px solid var(--border);
+    padding: 0.35rem 0.8rem;
+    border-radius: 4px;
+  }
+  nav.pages a.active { background: var(--accent); color: #282a36; border-color: var(--accent); }
+  nav.pages a:hover { background: var(--border); }
+
+  h2 { font-size: 1.4rem; margin-top: 2.5rem; border-bottom: 1px solid var(--border); padding-bottom: 0.3rem; }
+  h3.category { font-size: 1.15rem; color: var(--accent); margin-top: 2.2rem; }
+
+  code { font-family: "Consolas", "Courier New", monospace; font-size: 0.92rem; }
+  p.syntax code, p.example code {
+    display: inline-block;
+    background: var(--bg-code);
+    padding: 0.3rem 0.6rem;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+  }
+  p.def { margin: 0.5rem 0 0.6rem; }
+  p.syntax, p.example, p.flags { margin: 0.4rem 0; font-size: 0.95rem; }
+  p.example strong, p.flags strong { color: var(--muted); }
+
+  details.command {
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    margin-bottom: 0.5rem;
+    padding: 0 1rem;
+  }
+  details.command[open] { padding-bottom: 0.9rem; }
+  summary.cmd {
+    font-size: 1.05rem;
+    margin: 0;
+    padding: 0.7rem 0;
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+  }
+  summary.cmd::-webkit-details-marker { display: none; }
+  summary.cmd::before {
+    content: "\25B8";
+    color: var(--accent);
+    font-size: 0.8rem;
+    display: inline-block;
+    transition: transform 0.15s ease;
+  }
+  details.command[open] summary.cmd::before { transform: rotate(90deg); }
+  details.command[open] summary.cmd {
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 0.3rem;
+  }
+  summary.cmd code { background: var(--bg-code); padding: 0.1rem 0.4rem; border-radius: 3px; }
+  summary.cmd:hover { color: var(--accent); }
+  summary.cmd:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  .implications { display: flex; gap: 1rem; margin-top: 0.7rem; flex-wrap: wrap; }
+  .implications > div {
+    flex: 1 1 250px;
+    padding: 0.6rem 0.8rem;
+    border-radius: 4px;
+    font-size: 0.92rem;
+  }
+  .sysadmin { background: var(--sysadmin-bg); border-left: 3px solid var(--sysadmin); }
+  .security { background: var(--security-bg); border-left: 3px solid var(--security); }
+  .sysadmin strong { color: var(--sysadmin); }
+  .security strong { color: var(--security); }
+
+  ul.toc { columns: 2; column-gap: 2rem; list-style: none; padding: 0; font-size: 0.95rem; }
+  ul.toc li { margin-bottom: 0.3rem; break-inside: avoid; }
+  ul.toc a { color: var(--accent); text-decoration: none; }
+  ul.toc a:hover { text-decoration: underline; }
+
+  .about ul { font-size: 0.95rem; }
+  .about .sources { font-size: 0.85rem; color: var(--muted); margin-top: 0.8rem; }
+  .about .sources a { color: var(--muted); }
+
+  .expand-hint { font-size: 0.88rem; color: var(--muted); margin: -0.3rem 0 1rem; }
+
+  footer { margin-top: 3rem; border-top: 1px solid var(--border); padding-top: 1rem; font-size: 0.85rem; color: var(--muted); }
+
+  .toggle-all {
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--accent);
+    font-size: 0.85rem;
+    padding: 0.3rem 0.7rem;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 0.5rem 0 1rem;
+  }
+  .toggle-all:hover { background: var(--bg-code); }
+
+  @media print {
+    :root {
+      --bg: #ffffff;
+      --bg-code: #f4f4f4;
+      --text: #1c1c1c;
+      --muted: #5a5a5a;
+      --border: #d7d7d7;
+      --accent: #2c5f8a;
+      --sysadmin: #2c5f8a;
+      --sysadmin-bg: #eef4f9;
+      --security: #a13d2c;
+      --security-bg: #f9efec;
+    }
+    body { max-width: 100%; padding: 0; background: #fff; }
+    nav.pages, .toggle-all, .expand-hint { display: none; }
+    details.command { break-inside: avoid; border-color: #bbb; }
+    details.command > *:not(summary) { display: block !important; }
+    summary.cmd::before { display: none !important; }
+    summary.cmd { border-bottom: 1px solid #bbb; margin-bottom: 0.3rem; cursor: default; }
+    a { color: inherit; text-decoration: none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>CISCO Linux Unhatched</h1>
+  <p class="subtitle">Course Report &mdash; Jared Lomeli</p>
+  <nav class="pages">
+    <a href="Course Report - CISCO Linux Unhatched.html" class="active">Course Report</a>
+    <a href="Command Cheat Sheet.html">Command Cheat Sheet</a>
+    <a href="SEC+ Exam Mapping.html">SEC+ Exam Mapping</a>
+  </nav>
+</header>
+
+<section class="about" id="about">
+  <h2>About This Course</h2>
+  <p>
+    <strong>Linux Unhatched</strong> is a free, self-paced introduction to Linux offered through
+    <strong>Cisco Networking Academy</strong>, built by NDG (Network Development Group). It's an
+    8-hour, beginner-level course with no prerequisites, taught through instructional material paired
+    with a live Linux virtual machine that runs directly in the browser &mdash; no local install
+    required.
+  </p>
+  <p>
+    The course covers basic command-line navigation, file management, permissions, and system
+    configuration. It's aligned to a portion of the <strong>LPI Linux Essentials</strong> exam
+    objectives. Cisco/NDG recommend continuing on to <em>NDG Linux Essentials</em> or <em>NDG Linux
+    I</em> after finishing this course &mdash; for me, this course is groundwork for
+    <strong>CompTIA Security+ (SY0-701)</strong>, the certification I'm actually studying toward next,
+    not CompTIA A+.
+  </p>
+  <p>
+    This report is built from my own handwritten notes taken during the course, organized here by
+    topic with added context on why each command matters in practice &mdash; both as a general
+    system administrator and from a cybersecurity angle, since that's the direction I'm headed.
+  </p>
+  <p class="sources">
+    Sources: <a href="https://www.netdevgroup.com/online/courses/linux/linux-unhatched" target="_blank" rel="noopener">NDG &mdash; Linux Unhatched course page</a> &middot;
+    <a href="https://www.netacad.com/catalogs/learn" target="_blank" rel="noopener">Cisco Networking Academy &mdash; Learning Catalog</a>
+  </p>
+</section>
+
+<section id="toc">
+  <h2>Command Reference &mdash; Contents</h2>
+  <p class="expand-hint">Every command below is expandable &mdash; click a heading (or use "Expand all") to reveal the full breakdown.</p>
+  <ul class="toc">
+    <li><a href="#nav-paths">Navigation &amp; Paths</a></li>
+    <li><a href="#permissions">Permissions &amp; Ownership</a></li>
+    <li><a href="#viewing">Viewing &amp; Searching</a></li>
+    <li><a href="#fileops">File Operations</a></li>
+    <li><a href="#sysnet">System &amp; Network</a></li>
+    <li><a href="#pkgusers">Package &amp; User Management</a></li>
+  </ul>
+</section>
+
+<section id="commands">
+
+  <button class="toggle-all" type="button" onclick="document.querySelectorAll('details.command').forEach(d => d.open = this.textContent.trim() === 'Expand all'); this.textContent = this.textContent.trim() === 'Expand all' ? 'Collapse all' : 'Expand all';">Expand all</button>
+
+  <h3 class="category" id="nav-paths">Navigation &amp; Paths</h3>
+
+  <details class="command">
+    <summary class="cmd"><code>ls</code> &mdash; List Files</summary>
+    <p class="def"><strong>List</strong> &rarr; shows a listing of information about the files inside a directory.</p>
+    <p class="syntax"><code>ls [options] [arguments]</code></p>
+    <p class="flags"><strong>Key flags:</strong> <code>-l</code> long listing (permissions, owner, size, date) &middot; <code>-r</code> reverse alphabetical order &middot; <code>-v</code> verbose (extra operation detail). Flags can be combined in any order: <code>-lr</code> = <code>-l -r</code> = <code>-rl</code>.</p>
+    <p class="example"><strong>Example:</strong> <code>ls -lr Documents</code> &mdash; long, reverse-alphabetical listing of the Documents directory.</p>
+    <div class="implications">
+      <div class="sysadmin"><strong>Sysadmin angle:</strong> <code>-l</code> is the fastest way to eyeball who owns a file and what permissions it has before troubleshooting a "permission denied" error.</div>
+      <div class="security"><strong>Cybersecurity angle:</strong> <code>ls -la</code> is a standard first recon step &mdash; it reveals hidden dotfiles, unexpected SUID binaries, or recently modified files after a suspected compromise.</div>
+    </div>
+  </details>
+
+  <details class="command">
+    <summary class="cmd"><code>pwd</code> &mdash; Print Working Directory</summary>
+    <p class="def">Prints the directory you're currently standing in.</p>
+    <p class="syntax"><code>pwd [options]</code></p>
+    <p class="flags"><strong>Note:</strong> <code>~</code> is shorthand for "where we are" (home directory). A prompt like <code>sysadmin@localhost:~$</code> shows the machine name (<code>localhost</code>) and current location (<code>~</code>).</p>
+    <div class="implications">
+      <div class="sysadmin"><strong>Sysadmin angle:</strong> Confirms your working location before running a destructive command like <code>rm -r</code> &mdash; never delete blind.</div>
+      <div class="security"><strong>Cybersecurity angle:</strong> During incident response, <code>pwd</code> is the first sanity check after pivoting through a shell (especially a reverse shell) to know exactly where you landed on the filesystem.</div>
+    </div>
+  </details>
+
+  <details class="command">
+    <summary class="cmd"><code>cd</code> &mdash; Change Directory</summary>
+    <p class="def">Moves you to a different directory.</p>
+    <p class="syntax"><code>cd [options] [arguments]</code></p>
+    <p class="flags"><strong>Note:</strong> <code>/</code> is the root directory &mdash; Linux's equivalent of "My Computer." <code>cd /</code> moves you there.</p>
+    <div class="implications">
+      <div class="sysadmin"><strong>Sysadmin angle:</strong> Fast directory traversal is the backbone of every CLI workflow &mdash; muscle memory here saves real time doing routine admin work.</div>
+      <div class="security"><strong>Cybersecurity angle:</strong> Attackers with shell access use <code>cd</code> to explore a compromised host's directory tree, looking for config files, credentials, or writable directories to stage payloads.</div>
+    </div>
+  </details>
+
+  <details class="command">
+    <summary class="cmd">Absolute Path</summary>
+    <p class="def">The exact, full location of a directory, always starting with <code>/</code>.</p>
+    <p class="example"><strong>Example:</strong> home directory = <code>/home/sysadmin</code> = <code>~</code></p>
+    <div class="implications">
+      <div class="sysadmin"><strong>Sysadmin angle:</strong> Scripts and cron jobs should always use absolute paths &mdash; relative paths break silently when a script runs from an unexpected working directory.</div>
+      <div class="security"><strong>Cybersecurity angle:</strong> Malware frequently hardcodes absolute paths like <code>/tmp</code> or <code>/dev/shm</code> because those locations are reliably writable &mdash; recognizing them in logs is a red flag.</div>
+    </div>
+  </details>
+
+  <details class="command">
+    <summary class="cmd">Relative Path</summary>
+    <p class="def">Starts from a directory name rather than <code>/</code>; can span multiple layers (e.g. <code>/School/Art</code>). Go back one level with <code>cd ..</code>.</p>
+    <div class="implications">
+      <div class="sysadmin"><strong>Sysadmin angle:</strong> Handy for quick day-to-day navigation, but risky in automation &mdash; the same relative path means something different depending on where a script is launched from.</div>
+      <div class="security"><strong>Cybersecurity angle:</strong> Repeated <code>cd ..</code> (<code>../../../etc/passwd</code>) is the exact mechanism behind directory/path traversal attacks against web apps that build file paths from user input.</div>
+    </div>
+  </details>
+
+  <details class="command">
+    <summary class="cmd">File Types <span style="color:var(--muted); font-weight:normal;">(first character of <code>ls -l</code> output)</span></summary>
+    <p class="def">The first character of a long listing tells you what kind of file you're looking at.</p>
+    <p class="flags"><code>d</code> directory &middot; <code>-</code> regular file &middot; <code>l</code> symbolic link (points to another file) &middot; <code>s</code> socket (free two-way process communication) &middot; <code>p</code> pipe (one-way process communication) &middot; <code>b</code> block file (fixed-size hardware I/O) &middot; <code>c</code> character file (one-character-at-a-time hardware I/O).</p>
+    <div class="implications">
+      <div class="sysadmin"><strong>Sysadmin angle:</strong> Recognizing device files (<code>b</code>/<code>c</code>) versus regular files prevents accidentally <code>cat</code>-ing a block device and hanging a terminal.</div>
+      <div class="security"><strong>Cybersecurity angle:</strong> A regular file appearing where a symlink is expected (or vice versa) is a classic symlink-attack / TOCTOU red flag worth investigating.</div>
+    </div>
+  </details>
+
+  <h3 class="category" id="permissions">Permissions &amp; Ownership</h3>
+
+  <details class="command">
+    <summary class="cmd">Permission Bits <span style="color:var(--muted); font-weight:normal;">(<code>rwx</code> / Owner-Group-Other)</span></summary>
+    <p class="def"><code>drwxrwxrwx</code> breaks into three sets of three: owner, group, others &mdash; each set is read (<code>r</code>), write (<code>w</code>), execute (<code>x</code>).</p>
+    <p class="flags"><strong>Full <code>ls -l</code> line, left to right:</strong> permissions &rarr; hard link count &rarr; owner user &rarr; group owner &rarr; file size (bytes/KB) &rarr; timestamp &rarr; filename.</p>
+    <div class="implications">
+      <div class="sysadmin"><strong>Sysadmin angle:</strong> Reading a permission string correctly is the single most-used diagnostic skill for "why can't this service write its own log file" tickets.</div>
+      <div class="security"><strong>Cybersecurity angle:</strong> World-writable files (write permission set in the "others" column) are one of the most common misconfiguration findings in a security audit &mdash; they let any local user tamper with data or binaries.</div>
+    </div>
+  </details>
+
+  <details class="command">
+    <summary class="cmd"><code>su</code> / <code>sudo</code> &mdash; Switch User / Super User Do</summary>
+    <p class="def"><code>su</code> temporarily becomes another user (commonly root) inside a new shell &mdash; <code>exit</code> leaves it. <code>sudo</code> runs a single command as super user without opening a new shell.</p>
+    <p class="flags"><strong>Key flag:</strong> <code>sudo -u [username] [command]</code> &mdash; run as a specific user, not just root.</p>
+    <div class="implications">
+      <div class="sysadmin"><strong>Sysadmin angle:</strong> <code>sudo</code> is the standard hardening practice over <code>su</code> &mdash; it's logged per-command, whereas a full <code>su</code> session hides exactly what was run inside it.</div>
+      <div class="security"><strong>Cybersecurity angle:</strong> Every <code>sudo</code> invocation is auditable in <code>/var/log/auth.log</code> &mdash; exactly the kind of entry a SIEM watches for unusual privilege escalation.</div>
+    </div>
+  </details>
+
+  <details class="command">
+    <summary class="cmd"><code>chmod</code> &mdash; Change Mode</summary>
+    <p class="def">Changes who can read/write/execute a file. Only root or the file's owner can do it.</p>
+    <p class="syntax"><code>chmod [(SET)(ACTION)(PERMISSIONS)] FILE</code></p>
+    <p class="flags"><strong>SET:</strong> <code>u</code>/<code>g</code>/<code>o</code>/<code>a</code> (user/group/other/all) &middot; <strong>ACTION:</strong> <code>+</code>/<code>=</code>/<code>-</code> (add/set/remove) &middot; <strong>PERMISSIONS:</strong> <code>r</code>/<code>w</code>/<code>x</code>.</p>
+    <div class="implications">
+      <div class="sysadmin"><strong>Sysadmin angle:</strong> Correct <code>chmod</code> use keeps a web server able to read its own files without being writable by every user on the box.</div>
+      <div class="security"><strong>Cybersecurity angle:</strong> Overly permissive <code>chmod 777</code> is one of the most common findings on security hardening checklists &mdash; it directly violates the principle of least privilege.</div>
+    </div>
+  </details>
+
+  <details class="command">
+    <summary class="cmd">Execute a File</summary>
+    <p class="def">Run a script or program sitting in the current directory with <code>./filename</code>.</p>
+    <p class="example"><strong>Example:</strong> <code>./hello.sh</code></p>
+    <div class="implications">
+      <div class="sysadmin"><strong>Sysadmin angle:</strong> The <code>./</code> prefix is required because, unlike Windows, Linux doesn't search the current directory by default &mdash; a deliberate design choice.</div>
+      <div class="security"><strong>Cybersecurity angle:</strong> That same design choice is why PATH-hijacking (tricking a victim into running <code>./malicious</code> disguised as a common command) is a known local privilege-escalation technique &mdash; always verify what you're about to execute.</div>
+    </div>
+  </details>
+
+  <details class="command">
+    <summary class="cmd"><code>chown</code> &mdash; Change Owner</summary>
+    <p class="def">Changes who owns a file or directory.</p>
+    <p class="syntax"><code>chown [OPTIONS] [NEW OWNER] FILE</code></p>
+    <div class="implications">
+      <div class="sysadmin"><strong>Sysadmin angle:</strong> Used constantly after moving files between users' home directories or restoring backups, so the new owner can actually access their own data.</div>
+      <div class="security"><strong>Cybersecurity angle:</strong> Auditors specifically check for root-owned files writable by non-root users, and for services running as a user that owns files it shouldn't &mdash; both are privilege-escalation paths.</div>
+    </div>
+  </details>
+
+  <h3 class="category" id="viewing">Viewing &amp; Searching</h3>
+
+  <details class="command">
+    <summary class="cmd"><code>cat</code> &mdash; Concatenate &amp; Display Files</summary>
+    <p class="def">Dumps a file's entire contents to the screen.</p>
+    <p class="syntax"><code>cat [OPTIONS] [FILE]</code></p>
+    <div class="implications">
+      <div class="sysadmin"><strong>Sysadmin angle:</strong> The fastest way to quickly check a small config file's contents without opening an editor.</div>
+      <div class="security"><strong>Cybersecurity angle:</strong> <code>cat /var/log/auth.log</code> was the literal first step in my Lab 4.1 (Log Analysis) SEC+ lab &mdash; reading raw authentication logs by hand before hunting anomalies.</div>
+    </div>
+  </details>
+
+  <details class="command">
+    <summary class="cmd"><code>head</code> &mdash; Show Beginning of a File</summary>
+    <p class="def">Shows the first however-many lines of a file.</p>
+    <p class="syntax"><code>head [OPTIONS] [FILE]</code></p>
+    <p class="example"><strong>Example:</strong> <code>head -5 alpha.txt</code></p>
+    <div class="implications">
+      <div class="sysadmin"><strong>Sysadmin angle:</strong> Perfect for peeking at the top of a huge log file (headers, timestamps, format) without loading the whole thing.</div>
+      <div class="security"><strong>Cybersecurity angle:</strong> <code>sudo cat /var/log/auth.log | head -50</code> was used directly in Lab 4.1 to learn the normal shape of an auth-log entry before spotting attack traffic.</div>
+    </div>
+  </details>
+
+  <details class="command">
+    <summary class="cmd"><code>tail</code> &mdash; Show End of a File</summary>
+    <p class="def">Shows the last however-many lines of a file.</p>
+    <p class="syntax"><code>tail [OPTIONS] [FILE]</code></p>
+    <p class="example"><strong>Example:</strong> <code>tail -5 alpha.txt</code></p>
+    <div class="implications">
+      <div class="sysadmin"><strong>Sysadmin angle:</strong> <code>tail -f</code> (follow) is the everyday way to watch a log file update live while troubleshooting a running service.</div>
+      <div class="security"><strong>Cybersecurity angle:</strong> Watching the tail of an auth or web-server log in real time is a lightweight, no-tooling way to catch an active brute-force or scan as it happens.</div>
+    </div>
+  </details>
+
+  <details class="command">
+    <summary class="cmd"><code>grep</code> &mdash; Global Regular Expression Print</summary>
+    <p class="def">Searches text for a pattern and prints matching lines.</p>
+    <p class="syntax"><code>grep [OPTIONS] PATTERN [FILE]</code></p>
+    <p class="example"><strong>Example:</strong> <code>grep sysadmin passwd</code> &mdash; find "sysadmin" inside the passwd file.</p>
+    <div class="implications">
+      <div class="sysadmin"><strong>Sysadmin angle:</strong> The default tool for filtering noisy logs and config files down to only the lines that matter.</div>
+      <div class="security"><strong>Cybersecurity angle:</strong> <code>sudo grep "Failed password" /var/log/auth.log</code> was used directly in Lab 4.1 to isolate brute-force attempts &mdash; the hand-run version of the exact query logic a SIEM like Wazuh automates.</div>
+    </div>
+  </details>
+
+  <details class="command">
+    <summary class="cmd">Regular Expressions &mdash; Basic (BRE) vs Extended (ERE)</summary>
+    <p class="def">Patterns that describe text to match, rather than literal text.</p>
+    <p class="flags"><strong>Basic:</strong> <code>.</code> any one character &middot; <code>[ ]</code> any one listed character &middot; <code>[^ ]</code> NOT the listed character &middot; <code>*</code> zero or more of the previous character &middot; <code>^</code> start of line &middot; <code>$</code> end of line.</p>
+    <p class="flags"><strong>Extended</strong> (<code>-E</code> / <code>egrep</code>): <code>+</code> one or more &middot; <code>?</code> optional &middot; <code>{ }</code> min/max count &middot; <code>|</code> logical OR &middot; <code>( )</code> groups.</p>
+    <div class="implications">
+      <div class="sysadmin"><strong>Sysadmin angle:</strong> A well-built regex turns a 10,000-line log into the five lines you actually need to read.</div>
+      <div class="security"><strong>Cybersecurity angle:</strong> Regex is the language SIEM detection rules and IDS signatures are written in &mdash; learning <code>grep</code> regex by hand is directly learning how tools like Wazuh or Snort express what "suspicious" looks like.</div>
+    </div>
+  </details>
+
+  <h3 class="category" id="fileops">File Operations</h3>
+
+  <details class="command">
+    <summary class="cmd"><code>cp</code> &mdash; Copy Files and Directories</summary>
+    <p class="def">Copies a file to a new location.</p>
+    <p class="syntax"><code>cp [OPTIONS] (SOURCE) (DESTINATION)</code></p>
+    <p class="example"><strong>Example:</strong> <code>cp /etc/passwd .</code> &mdash; <code>.</code> is shorthand for "current directory."</p>
+    <div class="implications">
+      <div class="sysadmin"><strong>Sysadmin angle:</strong> Always the first step before editing a critical config file &mdash; copy it somewhere safe before touching the original.</div>
+      <div class="security"><strong>Cybersecurity angle:</strong> Attackers use <code>cp</code> to stage copies of sensitive files (like <code>/etc/shadow</code>) into world-readable locations before exfiltrating them &mdash; unexpected copies of credential files are a strong indicator of compromise.</div>
+    </div>
+  </details>
+
+  <details class="command">
+    <summary class="cmd"><code>dd</code> &mdash; Data Duplicator (low-level copy)</summary>
+    <p class="def">Copies raw data block-by-block, bypassing the filesystem-level logic <code>cp</code> relies on.</p>
+    <p class="syntax"><code>dd if=[input file] of=[output file] bs=[block size] count=[# blocks]</code></p>
+    <p class="example"><strong>Example:</strong> <code>dd if=/dev/zero of=/tmp/swapex bs=1M count=50</code></p>
+    <p class="flags"><strong>Note:</strong> if <code>cp</code> can't handle a file, use <code>dd</code> &mdash; otherwise use <code>cp</code>.</p>
+    <div class="implications">
+      <div class="sysadmin"><strong>Sysadmin angle:</strong> The standard tool for imaging entire disks or creating bootable USB drives, since it copies at the byte level, not the file level.</div>
+      <div class="security"><strong>Cybersecurity angle:</strong> <code>dd</code> is how forensic investigators create bit-for-bit disk images for evidence &mdash; and, in the wrong hands, how someone silently wipes a disk (<code>dd if=/dev/zero of=/dev/sda</code>) without normal file-deletion traces.</div>
+    </div>
+  </details>
+
+  <details class="command">
+    <summary class="cmd"><code>mv</code> &mdash; Move / Rename Files and Directories</summary>
+    <p class="def">Moves a file to a new location, or renames it in place.</p>
+    <p class="syntax"><code>mv [SOURCE file(s)] [DESTINATION]</code></p>
+    <p class="example"><strong>Example:</strong> <code>mv numbers.txt alpha.txt letters.txt School</code></p>
+    <div class="implications">
+      <div class="sysadmin"><strong>Sysadmin angle:</strong> Renaming a service's config file to <code>.bak</code> before replacing it is a quick, reversible safety net during changes.</div>
+      <div class="security"><strong>Cybersecurity angle:</strong> Malware commonly <code>mv</code>s itself into a legitimate-looking system path and renames itself after a common process &mdash; file-name masquerading is a standard evasion technique worth checking for.</div>
+    </div>
+  </details>
+
+  <details class="command">
+    <summary class="cmd"><code>rm</code> &mdash; Remove Files and Directories</summary>
+    <p class="def">Deletes files or directories.</p>
+    <p class="syntax"><code>rm [OPTIONS] FILE</code></p>
+    <p class="flags"><strong>Key flags:</strong> <code>-r</code> / <code>-R</code> recursive &mdash; deletes everything inside a directory, including itself.</p>
+    <div class="implications">
+      <div class="sysadmin"><strong>Sysadmin angle:</strong> The most dangerous everyday command &mdash; always <code>pwd</code> and double-check the target before running <code>rm -r</code>, since there's no recycle bin.</div>
+      <div class="security"><strong>Cybersecurity angle:</strong> Attackers use <code>rm</code> (or disk-wipe tools built on the same idea) to delete logs and cover their tracks after an intrusion &mdash; missing expected log entries is itself an indicator worth flagging.</div>
+    </div>
+  </details>
+
+  <h3 class="category" id="sysnet">System &amp; Network</h3>
+
+  <details class="command">
+    <summary class="cmd"><code>shutdown</code></summary>
+    <p class="def">Safely brings the system down.</p>
+    <p class="syntax"><code>shutdown [OPTIONS] TIME [MESSAGE]</code></p>
+    <p class="example"><strong>Example:</strong> <code>shutdown now "Goodbye World!"</code></p>
+    <div class="implications">
+      <div class="sysadmin"><strong>Sysadmin angle:</strong> Always prefer <code>shutdown</code> over pulling power &mdash; it lets running services close out and the filesystem unmount cleanly, avoiding corruption.</div>
+      <div class="security"><strong>Cybersecurity angle:</strong> An unscheduled shutdown or reboot on a production server outside a maintenance window is a notable event worth alerting on &mdash; it can indicate a compromised admin account or an attacker covering tracks.</div>
+    </div>
+  </details>
+
+  <details class="command">
+    <summary class="cmd"><code>ifconfig</code> / <code>ping</code></summary>
+    <p class="def"><code>ifconfig</code> (Interface Configuration) displays network configuration info (IP, MAC, status). <code>ping</code> tests reachability to another host.</p>
+    <p class="syntax"><code>ifconfig [OPTIONS]</code></p>
+    <p class="example"><strong>Example:</strong> <code>ping -c 4 192.168.1.2</code> &mdash; ping 4 times, then stop.</p>
+    <div class="implications">
+      <div class="sysadmin"><strong>Sysadmin angle:</strong> <code>ifconfig</code> is the first command run when troubleshooting "why can't this machine reach the network."</div>
+      <div class="security"><strong>Cybersecurity angle:</strong> This is essentially the command I used in Lab 2.1 (Network Segmentation) &mdash; <code>ip addr show</code> is the modern equivalent &mdash; paired with <code>ping</code> to prove which network segment a host can and can't reach.</div>
+    </div>
+  </details>
+
+  <details class="command">
+    <summary class="cmd"><code>ps</code> &mdash; Processes</summary>
+    <p class="def">Lists currently running processes.</p>
+    <p class="syntax"><code>ps [OPTIONS]</code></p>
+    <p class="flags"><strong>Output columns:</strong> <code>PID</code> unique process ID &middot; <code>TTY</code> terminal name &middot; <code>TIME</code> CPU time used &middot; <code>CMD</code> command that started it. <strong>Flags:</strong> <code>-e</code> every process &middot; <code>-f</code> full detail &middot; <code>-ef</code> both.</p>
+    <div class="implications">
+      <div class="sysadmin"><strong>Sysadmin angle:</strong> The go-to command to find and confirm the PID of a hung or misbehaving service before killing it.</div>
+      <div class="security"><strong>Cybersecurity angle:</strong> <code>ps -ef</code> is a core live-response technique for spotting a malicious or unexpected process &mdash; an unfamiliar CMD entry running from <code>/tmp</code> is a classic sign of compromise.</div>
+    </div>
+  </details>
+
+  <h3 class="category" id="pkgusers">Package &amp; User Management</h3>
+
+  <details class="command">
+    <summary class="cmd"><code>dpkg</code> / <code>apt-get</code></summary>
+    <p class="def"><code>dpkg</code> (Debian Package) is the low-level package manager; <code>apt-get</code> is the friendlier front-end for it.</p>
+    <p class="flags"><strong>Examples:</strong> <code>sudo apt-get update</code> (refresh package lists, doesn't upgrade) &middot; <code>apt-cache search [keyword]</code> &middot; <code>sudo apt-get install [package]</code> &middot; <code>apt-get upgrade [package]</code> &middot; <code>apt-get remove [package]</code> (uninstall, keep config files) &middot; <code>apt-get purge [package]</code> (uninstall completely).</p>
+    <div class="implications">
+      <div class="sysadmin"><strong>Sysadmin angle:</strong> Keeping systems patched via <code>apt-get update &amp;&amp; apt-get upgrade</code> is one of the single highest-value routine maintenance tasks.</div>
+      <div class="security"><strong>Cybersecurity angle:</strong> Unpatched software is a top root cause in breach reports &mdash; package management discipline is a direct, practical defense against known-vulnerability exploitation.</div>
+    </div>
+  </details>
+
+  <details class="command">
+    <summary class="cmd"><code>passwd</code></summary>
+    <p class="def">Updates or checks a user's password.</p>
+    <p class="syntax"><code>passwd [OPTIONS] [USER]</code></p>
+    <p class="example"><strong>Example:</strong> <code>passwd -S sysadmin</code> shows status: username, status, last change date, min/max days, warning threshold, inactive threshold.</p>
+    <p class="flags"><strong>Status codes:</strong> <code>P</code> usable password &middot; <code>L</code> locked &middot; <code>NP</code> no password.</p>
+    <div class="implications">
+      <div class="sysadmin"><strong>Sysadmin angle:</strong> <code>passwd -S</code> is a quick way to confirm an account isn't accidentally left with no password, or locked when it shouldn't be.</div>
+      <div class="security"><strong>Cybersecurity angle:</strong> The min/max/warn/inactive fields <code>passwd -S</code> reveals map directly to SEC+ account-management controls &mdash; enforcing password expiration and lockout thresholds is a named exam topic.</div>
+    </div>
+  </details>
+
+  <details class="command">
+    <summary class="cmd">I/O Redirection <span style="color:var(--muted); font-weight:normal;">(<code>&gt;</code> / <code>&gt;&gt;</code>)</span></summary>
+    <p class="def"><code>&gt;</code> sends a command's output into a file, overwriting it. <code>&gt;&gt;</code> appends to the end of a file instead.</p>
+    <p class="example"><strong>Example:</strong> <code>echo "..." &gt; sdfuiob.txt</code> vs. <code>echo "..." &gt;&gt; sdfuiob.txt</code></p>
+    <div class="implications">
+      <div class="sysadmin"><strong>Sysadmin angle:</strong> Redirecting command output into log or report files is the backbone of shell scripting and automated reporting.</div>
+      <div class="security"><strong>Cybersecurity angle:</strong> Knowing <code>&gt;</code> vs <code>&gt;&gt;</code> matters operationally &mdash; accidentally using <code>&gt;</code> on a log file truncates and destroys prior evidence instead of preserving it.</div>
+    </div>
+  </details>
+
+</section>
+
+<footer>
+  <p>Notes source: <code>Learning Linux.pdf</code> (handwritten course notes). Course info: Cisco Networking Academy / NDG Linux Unhatched official pages.</p>
+  <nav class="pages">
+    <a href="Command Cheat Sheet.html">&rarr; Command Cheat Sheet</a>
+    <a href="SEC+ Exam Mapping.html">&rarr; SEC+ Exam Mapping</a>
+  </nav>
+</footer>
+
+</body>
+</html>

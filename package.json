@@ -1,0 +1,12 @@
+{
+  "name": "jared-lomeli-portfolio",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Static portfolio/coursework showcase site",
+  "scripts": {
+    "test:e2e": "playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.62.1"
+  }
+}

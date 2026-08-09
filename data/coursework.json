@@ -1,0 +1,53 @@
+{
+  "semesters": [
+    {
+      "id": "sem-self-study",
+      "name": "Self-Study",
+      "courses": [
+        {
+          "code": "SELF-STUDY",
+          "title": "Cisco Linux Unhatched (NDG / Cisco Networking Academy)",
+          "professor": null,
+          "documents": [
+            {
+              "id": "doc-linux-unhatched-course-report",
+              "fileName": "course-report.html",
+              "title": "Course Report — CISCO Linux Unhatched",
+              "type": "Course Report",
+              "date": "2026-07-07",
+              "fileSizeBytes": 34303,
+              "formattedSize": "33.5 KB",
+              "publicPath": "/public/documents/self-study/cisco-linux-unhatched/course-report.html",
+              "tags": ["Linux", "Command Line", "Security+"],
+              "grade": "Completed"
+            },
+            {
+              "id": "doc-linux-unhatched-cheat-sheet",
+              "fileName": "command-cheat-sheet.html",
+              "title": "Command Cheat Sheet",
+              "type": "Reference",
+              "date": "2026-07-07",
+              "fileSizeBytes": 10442,
+              "formattedSize": "10.2 KB",
+              "publicPath": "/public/documents/self-study/cisco-linux-unhatched/command-cheat-sheet.html",
+              "tags": ["Linux", "Command Line"],
+              "grade": "Completed"
+            },
+            {
+              "id": "doc-linux-unhatched-exam-mapping",
+              "fileName": "secplus-exam-mapping.html",
+              "title": "SEC+ Exam Mapping",
+              "type": "Reference",
+              "date": "2026-07-07",
+              "fileSizeBytes": 9415,
+              "formattedSize": "9.2 KB",
+              "publicPath": "/public/documents/self-study/cisco-linux-unhatched/secplus-exam-mapping.html",
+              "tags": ["Linux", "Security+"],
+              "grade": "Completed"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

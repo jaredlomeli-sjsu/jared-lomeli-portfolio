@@ -1,0 +1,190 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "version": "1.0.0",
+  "highlights": [
+    {
+      "id": "hl-2026-cybersecurity-python-toolkit",
+      "title": "Cybersecurity Python Toolkit",
+      "category": "Project",
+      "date": "2026-05-11",
+      "semester": null,
+      "course": null,
+      "summary": "Three self-directed Python security tools built to practice hands-on SOC fundamentals: SHA-256 file integrity monitoring, password policy scoring, and regex-based SSH brute-force detection from auth logs.",
+      "metrics": [
+        "3 standalone security tools",
+        "SHA-256-based file integrity monitoring",
+        "Regex-driven brute-force IP detection from auth logs"
+      ],
+      "tags": ["Python", "Security", "Log Analysis", "Cryptography"],
+      "media": null,
+      "links": {
+        "github": null,
+        "liveDemo": null,
+        "pdfReport": null
+      },
+      "featured": true
+    },
+    {
+      "id": "hl-2026-packet-tracer-security-lab",
+      "title": "Segmented Enterprise Network Lab",
+      "category": "Project",
+      "date": "2026-06-16",
+      "semester": null,
+      "course": "CompTIA Security+ SY0-701 Prep",
+      "summary": "Segmented 3-VLAN enterprise network built in Cisco Packet Tracer covering Security+ SY0-701 Chapters 3-4: Layer-3 segmentation, TACACS+/RADIUS AAA, IDS via SPAN, centralized syslog, a honeypot, site-to-site IPSec VPN, and WPA2-Enterprise 802.1X wireless.",
+      "metrics": [
+        "3 VLANs across a Layer-3 core switch",
+        "Site-to-site IPSec VPN (IKEv1, AES-256, SHA-256)",
+        "WPA2-Enterprise 802.1X wireless via RADIUS"
+      ],
+      "tags": [
+        "Cisco Packet Tracer",
+        "Networking",
+        "VLANs",
+        "VPN",
+        "AAA",
+        "Security+"
+      ],
+      "media": {
+        "type": "image",
+        "localSourcePath": "/public/images/packet-tracer-topology.png",
+        "altText": "Segmented enterprise network topology diagram — 3 VLANs, AAA servers, IDS, honeypot, and site-to-site IPSec VPN"
+      },
+      "links": {
+        "github": "https://github.com/jaredlomeli-sjsu/packet-tracer-security-plus-lab",
+        "liveDemo": null,
+        "pdfReport": null
+      },
+      "featured": true
+    },
+    {
+      "id": "hl-2026-kali-metasploitable-wazuh-labs",
+      "title": "Kali / Metasploitable / Wazuh SIEM Lab Series",
+      "category": "Project",
+      "date": "2026-07-07",
+      "semester": null,
+      "course": "CompTIA Security+ SY0-701 Prep",
+      "summary": "Hands-on offensive/defensive security lab series across 6 domains using Kali Linux, Metasploitable 2, and a Wazuh SIEM — enumeration, exploitation, post-exploitation, log analysis, file integrity monitoring, and brute-force detection with alert triage.",
+      "metrics": [
+        "16 individual lab exercises across 6 domains",
+        "Wazuh SIEM configured for brute-force detection + FIM",
+        "Full write-up in a self-contained HTML portfolio"
+      ],
+      "tags": [
+        "Kali Linux",
+        "Metasploitable",
+        "Wazuh",
+        "SIEM",
+        "Incident Response",
+        "Linux"
+      ],
+      "media": null,
+      "links": {
+        "github": "https://github.com/jaredlomeli-sjsu/linux-learning",
+        "liveDemo": null,
+        "pdfReport": null
+      },
+      "featured": true
+    },
+    {
+      "id": "hl-2026-soc-dashboard-grafana",
+      "title": "SOC Dashboard — Network Intrusion Monitor",
+      "category": "Project",
+      "date": "2026-07-09",
+      "semester": null,
+      "course": null,
+      "summary": "Local Security Operations Center dashboard built on the real CIC-IDS2017 network intrusion dataset — Postgres holds 2.83M labeled flows, Grafana renders dashboard-as-code panels with click-through filtering, and a Python ETL pipeline handles real data-quality issues in the raw dataset.",
+      "metrics": [
+        "2,830,743 labeled network flows loaded",
+        "557,646 attack flows across 14 attack types",
+        "4 click-through filter dimensions (day, attack type, port, class)"
+      ],
+      "tags": [
+        "Grafana",
+        "PostgreSQL",
+        "Docker",
+        "Data Engineering",
+        "SOC",
+        "Network Security"
+      ],
+      "media": null,
+      "links": {
+        "github": null,
+        "liveDemo": null,
+        "pdfReport": null
+      },
+      "featured": true
+    },
+    {
+      "id": "hl-2026-phys2a-ice-ev-mechanics",
+      "title": "Mechanics & Heat Loss in ICE vs. EV Engines",
+      "category": "Project",
+      "date": "2026-04-24",
+      "semester": "Semester 2 (West Valley College)",
+      "course": "PHYS 2A — West Valley College",
+      "summary": "Cross-disciplinary Physics 2A final project analyzing why internal combustion engines lose roughly 80% of fuel energy to heat loss, using a 2021 Dodge Charger R/T 5.7L HEMI V8 as a real-world reference, then comparing that inefficiency against EVs using Phase Change Materials for thermal management. Delivered as a narrated video plus an interactive digital poster website with an embedded 3D engine explorer.",
+      "metrics": [
+        "9-part narrated video presentation",
+        "Interactive 3D ICE vs. EV engine explorer with quiz mode",
+        "Live companion site published for the class"
+      ],
+      "tags": ["Physics", "Thermodynamics", "Web Design", "Presentation"],
+      "media": null,
+      "links": {
+        "github": null,
+        "liveDemo": "https://superlative-mandazi-3b5f4b.netlify.app/",
+        "pdfReport": null
+      },
+      "featured": true
+    },
+    {
+      "id": "hl-2026-nexus-helpdesk-triage-agent",
+      "title": "Nexus Technologies IT Helpdesk Triage Agent",
+      "category": "Project",
+      "date": "2026-07-07",
+      "semester": null,
+      "course": "Google / Kaggle 5-Day AI Agents Intensive — Capstone (Agents for Business track)",
+      "summary": "Multi-agent IT helpdesk triage system built on Google ADK 2.0 that routes support tickets to one of three paths: instant auto-resolve via keyword matching, security escalation via prompt-injection/phishing screening before any LLM call, or human review with two Gemini agents drafting a response. Includes a custom MCP tool server and a FastAPI supervisor dashboard. Built as the capstone for the Google/Kaggle 5-Day AI Agents Intensive.",
+      "metrics": [
+        "3-way ticket routing (auto-resolve / security-escalate / human-review)",
+        "17 unit tests, no API key required",
+        "21 KB articles + 17 threat keywords + 7 prompt-injection patterns screened pre-LLM"
+      ],
+      "tags": [
+        "Python",
+        "Google ADK",
+        "Gemini",
+        "MCP",
+        "FastAPI",
+        "AI Agents",
+        "Security",
+        "AI Agents Intensive Badge"
+      ],
+      "media": null,
+      "links": {
+        "github": "https://github.com/jaredlomeli-sjsu/google-kaggle-5day-intensive",
+        "liveDemo": "https://www.kaggle.com/code/jaredlomeli/nexusbot-v4",
+        "pdfReport": null
+      },
+      "featured": true
+    },
+    {
+      "id": "hl-2026-comptia-security-plus",
+      "title": "CompTIA Security+ (SY0-701)",
+      "category": "Credential",
+      "date": "2026-07-30",
+      "semester": null,
+      "course": null,
+      "summary": "CompTIA Security+ (SY0-701) certification, valid through July 2029.",
+      "metrics": [],
+      "tags": ["Security+", "Certification", "CompTIA"],
+      "media": null,
+      "links": {
+        "github": null,
+        "liveDemo": null,
+        "pdfReport": null
+      },
+      "featured": true
+    }
+  ]
+}

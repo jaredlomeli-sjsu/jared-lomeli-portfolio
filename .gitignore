@@ -1,0 +1,18 @@
+# Local OS Fluff
+.DS_Store
+Thumbs.db
+
+# Raw Local Working Storage
+/raw_ssd_imports/
+*.docx
+*.tmp
+
+# Node Modules (if adding build tools later)
+node_modules/
+.vercel/
+
+# Playwright
+test-results/
+playwright-report/
+blob-report/
+playwright/.cache/
