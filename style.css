@@ -1,13 +1,19 @@
 :root {
   /* Design Tokens */
-  --bg-primary: #0f172a;
-  --bg-surface: #1e293b;
-  --bg-surface-hover: #334155;
-  --text-main: #f8fafc;
-  --text-muted: #94a3b8;
-  --accent-color: #38bdf8;
-  --accent-glow: rgba(56, 189, 248, 0.15);
-  --border-color: #334155;
+  --bg-primary: #f8fafc;
+  --bg-surface: #ffffff;
+  --bg-surface-hover: #f1f5f9;
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --text-on-accent: #ffffff;
+  --accent-color: #1e3a5f;
+  --accent-color-hover: #16304a;
+  --accent-glow: rgba(30, 58, 95, 0.08);
+  --border-color: #e2e8f0;
+  --shadow-card:
+    0 1px 3px rgba(15, 23, 42, 0.08), 0 1px 2px rgba(15, 23, 42, 0.04);
+  --shadow-card-hover: 0 8px 20px rgba(15, 23, 42, 0.1);
+  --shadow-dialog: 0 20px 50px rgba(15, 23, 42, 0.2);
   --font-sans: "Inter", system-ui, -apple-system, sans-serif;
   --font-mono: "JetBrains Mono", monospace;
 }
@@ -66,11 +72,12 @@ a {
 .btn-primary {
   background: var(--accent-color);
   border-color: var(--accent-color);
-  color: var(--bg-primary);
+  color: var(--text-on-accent);
 }
 
 .btn-primary:hover {
-  background: #0ea5e9;
+  background: var(--accent-color-hover);
+  border-color: var(--accent-color-hover);
 }
 
 .btn-secondary {
@@ -151,15 +158,18 @@ a {
   border: 1px solid var(--border-color);
   border-radius: 12px;
   overflow: hidden;
+  box-shadow: var(--shadow-card);
   transition:
     transform 0.2s ease,
-    border-color 0.2s ease;
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
   grid-column: 1 / -1;
 }
 
 .highlight-card:hover {
   transform: translateY(-2px);
   border-color: var(--accent-color);
+  box-shadow: var(--shadow-card-hover);
 }
 
 .highlight-card--no-media {
@@ -167,7 +177,7 @@ a {
 }
 
 .highlight-card-media {
-  background: var(--bg-primary);
+  background: var(--bg-surface-hover);
 }
 
 .highlight-card-media img {
@@ -247,10 +257,11 @@ dialog {
   padding: 0;
   max-width: min(90vw, 900px);
   max-height: 85vh;
+  box-shadow: var(--shadow-dialog);
 }
 
 dialog::backdrop {
-  background: rgba(15, 23, 42, 0.75);
+  background: rgba(15, 23, 42, 0.6);
 }
 
 .dialog-close {
@@ -320,7 +331,7 @@ dialog::backdrop {
   display: none;
   width: 100%;
   padding: 0.6rem;
-  background: var(--bg-primary);
+  background: var(--bg-surface-hover);
   color: var(--text-main);
   border: 1px solid var(--border-color);
   border-radius: 8px;
@@ -329,7 +340,7 @@ dialog::backdrop {
 .explorer-search {
   width: 100%;
   padding: 0.6rem 0.9rem;
-  background: var(--bg-primary);
+  background: var(--bg-surface-hover);
   color: var(--text-main);
   border: 1px solid var(--border-color);
   border-radius: 8px;
