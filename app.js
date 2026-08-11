@@ -32,13 +32,18 @@ function buildHighlightCard(item) {
   const card = document.createElement("article");
   card.className = "highlight-card";
 
-  const metaLine = [item.category, item.date, item.course]
-    .filter(Boolean)
-    .join(" · ");
+  const metaRest = [item.date, item.course].filter(Boolean).join(" · ");
+  const categorySlug = (item.category || "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-");
   const header = document.createElement("div");
   header.className = "highlight-card-header";
   header.innerHTML = `
-    <p class="highlight-card-meta">${escapeHtml(metaLine)}</p>
+    <p class="highlight-card-meta">${
+      item.category
+        ? `<span class="category-label category-label--${categorySlug}">${escapeHtml(item.category)}</span>`
+        : ""
+    }${item.category && metaRest ? " · " : ""}${escapeHtml(metaRest)}</p>
     <h3 class="highlight-card-title">${escapeHtml(item.title)}</h3>
   `;
   card.appendChild(header);
