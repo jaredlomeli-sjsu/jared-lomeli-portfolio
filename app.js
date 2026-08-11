@@ -32,6 +32,17 @@ function buildHighlightCard(item) {
   const card = document.createElement("article");
   card.className = "highlight-card";
 
+  const metaLine = [item.category, item.date, item.course]
+    .filter(Boolean)
+    .join(" · ");
+  const header = document.createElement("div");
+  header.className = "highlight-card-header";
+  header.innerHTML = `
+    <p class="highlight-card-meta">${escapeHtml(metaLine)}</p>
+    <h3 class="highlight-card-title">${escapeHtml(item.title)}</h3>
+  `;
+  card.appendChild(header);
+
   if (item.media && item.media.type === "placeholder") {
     const mediaEl = document.createElement("div");
     mediaEl.className =
@@ -61,13 +72,7 @@ function buildHighlightCard(item) {
 
   const content = document.createElement("div");
   content.className = "highlight-card-content";
-
-  const metaLine = [item.category, item.date, item.course]
-    .filter(Boolean)
-    .join(" · ");
   content.innerHTML = `
-    <p class="highlight-card-meta">${escapeHtml(metaLine)}</p>
-    <h3 class="highlight-card-title">${escapeHtml(item.title)}</h3>
     <p class="highlight-card-summary">${escapeHtml(item.summary)}</p>
   `;
 
