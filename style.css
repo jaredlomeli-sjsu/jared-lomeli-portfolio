@@ -1,15 +1,15 @@
 :root {
-  /* Design Tokens */
-  --bg-primary: #dee2e6;
-  --bg-surface: #eaeef2;
-  --bg-surface-hover: #e2e8f0;
-  --text-main: #0f172a;
-  --text-muted: #64748b;
+  /* Design Tokens — "Signal Blue" */
+  --bg-primary: #f4f6f8;
+  --bg-surface: #ffffff;
+  --bg-surface-hover: #eef1f4;
+  --text-main: #101828;
+  --text-muted: #5b6472;
   --text-on-accent: #ffffff;
-  --accent-color: #1e3a5f;
-  --accent-color-hover: #16304a;
-  --accent-glow: rgba(30, 58, 95, 0.08);
-  --border-color: #cbd5e1;
+  --accent-color: #2563eb;
+  --accent-color-hover: #1d4ed8;
+  --accent-glow: rgba(37, 99, 235, 0.1);
+  --border-color: #d8dde3;
   --shadow-card:
     0 1px 3px rgba(15, 23, 42, 0.08), 0 1px 2px rgba(15, 23, 42, 0.04);
   --shadow-card-hover: 0 8px 20px rgba(15, 23, 42, 0.1);
