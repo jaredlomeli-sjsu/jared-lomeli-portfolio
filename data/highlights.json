@@ -115,7 +115,11 @@
         "SOC",
         "Network Security"
       ],
-      "media": null,
+      "media": {
+        "type": "image",
+        "localSourcePath": "/public/images/soc-dashboard-grafana.png",
+        "altText": "Grafana SOC Analytics dashboard showing 2.83M total flows, 558K attack flows, 14 distinct attack types, a daily attack timeline, and attack type / attack family breakdown donut charts over the CIC-IDS2017 dataset"
+      },
       "links": {
         "github": null,
         "liveDemo": null,
