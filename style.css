@@ -126,6 +126,7 @@ a {
 
 /* Stacked Highlight Card Layout — image (full, uncropped) on top, content below */
 .highlight-card {
+  position: relative;
   display: flex;
   flex-direction: column;
   background: var(--bg-surface);
@@ -138,6 +139,16 @@ a {
     border-color 0.2s ease,
     box-shadow 0.2s ease;
   grid-column: 1 / -1;
+}
+
+.highlight-card-star {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  z-index: 2;
+  display: flex;
+  color: #f59e0b;
+  filter: drop-shadow(0 1px 2px rgba(15, 23, 42, 0.35));
 }
 
 .highlight-card:hover {
@@ -203,15 +214,21 @@ a {
 }
 
 .category-label {
+  display: inline-block;
   font-weight: 700;
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  margin-right: 0.15rem;
 }
 
 .category-label--project {
   color: var(--category-project);
+  background: rgba(30, 58, 95, 0.12);
 }
 
 .category-label--credential {
   color: var(--category-credential);
+  background: rgba(180, 83, 9, 0.12);
 }
 
 .highlight-card-title {

@@ -32,6 +32,15 @@ function buildHighlightCard(item) {
   const card = document.createElement("article");
   card.className = "highlight-card";
 
+  if (item.starred) {
+    const star = document.createElement("div");
+    star.className = "highlight-card-star";
+    star.title = "Featured — best and most comprehensive project";
+    star.innerHTML =
+      '<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M12 2.5l2.95 6.28 6.93.74-5.17 4.75 1.44 6.86L12 17.6l-6.15 3.53 1.44-6.86-5.17-4.75 6.93-.74L12 2.5z" fill="currentColor"/></svg>';
+    card.appendChild(star);
+  }
+
   const metaRest = [item.date, item.course].filter(Boolean).join(" · ");
   const categorySlug = (item.category || "")
     .toLowerCase()
