@@ -32,9 +32,10 @@ publicPath, tags[], grade`.
 filtering (`filter()`/`reduce()`) into a `DocumentFragment`. Full ARIA/keyboard support
 required: Esc closes modals, backdrop click closes, focus returns to the trigger element.
 
-A highlight card's `media` field supports three shapes: `null` (no-media layout),
-`{"type": "image", "localSourcePath", "altText"}` (real image, opens in the lightbox),
-or `{"type": "placeholder", "label"}` (dashed-border placeholder box with a caption text,
+A highlight card's `media` field supports three shapes: `null` (no image, text-only
+card), `{"type": "image", "localSourcePath", "altText"}` (real image, shown full-width
+at its natural aspect ratio — not cropped — opens in the lightbox), or
+`{"type": "placeholder", "label"}` (dashed-border placeholder box with a caption text,
 for cards awaiting a real screenshot — not clickable).
 
 ## Content ingestion pipeline (future work, not yet built)

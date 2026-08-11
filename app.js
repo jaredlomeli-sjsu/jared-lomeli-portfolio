@@ -30,8 +30,7 @@ function renderHighlightGrid() {
 
 function buildHighlightCard(item) {
   const card = document.createElement("article");
-  card.className =
-    "highlight-card" + (item.media ? "" : " highlight-card--no-media");
+  card.className = "highlight-card";
 
   if (item.media && item.media.type === "placeholder") {
     const mediaEl = document.createElement("div");
@@ -45,7 +44,6 @@ function buildHighlightCard(item) {
     const img = document.createElement("img");
     img.src = item.media.localSourcePath;
     img.alt = item.media.altText || "";
-    img.style.objectPosition = item.media.objectPosition || "center";
     img.loading = "lazy";
     img.tabIndex = 0;
     const openThisLightbox = () =>

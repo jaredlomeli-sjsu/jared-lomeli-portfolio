@@ -122,11 +122,10 @@ a {
   margin: 0 auto;
 }
 
-/* Side-by-Side Highlight Card Layout */
+/* Stacked Highlight Card Layout — image (full, uncropped) on top, content below */
 .highlight-card {
-  display: grid;
-  grid-template-columns: 320px 1fr;
-  gap: 1.5rem;
+  display: flex;
+  flex-direction: column;
   background: var(--bg-surface);
   border: 1px solid var(--border-color);
   border-radius: 12px;
@@ -145,19 +144,15 @@ a {
   box-shadow: var(--shadow-card-hover);
 }
 
-.highlight-card--no-media {
-  grid-template-columns: 1fr;
-}
-
 .highlight-card-media {
   background: var(--bg-surface-hover);
+  display: flex;
+  justify-content: center;
 }
 
 .highlight-card-media img {
   width: 100%;
-  height: 100%;
-  min-height: 200px;
-  object-fit: cover;
+  height: auto;
   cursor: zoom-in;
   display: block;
 }
@@ -166,8 +161,7 @@ a {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 200px;
-  height: 100%;
+  height: 200px;
   padding: 1rem;
   text-align: center;
   color: var(--text-muted);
@@ -184,14 +178,10 @@ a {
 }
 
 .highlight-card-content {
-  padding: 1.5rem 1.5rem 1.5rem 0;
+  padding: 1.5rem;
   display: flex;
   flex-direction: column;
   gap: 0.6rem;
-}
-
-.highlight-card--no-media .highlight-card-content {
-  padding: 1.5rem;
 }
 
 .highlight-card-meta {
