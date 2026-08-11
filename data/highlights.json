@@ -3,6 +3,32 @@
   "version": "1.0.0",
   "highlights": [
     {
+      "id": "hl-2026-phys2a-ice-ev-mechanics",
+      "title": "Mechanics & Heat Loss in ICE vs. EV Engines",
+      "category": "Project",
+      "date": "2026-04-24",
+      "semester": "Semester 2 (West Valley College)",
+      "course": "PHYS 2A — West Valley College",
+      "summary": "Cross-disciplinary Physics 2A final project analyzing why internal combustion engines lose roughly 80% of fuel energy to heat loss, using a 2021 Dodge Charger R/T 5.7L HEMI V8 as a real-world reference, then comparing that inefficiency against EVs using Phase Change Materials for thermal management. Delivered as a narrated video plus an interactive digital poster website with an embedded 3D engine explorer.",
+      "metrics": [
+        "9-part narrated video presentation",
+        "Interactive 3D ICE vs. EV engine explorer with quiz mode",
+        "Live companion site published for the class"
+      ],
+      "tags": ["Physics", "Thermodynamics", "Web Design", "Presentation"],
+      "media": {
+        "type": "image",
+        "localSourcePath": "/public/images/phys2a-engine-explorer.png",
+        "altText": "Interactive 3D Engine Explorer showing a cutaway ICE turbocharger model with a live part-info spec panel, from the ICE vs. EV Physics 2A companion site"
+      },
+      "links": {
+        "github": null,
+        "liveDemo": "https://superlative-mandazi-3b5f4b.netlify.app/",
+        "pdfReport": null
+      },
+      "featured": true
+    },
+    {
       "id": "hl-2026-cybersecurity-python-toolkit",
       "title": "Cybersecurity Python Toolkit",
       "category": "Project",
@@ -128,36 +154,10 @@
       "featured": true
     },
     {
-      "id": "hl-2026-phys2a-ice-ev-mechanics",
-      "title": "Mechanics & Heat Loss in ICE vs. EV Engines",
-      "category": "Project",
-      "date": "2026-04-24",
-      "semester": "Semester 2 (West Valley College)",
-      "course": "PHYS 2A — West Valley College",
-      "summary": "Cross-disciplinary Physics 2A final project analyzing why internal combustion engines lose roughly 80% of fuel energy to heat loss, using a 2021 Dodge Charger R/T 5.7L HEMI V8 as a real-world reference, then comparing that inefficiency against EVs using Phase Change Materials for thermal management. Delivered as a narrated video plus an interactive digital poster website with an embedded 3D engine explorer.",
-      "metrics": [
-        "9-part narrated video presentation",
-        "Interactive 3D ICE vs. EV engine explorer with quiz mode",
-        "Live companion site published for the class"
-      ],
-      "tags": ["Physics", "Thermodynamics", "Web Design", "Presentation"],
-      "media": {
-        "type": "image",
-        "localSourcePath": "/public/images/phys2a-engine-explorer.png",
-        "altText": "Interactive 3D Engine Explorer showing a cutaway ICE turbocharger model with a live part-info spec panel, from the ICE vs. EV Physics 2A companion site"
-      },
-      "links": {
-        "github": null,
-        "liveDemo": "https://superlative-mandazi-3b5f4b.netlify.app/",
-        "pdfReport": null
-      },
-      "featured": true
-    },
-    {
       "id": "hl-2026-nexus-helpdesk-triage-agent",
       "title": "Nexus Technologies IT Helpdesk Triage Agent",
       "category": "Project",
-      "date": "2026-07-07",
+      "date": "2026-07-18",
       "semester": null,
       "course": "Google / Kaggle 5-Day AI Agents Intensive — Capstone (Agents for Business track)",
       "summary": "Multi-agent IT helpdesk triage system built on Google ADK 2.0 that routes support tickets to one of three paths: instant auto-resolve via keyword matching, security escalation via prompt-injection/phishing screening before any LLM call, or human review with two Gemini agents drafting a response. Includes a custom MCP tool server and a FastAPI supervisor dashboard. Built as the capstone for the Google/Kaggle 5-Day AI Agents Intensive.",
