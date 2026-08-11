@@ -19,16 +19,27 @@ function escapeHtml(str) {
 
 // --- HighlightGrid ---
 
+function computeCommonTags(highlights) {
+  const counts = {};
+  highlights.forEach((item) => {
+    (item.tags || []).forEach((tag) => {
+      counts[tag] = (counts[tag] || 0) + 1;
+    });
+  });
+  return new Set(Object.keys(counts).filter((tag) => counts[tag] >= 2));
+}
+
 function renderHighlightGrid() {
   const container = document.getElementById("highlight-grid");
+  const commonTags = computeCommonTags(appState.highlights);
   const fragment = document.createDocumentFragment();
   appState.highlights.forEach((item) =>
-    fragment.appendChild(buildHighlightCard(item)),
+    fragment.appendChild(buildHighlightCard(item, commonTags)),
   );
   container.replaceChildren(fragment);
 }
 
-function buildHighlightCard(item) {
+function buildHighlightCard(item, commonTags) {
   const card = document.createElement("article");
   card.className = "highlight-card";
 
@@ -41,18 +52,13 @@ function buildHighlightCard(item) {
     card.appendChild(star);
   }
 
-  const metaRest = [item.date, item.course].filter(Boolean).join(" · ");
-  const categorySlug = (item.category || "")
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-");
+  const metaLine = [item.category, item.date, item.course]
+    .filter(Boolean)
+    .join(" · ");
   const header = document.createElement("div");
   header.className = "highlight-card-header";
   header.innerHTML = `
-    <p class="highlight-card-meta">${
-      item.category
-        ? `<span class="category-label category-label--${categorySlug}">${escapeHtml(item.category)}</span>`
-        : ""
-    }${item.category && metaRest ? " · " : ""}${escapeHtml(metaRest)}</p>
+    <p class="highlight-card-meta">${escapeHtml(metaLine)}</p>
     <h3 class="highlight-card-title">${escapeHtml(item.title)}</h3>
   `;
   card.appendChild(header);
@@ -106,7 +112,7 @@ function buildHighlightCard(item) {
     tagsEl.className = "highlight-card-tags";
     item.tags.forEach((tag) => {
       const span = document.createElement("span");
-      span.className = "tag";
+      span.className = "tag" + (commonTags.has(tag) ? " tag--common" : "");
       span.textContent = tag;
       tagsEl.appendChild(span);
     });

@@ -9,8 +9,6 @@
   --accent-color: #1e3a5f;
   --accent-color-hover: #16304a;
   --accent-glow: rgba(30, 58, 95, 0.08);
-  --category-project: #1e3a5f;
-  --category-credential: #b45309;
   --border-color: #cbd5e1;
   --shadow-card:
     0 1px 3px rgba(15, 23, 42, 0.08), 0 1px 2px rgba(15, 23, 42, 0.04);
@@ -213,24 +211,6 @@ a {
   margin: 0;
 }
 
-.category-label {
-  display: inline-block;
-  font-weight: 700;
-  padding: 0.15rem 0.55rem;
-  border-radius: 999px;
-  margin-right: 0.15rem;
-}
-
-.category-label--project {
-  color: var(--category-project);
-  background: rgba(30, 58, 95, 0.12);
-}
-
-.category-label--credential {
-  color: var(--category-credential);
-  background: rgba(180, 83, 9, 0.12);
-}
-
 .highlight-card-title {
   margin: 0;
   font-size: 1.3rem;
@@ -255,12 +235,18 @@ a {
 }
 
 .tag {
-  background: var(--accent-glow);
-  color: var(--accent-color);
+  background: var(--bg-surface-hover);
+  color: var(--text-muted);
   border-radius: 999px;
   padding: 0.2rem 0.7rem;
   font-size: 0.75rem;
   font-family: var(--font-mono);
+}
+
+.tag--common {
+  background: var(--accent-glow);
+  color: var(--accent-color);
+  font-weight: 600;
 }
 
 .highlight-card-links {
