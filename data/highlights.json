@@ -197,7 +197,12 @@
       "summary": "CompTIA Security+ (SY0-701) certification, valid through July 2029.",
       "metrics": [],
       "tags": ["Security+", "Certification", "CompTIA"],
-      "media": null,
+      "media": {
+        "type": "image",
+        "localSourcePath": "/public/images/secplus-badge.png",
+        "altText": "CompTIA Security+ (SY0-701) certificate for Jared Lomeli, certified July 30, 2026, valid through July 30, 2029",
+        "objectPosition": "26% 52%"
+      },
       "links": {
         "github": null,
         "liveDemo": null,
