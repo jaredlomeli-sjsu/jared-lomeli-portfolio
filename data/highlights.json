@@ -17,8 +17,9 @@
       ],
       "tags": ["Python", "Security", "Log Analysis", "Cryptography"],
       "media": {
-        "type": "placeholder",
-        "label": "Terminal output screenshot — coming soon"
+        "type": "image",
+        "localSourcePath": "/public/images/toolkit-fim-demo.png",
+        "altText": "File Integrity Checker terminal output after a tamper test — detects a modified config file (CHANGED) and a deleted key file (MISSING) against a saved SHA-256 baseline"
       },
       "links": {
         "github": null,
