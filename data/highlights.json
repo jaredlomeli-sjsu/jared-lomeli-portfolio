@@ -51,7 +51,8 @@
       "media": {
         "type": "image",
         "localSourcePath": "/public/images/packet-tracer-topology.png",
-        "altText": "Segmented enterprise network topology diagram — 3 VLANs, AAA servers, IDS, honeypot, and site-to-site IPSec VPN"
+        "altText": "Segmented enterprise network topology diagram — 3 VLANs, AAA servers, IDS, honeypot, and site-to-site IPSec VPN",
+        "objectPosition": "65% 35%"
       },
       "links": {
         "github": "https://github.com/jaredlomeli-sjsu/packet-tracer-security-plus-lab",
@@ -84,7 +85,8 @@
       "media": {
         "type": "image",
         "localSourcePath": "/public/images/kali-nmap-scan.png",
-        "altText": "Nmap service, version, and OS detection scan (nmap -sV -O) against the Metasploitable 2 target from Kali Linux, run on the isolated 192.168.56.0/24 host-only lab network"
+        "altText": "Nmap service, version, and OS detection scan (nmap -sV -O) against the Metasploitable 2 target from Kali Linux, run on the isolated 192.168.56.0/24 host-only lab network",
+        "objectPosition": "0% center"
       },
       "links": {
         "github": "https://github.com/jaredlomeli-sjsu/linux-learning/tree/main/kali-metasploitable-wazuh-linux",
@@ -136,7 +138,12 @@
         "Live companion site published for the class"
       ],
       "tags": ["Physics", "Thermodynamics", "Web Design", "Presentation"],
-      "media": null,
+      "media": {
+        "type": "image",
+        "localSourcePath": "/public/images/phys2a-engine-explorer.png",
+        "altText": "Interactive 3D Engine Explorer showing a cutaway ICE turbocharger model with a live part-info spec panel, from the ICE vs. EV Physics 2A companion site",
+        "objectPosition": "35% center"
+      },
       "links": {
         "github": null,
         "liveDemo": "https://superlative-mandazi-3b5f4b.netlify.app/",
@@ -167,7 +174,12 @@
         "Security",
         "AI Agents Intensive Badge"
       ],
-      "media": null,
+      "media": {
+        "type": "image",
+        "localSourcePath": "/public/images/nexusbot-notebook.png",
+        "altText": "NexusBot.v4 Kaggle notebook showing the inline test suite covering all routing paths and MCP agent skills, 17 unit tests with no API key required",
+        "objectPosition": "42% center"
+      },
       "links": {
         "github": "https://github.com/jaredlomeli-sjsu/google-kaggle-5day-intensive",
         "liveDemo": "https://www.kaggle.com/code/jaredlomeli/nexusbot-v4",

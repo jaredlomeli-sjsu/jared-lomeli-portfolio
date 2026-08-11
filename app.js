@@ -45,6 +45,7 @@ function buildHighlightCard(item) {
     const img = document.createElement("img");
     img.src = item.media.localSourcePath;
     img.alt = item.media.altText || "";
+    img.style.objectPosition = item.media.objectPosition || "center";
     img.loading = "lazy";
     img.tabIndex = 0;
     const openThisLightbox = () =>
