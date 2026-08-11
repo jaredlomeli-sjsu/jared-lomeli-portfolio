@@ -9,14 +9,17 @@
       "date": "2026-05-11",
       "semester": null,
       "course": null,
-      "summary": "Three self-directed Python security tools built to practice hands-on SOC fundamentals: SHA-256 file integrity monitoring, password policy scoring, and regex-based SSH brute-force detection from auth logs.",
+      "summary": "Three self-directed Python security tools built to practice hands-on SOC fundamentals, stdlib-only (hashlib, json, os, re, collections). File Integrity Checker: recursively SHA-256-fingerprints a target folder, saves a JSON baseline, and re-hashes on demand to report each file OK / CHANGED / MISSING — classic FIM logic. Password Strength Checker: scores an input 0-5 against length, uppercase, lowercase, digit, and symbol checks and prints a pass/fail breakdown with a verdict from 'Very Weak' to 'Excellent'. SSH Brute-Force Log Parser: regex-scans an auth log for 'Failed password' lines, extracts and tallies source IPs, and flags any IP over a configurable attempt threshold as a likely brute-force source.",
       "metrics": [
-        "3 standalone security tools",
-        "SHA-256-based file integrity monitoring",
-        "Regex-driven brute-force IP detection from auth logs"
+        "3 standalone tools, zero third-party dependencies",
+        "FIM: SHA-256 fingerprinting in 8192-byte chunks, baseline + verify workflow",
+        "Brute-force parser: flagged 2 of 4 source IPs as attackers on a 41-line sample auth log (192.168.1.10 at 23 attempts, 10.0.0.5 at 13, threshold 10)"
       ],
       "tags": ["Python", "Security", "Log Analysis", "Cryptography"],
-      "media": null,
+      "media": {
+        "type": "placeholder",
+        "label": "Terminal output screenshot — coming soon"
+      },
       "links": {
         "github": null,
         "liveDemo": null,
@@ -78,7 +81,11 @@
         "Incident Response",
         "Linux"
       ],
-      "media": null,
+      "media": {
+        "type": "image",
+        "localSourcePath": "/public/images/kali-nmap-scan.png",
+        "altText": "Nmap service, version, and OS detection scan (nmap -sV -O) against the Metasploitable 2 target from Kali Linux, run on the isolated 192.168.56.0/24 host-only lab network"
+      },
       "links": {
         "github": "https://github.com/jaredlomeli-sjsu/linux-learning/tree/main/kali-metasploitable-wazuh-linux",
         "liveDemo": null,

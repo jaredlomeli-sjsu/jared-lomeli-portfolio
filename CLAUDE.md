@@ -18,18 +18,24 @@ publicPath, tags[], grade`.
 
 ## Component architecture
 
-| Component        | Responsibility                        | Implementation                                                |
-| ---------------- | ------------------------------------- | ------------------------------------------------------------- |
-| `HeroView`       | Recruiter hook & CTA                  | `<header>`, Flexbox, inline SVG                               |
-| `HighlightGrid`  | Render highlight cards                | CSS Grid `repeat(auto-fit, minmax(320px, 1fr))`, lazy `<img>` |
-| `LightboxModal`  | Full-screen image preview             | `<dialog id="lightbox">`, backdrop-click close                |
-| `ExplorerModal`  | Windows-style coursework file browser | `<dialog id="vault-explorer">`, 2-col grid                    |
-| `PdfViewerModal` | In-browser PDF preview                | `<dialog id="pdf-viewer">`, `<iframe loading="lazy">`         |
+| Component        | Responsibility            | Implementation                                                                             |
+| ---------------- | ------------------------- | ------------------------------------------------------------------------------------------ |
+| `HeroView`       | Recruiter hook            | `<header>`, no CTA buttons (removed 2026-08-09)                                            |
+| `HighlightGrid`  | Render highlight cards    | CSS Grid `repeat(auto-fit, minmax(320px, 1fr))`, lazy `<img>`                              |
+| `LightboxModal`  | Full-screen image preview | `<dialog id="lightbox">`, backdrop-click close                                             |
+| `PdfViewerModal` | In-browser PDF preview    | `<dialog id="pdf-viewer">`, `<iframe loading="lazy">`, wired to a card's `links.pdfReport` |
 
-`app.js` holds a single `appState` object (active semester, search query, selected course,
-open PDF) and does in-memory filtering (`filter()`/`reduce()`) into a `DocumentFragment`.
-Full ARIA/keyboard support required: Esc closes modals, Tab trap inside the explorer,
-arrow-key row traversal.
+**Removed 2026-08-09: `ExplorerModal` (Coursework Vault) and both hero CTA buttons**
+("View Projects", "Browse Coursework") at Jared's request — see Status below.
+
+`app.js` holds a single `appState` object (`openPdf`, `highlights`) and does in-memory
+filtering (`filter()`/`reduce()`) into a `DocumentFragment`. Full ARIA/keyboard support
+required: Esc closes modals, backdrop click closes, focus returns to the trigger element.
+
+A highlight card's `media` field supports three shapes: `null` (no-media layout),
+`{"type": "image", "localSourcePath", "altText"}` (real image, opens in the lightbox),
+or `{"type": "placeholder", "label"}` (dashed-border placeholder box with a caption text,
+for cards awaiting a real screenshot — not clickable).
 
 ## Content ingestion pipeline (future work, not yet built)
 
@@ -138,3 +144,35 @@ instead of the bare `linux-learning` repo root.
 - `Password Strength Checker.py`'s test string and both scripts' hardcoded personal
   paths were already fixed in place at the original `School Backup` source before
   this repo was created (see [[student-portfolio-site]] memory).
+
+**2026-08-09 — removed both hero CTA buttons and the Coursework Vault feature
+entirely**, at Jared's explicit request. Removed from `index.html`: the `.hero-actions`
+div (both buttons) and the entire `#vault-explorer` dialog markup. Removed from
+`app.js`: `openExplorer`, `renderExplorerSidebar`, `renderExplorerMobileSelect`,
+`selectSemester`, `renderExplorerDocuments`, `buildExplorerDocRow`,
+`initExplorerArrowNav`, `initExplorerFocusTrap`, `initExplorerSearch`,
+`initHeroActions`, and the `activeSemester`/`searchQuery`/`selectedCourse`/`coursework`
+fields on `appState`; `loadData()` no longer fetches `data/coursework.json` (the file
+itself is untouched on disk, just unused). Removed the matching `.explorer-*`,
+`.hero-actions`, `.btn-primary`, and `.btn-secondary` rules from `style.css`. Removed
+the "explorer modal (coursework vault)" Playwright describe block (2 tests) from
+`tests/smoke.spec.js` — suite is now 7 tests, all passing. `PdfViewerModal` and
+`LightboxModal` were kept — the PDF viewer is still wired to a highlight card's
+`links.pdfReport` (`openPdfViewer`), it just no longer has the explorer as a second
+caller.
+
+**2026-08-09 — expanded the Cybersecurity Python Toolkit highlight card.** Verified
+the source repo (`D:\Projects\Portfolio\cybersecurity-python-toolkit`) is still clean —
+grepped for OneDrive paths, personal identifiers, and secrets, found none; the sample
+`False_Auth.Log` only contains fictional private-range IPs. Ran all three scripts for
+real to get accurate numbers instead of generic claims: the SSH brute-force parser
+flags 2 of 4 source IPs (192.168.1.10 at 23 attempts, 10.0.0.5 at 13) as attackers
+against the 41-line sample log at threshold 10. Rewrote `summary` in
+`data/highlights.json` to describe each of the 3 tools individually instead of one
+generic sentence, and replaced the generic `metrics` with the real numbers above.
+Jared doesn't have a screenshot yet, so added a new `media.type: "placeholder"` shape
+(dashed-border box with a caption, not clickable — see Component architecture above)
+instead of leaving `media: null`; swap it for a real `type: "image"` entry once he
+provides one. No image capture tooling (browser/OS screenshot) was available this
+session — a synthetic rendered "terminal output" graphic was offered as an alternative
+but Jared preferred the placeholder and a real screenshot later.

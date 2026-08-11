@@ -69,27 +69,6 @@ a {
   height: 1.1rem;
 }
 
-.btn-primary {
-  background: var(--accent-color);
-  border-color: var(--accent-color);
-  color: var(--text-on-accent);
-}
-
-.btn-primary:hover {
-  background: var(--accent-color-hover);
-  border-color: var(--accent-color-hover);
-}
-
-.btn-secondary {
-  background: var(--bg-surface);
-  color: var(--text-main);
-}
-
-.btn-secondary:hover {
-  background: var(--bg-surface-hover);
-  border-color: var(--accent-color);
-}
-
 .btn-link {
   padding: 0.4rem 0.85rem;
   font-size: 0.85rem;
@@ -131,12 +110,6 @@ a {
   color: var(--text-muted);
   font-size: 1.05rem;
   margin: 0 0 2rem;
-}
-
-.hero-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
 }
 
 /* Highlight Grid */
@@ -187,6 +160,27 @@ a {
   object-fit: cover;
   cursor: zoom-in;
   display: block;
+}
+
+.highlight-card-media--placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  height: 100%;
+  padding: 1rem;
+  text-align: center;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  border: 1px dashed var(--border-color);
+  background: repeating-linear-gradient(
+    135deg,
+    var(--bg-surface-hover),
+    var(--bg-surface-hover) 10px,
+    var(--bg-surface) 10px,
+    var(--bg-surface) 20px
+  );
 }
 
 .highlight-card-content {
@@ -304,135 +298,6 @@ dialog::backdrop {
   margin: 1rem 0 0;
 }
 
-/* Explorer */
-.explorer-dialog {
-  position: relative;
-  width: 100%;
-  padding: 1.5rem;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.explorer-dialog[open] {
-  display: flex;
-}
-
-.explorer-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.explorer-header h2 {
-  margin: 0;
-}
-
-.explorer-mobile-select {
-  display: none;
-  width: 100%;
-  padding: 0.6rem;
-  background: var(--bg-surface-hover);
-  color: var(--text-main);
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-}
-
-.explorer-search {
-  width: 100%;
-  padding: 0.6rem 0.9rem;
-  background: var(--bg-surface-hover);
-  color: var(--text-main);
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-  font-family: inherit;
-}
-
-.explorer-container {
-  display: grid;
-  grid-template-columns: 220px 1fr;
-  gap: 1.5rem;
-  overflow: hidden;
-  flex: 1;
-}
-
-.explorer-sidebar {
-  display: flex;
-  flex-direction: column;
-  gap: 0.3rem;
-  overflow-y: auto;
-}
-
-.explorer-semester-btn {
-  text-align: left;
-  background: transparent;
-  border: 1px solid transparent;
-  color: var(--text-muted);
-  padding: 0.5rem 0.7rem;
-  border-radius: 8px;
-  cursor: pointer;
-  font-family: inherit;
-  font-size: 0.9rem;
-}
-
-.explorer-semester-btn:hover {
-  background: var(--bg-surface-hover);
-}
-
-.explorer-semester-btn.active {
-  background: var(--accent-glow);
-  color: var(--accent-color);
-  border-color: var(--accent-color);
-}
-
-.explorer-documents {
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-}
-
-.explorer-course-heading {
-  font-size: 0.85rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--text-muted);
-  margin: 0.8rem 0 0.2rem;
-}
-
-.explorer-course-heading:first-child {
-  margin-top: 0;
-}
-
-.explorer-doc-row {
-  display: flex;
-  flex-direction: column;
-  gap: 0.15rem;
-  padding: 0.6rem 0.8rem;
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-  cursor: pointer;
-}
-
-.explorer-doc-row:hover {
-  border-color: var(--accent-color);
-  background: var(--bg-surface-hover);
-}
-
-.explorer-doc-title {
-  font-weight: 600;
-}
-
-.explorer-doc-meta {
-  color: var(--text-muted);
-  font-size: 0.8rem;
-  font-family: var(--font-mono);
-}
-
-.explorer-empty {
-  color: var(--text-muted);
-  font-style: italic;
-}
-
 /* PDF Viewer */
 .pdf-viewer-dialog {
   width: 100%;
@@ -469,14 +334,5 @@ dialog::backdrop {
 @media (max-width: 768px) {
   .highlight-card {
     grid-template-columns: 1fr;
-  }
-  .explorer-container {
-    grid-template-columns: 1fr;
-  }
-  .explorer-sidebar {
-    display: none; /* Collapses to top dropdown on mobile */
-  }
-  .explorer-mobile-select {
-    display: block;
   }
 }

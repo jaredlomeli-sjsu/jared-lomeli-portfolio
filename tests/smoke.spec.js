@@ -81,66 +81,6 @@ test.describe("lightbox modal", () => {
   });
 });
 
-test.describe("explorer modal (coursework vault)", () => {
-  test("opens, lists courses, and traps Tab focus", async ({ page }) => {
-    await page.goto("/");
-    const opener = page.locator("#open-explorer-btn");
-    if ((await opener.count()) === 0)
-      test.skip(true, "no explorer opener found on page");
-
-    await opener.click();
-    const explorer = page.locator("#vault-explorer");
-    await expect(explorer).toBeVisible();
-
-    // Tab should stay inside the dialog
-    const focusInDialog = async () =>
-      page.evaluate(() => {
-        const dialog = document.querySelector("#vault-explorer");
-        return dialog ? dialog.contains(document.activeElement) : false;
-      });
-
-    for (let i = 0; i < 10; i++) {
-      await page.keyboard.press("Tab");
-      expect(
-        await focusInDialog(),
-        `focus escaped dialog after ${i + 1} tabs`,
-      ).toBe(true);
-    }
-
-    await page.keyboard.press("Escape");
-    await expect(explorer).toBeHidden();
-  });
-
-  test("opening a document shows the PDF viewer with correct title", async ({
-    page,
-  }) => {
-    await page.goto("/");
-    const opener = page.locator("#open-explorer-btn");
-    if ((await opener.count()) === 0)
-      test.skip(true, "no explorer opener found on page");
-    await opener.click();
-
-    const explorer = page.locator("#vault-explorer");
-    await expect(explorer).toBeVisible();
-
-    const doc = explorer.locator(".explorer-doc-row").first();
-    if ((await doc.count()) === 0)
-      test.skip(true, "no documents listed in explorer");
-
-    const docTitle = (
-      await doc.locator(".explorer-doc-title").textContent()
-    )?.trim();
-    await doc.click();
-
-    const pdfViewer = page.locator("#pdf-viewer");
-    await expect(pdfViewer).toBeVisible();
-    await expect(pdfViewer.locator("iframe")).toHaveAttribute("src", /.+/);
-    if (docTitle) {
-      await expect(page.locator("#pdf-viewer-title")).toContainText(docTitle);
-    }
-  });
-});
-
 test.describe("nav links", () => {
   test("all internal links resolve without 4xx/5xx", async ({
     page,
