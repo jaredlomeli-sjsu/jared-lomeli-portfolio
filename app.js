@@ -139,7 +139,13 @@ function buildHighlightCard(item, commonTags) {
   }
 
   const links = item.links || {};
-  if (links.github || links.liveDemo || links.pdfReport || links.verify) {
+  if (
+    links.github ||
+    links.liveDemo ||
+    links.pdfReport ||
+    links.verify ||
+    links.video
+  ) {
     const linksEl = document.createElement("div");
     linksEl.className = "highlight-card-links";
 
@@ -147,6 +153,8 @@ function buildHighlightCard(item, commonTags) {
       linksEl.appendChild(createExternalLink("GitHub", links.github));
     if (links.liveDemo)
       linksEl.appendChild(createExternalLink("Live Demo", links.liveDemo));
+    if (links.video)
+      linksEl.appendChild(createExternalLink("Watch Video", links.video));
     if (links.verify)
       linksEl.appendChild(
         createExternalLink("Verify Credential", links.verify),
