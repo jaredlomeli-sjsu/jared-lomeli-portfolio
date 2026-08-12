@@ -241,7 +241,8 @@
       "links": {
         "github": null,
         "liveDemo": null,
-        "pdfReport": null
+        "pdfReport": null,
+        "verify": "https://cp.certmetrics.com/CompTIA/en/public/verify/credential/425e1ca8051246a4b59ecdc016009659"
       },
       "featured": true
     }

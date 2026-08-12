@@ -120,7 +120,7 @@ function buildHighlightCard(item, commonTags) {
   }
 
   const links = item.links || {};
-  if (links.github || links.liveDemo || links.pdfReport) {
+  if (links.github || links.liveDemo || links.pdfReport || links.verify) {
     const linksEl = document.createElement("div");
     linksEl.className = "highlight-card-links";
 
@@ -128,6 +128,10 @@ function buildHighlightCard(item, commonTags) {
       linksEl.appendChild(createExternalLink("GitHub", links.github));
     if (links.liveDemo)
       linksEl.appendChild(createExternalLink("Live Demo", links.liveDemo));
+    if (links.verify)
+      linksEl.appendChild(
+        createExternalLink("Verify Credential", links.verify),
+      );
     if (links.pdfReport) {
       const btn = document.createElement("button");
       btn.type = "button";
