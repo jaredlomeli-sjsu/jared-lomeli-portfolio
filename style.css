@@ -81,6 +81,27 @@ a {
   color: var(--accent-color);
 }
 
+.btn-primary {
+  background: var(--accent-color);
+  border-color: var(--accent-color);
+  color: var(--text-on-accent);
+}
+
+.btn-primary:hover {
+  background: var(--accent-color-hover);
+  border-color: var(--accent-color-hover);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--text-main);
+}
+
+.btn-outline:hover {
+  border-color: var(--accent-color);
+  color: var(--accent-color);
+}
+
 /* Hero */
 #hero {
   padding: 4rem 1.5rem;
@@ -109,7 +130,22 @@ a {
 .hero-tagline {
   color: var(--text-muted);
   font-size: 1.05rem;
-  margin: 0 0 2rem;
+  margin: 0 0 1rem;
+}
+
+.hero-location {
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0 0 1.5rem;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
 }
 
 /* Highlight Grid */
@@ -344,9 +380,41 @@ dialog::backdrop {
   background: white;
 }
 
-/* Responsive Collapse for Mobile */
-@media (max-width: 768px) {
-  .highlight-card {
-    grid-template-columns: 1fr;
-  }
+/* Footer */
+#site-footer {
+  max-width: 760px;
+  margin: 3rem auto 0;
+  padding: 2rem 1.5rem 3rem;
+  border-top: 1px solid var(--border-color);
+  text-align: center;
+}
+
+#site-footer p {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  line-height: 1.6;
+  margin: 0 0 0.5rem;
+}
+
+#site-footer p:last-child {
+  margin-bottom: 0;
+}
+
+#site-footer a {
+  color: var(--text-muted);
+  text-decoration: underline;
+  text-decoration-color: var(--border-color);
+  text-underline-offset: 2px;
+}
+
+#site-footer a:hover {
+  color: var(--accent-color);
+  text-decoration-color: var(--accent-color);
+}
+
+.footer-updated {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
