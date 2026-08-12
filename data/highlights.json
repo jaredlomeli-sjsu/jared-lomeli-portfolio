@@ -3,88 +3,26 @@
   "version": "1.0.0",
   "highlights": [
     {
-      "id": "hl-2026-phys2a-ice-ev-mechanics",
-      "title": "Mechanics & Heat Loss in ICE vs. EV Engines",
-      "category": "Project",
-      "date": "2026-04-24",
-      "semester": "Semester 2 (West Valley College)",
-      "course": "PHYS 2A — West Valley College",
-      "summary": "Cross-disciplinary Physics 2A final project analyzing why internal combustion engines lose roughly 80% of fuel energy to heat loss, using a 2021 Dodge Charger R/T 5.7L HEMI V8 as a real-world reference, then comparing that inefficiency against EVs using Phase Change Materials for thermal management. Delivered as a narrated video plus an interactive digital poster website with an embedded 3D engine explorer.",
-      "metrics": [
-        "9-part narrated video presentation",
-        "Interactive 3D ICE vs. EV engine explorer with quiz mode",
-        "Live companion site published for the class"
-      ],
-      "tags": ["Physics", "Thermodynamics", "Web Design", "Presentation"],
-      "media": {
-        "type": "image",
-        "localSourcePath": "/public/images/phys2a-engine-explorer.png",
-        "altText": "Interactive 3D Engine Explorer showing a cutaway ICE turbocharger model with a live part-info spec panel, from the ICE vs. EV Physics 2A companion site"
-      },
-      "links": {
-        "github": null,
-        "liveDemo": "https://superlative-mandazi-3b5f4b.netlify.app/",
-        "pdfReport": null
-      },
-      "featured": true
-    },
-    {
-      "id": "hl-2026-cybersecurity-python-toolkit",
-      "title": "Cybersecurity Python Toolkit",
-      "category": "Project",
-      "date": "2026-05-11",
+      "id": "hl-2026-comptia-security-plus",
+      "title": "CompTIA Security+ (SY0-701)",
+      "category": "Credential",
+      "date": "2026-07-30",
+      "starred": true,
       "semester": null,
       "course": null,
-      "summary": "Three self-directed Python security tools built to practice hands-on SOC fundamentals, stdlib-only (hashlib, json, os, re, collections). File Integrity Checker: recursively SHA-256-fingerprints a target folder, saves a JSON baseline, and re-hashes on demand to report each file OK / CHANGED / MISSING — classic FIM logic. Password Strength Checker: scores an input 0-5 against length, uppercase, lowercase, digit, and symbol checks and prints a pass/fail breakdown with a verdict from 'Very Weak' to 'Excellent'. SSH Brute-Force Log Parser: regex-scans an auth log for 'Failed password' lines, extracts and tallies source IPs, and flags any IP over a configurable attempt threshold as a likely brute-force source.",
-      "metrics": [
-        "3 standalone tools, zero third-party dependencies",
-        "FIM: SHA-256 fingerprinting in 8192-byte chunks, baseline + verify workflow",
-        "Brute-force parser: flagged 2 of 4 source IPs as attackers on a 41-line sample auth log (192.168.1.10 at 23 attempts, 10.0.0.5 at 13, threshold 10)"
-      ],
-      "tags": ["Python", "Security", "Log Analysis", "Cryptography"],
+      "summary": "CompTIA Security+ (SY0-701) certification, valid through July 2029.",
+      "metrics": [],
+      "tags": ["Security+", "Certification", "CompTIA"],
       "media": {
         "type": "image",
-        "localSourcePath": "/public/images/toolkit-fim-demo.png",
-        "altText": "File Integrity Checker terminal output after a tamper test — detects a modified config file (CHANGED) and a deleted key file (MISSING) against a saved SHA-256 baseline"
+        "localSourcePath": "/public/images/secplus-badge.png",
+        "altText": "CompTIA Security+ (SY0-701) certificate for Jared Lomeli, certified July 30, 2026, valid through July 30, 2029"
       },
       "links": {
         "github": null,
         "liveDemo": null,
-        "pdfReport": null
-      },
-      "featured": true
-    },
-    {
-      "id": "hl-2026-packet-tracer-security-lab",
-      "title": "Segmented Enterprise Network Lab",
-      "category": "Project",
-      "date": "2026-06-16",
-      "semester": null,
-      "course": "CompTIA Security+ SY0-701 Prep",
-      "summary": "Segmented 3-VLAN enterprise network built in Cisco Packet Tracer covering Security+ SY0-701 Chapters 3-4: Layer-3 segmentation, TACACS+/RADIUS AAA, IDS via SPAN, centralized syslog, a honeypot, site-to-site IPSec VPN, and WPA2-Enterprise 802.1X wireless — hardened with port security, BPDU Guard, DHCP snooping, SNMP v3, and SSH-only administration.",
-      "metrics": [
-        "3 VLANs across a Layer-3 core switch",
-        "Site-to-site IPSec VPN (IKEv1, AES-256, SHA-256)",
-        "WPA2-Enterprise 802.1X wireless via RADIUS",
-        "Port security (sticky-MAC violation shutdown), BPDU Guard, and DHCP snooping on every access port; SNMP v3 (SHA/AES-128) replacing plaintext v1/v2"
-      ],
-      "tags": [
-        "Cisco Packet Tracer",
-        "Networking",
-        "VLANs",
-        "VPN",
-        "AAA",
-        "Security+"
-      ],
-      "media": {
-        "type": "image",
-        "localSourcePath": "/public/images/packet-tracer-topology.png",
-        "altText": "Segmented enterprise network topology diagram — 3 VLANs, AAA servers, IDS, honeypot, and site-to-site IPSec VPN"
-      },
-      "links": {
-        "github": "https://github.com/jaredlomeli-sjsu/packet-tracer-security-plus-lab",
-        "liveDemo": null,
-        "pdfReport": null
+        "pdfReport": null,
+        "verify": "https://cp.certmetrics.com/CompTIA/en/public/verify/credential/425e1ca8051246a4b59ecdc016009659"
       },
       "featured": true
     },
@@ -123,6 +61,40 @@
       "featured": true
     },
     {
+      "id": "hl-2026-soc-dashboard-grafana",
+      "title": "SOC Dashboard — Network Intrusion Monitor",
+      "category": "Project",
+      "date": "2026-07-09",
+      "semester": null,
+      "course": null,
+      "summary": "Local Security Operations Center dashboard built on the real CIC-IDS2017 network intrusion dataset — Postgres holds 2.83M labeled flows, Grafana renders dashboard-as-code panels with click-through filtering, and a Python ETL pipeline fixes real data-quality defects in the raw dataset before idempotent bulk loading.",
+      "metrics": [
+        "2,830,743 labeled network flows loaded",
+        "557,646 attack flows across 14 attack types",
+        "4 click-through filter dimensions (day, attack type, port, class)",
+        "ETL fixes 5 real data-quality defects: mangled headers, a duplicate column, Infinity/negative sensor artifacts, mislabeled attack categories, and a µs-to-seconds unit mismatch"
+      ],
+      "tags": [
+        "Grafana",
+        "PostgreSQL",
+        "Docker",
+        "Data Engineering",
+        "SOC",
+        "Network Security"
+      ],
+      "media": {
+        "type": "image",
+        "localSourcePath": "/public/images/soc-dashboard-grafana.png",
+        "altText": "Grafana SOC Analytics dashboard showing 2.83M total flows, 558K attack flows, 14 distinct attack types, a daily attack timeline, and attack type / attack family breakdown donut charts over the CIC-IDS2017 dataset"
+      },
+      "links": {
+        "github": null,
+        "liveDemo": null,
+        "pdfReport": null
+      },
+      "featured": true
+    },
+    {
       "id": "hl-2026-kali-metasploitable-wazuh-labs",
       "title": "Kali / Metasploitable / Wazuh SIEM Lab Series",
       "category": "Project",
@@ -156,34 +128,34 @@
       "featured": true
     },
     {
-      "id": "hl-2026-soc-dashboard-grafana",
-      "title": "SOC Dashboard — Network Intrusion Monitor",
+      "id": "hl-2026-packet-tracer-security-lab",
+      "title": "Segmented Enterprise Network Lab",
       "category": "Project",
-      "date": "2026-07-09",
+      "date": "2026-06-16",
       "semester": null,
-      "course": null,
-      "summary": "Local Security Operations Center dashboard built on the real CIC-IDS2017 network intrusion dataset — Postgres holds 2.83M labeled flows, Grafana renders dashboard-as-code panels with click-through filtering, and a Python ETL pipeline fixes real data-quality defects in the raw dataset before idempotent bulk loading.",
+      "course": "CompTIA Security+ SY0-701 Prep",
+      "summary": "Segmented 3-VLAN enterprise network built in Cisco Packet Tracer covering Security+ SY0-701 Chapters 3-4: Layer-3 segmentation, TACACS+/RADIUS AAA, IDS via SPAN, centralized syslog, a honeypot, site-to-site IPSec VPN, and WPA2-Enterprise 802.1X wireless — hardened with port security, BPDU Guard, DHCP snooping, SNMP v3, and SSH-only administration.",
       "metrics": [
-        "2,830,743 labeled network flows loaded",
-        "557,646 attack flows across 14 attack types",
-        "4 click-through filter dimensions (day, attack type, port, class)",
-        "ETL fixes 5 real data-quality defects: mangled headers, a duplicate column, Infinity/negative sensor artifacts, mislabeled attack categories, and a µs-to-seconds unit mismatch"
+        "3 VLANs across a Layer-3 core switch",
+        "Site-to-site IPSec VPN (IKEv1, AES-256, SHA-256)",
+        "WPA2-Enterprise 802.1X wireless via RADIUS",
+        "Port security (sticky-MAC violation shutdown), BPDU Guard, and DHCP snooping on every access port; SNMP v3 (SHA/AES-128) replacing plaintext v1/v2"
       ],
       "tags": [
-        "Grafana",
-        "PostgreSQL",
-        "Docker",
-        "Data Engineering",
-        "SOC",
-        "Network Security"
+        "Cisco Packet Tracer",
+        "Networking",
+        "VLANs",
+        "VPN",
+        "AAA",
+        "Security+"
       ],
       "media": {
         "type": "image",
-        "localSourcePath": "/public/images/soc-dashboard-grafana.png",
-        "altText": "Grafana SOC Analytics dashboard showing 2.83M total flows, 558K attack flows, 14 distinct attack types, a daily attack timeline, and attack type / attack family breakdown donut charts over the CIC-IDS2017 dataset"
+        "localSourcePath": "/public/images/packet-tracer-topology.png",
+        "altText": "Segmented enterprise network topology diagram — 3 VLANs, AAA servers, IDS, honeypot, and site-to-site IPSec VPN"
       },
       "links": {
-        "github": null,
+        "github": "https://github.com/jaredlomeli-sjsu/packet-tracer-security-plus-lab",
         "liveDemo": null,
         "pdfReport": null
       },
@@ -225,26 +197,54 @@
       "featured": true
     },
     {
-      "id": "hl-2026-comptia-security-plus",
-      "title": "CompTIA Security+ (SY0-701)",
-      "category": "Credential",
-      "date": "2026-07-30",
-      "starred": true,
+      "id": "hl-2026-cybersecurity-python-toolkit",
+      "title": "Cybersecurity Python Toolkit",
+      "category": "Project",
+      "date": "2026-05-11",
       "semester": null,
       "course": null,
-      "summary": "CompTIA Security+ (SY0-701) certification, valid through July 2029.",
-      "metrics": [],
-      "tags": ["Security+", "Certification", "CompTIA"],
+      "summary": "Three self-directed Python security tools built to practice hands-on SOC fundamentals, stdlib-only (hashlib, json, os, re, collections). File Integrity Checker: recursively SHA-256-fingerprints a target folder, saves a JSON baseline, and re-hashes on demand to report each file OK / CHANGED / MISSING — classic FIM logic. Password Strength Checker: scores an input 0-5 against length, uppercase, lowercase, digit, and symbol checks and prints a pass/fail breakdown with a verdict from 'Very Weak' to 'Excellent'. SSH Brute-Force Log Parser: regex-scans an auth log for 'Failed password' lines, extracts and tallies source IPs, and flags any IP over a configurable attempt threshold as a likely brute-force source.",
+      "metrics": [
+        "3 standalone tools, zero third-party dependencies",
+        "FIM: SHA-256 fingerprinting in 8192-byte chunks, baseline + verify workflow",
+        "Brute-force parser: flagged 2 of 4 source IPs as attackers on a 41-line sample auth log (192.168.1.10 at 23 attempts, 10.0.0.5 at 13, threshold 10)"
+      ],
+      "tags": ["Python", "Security", "Log Analysis", "Cryptography"],
       "media": {
         "type": "image",
-        "localSourcePath": "/public/images/secplus-badge.png",
-        "altText": "CompTIA Security+ (SY0-701) certificate for Jared Lomeli, certified July 30, 2026, valid through July 30, 2029"
+        "localSourcePath": "/public/images/toolkit-fim-demo.png",
+        "altText": "File Integrity Checker terminal output after a tamper test — detects a modified config file (CHANGED) and a deleted key file (MISSING) against a saved SHA-256 baseline"
       },
       "links": {
         "github": null,
         "liveDemo": null,
-        "pdfReport": null,
-        "verify": "https://cp.certmetrics.com/CompTIA/en/public/verify/credential/425e1ca8051246a4b59ecdc016009659"
+        "pdfReport": null
+      },
+      "featured": true
+    },
+    {
+      "id": "hl-2026-phys2a-ice-ev-mechanics",
+      "title": "Mechanics & Heat Loss in ICE vs. EV Engines",
+      "category": "Project",
+      "date": "2026-04-24",
+      "semester": "Semester 2 (West Valley College)",
+      "course": "PHYS 2A — West Valley College",
+      "summary": "Cross-disciplinary Physics 2A final project analyzing why internal combustion engines lose roughly 80% of fuel energy to heat loss, using a 2021 Dodge Charger R/T 5.7L HEMI V8 as a real-world reference, then comparing that inefficiency against EVs using Phase Change Materials for thermal management. Delivered as a narrated video plus an interactive digital poster website with an embedded 3D engine explorer.",
+      "metrics": [
+        "9-part narrated video presentation",
+        "Interactive 3D ICE vs. EV engine explorer with quiz mode",
+        "Live companion site published for the class"
+      ],
+      "tags": ["Physics", "Thermodynamics", "Web Design", "Presentation"],
+      "media": {
+        "type": "image",
+        "localSourcePath": "/public/images/phys2a-engine-explorer.png",
+        "altText": "Interactive 3D Engine Explorer showing a cutaway ICE turbocharger model with a live part-info spec panel, from the ICE vs. EV Physics 2A companion site"
+      },
+      "links": {
+        "github": null,
+        "liveDemo": "https://superlative-mandazi-3b5f4b.netlify.app/",
+        "pdfReport": null
       },
       "featured": true
     }
