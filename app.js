@@ -43,9 +43,18 @@ function renderHighlightGrid() {
   const container = document.getElementById("highlight-grid");
   const commonTags = computeCommonTags(appState.highlights);
   const fragment = document.createDocumentFragment();
-  appState.highlights.forEach((item) =>
-    fragment.appendChild(buildHighlightCard(item, commonTags)),
-  );
+  let lastCategory = null;
+  appState.highlights.forEach((item) => {
+    if (item.category !== lastCategory) {
+      const heading = document.createElement("h2");
+      heading.className = "highlight-section-heading";
+      heading.textContent =
+        item.category === "Credential" ? "Credentials" : "Projects";
+      fragment.appendChild(heading);
+      lastCategory = item.category;
+    }
+    fragment.appendChild(buildHighlightCard(item, commonTags));
+  });
   container.replaceChildren(fragment);
 }
 
