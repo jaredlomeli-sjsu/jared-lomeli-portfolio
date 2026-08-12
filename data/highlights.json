@@ -61,11 +61,12 @@
       "date": "2026-06-16",
       "semester": null,
       "course": "CompTIA Security+ SY0-701 Prep",
-      "summary": "Segmented 3-VLAN enterprise network built in Cisco Packet Tracer covering Security+ SY0-701 Chapters 3-4: Layer-3 segmentation, TACACS+/RADIUS AAA, IDS via SPAN, centralized syslog, a honeypot, site-to-site IPSec VPN, and WPA2-Enterprise 802.1X wireless.",
+      "summary": "Segmented 3-VLAN enterprise network built in Cisco Packet Tracer covering Security+ SY0-701 Chapters 3-4: Layer-3 segmentation, TACACS+/RADIUS AAA, IDS via SPAN, centralized syslog, a honeypot, site-to-site IPSec VPN, and WPA2-Enterprise 802.1X wireless — hardened with port security, BPDU Guard, DHCP snooping, SNMP v3, and SSH-only administration.",
       "metrics": [
         "3 VLANs across a Layer-3 core switch",
         "Site-to-site IPSec VPN (IKEv1, AES-256, SHA-256)",
-        "WPA2-Enterprise 802.1X wireless via RADIUS"
+        "WPA2-Enterprise 802.1X wireless via RADIUS",
+        "Port security (sticky-MAC violation shutdown), BPDU Guard, and DHCP snooping on every access port; SNMP v3 (SHA/AES-128) replacing plaintext v1/v2"
       ],
       "tags": [
         "Cisco Packet Tracer",
@@ -97,7 +98,7 @@
       "course": "CompTIA Security+ SY0-701 Prep",
       "summary": "Self-built exam-prep site covering all 5 weighted SY0-701 domains — 11 chapter study-note pages with original interactive diagrams, a quiz/flashcard/PBQ practice engine, a 1,090-term glossary, and a keyword-retrieval study assistant with an optional in-browser LLM. Built June 2026 while studying for the exam, then reopened and expanded through August 2026 with a Linux Lab: a simulated shell with guided lessons, free play, and SEC+ scenario challenges. Vanilla HTML/CSS/JS, no build step.",
       "metrics": [
-        "800-question bank across all 5 weighted exam domains",
+        "800-question bank, domain-weighted within ~1-4.5 points of the real SY0-701 exam distribution (verified via a full glossary cross-reference)",
         "50 PBQ labs (38 row-matching + 12 scenario) plus a simulated Linux shell with 8 lessons and 5 SEC+ challenges",
         "1,090-term glossary and 11 interactive chapter diagrams"
       ],
@@ -161,11 +162,12 @@
       "date": "2026-07-09",
       "semester": null,
       "course": null,
-      "summary": "Local Security Operations Center dashboard built on the real CIC-IDS2017 network intrusion dataset — Postgres holds 2.83M labeled flows, Grafana renders dashboard-as-code panels with click-through filtering, and a Python ETL pipeline handles real data-quality issues in the raw dataset.",
+      "summary": "Local Security Operations Center dashboard built on the real CIC-IDS2017 network intrusion dataset — Postgres holds 2.83M labeled flows, Grafana renders dashboard-as-code panels with click-through filtering, and a Python ETL pipeline fixes real data-quality defects in the raw dataset before idempotent bulk loading.",
       "metrics": [
         "2,830,743 labeled network flows loaded",
         "557,646 attack flows across 14 attack types",
-        "4 click-through filter dimensions (day, attack type, port, class)"
+        "4 click-through filter dimensions (day, attack type, port, class)",
+        "ETL fixes 5 real data-quality defects: mangled headers, a duplicate column, Infinity/negative sensor artifacts, mislabeled attack categories, and a µs-to-seconds unit mismatch"
       ],
       "tags": [
         "Grafana",
