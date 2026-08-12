@@ -19,6 +19,14 @@ function escapeHtml(str) {
 
 // --- HighlightGrid ---
 
+// Tags always highlighted regardless of how many cards they appear on —
+// skills worth calling out even where they only show up once.
+const PINNED_TAGS = new Set([
+  "Data Engineering",
+  "Linux",
+  "Cisco Packet Tracer",
+]);
+
 function computeCommonTags(highlights) {
   const counts = {};
   highlights.forEach((item) => {
@@ -26,7 +34,9 @@ function computeCommonTags(highlights) {
       counts[tag] = (counts[tag] || 0) + 1;
     });
   });
-  return new Set(Object.keys(counts).filter((tag) => counts[tag] >= 2));
+  const common = new Set(Object.keys(counts).filter((tag) => counts[tag] >= 2));
+  PINNED_TAGS.forEach((tag) => common.add(tag));
+  return common;
 }
 
 function renderHighlightGrid() {
