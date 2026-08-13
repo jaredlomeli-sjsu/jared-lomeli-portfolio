@@ -1,0 +1,2624 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SEC+ Lab Portfolio — Jared Lomeli</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #0d1117;
+        --bg2: #161b22;
+        --bg3: #1c2128;
+        --border: #30363d;
+        --border2: #21262d;
+        --text: #e6edf3;
+        --text2: #8b949e;
+        --text3: #6e7681;
+        --green: #3fb950;
+        --green-bg: rgba(63, 185, 80, 0.1);
+        --green-bd: rgba(63, 185, 80, 0.3);
+        --blue: #58a6ff;
+        --yellow: #d29922;
+        --red: #f85149;
+        --purple: #bc8cff;
+      }
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        background: var(--bg);
+        color: var(--text);
+        font-family: "Inter", system-ui, sans-serif;
+        font-size: 15px;
+        line-height: 1.6;
+      }
+
+      /* NAV */
+      nav {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: rgba(13, 17, 23, 0.93);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 2rem;
+        height: 54px;
+      }
+      .nav-brand {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.8125rem;
+        font-weight: 500;
+        color: var(--green);
+      }
+      .nav-brand span {
+        color: var(--text3);
+      }
+      .nav-links {
+        display: flex;
+        gap: 0.25rem;
+        list-style: none;
+      }
+      .nav-links a {
+        display: block;
+        padding: 0.375rem 0.75rem;
+        color: var(--text2);
+        text-decoration: none;
+        font-size: 0.8125rem;
+        font-weight: 500;
+        border-radius: 6px;
+        transition:
+          color 0.15s,
+          background 0.15s;
+      }
+      .nav-links a:hover {
+        color: var(--text);
+        background: rgba(255, 255, 255, 0.05);
+      }
+
+      /* HERO */
+      .hero {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 5rem 2rem 3.5rem;
+        border-bottom: 1px solid var(--border);
+      }
+      .eyebrow {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 1.25rem;
+      }
+      .dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--green);
+        box-shadow: 0 0 8px var(--green);
+        animation: blink 2s ease-in-out infinite;
+      }
+      @keyframes blink {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.35;
+        }
+      }
+      .eyebrow-text {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.6875rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--green);
+      }
+      .hero h1 {
+        font-size: clamp(2rem, 4vw, 2.875rem);
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        line-height: 1.15;
+        margin-bottom: 1rem;
+      }
+      .hero h1 .hl {
+        color: var(--green);
+      }
+      .hero-sub {
+        font-size: 1rem;
+        color: var(--text2);
+        max-width: 620px;
+        margin-bottom: 2rem;
+      }
+      .pills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.6rem;
+        margin-bottom: 2.5rem;
+      }
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.375rem;
+        padding: 0.275rem 0.75rem;
+        border-radius: 100px;
+        font-size: 0.8125rem;
+        font-weight: 500;
+        border: 1px solid;
+      }
+      .pill-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+      }
+      .pill.kali {
+        background: rgba(88, 166, 255, 0.08);
+        border-color: rgba(88, 166, 255, 0.25);
+        color: var(--blue);
+      }
+      .pill.meta {
+        background: rgba(248, 81, 73, 0.08);
+        border-color: rgba(248, 81, 73, 0.25);
+        color: var(--red);
+      }
+      .pill.wazuh {
+        background: rgba(188, 140, 255, 0.08);
+        border-color: rgba(188, 140, 255, 0.25);
+        color: var(--purple);
+      }
+      .pill.secplus {
+        background: rgba(210, 153, 34, 0.08);
+        border-color: rgba(210, 153, 34, 0.25);
+        color: var(--yellow);
+      }
+      .progress-box {
+        background: var(--bg2);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 1.375rem;
+        max-width: 520px;
+      }
+      .progress-row {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 0.625rem;
+      }
+      .progress-label {
+        font-size: 0.875rem;
+        font-weight: 600;
+      }
+      .progress-count {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.8125rem;
+        color: var(--green);
+      }
+      .bar-track {
+        background: var(--border);
+        border-radius: 100px;
+        height: 5px;
+        overflow: hidden;
+        margin-bottom: 0.625rem;
+      }
+      .bar-fill {
+        height: 100%;
+        background: linear-gradient(90deg, #3fb950, #4ade80);
+        border-radius: 100px;
+        width: 68.75%;
+      }
+      .legend {
+        display: flex;
+        gap: 1.25rem;
+        font-size: 0.75rem;
+        color: var(--text3);
+      }
+      .ld {
+        display: inline-block;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        margin-right: 0.3rem;
+        vertical-align: middle;
+      }
+
+      /* MAIN */
+      main {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 0 2rem 4rem;
+      }
+
+      /* DOMAIN SECTION */
+      .dom {
+        margin-top: 3.5rem;
+      }
+      .dom-head {
+        display: flex;
+        align-items: center;
+        gap: 0.875rem;
+        padding-bottom: 1rem;
+        margin-bottom: 1.5rem;
+        border-bottom: 1px solid var(--border);
+      }
+      .dom-num {
+        width: 34px;
+        height: 34px;
+        border-radius: 8px;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.75rem;
+        font-weight: 700;
+      }
+      .d1 .dom-num {
+        background: rgba(248, 81, 73, 0.15);
+        color: var(--red);
+      }
+      .d2 .dom-num {
+        background: rgba(88, 166, 255, 0.15);
+        color: var(--blue);
+      }
+      .d3 .dom-num {
+        background: rgba(63, 185, 80, 0.15);
+        color: var(--green);
+      }
+      .d4 .dom-num {
+        background: rgba(210, 153, 34, 0.15);
+        color: var(--yellow);
+      }
+      .d5 .dom-num {
+        background: rgba(240, 136, 62, 0.15);
+        color: #f0883e;
+      }
+      .d6 .dom-num {
+        background: rgba(188, 140, 255, 0.15);
+        color: var(--purple);
+      }
+      .dom-head h2 {
+        font-size: 1.0625rem;
+        font-weight: 700;
+      }
+      .dom-head p {
+        font-size: 0.8125rem;
+        color: var(--text3);
+        margin-top: 0.1rem;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 1rem;
+        align-items: start;
+      }
+
+      /* CARD */
+      .card {
+        background: var(--bg3);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        overflow: hidden;
+        transition:
+          border-color 0.2s,
+          box-shadow 0.2s;
+        display: flex;
+        flex-direction: column;
+      }
+      .card:hover {
+        border-color: #3d444d;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+      }
+      .card.dim {
+        opacity: 0.58;
+      }
+      .card-head {
+        padding: 1.125rem 1.25rem 0.875rem;
+        border-bottom: 1px solid var(--border2);
+      }
+      .card-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 0.4rem;
+      }
+      .lab-no {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.6875rem;
+        color: var(--text3);
+        font-weight: 500;
+      }
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3rem;
+        padding: 0.175rem 0.55rem;
+        border-radius: 100px;
+        font-size: 0.625rem;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        border: 1px solid;
+      }
+      .badge::before {
+        content: "";
+        display: inline-block;
+        width: 4px;
+        height: 4px;
+        border-radius: 50%;
+      }
+      .b-done {
+        background: var(--green-bg);
+        border-color: var(--green-bd);
+        color: var(--green);
+      }
+      .b-done::before {
+        background: var(--green);
+      }
+      .b-word {
+        background: rgba(88, 166, 255, 0.1);
+        border-color: rgba(88, 166, 255, 0.25);
+        color: var(--blue);
+      }
+      .b-word::before {
+        background: var(--blue);
+      }
+      .b-soon {
+        background: rgba(110, 118, 129, 0.1);
+        border-color: rgba(110, 118, 129, 0.2);
+        color: var(--text3);
+      }
+      .b-soon::before {
+        background: var(--text3);
+      }
+      .card-title {
+        font-size: 0.9375rem;
+        font-weight: 600;
+        line-height: 1.3;
+      }
+      .card-body {
+        padding: 0.875rem 1.25rem;
+        flex: 1;
+      }
+      .obj {
+        font-size: 0.8125rem;
+        color: var(--text2);
+        margin-bottom: 0.75rem;
+        line-height: 1.55;
+      }
+      .tools {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.3rem;
+      }
+      .tp {
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid var(--border);
+        border-radius: 100px;
+        padding: 0.125rem 0.55rem;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.625rem;
+        color: var(--text3);
+      }
+      .word-note {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.6rem 1.25rem;
+        border-top: 1px solid var(--border2);
+        font-size: 0.75rem;
+        color: var(--text3);
+      }
+
+      /* DETAILS / EXPAND */
+      .card-expand {
+        border-top: 1px solid var(--border2);
+      }
+      .card-summary {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.625rem 1.25rem;
+        font-size: 0.8125rem;
+        font-weight: 600;
+        color: var(--text2);
+        cursor: pointer;
+        user-select: none;
+        transition:
+          color 0.15s,
+          background 0.15s;
+      }
+      .card-summary:hover {
+        color: var(--text);
+        background: rgba(255, 255, 255, 0.025);
+      }
+      .arr {
+        width: 13px;
+        height: 13px;
+        flex-shrink: 0;
+        color: var(--text3);
+        transition: transform 0.2s;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+      .dc {
+        padding: 0.875rem 1.25rem;
+        display: none;
+        flex-direction: column;
+        gap: 0.875rem;
+      }
+      .ds-label {
+        font-size: 0.625rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--text3);
+        margin-bottom: 0.375rem;
+      }
+      .ds-body {
+        font-size: 0.8125rem;
+        color: var(--text2);
+        line-height: 1.6;
+      }
+      .ds-body ul {
+        padding-left: 1.2rem;
+      }
+      .ds-body li {
+        margin-bottom: 0.3rem;
+      }
+      .ds-body code {
+        font-family: "JetBrains Mono", monospace;
+        color: var(--green);
+        font-size: 0.75rem;
+      }
+      .cmd {
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 0.625rem 0.875rem;
+        margin-top: 0.375rem;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.75rem;
+        color: var(--green);
+        overflow-x: auto;
+        white-space: pre;
+        line-height: 1.7;
+      }
+
+      /* TOOLS SECTION */
+      .tools-sec {
+        margin-top: 4rem;
+        padding-top: 3rem;
+        border-top: 1px solid var(--border);
+      }
+      .sec-eyebrow {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.6875rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--green);
+        margin-bottom: 0.5rem;
+      }
+      .sec-title {
+        font-size: 1.375rem;
+        font-weight: 700;
+        margin-bottom: 0.3rem;
+      }
+      .sec-sub {
+        font-size: 0.875rem;
+        color: var(--text2);
+        margin-bottom: 1.75rem;
+      }
+      .tool-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(185px, 1fr));
+        gap: 0.75rem;
+        align-items: start;
+      }
+      .tool-card {
+        background: var(--bg3);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        transition: border-color 0.2s;
+      }
+      .tool-card:hover {
+        border-color: var(--green-bd);
+      }
+      .tool-card .tool-summary {
+        padding: 0.875rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.35rem;
+        cursor: pointer;
+        user-select: none;
+        position: relative;
+      }
+      .tc-arr {
+        position: absolute;
+        top: 0.875rem;
+        right: 0.875rem;
+        width: 13px;
+        height: 13px;
+        flex-shrink: 0;
+        fill: none;
+        stroke: var(--text3);
+        stroke-width: 2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        transition: transform 0.2s;
+      }
+      .tool-detail {
+        border-top: 1px solid var(--border2);
+        padding: 0.75rem 0.875rem 0.885rem;
+        display: none;
+        flex-direction: column;
+        gap: 0.625rem;
+      }
+      .ti {
+        font-size: 1.25rem;
+        line-height: 1;
+      }
+      .tn {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.8125rem;
+        font-weight: 500;
+        padding-right: 1.25rem;
+      }
+      .td {
+        font-size: 0.6875rem;
+        color: var(--text3);
+        line-height: 1.45;
+      }
+
+      /* FOOTER */
+      footer {
+        border-top: 1px solid var(--border);
+        padding: 2rem;
+      }
+      .foot-inner {
+        max-width: 1100px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+      .foot-name {
+        font-weight: 600;
+        margin-bottom: 0.15rem;
+      }
+      .foot-ctx {
+        font-size: 0.8125rem;
+        color: var(--text3);
+      }
+      .gh-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        padding: 0.4rem 0.875rem;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        font-size: 0.8125rem;
+        font-weight: 500;
+        color: var(--text2);
+        text-decoration: none;
+        transition:
+          border-color 0.15s,
+          color 0.15s;
+      }
+      .gh-link:hover {
+        border-color: var(--green-bd);
+        color: var(--green);
+      }
+
+      /* FADE IN */
+      .fi {
+        opacity: 0;
+        transform: translateY(14px);
+        transition:
+          opacity 0.4s ease,
+          transform 0.4s ease;
+      }
+      .fi.vis {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      @media (max-width: 720px) {
+        nav {
+          padding: 0 1rem;
+        }
+        .nav-links {
+          display: none;
+        }
+        .hero,
+        main {
+          padding-left: 1rem;
+          padding-right: 1rem;
+        }
+        .hero {
+          padding-top: 3rem;
+        }
+        .grid {
+          grid-template-columns: 1fr;
+        }
+        .foot-inner {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <span class="nav-brand">sec+<span>.labs</span></span>
+      <ul class="nav-links">
+        <li><a href="#d1">Domain 1</a></li>
+        <li><a href="#d2">Domain 2</a></li>
+        <li><a href="#d3">Domain 3</a></li>
+        <li><a href="#d4">Domain 4</a></li>
+        <li><a href="#d5">Domain 5</a></li>
+        <li><a href="#wazuh">Wazuh</a></li>
+        <li><a href="#tools">Tools</a></li>
+      </ul>
+    </nav>
+
+    <section class="hero">
+      <div class="eyebrow">
+        <div class="dot"></div>
+        <span class="eyebrow-text">CompTIA SEC+ Hands-On Lab Portfolio</span>
+      </div>
+      <h1>
+        Kali &bull; Metasploitable<br />&bull;
+        <span class="hl">Wazuh SIEM</span>
+      </h1>
+      <p class="hero-sub">
+        A practical, hands-on lab series exploring attack techniques,
+        architectural controls, cryptographic implementation, and incident
+        response — built on a virtualized security lab.
+      </p>
+      <div class="pills">
+        <span class="pill kali"
+          ><span class="pill-dot" style="background: var(--blue)"></span>Kali
+          Linux</span
+        >
+        <span class="pill meta"
+          ><span class="pill-dot" style="background: var(--red)"></span
+          >Metasploitable 2</span
+        >
+        <span class="pill wazuh"
+          ><span class="pill-dot" style="background: var(--purple)"></span>Wazuh
+          SIEM</span
+        >
+        <span class="pill secplus">&#9889; SEC+ Ch. 3 &amp; 4</span>
+      </div>
+      <div class="progress-box">
+        <div class="progress-row">
+          <span class="progress-label">Lab Completion</span>
+          <span class="progress-count">16 / 16 reports filed</span>
+        </div>
+        <div class="bar-track">
+          <div class="bar-fill" style="width: 100%"></div>
+        </div>
+        <div class="legend">
+          <span
+            ><span class="ld" style="background: var(--green)"></span
+            >Complete</span
+          >
+          <span
+            ><span class="ld" style="background: var(--blue)"></span>Report on
+            file</span
+          >
+          <span
+            ><span class="ld" style="background: var(--text3)"></span
+            >Upcoming</span
+          >
+        </div>
+      </div>
+    </section>
+
+    <main>
+      <!-- ── DOMAIN 1 ── -->
+      <section class="dom d1 fi" id="d1">
+        <div class="dom-head">
+          <div class="dom-num">D1</div>
+          <div>
+            <h2>Domain 1 &mdash; Threats, Attacks &amp; Vulnerabilities</h2>
+            <p>
+              Reconnaissance, vulnerability enumeration, and automated
+              credential attacks
+            </p>
+          </div>
+        </div>
+        <div class="grid">
+          <!-- 1.1 -->
+          <div class="card">
+            <div class="card-head">
+              <div class="card-top">
+                <span class="lab-no">LAB 1.1</span
+                ><span class="badge b-done">Complete</span>
+              </div>
+              <div class="card-title">Network Scanning with Nmap</div>
+            </div>
+            <div class="card-body">
+              <p class="obj">
+                Practice active reconnaissance using Nmap to discover live hosts
+                and enumerate services, versions, and OS on Metasploitable 2 —
+                mapping its full attack surface.
+              </p>
+              <div class="tools">
+                <span class="tp">nmap</span><span class="tp">Kali Linux</span
+                ><span class="tp">VirtualBox</span>
+              </div>
+            </div>
+            <div class="card-expand">
+              <div class="card-summary" onclick="toggleCard(this)">
+                <svg class="arr" viewBox="0 0 16 16">
+                  <path d="M6 4l4 4-4 4" />
+                </svg>
+                View Lab Report
+              </div>
+              <div class="dc">
+                <div>
+                  <div class="ds-label">Key Findings</div>
+                  <div class="ds-body">
+                    <ul>
+                      <li>
+                        Confirmed Metasploitable 2 at
+                        <code>192.168.56.101</code> via subnet sweep
+                      </li>
+                      <li>
+                        Open ports discovered: 21 (FTP), 22 (SSH), 23 (Telnet),
+                        25 (SMTP), 80 (HTTP), 139/445 (SMB), and more
+                      </li>
+                      <li>
+                        <code>-sV</code> fingerprinted specific software
+                        versions; <code>-O</code> confirmed the Linux OS
+                      </li>
+                      <li>
+                        Full <code>-p-</code> sweep revealed additional ports
+                        beyond Nmap's default top-1000
+                      </li>
+                      <li>
+                        Legacy plaintext services (Telnet port 23, FTP port 21)
+                        confirmed running — high credential-exposure risk
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div>
+                  <div class="ds-label">Commands Used</div>
+                  <div class="cmd">
+                    nmap 192.168.56.0/24 nmap -sV -O 192.168.56.101 nmap -p-
+                    192.168.56.101
+                  </div>
+                </div>
+                <div>
+                  <div class="ds-label">Learning Outcome</div>
+                  <div class="ds-body">
+                    Reconnaissance is the foundation of both offensive testing
+                    and defensive hardening. Every unnecessary open port and
+                    outdated service like Telnet or FTP meaningfully expands the
+                    attack surface. Disabling them and replacing with encrypted
+                    alternatives shrinks it before any vulnerability-specific
+                    patching happens.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 1.2 -->
+          <div class="card">
+            <div class="card-head">
+              <div class="card-top">
+                <span class="lab-no">LAB 1.2</span
+                ><span class="badge b-done">Complete</span>
+              </div>
+              <div class="card-title">Vulnerability Scanning with Nikto</div>
+            </div>
+            <div class="card-body">
+              <p class="obj">
+                Use Nikto to scan Metasploitable's intentionally outdated Apache
+                web server for known vulnerabilities, misconfigurations, and
+                missing security headers.
+              </p>
+              <div class="tools">
+                <span class="tp">nikto</span><span class="tp">Apache</span
+                ><span class="tp">Kali Linux</span>
+              </div>
+            </div>
+            <div class="card-expand">
+              <div class="card-summary" onclick="toggleCard(this)">
+                <svg class="arr" viewBox="0 0 16 16">
+                  <path d="M6 4l4 4-4 4" />
+                </svg>
+                View Lab Report
+              </div>
+              <div class="dc">
+                <div>
+                  <div class="ds-label">Key Findings</div>
+                  <div class="ds-body">
+                    <ul>
+                      <li>
+                        Nikto returned dozens of findings against
+                        Metasploitable's outdated Apache stack
+                      </li>
+                      <li>
+                        Multiple OSVDB identifiers logged — mapping abstract CVE
+                        concepts to real, observable results
+                      </li>
+                      <li>
+                        Flagged: outdated Apache version, missing
+                        <code>X-Frame-Options</code> and
+                        <code>X-Content-Type-Options</code> headers, exposed
+                        directories
+                      </li>
+                      <li>
+                        Scan performed enumeration only — no exploitation
+                        attempted (distinguishes vulnerability scanning from
+                        penetration testing)
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div>
+                  <div class="ds-label">Commands Used</div>
+                  <div class="cmd">nikto -h 192.168.56.101</div>
+                </div>
+                <div>
+                  <div class="ds-label">Learning Outcome</div>
+                  <div class="ds-body">
+                    A single misconfigured or outdated web server can expose a
+                    long list of weaknesses simultaneously — which is why
+                    regular vulnerability scanning is treated as a routine,
+                    ongoing control rather than a one-time check. This lab also
+                    drew the practical line between vulnerability scanning
+                    (enumerate) and penetration testing (exploit).
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 1.3 -->
+          <div class="card">
+            <div class="card-head">
+              <div class="card-top">
+                <span class="lab-no">LAB 1.3</span
+                ><span class="badge b-done">Complete</span>
+              </div>
+              <div class="card-title">Password Attack with Hydra</div>
+            </div>
+            <div class="card-body">
+              <p class="obj">
+                Perform an automated dictionary attack against Metasploitable's
+                FTP service using Hydra and the rockyou wordlist to demonstrate
+                why weak credentials remain so dangerous.
+              </p>
+              <div class="tools">
+                <span class="tp">hydra</span><span class="tp">rockyou.txt</span
+                ><span class="tp">FTP</span><span class="tp">Kali Linux</span>
+              </div>
+            </div>
+            <div class="card-expand">
+              <div class="card-summary" onclick="toggleCard(this)">
+                <svg class="arr" viewBox="0 0 16 16">
+                  <path d="M6 4l4 4-4 4" />
+                </svg>
+                View Lab Report
+              </div>
+              <div class="dc">
+                <div>
+                  <div class="ds-label">Key Findings</div>
+                  <div class="ds-body">
+                    <ul>
+                      <li>
+                        Hydra cracked <code>msfadmin:msfadmin</code> on FTP
+                        (port 21) within seconds — password identical to the
+                        username
+                      </li>
+                      <li>
+                        Result:
+                        <code
+                          >[21][ftp] host: 192.168.56.101 login: msfadmin
+                          password: msfadmin</code
+                        >
+                      </li>
+                      <li>
+                        No account lockout or rate limiting in place — unlimited
+                        attempts allowed without interruption
+                      </li>
+                      <li>
+                        Attack required almost no skill beyond pointing the tool
+                        at the exposed service
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div>
+                  <div class="ds-label">Commands Used</div>
+                  <div class="cmd">
+                    hydra -l msfadmin -P /usr/share/wordlists/rockyou.txt.gz
+                    192.168.56.101 ftp
+                  </div>
+                </div>
+                <div>
+                  <div class="ds-label">Learning Outcome</div>
+                  <div class="ds-body">
+                    Brute force and dictionary attacks are fast, automated, and
+                    require almost no skill. Defense requires a layered
+                    approach: strong unique passwords, lockout thresholds after
+                    a small number of failed attempts, and ideally multifactor
+                    authentication — so that a guessed password alone is not
+                    enough to gain access.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── DOMAIN 2 ── -->
+      <section class="dom d2 fi" id="d2">
+        <div class="dom-head">
+          <div class="dom-num">D2</div>
+          <div>
+            <h2>Domain 2 &mdash; Architecture &amp; Design</h2>
+            <p>
+              Network segmentation, DMZ concepts, and plaintext vs. encrypted
+              protocol comparison
+            </p>
+          </div>
+        </div>
+        <div class="grid">
+          <!-- 2.1 -->
+          <div class="card">
+            <div class="card-head">
+              <div class="card-top">
+                <span class="lab-no">LAB 2.1</span
+                ><span class="badge b-done">Complete</span>
+              </div>
+              <div class="card-title">Understanding Network Segmentation</div>
+            </div>
+            <div class="card-body">
+              <p class="obj">
+                Observe Host-Only network isolation vs. NAT internet access to
+                demonstrate how segmentation keeps vulnerable systems off
+                untrusted networks — a DMZ in miniature.
+              </p>
+              <div class="tools">
+                <span class="tp">VirtualBox</span><span class="tp">ping</span
+                ><span class="tp">ip addr</span
+                ><span class="tp">NAT / Host-Only</span>
+              </div>
+            </div>
+            <div class="card-expand">
+              <div class="card-summary" onclick="toggleCard(this)">
+                <svg class="arr" viewBox="0 0 16 16">
+                  <path d="M6 4l4 4-4 4" />
+                </svg>
+                View Lab Report
+              </div>
+              <div class="dc">
+                <div>
+                  <div class="ds-label">Key Findings</div>
+                  <div class="ds-body">
+                    <ul>
+                      <li>
+                        With Host-Only adapter only, Kali could not reach
+                        <code>8.8.8.8</code> — fully isolated from the internet
+                      </li>
+                      <li>
+                        Adding a NAT adapter to Kali gave it internet access
+                        immediately; Metasploitable remained isolated throughout
+                      </li>
+                      <li>
+                        Kali became dual-homed (eth0 Host-Only + eth1 NAT),
+                        mirroring a bastion/jump host architecture
+                      </li>
+                      <li>
+                        Lab connectivity between Kali and Metasploitable
+                        persisted after adding the second adapter — segmentation
+                        held
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div>
+                  <div class="ds-label">Commands Used</div>
+                  <div class="cmd">
+                    ip addr show ping 8.8.8.8 ping 192.168.56.101
+                  </div>
+                </div>
+                <div>
+                  <div class="ds-label">Learning Outcome</div>
+                  <div class="ds-body">
+                    Segmentation is enforced at the network interface and
+                    routing level — not just through firewall rules. Keeping a
+                    vulnerable system fully offline from untrusted networks is
+                    one of the simplest and most effective isolation controls.
+                    This lab made the DMZ concept tangible: high-risk systems
+                    belong in their own segment, accessible only through
+                    controlled hosts.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2.2 -->
+          <div class="card">
+            <div class="card-head">
+              <div class="card-top">
+                <span class="lab-no">LAB 2.2</span
+                ><span class="badge b-done">Complete</span>
+              </div>
+              <div class="card-title">Secure vs. Insecure Protocols</div>
+            </div>
+            <div class="card-body">
+              <p class="obj">
+                Compare plaintext Telnet against encrypted SSH to the same
+                target — identical user experience, fundamentally different
+                security properties on the wire.
+              </p>
+              <div class="tools">
+                <span class="tp">telnet</span><span class="tp">ssh</span
+                ><span class="tp">Wireshark</span
+                ><span class="tp">Kali Linux</span>
+              </div>
+            </div>
+            <div class="card-expand">
+              <div class="card-summary" onclick="toggleCard(this)">
+                <svg class="arr" viewBox="0 0 16 16">
+                  <path d="M6 4l4 4-4 4" />
+                </svg>
+                View Lab Report
+              </div>
+              <div class="dc">
+                <div>
+                  <div class="ds-label">Key Findings</div>
+                  <div class="ds-body">
+                    <ul>
+                      <li>
+                        Both Telnet and SSH connected to
+                        <code>msfadmin@192.168.56.101</code> — user experience
+                        was identical
+                      </li>
+                      <li>
+                        Telnet: credentials visible in plaintext to anyone
+                        capturing traffic on the wire
+                      </li>
+                      <li>
+                        SSH: only ciphertext visible — credentials and session
+                        data fully encrypted in transit
+                      </li>
+                      <li>
+                        Pattern repeats across the full protocol table:
+                        HTTP&rarr;HTTPS, FTP&rarr;SFTP, SNMP v1/v2&rarr;v3,
+                        LDAP&rarr;LDAPS
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div>
+                  <div class="ds-label">Commands Used</div>
+                  <div class="cmd">
+                    telnet 192.168.56.101 ssh msfadmin@192.168.56.101
+                  </div>
+                </div>
+                <div>
+                  <div class="ds-label">Learning Outcome</div>
+                  <div class="ds-body">
+                    Two protocols can look and behave identically to users while
+                    having completely different security properties underneath.
+                    Legacy plaintext protocols should be disabled wherever
+                    encrypted alternatives exist — this is one recurring pattern
+                    across the entire SEC+ protocol comparison table, not a set
+                    of isolated facts to memorize.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── DOMAIN 3 ── -->
+      <section class="dom d3 fi" id="d3">
+        <div class="dom-head">
+          <div class="dom-num">D3</div>
+          <div>
+            <h2>Domain 3 &mdash; Implementation</h2>
+            <p>
+              Cryptography in practice, firewall configuration, and certificate
+              infrastructure
+            </p>
+          </div>
+        </div>
+        <div class="grid">
+          <!-- 3.1 -->
+          <div class="card">
+            <div class="card-head">
+              <div class="card-top">
+                <span class="lab-no">LAB 3.1</span
+                ><span class="badge b-done">Complete</span>
+              </div>
+              <div class="card-title">Encryption &amp; Hashing</div>
+            </div>
+            <div class="card-body">
+              <p class="obj">
+                Demonstrate the avalanche effect in MD5/SHA-256 hashing and
+                perform symmetric AES-256 encryption with GPG to distinguish
+                integrity verification from confidentiality protection.
+              </p>
+              <div class="tools">
+                <span class="tp">gpg</span><span class="tp">sha256sum</span
+                ><span class="tp">md5sum</span><span class="tp">AES-256</span>
+              </div>
+            </div>
+            <div class="card-expand">
+              <div class="card-summary" onclick="toggleCard(this)">
+                <svg class="arr" viewBox="0 0 16 16">
+                  <path d="M6 4l4 4-4 4" />
+                </svg>
+                View Lab Report
+              </div>
+              <div class="dc">
+                <div>
+                  <div class="ds-label">Key Findings</div>
+                  <div class="ds-body">
+                    <ul>
+                      <li>
+                        Adding a single period to a file produced a completely
+                        different MD5 and SHA-256 hash — avalanche effect
+                        confirmed
+                      </li>
+                      <li>
+                        MD5: 32-char hex output (128-bit) — SEC+ marks this as
+                        broken/weak; SHA-256: 64-char hex (256-bit) — current
+                        standard
+                      </li>
+                      <li>
+                        GPG-encrypted file (<code>secret.txt.gpg</code>) was
+                        completely unreadable binary without the passphrase
+                      </li>
+                      <li>
+                        Decryption with the correct passphrase recovered the
+                        original message exactly — confirmed two-way operation
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div>
+                  <div class="ds-label">Commands Used</div>
+                  <div class="cmd">
+                    md5sum testfile.txt sha256sum testfile.txt gpg --symmetric
+                    --cipher-algo AES256 secret.txt gpg --decrypt secret.txt.gpg
+                  </div>
+                </div>
+                <div>
+                  <div class="ds-label">Learning Outcome</div>
+                  <div class="ds-body">
+                    Hashing is one-way and protects integrity. Encryption is
+                    two-way and protects confidentiality. MD5 is broken and
+                    should not be relied on for security-sensitive checks.
+                    SHA-256 is the current standard. AES-256 is the gold
+                    standard for symmetric encryption. Doing this by hand made
+                    the hashing vs. encryption distinction concrete rather than
+                    just definitional.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3.2 -->
+          <div class="card">
+            <div class="card-head">
+              <div class="card-top">
+                <span class="lab-no">LAB 3.2</span
+                ><span class="badge b-done">Complete</span>
+              </div>
+              <div class="card-title">Firewall Rules with iptables</div>
+            </div>
+            <div class="card-body">
+              <p class="obj">
+                Configure and manage Linux firewall rules using iptables to
+                control inbound and outbound traffic — implementing allow/deny
+                policies and observing their real effect on connectivity.
+              </p>
+              <div class="tools">
+                <span class="tp">iptables</span
+                ><span class="tp">Kali Linux</span
+                ><span class="tp">Metasploitable</span>
+              </div>
+            </div>
+            <div class="card-expand">
+              <div class="card-summary" onclick="toggleCard(this)">
+                <svg class="arr" viewBox="0 0 16 16">
+                  <path d="M6 4l4 4-4 4" />
+                </svg>
+                View Lab Report
+              </div>
+              <div class="dc">
+                <div>
+                  <div class="ds-label">Key Findings</div>
+                  <div class="ds-body">
+                    <ul>
+                      <li>
+                        Baseline confirmed: INPUT chain defaulted to ACCEPT — no
+                        rules blocking anything before the lab began
+                      </li>
+                      <li>
+                        ICMP DROP rule blocked pings from both Metasploitable
+                        and the Windows host — confirmed the rule applies to all
+                        sources, not just VMs
+                      </li>
+                      <li>
+                        SSH allow-list demonstrated rule ordering:
+                        <code>ACCEPT port 22</code> must come before the blanket
+                        <code>DROP</code> or SSH itself gets blocked
+                      </li>
+                      <li>
+                        Default-deny posture (block all, explicitly allow what's
+                        needed) confirmed as far more secure than default-allow
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div>
+                  <div class="ds-label">Commands Used</div>
+                  <div class="cmd">
+                    sudo iptables -L -n -v sudo iptables -A INPUT -p icmp
+                    --icmp-type echo-request -j DROP sudo iptables -D INPUT -p
+                    icmp --icmp-type echo-request -j DROP sudo iptables -A INPUT
+                    -p tcp --dport 22 -j ACCEPT sudo iptables -A INPUT -p tcp -j
+                    DROP sudo iptables -F
+                  </div>
+                </div>
+                <div>
+                  <div class="ds-label">Learning Outcome</div>
+                  <div class="ds-body">
+                    iptables evaluates rules top-to-bottom and stops at the
+                    first match — the same logic behind ACLs on routers and
+                    firewalls. The SSH allow-list was a hands-on demonstration
+                    of implicit deny: anything not matching an ACCEPT rule above
+                    the final DROP is denied by default. This connects directly
+                    to stateless vs. stateful firewall concepts and Network
+                    Access Control in the SEC+ Implementation domain.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3.3 -->
+          <div class="card">
+            <div class="card-head">
+              <div class="card-top">
+                <span class="lab-no">LAB 3.3</span
+                ><span class="badge b-done">Complete</span>
+              </div>
+              <div class="card-title">
+                Creating &amp; Examining SSL/TLS Certificates
+              </div>
+            </div>
+            <div class="card-body">
+              <p class="obj">
+                Generate a self-signed X.509 certificate with OpenSSL, inspect
+                every field in plain text, and compare it against a real
+                CA-issued certificate to understand the chain of trust behind
+                HTTPS.
+              </p>
+              <div class="tools">
+                <span class="tp">openssl</span><span class="tp">TLS/SSL</span
+                ><span class="tp">PKI</span><span class="tp">Kali Linux</span>
+              </div>
+            </div>
+            <div class="card-expand">
+              <div class="card-summary" onclick="toggleCard(this)">
+                <svg class="arr" viewBox="0 0 16 16">
+                  <path d="M6 4l4 4-4 4" />
+                </svg>
+                View Lab Report
+              </div>
+              <div class="dc">
+                <div>
+                  <div class="ds-label">Key Findings</div>
+                  <div class="ds-body">
+                    <ul>
+                      <li>
+                        Self-signed cert: Issuer and Subject fields were
+                        identical — I was simultaneously the cert's subject and
+                        its own issuer
+                      </li>
+                      <li>
+                        Validity window confirmed: Not Before = creation time,
+                        Not After = exactly 365 days later
+                      </li>
+                      <li>
+                        Public Key Algorithm: RSA 2048-bit; Signature Algorithm:
+                        SHA-256 — cryptographic signing confirmed, not just
+                        plain text
+                      </li>
+                      <li>
+                        Real CA-issued cert (viewed via Firefox padlock) showed
+                        Root CA → Intermediate CA → leaf cert chain — this is
+                        why browsers trust it without a warning
+                      </li>
+                      <li>
+                        Self-signed certs provide equal encryption strength but
+                        carry no third-party validation — hence browser warnings
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div>
+                  <div class="ds-label">Commands Used</div>
+                  <div class="cmd">
+                    openssl req -x509 -newkey rsa:2048 -keyout mykey.pem -out
+                    mycert.pem -days 365 -nodes openssl x509 -in mycert.pem
+                    -text -noout
+                  </div>
+                </div>
+                <div>
+                  <div class="ds-label">Learning Outcome</div>
+                  <div class="ds-body">
+                    "Encrypted" and "trusted" are not the same thing. A
+                    self-signed certificate provides the same RSA encryption as
+                    a CA-issued one but carries no third-party validation, which
+                    is why browsers reject it by default. This lab made the PKI
+                    vocabulary concrete: Root CA, Intermediate CA, CSR, CRL, and
+                    OCSP are not isolated terms to memorize — they describe
+                    specific roles in the chain of trust that the exam's PKI
+                    questions are really testing.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── DOMAIN 4 ── -->
+      <section class="dom d4 fi" id="d4">
+        <div class="dom-head">
+          <div class="dom-num">D4</div>
+          <div>
+            <h2>Domain 4 &mdash; Operations &amp; Incident Response</h2>
+            <p>
+              Log analysis, IR lifecycle, and live network traffic capture &amp;
+              analysis
+            </p>
+          </div>
+        </div>
+        <div class="grid">
+          <!-- 4.1 -->
+          <div class="card">
+            <div class="card-head">
+              <div class="card-top">
+                <span class="lab-no">LAB 4.1</span
+                ><span class="badge b-done">Complete</span>
+              </div>
+              <div class="card-title">Log Analysis</div>
+            </div>
+            <div class="card-body">
+              <p class="obj">
+                Read auth.log directly, deliberately generate failed logins and
+                a Hydra brute-force attack, then observe how both appear in raw
+                log data — the same signal a SIEM rule keys on.
+              </p>
+              <div class="tools">
+                <span class="tp">auth.log</span><span class="tp">grep</span
+                ><span class="tp">hydra</span><span class="tp">Kali Linux</span>
+              </div>
+            </div>
+            <div class="card-expand">
+              <div class="card-summary" onclick="toggleCard(this)">
+                <svg class="arr" viewBox="0 0 16 16">
+                  <path d="M6 4l4 4-4 4" />
+                </svg>
+                View Lab Report
+              </div>
+              <div class="dc">
+                <div>
+                  <div class="ds-label">Key Findings</div>
+                  <div class="ds-body">
+                    <ul>
+                      <li>
+                        Every failed login produced a distinct auth.log entry
+                        with timestamp, attempted username, and source IP
+                      </li>
+                      <li>
+                        A single manual SSH failure generated a handful of
+                        entries; Hydra generated hundreds of "Failed password"
+                        lines in seconds from the same source IP
+                      </li>
+                      <li>
+                        The visual difference between baseline noise and a
+                        brute-force burst was immediately obvious just by
+                        scrolling the log
+                      </li>
+                      <li>
+                        This is exactly the pattern a SIEM correlation rule is
+                        built to detect and alert on automatically
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div>
+                  <div class="ds-label">Commands Used</div>
+                  <div class="cmd">
+                    sudo cat /var/log/auth.log | head -50 sudo grep "Failed
+                    password" /var/log/auth.log ssh wronguser@192.168.56.101
+                    sudo cat /var/log/auth.log | grep "Failed" hydra -l msfadmin
+                    -P /usr/share/wordlists/rockyou.txt.gz 192.168.56.101 ssh
+                  </div>
+                </div>
+                <div>
+                  <div class="ds-label">Learning Outcome</div>
+                  <div class="ds-body">
+                    A single failed login is background noise; a burst of
+                    hundreds from one source in seconds is an IOC (Indicator of
+                    Compromise) consistent with a brute-force attack. This is
+                    the same signal a SIEM platform like Wazuh flags
+                    automatically. Reading raw logs by hand first builds the
+                    intuition for why log retention, aggregation, and automated
+                    correlation rules matter — a human scrolling auth.log does
+                    not scale, but the underlying pattern does not change.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4.2 -->
+          <div class="card">
+            <div class="card-head">
+              <div class="card-top">
+                <span class="lab-no">LAB 4.2</span
+                ><span class="badge b-done">Complete</span>
+              </div>
+              <div class="card-title">Incident Response Simulation</div>
+            </div>
+            <div class="card-body">
+              <p class="obj">
+                Walk through all six NIST IR phases — Preparation, Detection,
+                Containment, Eradication, Recovery, and Lessons Learned — using
+                a simulated compromise of Metasploitable as the scenario.
+              </p>
+              <div class="tools">
+                <span class="tp">nmap</span><span class="tp">curl</span
+                ><span class="tp">VirtualBox</span
+                ><span class="tp">NIST IR</span>
+              </div>
+            </div>
+            <div class="card-expand">
+              <div class="card-summary" onclick="toggleCard(this)">
+                <svg class="arr" viewBox="0 0 16 16">
+                  <path d="M6 4l4 4-4 4" />
+                </svg>
+                View Lab Report
+              </div>
+              <div class="dc">
+                <div>
+                  <div class="ds-label">Key Findings</div>
+                  <div class="ds-body">
+                    <ul>
+                      <li>
+                        Detection: <code>nmap -sV</code> confirmed deliberately
+                        old, vulnerable services — concrete IOCs to point to
+                      </li>
+                      <li>
+                        Identification: <code>curl -I</code> revealed Apache
+                        version and OS via the Server header — version
+                        disclosure hands attackers free reconnaissance
+                      </li>
+                      <li>
+                        Containment: disabling the VM's network adapter
+                        immediately cut all connectivity without powering off,
+                        preserving volatile evidence
+                      </li>
+                      <li>
+                        Lessons Learned: writing the full incident timeline
+                        (date, detected, confirmed, actions, recommendations)
+                        made clear how structured real post-incident reports
+                        must be
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div>
+                  <div class="ds-label">Commands Used</div>
+                  <div class="cmd">
+                    nmap -sV 192.168.56.101 curl -I http://192.168.56.101
+                    VirtualBox: Network Adapter 1 -> Disable (Containment)
+                    VirtualBox: Network Adapter 1 -> Enable (Recovery)
+                  </div>
+                </div>
+                <div>
+                  <div class="ds-label">Learning Outcome</div>
+                  <div class="ds-body">
+                    The six-phase sequence matters: jumping to Eradication
+                    before Containment risks letting an active attacker maintain
+                    access while evidence is altered. Acting out each phase in
+                    order reinforced IOC, TTP, SIEM, SOAR, and Chain of Custody
+                    as contextual concepts rather than isolated vocabulary — the
+                    mental model the exam is testing when it asks about incident
+                    response.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4.3 -->
+          <div class="card">
+            <div class="card-head">
+              <div class="card-top">
+                <span class="lab-no">LAB 4.3</span
+                ><span class="badge b-done">Complete</span>
+              </div>
+              <div class="card-title">
+                Capturing &amp; Analyzing Network Traffic
+              </div>
+            </div>
+            <div class="card-body">
+              <p class="obj">
+                Use Wireshark to capture live traffic on eth0 and compare Telnet
+                credentials readable in plaintext against encrypted SSH sessions
+                — making confidentiality from the CIA Triad visible rather than
+                theoretical.
+              </p>
+              <div class="tools">
+                <span class="tp">Wireshark</span><span class="tp">telnet</span
+                ><span class="tp">ssh</span><span class="tp">eth0</span>
+              </div>
+            </div>
+            <div class="card-expand">
+              <div class="card-summary" onclick="toggleCard(this)">
+                <svg class="arr" viewBox="0 0 16 16">
+                  <path d="M6 4l4 4-4 4" />
+                </svg>
+                View Lab Report
+              </div>
+              <div class="dc">
+                <div>
+                  <div class="ds-label">Key Findings</div>
+                  <div class="ds-body">
+                    <ul>
+                      <li>
+                        Telnet capture: the literal string
+                        <code>msfadmin</code> (username and password) appeared
+                        repeatedly and clearly in packet payloads — no
+                        obfuscation of any kind
+                      </li>
+                      <li>
+                        The <code>ls</code> command output and
+                        <code>exit</code> were also fully visible in the packet
+                        bytes
+                      </li>
+                      <li>
+                        SSH capture: only encrypted, unreadable binary payload
+                        in every packet — no credentials or command text
+                        recoverable
+                      </li>
+                      <li>
+                        Confirmed that anyone on the same network segment can
+                        passively harvest Telnet credentials without the victim
+                        knowing
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div>
+                  <div class="ds-label">Commands Used</div>
+                  <div class="cmd">
+                    wireshark # capture on eth0 telnet 192.168.56.101 #
+                    Wireshark filter: telnet ssh msfadmin@192.168.56.101 #
+                    Wireshark filter: ssh
+                  </div>
+                </div>
+                <div>
+                  <div class="ds-label">Learning Outcome</div>
+                  <div class="ds-body">
+                    Reading "Telnet sends data in cleartext" is different from
+                    watching a real password scroll past in a packet capture.
+                    This lab made confidentiality from the CIA Triad concrete
+                    and reinforced the man-in-the-middle attack concept: anyone
+                    with visibility into the traffic path can passively harvest
+                    credentials from unencrypted sessions. It also builds a
+                    transferable skill — Wireshark is used for offensive
+                    testing, defensive monitoring, and validating that
+                    encryption is actually in effect, not just assumed.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── DOMAIN 5 ── -->
+      <section class="dom d5 fi" id="d5">
+        <div class="dom-head">
+          <div class="dom-num">D5</div>
+          <div>
+            <h2>Domain 5 &mdash; Governance, Risk &amp; Compliance</h2>
+            <p>
+              Risk assessment calculations, risk response strategies, and data
+              classification controls
+            </p>
+          </div>
+        </div>
+        <div class="grid">
+          <!-- 5.1 -->
+          <div class="card">
+            <div class="card-head">
+              <div class="card-top">
+                <span class="lab-no">LAB 5.1</span
+                ><span class="badge b-done">Complete</span>
+              </div>
+              <div class="card-title">Risk Assessment Exercise</div>
+            </div>
+            <div class="card-body">
+              <p class="obj">
+                Apply the risk formula (Risk = Threat &times; Vulnerability
+                &times; Impact) to real Metasploitable vulnerabilities,
+                calculate ALE/SLE/ARO, and practice the four risk response
+                strategies: Accept, Mitigate, Transfer, Avoid.
+              </p>
+              <div class="tools">
+                <span class="tp">ALE / SLE / ARO</span
+                ><span class="tp">risk matrix</span><span class="tp">GRC</span
+                ><span class="tp">nmap</span><span class="tp">curl</span>
+              </div>
+            </div>
+            <div class="card-expand">
+              <div class="card-summary" onclick="toggleCard(this)">
+                <svg class="arr" viewBox="0 0 16 16">
+                  <path d="M6 4l4 4-4 4" />
+                </svg>
+                View Lab Report
+              </div>
+              <div class="dc">
+                <div>
+                  <div class="ds-label">Key Findings</div>
+                  <div class="ds-body">
+                    <ul>
+                      <li>
+                        Applied risk formula to two Metasploitable
+                        vulnerabilities: open Telnet (port 23) and Apache
+                        version disclosure
+                      </li>
+                      <li>
+                        Telnet ALE = <code>$50,000/yr</code> (SLE $100k &times;
+                        ARO 0.5); Apache ALE = <code>$25,000/yr</code> (SLE
+                        $100k &times; ARO 0.25)
+                      </li>
+                      <li>
+                        Telnet carried 2&times; the annualized risk despite
+                        identical High impact and SLE — difference was entirely
+                        likelihood and frequency
+                      </li>
+                      <li>
+                        Both resolved to <strong>Mitigate</strong>: Telnet fix
+                        is free (disable, enforce SSH); Apache patch is
+                        low-effort, high-return
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div>
+                  <div class="ds-label">
+                    Commands Used (prior lab evidence re-examined)
+                  </div>
+                  <div class="cmd">
+                    nmap -sV -O 192.168.56.101 # confirmed Telnet port 23 open
+                    curl -I http://192.168.56.101 # revealed exact Apache
+                    version in Server header
+                  </div>
+                </div>
+                <div>
+                  <div class="ds-label">Learning Outcome</div>
+                  <div class="ds-body">
+                    The ALE = SLE &times; ARO calculation became concrete by
+                    applying it to vulnerabilities I had personally found rather
+                    than textbook numbers. The right risk response depends on
+                    fix cost relative to the ALE it removes — in both cases
+                    here, Mitigate was obvious because the fix cost was near
+                    zero compared to the dollar risk eliminated. Also reinforced
+                    the asset/threat/vulnerability/risk distinction the exam
+                    tests.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 5.2 -->
+          <div class="card">
+            <div class="card-head">
+              <div class="card-top">
+                <span class="lab-no">LAB 5.2</span
+                ><span class="badge b-done">Complete</span>
+              </div>
+              <div class="card-title">Data Classification Exercise</div>
+            </div>
+            <div class="card-body">
+              <p class="obj">
+                Create a tiered file structure representing Public / Internal /
+                Confidential / Restricted data, apply Linux file permissions to
+                enforce least-privilege access controls, and map classification
+                levels to real handling requirements.
+              </p>
+              <div class="tools">
+                <span class="tp">chmod</span><span class="tp">ls -la</span
+                ><span class="tp">Kali Linux</span
+                ><span class="tp">data classification</span>
+              </div>
+            </div>
+            <div class="card-expand">
+              <div class="card-summary" onclick="toggleCard(this)">
+                <svg class="arr" viewBox="0 0 16 16">
+                  <path d="M6 4l4 4-4 4" />
+                </svg>
+                View Lab Report
+              </div>
+              <div class="dc">
+                <div>
+                  <div class="ds-label">Key Findings</div>
+                  <div class="ds-body">
+                    <ul>
+                      <li>
+                        Created four-tier directory structure on Kali: Public,
+                        Internal, Confidential, Restricted — each with a
+                        representative file
+                      </li>
+                      <li>
+                        <code>chmod 644</code> (Public) down to
+                        <code>chmod 600</code> (Confidential/Restricted) — least
+                        privilege visible as actual permission bits, not just a
+                        definition
+                      </li>
+                      <li>
+                        <code>ls -la</code> confirmed: Public brochure showed
+                        <code>-rw-r--r--</code>; Confidential customer file
+                        showed <code>-rw-------</code> — group and others access
+                        fully stripped
+                      </li>
+                      <li>
+                        Tied corporate classification tiers (Public, Internal,
+                        Confidential, Restricted) directly to enforceable
+                        technical controls
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div>
+                  <div class="ds-label">Commands Used</div>
+                  <div class="cmd">
+                    mkdir -p
+                    ~/DataClassification/{Public,Internal,Confidential,Restricted}
+                    chmod 644 ~/DataClassification/Public/brochure.txt chmod 640
+                    ~/DataClassification/Internal/directory.txt chmod 600
+                    ~/DataClassification/Confidential/customers.txt chmod 600
+                    ~/DataClassification/Restricted/source_code.txt ls -la
+                    ~/DataClassification/Public/ ls -la
+                    ~/DataClassification/Confidential/
+                  </div>
+                </div>
+                <div>
+                  <div class="ds-label">Learning Outcome</div>
+                  <div class="ds-body">
+                    Data classification only matters if backed by a control that
+                    actually enforces it. Applying chmod values to each tier
+                    made the need-to-know principle and least privilege
+                    concrete: the more sensitive the data, the fewer entities
+                    get access. It also clarified how classification decisions
+                    are supposed to drive downstream data handling and retention
+                    policy — not just exist on paper.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── WAZUH BONUS ── -->
+      <section class="dom d6 fi" id="wazuh">
+        <div class="dom-head">
+          <div class="dom-num">&#x2605;</div>
+          <div>
+            <h2>Bonus &mdash; Wazuh SIEM Labs</h2>
+            <p>
+              Security information and event management — brute force detection,
+              FIM, and dashboard analysis
+            </p>
+          </div>
+        </div>
+        <div class="grid">
+          <!-- 6.1 -->
+          <div class="card">
+            <div class="card-head">
+              <div class="card-top">
+                <span class="lab-no">LAB 6.1</span
+                ><span class="badge b-done">Complete</span>
+              </div>
+              <div class="card-title">Brute Force Detection with Wazuh</div>
+            </div>
+            <div class="card-body">
+              <p class="obj">
+                Re-run the Lab 1.3 Hydra FTP attack with the Wazuh agent live,
+                then observe the defender's view — Security Events spike, Threat
+                Hunting filters, and SIEM correlation turning individual failed
+                logins into a single actionable alert.
+              </p>
+              <div class="tools">
+                <span class="tp">Wazuh</span><span class="tp">SIEM</span
+                ><span class="tp">Hydra</span><span class="tp">alert rules</span
+                ><span class="tp">Threat Hunting</span>
+              </div>
+            </div>
+            <div class="card-expand">
+              <div class="card-summary" onclick="toggleCard(this)">
+                <svg class="arr" viewBox="0 0 16 16">
+                  <path d="M6 4l4 4-4 4" />
+                </svg>
+                View Lab Report
+              </div>
+              <div class="dc">
+                <div>
+                  <div class="ds-label">Key Findings</div>
+                  <div class="ds-body">
+                    <ul>
+                      <li>
+                        Security Events graph spiked within ~1 minute of
+                        launching Hydra — baseline vs. attack was visually
+                        obvious immediately
+                      </li>
+                      <li>
+                        Individual failed-login alerts landed in the medium
+                        severity range (7&ndash;11) on Wazuh's 0&ndash;15 scale
+                      </li>
+                      <li>
+                        Wazuh raised a higher-level
+                        <code>Multiple authentication failures</code>
+                        correlation alert — the SIEM recognized the pattern, not
+                        just the individual events
+                      </li>
+                      <li>
+                        Clicking into alerts revealed: raw log line, rule ID,
+                        rule description, and source IP — same attack,
+                        completely different defender-side view vs. Lab 1.3
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div>
+                  <div class="ds-label">Commands &amp; Filters Used</div>
+                  <div class="cmd">
+                    hydra -l msfadmin -P test_passwords.txt 192.168.56.102 ftp #
+                    Wazuh Threat Hunting filters: agent.name: kali rule.groups:
+                    authentication_failed
+                  </div>
+                </div>
+                <div>
+                  <div class="ds-label">Learning Outcome</div>
+                  <div class="ds-body">
+                    Seeing the same Hydra attack from both the attacker's
+                    terminal (Lab 1.3) and the Wazuh Dashboard here made the
+                    value of a SIEM concrete: without correlation, dozens of
+                    failed-login events are easy to miss; with it, they collapse
+                    into one clear, high-priority alert. Also reinforced core
+                    SEC+ Domain 4 vocabulary — SIEM, IOC, and the SOC analyst
+                    workflow of detect, investigate, and respond — in a hands-on
+                    context rather than a study-guide definition.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 6.2 -->
+          <div class="card">
+            <div class="card-head">
+              <div class="card-top">
+                <span class="lab-no">LAB 6.2</span
+                ><span class="badge b-done">Complete</span>
+              </div>
+              <div class="card-title">File Integrity Monitoring (FIM)</div>
+            </div>
+            <div class="card-body">
+              <p class="obj">
+                Use Wazuh's built-in FIM to monitor critical files for
+                unauthorized changes, demonstrate how even small modifications
+                are detected and logged, and understand FIM as a key compliance
+                control.
+              </p>
+              <div class="tools">
+                <span class="tp">Wazuh FIM</span><span class="tp">SIEM</span
+                ><span class="tp">integrity</span>
+              </div>
+            </div>
+            <div class="card-expand">
+              <div class="card-summary" onclick="toggleCard(this)">
+                <svg class="arr" viewBox="0 0 16 16">
+                  <path d="M6 4l4 4-4 4" />
+                </svg>
+                View Lab Report
+              </div>
+              <div class="dc">
+                <div>
+                  <div class="ds-label">Key Findings</div>
+                  <div class="ds-body">
+                    <ul>
+                      <li>
+                        Wazuh's default <code>syscheck</code> config already
+                        monitors <code>/etc</code>, <code>/usr/bin</code>, and
+                        <code>/usr/sbin</code> — no extra configuration was
+                        needed to pick up the test file
+                      </li>
+                      <li>
+                        Creating <code>/etc/testfile_wazuh.txt</code> logged a
+                        "file added" event with a baseline SHA-256 hash in the
+                        Integrity Monitoring module
+                      </li>
+                      <li>
+                        Overwriting the file's content triggered a "file
+                        modified" event with a completely different hash — the
+                        same avalanche effect from Lab 3.1, this time detected
+                        automatically instead of run by hand
+                      </li>
+                      <li>
+                        FIM change history persisted after the fact and stayed
+                        queryable in the Dashboard, not just visible at the
+                        moment the alert fired
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div>
+                  <div class="ds-label">Commands Used</div>
+                  <div class="cmd">
+                    sudo grep -A2 "syscheck" /var/ossec/etc/ossec.conf sudo
+                    touch /etc/testfile_wazuh.txt echo "original content" | sudo
+                    tee /etc/testfile_wazuh.txt echo "content was changed!" |
+                    sudo tee /etc/testfile_wazuh.txt sudo rm
+                    /etc/testfile_wazuh.txt
+                  </div>
+                </div>
+                <div>
+                  <div class="ds-label">Learning Outcome</div>
+                  <div class="ds-body">
+                    Manually running <code>sha256sum</code> on a file (Lab 3.1)
+                    is useful for understanding the math behind hashing, but it
+                    does not scale — no analyst is going to hash every file on a
+                    server by hand every few minutes. Wazuh's syscheck module
+                    automates exactly that, continuously baselining and
+                    re-checking monitored files and alerting the moment a hash
+                    changes. For SEC+, this reinforced FIM as a practical
+                    control protecting the Integrity leg of the CIA Triad, and
+                    why default monitored paths matter: because
+                    <code>/etc</code> is already covered out of the box, a real
+                    attacker modifying a configuration file there generates an
+                    alert with zero extra setup.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 6.3 -->
+          <div class="card">
+            <div class="card-head">
+              <div class="card-top">
+                <span class="lab-no">LAB 6.3</span
+                ><span class="badge b-done">Complete</span>
+              </div>
+              <div class="card-title">SIEM Dashboard Exploration</div>
+            </div>
+            <div class="card-body">
+              <p class="obj">
+                Navigate the Wazuh dashboard to explore security events, build
+                custom queries, and understand how analysts use centralized
+                logging and visualization to identify threats at scale.
+              </p>
+              <div class="tools">
+                <span class="tp">Wazuh</span><span class="tp">OpenSearch</span
+                ><span class="tp">dashboards</span><span class="tp">SIEM</span>
+              </div>
+            </div>
+            <div class="card-expand">
+              <div class="card-summary" onclick="toggleCard(this)">
+                <svg class="arr" viewBox="0 0 16 16">
+                  <path d="M6 4l4 4-4 4" />
+                </svg>
+                View Lab Report
+              </div>
+              <div class="dc">
+                <div>
+                  <div class="ds-label">Key Findings</div>
+                  <div class="ds-body">
+                    <ul>
+                      <li>
+                        The Overview (Home) screen gave a fast, high-level read
+                        on system health — event graph and severity breakdown
+                        made anything unusual obvious within seconds, without
+                        reading individual alerts
+                      </li>
+                      <li>
+                        Security Events let me trace an alert all the way back
+                        to its exact raw log line, showing how a single log
+                        entry on Kali becomes a structured, searchable alert
+                      </li>
+                      <li>
+                        Integrity Monitoring still showed the "file added" and
+                        "file modified" events from the Lab 6.2 test file,
+                        confirming FIM history persists and is queryable after
+                        the fact
+                      </li>
+                      <li>
+                        Vulnerability Detection (CVE matching) took longer to
+                        populate than the other modules; Security Configuration
+                        Assessment (SCA) benchmarked the Kali agent against CIS
+                        Benchmark standards, with a mix of passing and failing
+                        checks
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div>
+                  <div class="ds-label">Dashboard Sections Reviewed</div>
+                  <div class="cmd">
+                    Overview (Home) Security Events Integrity Monitoring
+                    Vulnerability Detection Security Configuration Assessment
+                    (SCA)
+                  </div>
+                </div>
+                <div>
+                  <div class="ds-label">Learning Outcome</div>
+                  <div class="ds-body">
+                    A SIEM dashboard is organized around one underlying event
+                    stream viewed through different lenses, not a collection of
+                    unrelated tools — Overview gives the big picture, Security
+                    Events gives the raw detail, Integrity Monitoring and
+                    Vulnerability Detection focus on specific categories of
+                    risk, and SCA focuses on configuration compliance, but all
+                    of it traces back to data the agent continuously ships to
+                    the Manager. Walking through each section while asking what
+                    threat it detects and where it fits in the NIST IR lifecycle
+                    from Lab 4.2 connected Domain 4's SIEM, SOAR, IOC, and TTP
+                    terminology to an actual interface instead of a list of
+                    definitions.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── TOOLS ── -->
+      <section class="tools-sec fi" id="tools">
+        <div class="sec-eyebrow">// environment</div>
+        <div class="sec-title">Tools &amp; Technologies</div>
+        <div class="sec-sub">
+          Security tools, platforms, and protocols covered across all labs
+        </div>
+        <div class="tool-grid">
+          <div class="tool-card">
+            <div class="tool-summary" onclick="toggleTool(this)">
+              <svg class="tc-arr" viewBox="0 0 16 16">
+                <path d="M4 6l4 4 4-4" />
+              </svg>
+              <div class="ti">&#x1f50d;</div>
+              <div class="tn">Nmap</div>
+              <div class="td">
+                Network discovery, port scanning, service &amp; OS
+                fingerprinting
+              </div>
+            </div>
+            <div class="tool-detail">
+              <div>
+                <div class="ds-label">Definition</div>
+                <div class="ds-body">
+                  Open-source network scanner that sends crafted packets and
+                  analyzes responses to map live hosts, open ports, running
+                  services and their versions, and the underlying operating
+                  system — all without needing credentials on the target.
+                </div>
+              </div>
+              <div>
+                <div class="ds-label">Use Case in This Lab</div>
+                <div class="ds-body">
+                  Used in Lab 1.1 to sweep the 192.168.56.0/24 subnet, confirm
+                  Metasploitable at .101, then fingerprint every open port and
+                  service. The output became the attack surface map used in all
+                  later labs.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-summary" onclick="toggleTool(this)">
+              <svg class="tc-arr" viewBox="0 0 16 16">
+                <path d="M4 6l4 4 4-4" />
+              </svg>
+              <div class="ti">&#x26a1;</div>
+              <div class="tn">Nikto</div>
+              <div class="td">
+                Web server vulnerability scanner, OSVDB/CVE mapping
+              </div>
+            </div>
+            <div class="tool-detail">
+              <div>
+                <div class="ds-label">Definition</div>
+                <div class="ds-body">
+                  Web server scanner that checks for thousands of known
+                  vulnerabilities, outdated software versions, dangerous files,
+                  and missing security headers. Results are mapped to OSVDB and
+                  CVE identifiers for reference. It enumerates — it does not
+                  exploit.
+                </div>
+              </div>
+              <div>
+                <div class="ds-label">Use Case in This Lab</div>
+                <div class="ds-body">
+                  Used in Lab 1.2 against Metasploitable's Apache server.
+                  Returned dozens of findings including outdated Apache version,
+                  missing
+                  <code style="font-family: monospace; color: var(--green)"
+                    >X-Frame-Options</code
+                  >
+                  headers, and exposed directories — all tagged with OSVDB IDs.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-summary" onclick="toggleTool(this)">
+              <svg class="tc-arr" viewBox="0 0 16 16">
+                <path d="M4 6l4 4 4-4" />
+              </svg>
+              <div class="ti">&#x1f511;</div>
+              <div class="tn">Hydra</div>
+              <div class="td">
+                Automated credential brute-force / dictionary attack
+              </div>
+            </div>
+            <div class="tool-detail">
+              <div>
+                <div class="ds-label">Definition</div>
+                <div class="ds-body">
+                  Fast, parallelized login cracker that automates dictionary and
+                  brute-force attacks against network services (FTP, SSH, HTTP,
+                  Telnet, and many more). Tries username/password combinations
+                  from a wordlist at high speed until one succeeds.
+                </div>
+              </div>
+              <div>
+                <div class="ds-label">Use Case in This Lab</div>
+                <div class="ds-body">
+                  Used in Lab 1.3 to crack
+                  <code style="font-family: monospace; color: var(--green)"
+                    >msfadmin:msfadmin</code
+                  >
+                  on FTP in seconds using the rockyou wordlist — no lockout
+                  policies were in place, so it ran unchecked until it found the
+                  match.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-summary" onclick="toggleTool(this)">
+              <svg class="tc-arr" viewBox="0 0 16 16">
+                <path d="M4 6l4 4 4-4" />
+              </svg>
+              <div class="ti">&#x1f4e1;</div>
+              <div class="tn">Wireshark</div>
+              <div class="td">Packet capture and protocol analysis</div>
+            </div>
+            <div class="tool-detail">
+              <div>
+                <div class="ds-label">Definition</div>
+                <div class="ds-body">
+                  Network protocol analyzer that captures live traffic from a
+                  network interface and lets you inspect individual packets
+                  layer by layer — from Ethernet frames down to
+                  application-layer payloads. Display filters isolate specific
+                  protocols or conversations.
+                </div>
+              </div>
+              <div>
+                <div class="ds-label">Use Case in This Lab</div>
+                <div class="ds-body">
+                  Used in Lab 4.3 to capture traffic on eth0. The
+                  <code style="font-family: monospace; color: var(--green)"
+                    >telnet</code
+                  >
+                  filter revealed plaintext credentials in packet payloads; the
+                  <code style="font-family: monospace; color: var(--green)"
+                    >ssh</code
+                  >
+                  filter showed only encrypted binary — confirming why protocol
+                  choice determines whether data is exposed.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-summary" onclick="toggleTool(this)">
+              <svg class="tc-arr" viewBox="0 0 16 16">
+                <path d="M4 6l4 4 4-4" />
+              </svg>
+              <div class="ti">&#x1f510;</div>
+              <div class="tn">GPG / AES-256</div>
+              <div class="td">Symmetric encryption and key management</div>
+            </div>
+            <div class="tool-detail">
+              <div>
+                <div class="ds-label">Definition</div>
+                <div class="ds-body">
+                  GNU Privacy Guard (GPG) implements OpenPGP standards for
+                  encryption and signing. AES-256 (Advanced Encryption Standard,
+                  256-bit key) is the symmetric cipher used for bulk data — it
+                  is the current gold standard for confidentiality, used in TLS,
+                  disk encryption, and file protection.
+                </div>
+              </div>
+              <div>
+                <div class="ds-label">Use Case in This Lab</div>
+                <div class="ds-body">
+                  Used in Lab 3.1 to encrypt a secret message with
+                  <code style="font-family: monospace; color: var(--green)"
+                    >gpg --symmetric --cipher-algo AES256</code
+                  >, confirm the output was unreadable binary, then decrypt it
+                  with the correct passphrase — demonstrating two-way
+                  confidentiality protection.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-summary" onclick="toggleTool(this)">
+              <svg class="tc-arr" viewBox="0 0 16 16">
+                <path d="M4 6l4 4 4-4" />
+              </svg>
+              <div class="ti">&#x1f6e1;&#xfe0f;</div>
+              <div class="tn">iptables</div>
+              <div class="td">Linux netfilter firewall rule configuration</div>
+            </div>
+            <div class="tool-detail">
+              <div>
+                <div class="ds-label">Definition</div>
+                <div class="ds-body">
+                  Linux kernel's built-in packet filtering tool, part of the
+                  Netfilter framework. Rules in the INPUT, OUTPUT, and FORWARD
+                  chains are evaluated top-to-bottom; the first matching rule
+                  wins. Supports filtering by protocol, port, source/destination
+                  IP, and connection state.
+                </div>
+              </div>
+              <div>
+                <div class="ds-label">Use Case in This Lab</div>
+                <div class="ds-body">
+                  Used in Lab 3.2 to block ICMP pings from all sources, then
+                  build an SSH-only allow-list — demonstrating implicit deny:
+                  everything not explicitly accepted by an earlier rule falls
+                  through to the final DROP. Rule ordering was confirmed to
+                  matter by swapping the sequence.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-summary" onclick="toggleTool(this)">
+              <svg class="tc-arr" viewBox="0 0 16 16">
+                <path d="M4 6l4 4 4-4" />
+              </svg>
+              <div class="ti">&#x1f4dc;</div>
+              <div class="tn">OpenSSL</div>
+              <div class="td">
+                Certificate generation, TLS inspection, crypto operations
+              </div>
+            </div>
+            <div class="tool-detail">
+              <div>
+                <div class="ds-label">Definition</div>
+                <div class="ds-body">
+                  Open-source cryptography toolkit implementing SSL/TLS
+                  protocols and a wide range of cryptographic primitives. Used
+                  to generate key pairs, create and sign certificates, inspect
+                  certificate fields, test TLS handshakes, and perform hashing
+                  and encryption from the command line.
+                </div>
+              </div>
+              <div>
+                <div class="ds-label">Use Case in This Lab</div>
+                <div class="ds-body">
+                  Used in Lab 3.3 to generate a self-signed RSA 2048-bit
+                  certificate (<code
+                    style="font-family: monospace; color: var(--green)"
+                    >req -x509</code
+                  >) and inspect every field with
+                  <code style="font-family: monospace; color: var(--green)"
+                    >x509 -text -noout</code
+                  >
+                  — Issuer, Subject, validity window, and signature algorithm —
+                  making PKI structure visible.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-summary" onclick="toggleTool(this)">
+              <svg class="tc-arr" viewBox="0 0 16 16">
+                <path d="M4 6l4 4 4-4" />
+              </svg>
+              <div class="ti">&#x1f5a5;&#xfe0f;</div>
+              <div class="tn">Kali Linux</div>
+              <div class="td">
+                Attacker / analyst VM — all tools run from here
+              </div>
+            </div>
+            <div class="tool-detail">
+              <div>
+                <div class="ds-label">Definition</div>
+                <div class="ds-body">
+                  Debian-based Linux distribution maintained by Offensive
+                  Security and purpose-built for penetration testing and
+                  security auditing. Ships pre-installed with hundreds of tools
+                  covering reconnaissance, exploitation, post-exploitation,
+                  forensics, and wireless security.
+                </div>
+              </div>
+              <div>
+                <div class="ds-label">Use Case in This Lab</div>
+                <div class="ds-body">
+                  Served as the attacker and analyst workstation for every lab
+                  in this series. All scanning, cracking, packet capture,
+                  hashing, encryption, firewall configuration, and certificate
+                  generation commands ran from Kali's terminal against
+                  Metasploitable as the target.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-summary" onclick="toggleTool(this)">
+              <svg class="tc-arr" viewBox="0 0 16 16">
+                <path d="M4 6l4 4 4-4" />
+              </svg>
+              <div class="ti">&#x1f3af;</div>
+              <div class="tn">Metasploitable 2</div>
+              <div class="td">Intentionally vulnerable target VM</div>
+            </div>
+            <div class="tool-detail">
+              <div>
+                <div class="ds-label">Definition</div>
+                <div class="ds-body">
+                  Intentionally insecure Ubuntu-based virtual machine created by
+                  Rapid7 for practicing exploitation in a safe, legal
+                  environment. It runs deliberately outdated and misconfigured
+                  services — Telnet, FTP, vulnerable Apache, weak credentials —
+                  to provide realistic attack surfaces without risk to
+                  production systems.
+                </div>
+              </div>
+              <div>
+                <div class="ds-label">Use Case in This Lab</div>
+                <div class="ds-body">
+                  Served as the target for every domain in this lab series. Its
+                  open ports (21, 22, 23, 80, etc.), weak default credentials
+                  (msfadmin:msfadmin), outdated Apache, and insecure services
+                  were the real vulnerabilities scanned, cracked, and analyzed
+                  across labs 1.1 through 4.3.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-summary" onclick="toggleTool(this)">
+              <svg class="tc-arr" viewBox="0 0 16 16">
+                <path d="M4 6l4 4 4-4" />
+              </svg>
+              <div class="ti">&#x1f4ca;</div>
+              <div class="tn">Wazuh SIEM</div>
+              <div class="td">
+                Event monitoring, FIM, alert correlation &mdash; SIEM detection
+                labs
+              </div>
+            </div>
+            <div class="tool-detail">
+              <div>
+                <div class="ds-label">Definition</div>
+                <div class="ds-body">
+                  Free, open-source Security Information and Event Management
+                  (SIEM) and XDR platform used in real SOC environments
+                  worldwide. Collects logs from agents on monitored endpoints,
+                  applies detection rules, correlates events into alerts,
+                  performs File Integrity Monitoring (FIM), and provides a
+                  searchable dashboard for threat hunting.
+                </div>
+              </div>
+              <div>
+                <div class="ds-label">Use Case in This Lab</div>
+                <div class="ds-body">
+                  Used in Lab 6.1 to detect the same Hydra brute-force attack
+                  from Lab 1.3 from the defender's perspective — Security Events
+                  spike, Threat Hunting filters, and correlation alerts. Labs
+                  6.2–6.3 (FIM and dashboard exploration) are upcoming.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-summary" onclick="toggleTool(this)">
+              <svg class="tc-arr" viewBox="0 0 16 16">
+                <path d="M4 6l4 4 4-4" />
+              </svg>
+              <div class="ti">&#x1f4bb;</div>
+              <div class="tn">VirtualBox</div>
+              <div class="td">
+                Virtualization host; Host-Only network isolation
+              </div>
+            </div>
+            <div class="tool-detail">
+              <div>
+                <div class="ds-label">Definition</div>
+                <div class="ds-body">
+                  Free, open-source Type 2 hypervisor from Oracle that runs
+                  multiple operating systems as virtual machines on a single
+                  physical host. Supports multiple network modes: Host-Only (VMs
+                  talk to each other, not the internet), NAT (VM gets internet
+                  via host), and Bridged (VM appears as a real network device).
+                </div>
+              </div>
+              <div>
+                <div class="ds-label">Use Case in This Lab</div>
+                <div class="ds-body">
+                  Hosts all VMs (Kali, Metasploitable, future Wazuh) and
+                  provides the Host-Only adapter that creates the isolated
+                  192.168.56.0/24 lab network. Lab 2.1 directly demonstrated
+                  segmentation by adding a NAT adapter to Kali while keeping
+                  Metasploitable Host-Only only.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-summary" onclick="toggleTool(this)">
+              <svg class="tc-arr" viewBox="0 0 16 16">
+                <path d="M4 6l4 4 4-4" />
+              </svg>
+              <div class="ti">&#x1f4d6;</div>
+              <div class="tn">rockyou.txt</div>
+              <div class="td">
+                Common-password wordlist for brute-force demonstrations
+              </div>
+            </div>
+            <div class="tool-detail">
+              <div>
+                <div class="ds-label">Definition</div>
+                <div class="ds-body">
+                  A 14-million-entry plaintext password list leaked from the
+                  2009 RockYou data breach, where passwords were stored
+                  unencrypted. It is now the most widely used wordlist in
+                  penetration testing because it reflects real passwords real
+                  people chose — common words, names, and patterns that weak
+                  password policies allow.
+                </div>
+              </div>
+              <div>
+                <div class="ds-label">Use Case in This Lab</div>
+                <div class="ds-body">
+                  Supplied to Hydra in Lab 1.3 as the dictionary for the FTP
+                  brute-force attack. The password
+                  <code style="font-family: monospace; color: var(--green)"
+                    >msfadmin</code
+                  >
+                  appeared early in the list because it matches common patterns
+                  (username = password), demonstrating why predictable
+                  credentials are cracked in seconds.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="foot-inner">
+        <div>
+          <div class="foot-name">Jared Lomeli</div>
+          <div class="foot-ctx">
+            CompTIA SEC+ Hands-On Lab Series &mdash; Domains 1&ndash;5 + Wazuh
+            SIEM Bonus
+          </div>
+        </div>
+        <a
+          class="gh-link"
+          href="https://github.com/jaredlomeli-sjsu/kali-metasploitable-wazuh-linux"
+          target="_blank"
+          rel="noopener"
+        >
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
+            <path
+              d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"
+            />
+          </svg>
+          GitHub
+        </a>
+      </div>
+    </footer>
+
+    <script>
+      const obs = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.classList.add("vis");
+              obs.unobserve(e.target);
+            }
+          });
+        },
+        { threshold: 0.07 },
+      );
+      document.querySelectorAll(".fi").forEach((el) => obs.observe(el));
+
+      function toggleCard(btn) {
+        var dc = btn.parentElement.querySelector(".dc");
+        var arr = btn.querySelector(".arr");
+        var open = dc.style.display === "flex";
+        dc.style.display = open ? "none" : "flex";
+        btn.style.color = open ? "" : "var(--text)";
+        btn.style.borderBottom = open ? "" : "1px solid var(--border2)";
+        if (arr) arr.style.transform = open ? "" : "rotate(90deg)";
+      }
+
+      function toggleTool(btn) {
+        var card = btn.parentElement;
+        var detail = card.querySelector(".tool-detail");
+        var arr = btn.querySelector(".tc-arr");
+        var open = detail.style.display === "flex";
+        detail.style.display = open ? "none" : "flex";
+        card.style.borderColor = open ? "" : "var(--green-bd)";
+        if (arr) arr.style.transform = open ? "" : "rotate(180deg)";
+      }
+    </script>
+  </body>
+</html>

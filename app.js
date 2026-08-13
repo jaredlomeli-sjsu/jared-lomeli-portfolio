@@ -3,12 +3,26 @@
 const appState = {
   openPdf: null,
   highlights: [],
+  lastUpdated: null,
 };
 
 async function loadData() {
   const highlightsRes = await fetch("data/highlights.json");
   const highlightsData = await highlightsRes.json();
   appState.highlights = highlightsData.highlights;
+  appState.lastUpdated = highlightsData.lastUpdated || null;
+}
+
+function renderFooterUpdated() {
+  if (!appState.lastUpdated) return;
+  const el = document.getElementById("footer-updated");
+  if (!el) return;
+  const date = new Date(appState.lastUpdated + "T00:00:00");
+  const formatted = date.toLocaleDateString("en-US", {
+    month: "long",
+    year: "numeric",
+  });
+  el.textContent = `Last updated ${formatted}`;
 }
 
 function escapeHtml(str) {
@@ -27,6 +41,8 @@ const PINNED_TAGS = new Set([
   "Cisco Packet Tracer",
 ]);
 
+// Tags accent once they recur on a growing share of cards, not a fixed count —
+// a flat ">= 2" threshold saturates once the site has 15-20 cards.
 function computeCommonTags(highlights) {
   const counts = {};
   highlights.forEach((item) => {
@@ -34,33 +50,60 @@ function computeCommonTags(highlights) {
       counts[tag] = (counts[tag] || 0) + 1;
     });
   });
-  const common = new Set(Object.keys(counts).filter((tag) => counts[tag] >= 2));
+  const threshold = Math.max(2, Math.ceil(highlights.length * 0.22));
+  const common = new Set(
+    Object.keys(counts).filter((tag) => counts[tag] >= threshold),
+  );
   PINNED_TAGS.forEach((tag) => common.add(tag));
   return common;
 }
+
+// Fixed render order for known categories — Credentials lead, Projects stay in
+// their curated strength order, Lab/Coursework are reserved for future content.
+// Any category not listed here still renders, using its own name as the heading.
+const CATEGORY_ORDER = ["Credential", "Project", "Lab", "Coursework"];
+const CATEGORY_LABELS = {
+  Credential: "Credentials",
+  Project: "Projects",
+  Lab: "Labs",
+  Coursework: "Coursework",
+};
 
 function renderHighlightGrid() {
   const container = document.getElementById("highlight-grid");
   const commonTags = computeCommonTags(appState.highlights);
   const fragment = document.createDocumentFragment();
-  let lastCategory = null;
+
+  const buckets = new Map();
   appState.highlights.forEach((item) => {
-    if (item.category !== lastCategory) {
-      const heading = document.createElement("h2");
-      heading.className = "highlight-section-heading";
-      heading.textContent =
-        item.category === "Credential" ? "Credentials" : "Projects";
-      fragment.appendChild(heading);
-      lastCategory = item.category;
-    }
-    fragment.appendChild(buildHighlightCard(item, commonTags));
+    if (!buckets.has(item.category)) buckets.set(item.category, []);
+    buckets.get(item.category).push(item);
   });
+
+  const orderedCategories = [
+    ...CATEGORY_ORDER.filter((category) => buckets.has(category)),
+    ...[...buckets.keys()].filter(
+      (category) => !CATEGORY_ORDER.includes(category),
+    ),
+  ];
+
+  orderedCategories.forEach((category) => {
+    const heading = document.createElement("h2");
+    heading.className = "highlight-section-heading";
+    heading.textContent = CATEGORY_LABELS[category] || category;
+    fragment.appendChild(heading);
+    buckets.get(category).forEach((item) => {
+      fragment.appendChild(buildHighlightCard(item, commonTags));
+    });
+  });
+
   container.replaceChildren(fragment);
 }
 
 function buildHighlightCard(item, commonTags) {
   const card = document.createElement("article");
-  card.className = "highlight-card";
+  card.className =
+    "highlight-card" + (item.starred ? " highlight-card--wide" : "");
 
   if (item.starred) {
     const star = document.createElement("div");
@@ -95,6 +138,10 @@ function buildHighlightCard(item, commonTags) {
     img.src = item.media.localSourcePath;
     img.alt = item.media.altText || "";
     img.loading = "lazy";
+    if (item.media.width && item.media.height) {
+      img.width = item.media.width;
+      img.height = item.media.height;
+    }
     img.tabIndex = 0;
     const openThisLightbox = () =>
       openLightbox(item.media.localSourcePath, item.media.altText || "");
@@ -144,17 +191,27 @@ function buildHighlightCard(item, commonTags) {
     links.liveDemo ||
     links.pdfReport ||
     links.verify ||
-    links.video
+    links.video ||
+    links.caseStudy ||
+    links.writeup
   ) {
     const linksEl = document.createElement("div");
     linksEl.className = "highlight-card-links";
 
     if (links.github)
       linksEl.appendChild(createExternalLink("GitHub", links.github));
-    if (links.liveDemo)
-      linksEl.appendChild(createExternalLink("Live Demo", links.liveDemo));
+    // Video before Live Demo: when a project has both, the video is the more
+    // durable link (a hosted demo on a free-tier subdomain can lapse silently).
     if (links.video)
       linksEl.appendChild(createExternalLink("Watch Video", links.video));
+    if (links.liveDemo)
+      linksEl.appendChild(createExternalLink("Live Demo", links.liveDemo));
+    if (links.writeup)
+      linksEl.appendChild(createExternalLink("Full Write-Up", links.writeup));
+    if (links.caseStudy)
+      linksEl.appendChild(
+        createExternalLink("Read the Write-Up", links.caseStudy),
+      );
     if (links.verify)
       linksEl.appendChild(
         createExternalLink("Verify Credential", links.verify),
@@ -238,6 +295,7 @@ function initBackdropClose() {
 async function init() {
   await loadData();
   renderHighlightGrid();
+  renderFooterUpdated();
   initDialogFocusReturn();
   initDialogCloseButtons();
   initBackdropClose();

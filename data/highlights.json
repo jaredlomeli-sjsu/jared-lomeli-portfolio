@@ -1,6 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "version": "1.0.0",
+  "lastUpdated": "2026-08-12",
   "highlights": [
     {
       "id": "hl-2026-comptia-security-plus",
@@ -10,13 +11,19 @@
       "starred": true,
       "semester": null,
       "course": null,
-      "summary": "CompTIA Security+ (SY0-701) certification, valid through July 2029.",
-      "metrics": [],
+      "summary": "CompTIA Security+ ce (SY0-701) certification, valid through July 2029 — the exam I built an 800-question interactive study guide for while preparing (see below).",
+      "metrics": [
+        "90 questions, 90 minutes, 750-of-900 to pass",
+        "5 weighted domains: General Security Concepts, Threats/Vulnerabilities/Mitigations, Security Architecture, Security Operations, Security Program Management",
+        "Credential ID 57fca5bf-06f2-4057-9cbb-ba98dc3d1bca · issued July 2026"
+      ],
       "tags": ["Security+", "Certification", "CompTIA"],
       "media": {
         "type": "image",
         "localSourcePath": "/public/images/secplus-badge.png",
-        "altText": "CompTIA Security+ (SY0-701) certificate for Jared Lomeli, certified July 30, 2026, valid through July 30, 2029"
+        "altText": "CompTIA Security+ (SY0-701) certificate for Jared Lomeli, certified July 30, 2026, valid through July 30, 2029",
+        "width": 1600,
+        "height": 1236
       },
       "links": {
         "github": null,
@@ -25,6 +32,35 @@
         "verify": "https://cp.certmetrics.com/CompTIA/en/public/verify/credential/425e1ca8051246a4b59ecdc016009659"
       },
       "featured": true
+    },
+    {
+      "id": "hl-2026-cisco-linux-unhatched",
+      "title": "Cisco NDG Linux Unhatched",
+      "category": "Credential",
+      "date": "2026-07-07",
+      "starred": false,
+      "semester": null,
+      "course": "Cisco Networking Academy (NDG)",
+      "summary": "Course report and command reference for Linux Unhatched, a free 8-hour self-paced Cisco Networking Academy course. Written up from my own course notes, with dual sysadmin-vs-cybersecurity context for each command since I was studying toward Security+ (SY0-701) at the same time.",
+      "metrics": [
+        "26 commands/concepts across 6 categories, each with syntax, key flags, a worked example, and sysadmin vs. cybersecurity context",
+        "Condensed command cheat sheet for fast reference",
+        "Mapped to current SY0-701 exam domains, including direct command reuse in a Log Analysis SIEM lab"
+      ],
+      "tags": ["Linux", "Cisco", "NDG", "Security+", "Documentation"],
+      "media": {
+        "type": "image",
+        "localSourcePath": "/public/images/linux-unhatched-course-report.png",
+        "altText": "Cisco NDG Linux Unhatched course report homepage showing the course overview and a 6-category command reference table of contents",
+        "width": 1400,
+        "height": 950
+      },
+      "links": {
+        "github": "https://github.com/jaredlomeli-sjsu/linux-learning/tree/main/CISCO%20Linux%20Unhatched",
+        "liveDemo": "/public/documents/self-study/cisco-linux-unhatched/course-report.html",
+        "pdfReport": null
+      },
+      "featured": false
     },
     {
       "id": "hl-2026-secplus-study-guide",
@@ -51,7 +87,9 @@
       "media": {
         "type": "image",
         "localSourcePath": "/public/images/secplus-study-site-home.png",
-        "altText": "Security+ SY0-701 study guide homepage showing the exam-facts panel (750/900 to pass, 90 questions, 90 minutes), master port reference, and chapter navigation"
+        "altText": "Security+ SY0-701 study guide homepage showing the exam-facts panel (750/900 to pass, 90 questions, 90 minutes), master port reference, and chapter navigation",
+        "width": 1600,
+        "height": 862
       },
       "links": {
         "github": "https://github.com/jaredlomeli-sjsu/comptia-secplus-study-guide",
@@ -67,11 +105,11 @@
       "date": "2026-07-09",
       "semester": null,
       "course": null,
-      "summary": "Local Security Operations Center dashboard built on the real CIC-IDS2017 network intrusion dataset — Postgres holds 2.83M labeled flows, Grafana renders dashboard-as-code panels with click-through filtering, and a Python ETL pipeline fixes real data-quality defects in the raw dataset before idempotent bulk loading.",
+      "summary": "Local Security Operations Center dashboard built on the real CIC-IDS2017 network intrusion dataset — Postgres holds 2.83M labeled flows, Grafana renders 17 dashboard-as-code panels with click-through filtering, and a Python ETL pipeline fixes real data-quality defects in the raw dataset before idempotent bulk loading. One documented limitation: the Behavioral Signature Map's scatter plot can't color points by attack type, since Grafana's native XY Chart panel only supports numeric color fields — hover a point to identify it via tooltip instead.",
       "metrics": [
-        "2,830,743 labeled network flows loaded",
-        "557,646 attack flows across 14 attack types",
-        "4 click-through filter dimensions (day, attack type, port, class)",
+        "2,830,743 labeled network flows loaded, 557,646 attack flows across 14 attack types",
+        "17 Grafana panels — 3 KPI cards, attack-type/family breakdowns, a behavioral scatter plot, and raw flow record drill-down, all provisioned as dashboard-as-code",
+        "4 click-through filter dimensions (day, attack type, port, class) — the class filter is deliberately excluded from panels whose own query logic already bakes in a class, avoiding a guaranteed-empty result",
         "ETL fixes 5 real data-quality defects: mangled headers, a duplicate column, Infinity/negative sensor artifacts, mislabeled attack categories, and a µs-to-seconds unit mismatch"
       ],
       "tags": [
@@ -85,12 +123,15 @@
       "media": {
         "type": "image",
         "localSourcePath": "/public/images/soc-dashboard-grafana.png",
-        "altText": "Grafana SOC Analytics dashboard showing 2.83M total flows, 558K attack flows, 14 distinct attack types, a daily attack timeline, and attack type / attack family breakdown donut charts over the CIC-IDS2017 dataset"
+        "altText": "Grafana SOC Analytics dashboard showing 2.83M total flows, 558K attack flows, 14 distinct attack types, a daily attack timeline, and attack type / attack family breakdown donut charts over the CIC-IDS2017 dataset",
+        "width": 1600,
+        "height": 868
       },
       "links": {
         "github": null,
         "liveDemo": null,
-        "pdfReport": null
+        "pdfReport": null,
+        "caseStudy": "/public/case-studies/soc-dashboard.html"
       },
       "featured": true
     },
@@ -101,10 +142,10 @@
       "date": "2026-07-07",
       "semester": null,
       "course": "CompTIA Security+ SY0-701 Prep",
-      "summary": "Hands-on offensive/defensive security lab series across 6 domains using Kali Linux, Metasploitable 2, and a Wazuh SIEM — enumeration, exploitation, post-exploitation, log analysis, file integrity monitoring, and brute-force detection with alert triage.",
+      "summary": "Hands-on offensive/defensive security lab series across the 5 core Security+ domains plus a Wazuh SIEM bonus track, using Kali Linux, Metasploitable 2, and Wazuh — enumeration, exploitation, post-exploitation, log analysis, file integrity monitoring, and brute-force detection with alert triage.",
       "metrics": [
-        "16 individual lab exercises across 6 domains",
-        "Wazuh SIEM configured for brute-force detection + FIM",
+        "16 completed lab exercises across 5 Security+ domains plus a Wazuh SIEM bonus track",
+        "Wazuh SIEM configured for brute-force detection and File Integrity Monitoring (FIM)",
         "Full write-up in a self-contained HTML portfolio"
       ],
       "tags": [
@@ -118,12 +159,15 @@
       "media": {
         "type": "image",
         "localSourcePath": "/public/images/kali-nmap-scan.png",
-        "altText": "Nmap service, version, and OS detection scan (nmap -sV -O) against the Metasploitable 2 target from Kali Linux, run on the isolated 192.168.56.0/24 host-only lab network"
+        "altText": "Nmap service, version, and OS detection scan (nmap -sV -O) against the Metasploitable 2 target from Kali Linux, run on the isolated 192.168.56.0/24 host-only lab network",
+        "width": 1600,
+        "height": 947
       },
       "links": {
         "github": "https://github.com/jaredlomeli-sjsu/linux-learning/tree/main/kali-metasploitable-wazuh-linux",
         "liveDemo": null,
-        "pdfReport": null
+        "pdfReport": null,
+        "writeup": "/public/documents/kali-metasploitable-wazuh-linux/Portfolio.html"
       },
       "featured": true
     },
@@ -152,12 +196,15 @@
       "media": {
         "type": "image",
         "localSourcePath": "/public/images/packet-tracer-topology.png",
-        "altText": "Segmented enterprise network topology diagram — 3 VLANs, AAA servers, IDS, honeypot, and site-to-site IPSec VPN"
+        "altText": "Segmented enterprise network topology diagram — 3 VLANs, AAA servers, IDS, honeypot, and site-to-site IPSec VPN",
+        "width": 957,
+        "height": 876
       },
       "links": {
         "github": "https://github.com/jaredlomeli-sjsu/packet-tracer-security-plus-lab",
         "liveDemo": null,
-        "pdfReport": null
+        "pdfReport": null,
+        "writeup": "/public/case-studies/packet-tracer-network-lab.html"
       },
       "featured": true
     },
@@ -167,7 +214,7 @@
       "category": "Project",
       "date": "2026-07-18",
       "semester": null,
-      "course": "Google / Kaggle 5-Day AI Agents Intensive — Capstone (Agents for Business track)",
+      "course": "Google / Kaggle 5-Day Generative AI Intensive — Capstone (Agents for Business track)",
       "summary": "Multi-agent IT helpdesk triage system built on Google ADK 2.0 that routes support tickets to one of three paths: instant auto-resolve via keyword matching, security escalation via prompt-injection/phishing screening before any LLM call, or human review with two Gemini agents drafting a response. Includes a custom MCP tool server and a FastAPI supervisor dashboard. Built as the capstone for the Google/Kaggle 5-Day AI Agents Intensive.",
       "metrics": [
         "3-way ticket routing (auto-resolve / security-escalate / human-review)",
@@ -187,12 +234,15 @@
       "media": {
         "type": "image",
         "localSourcePath": "/public/images/nexusbot-notebook.png",
-        "altText": "NexusBot.v4 Kaggle notebook showing the inline test suite covering all routing paths and MCP agent skills, 17 unit tests with no API key required"
+        "altText": "NexusBot.v4 Kaggle notebook showing the inline test suite covering all routing paths and MCP agent skills, 17 unit tests with no API key required",
+        "width": 1600,
+        "height": 860
       },
       "links": {
         "github": "https://github.com/jaredlomeli-sjsu/google-kaggle-5day-intensive",
         "liveDemo": "https://www.kaggle.com/code/jaredlomeli/nexusbot-v4",
-        "pdfReport": null
+        "pdfReport": null,
+        "verify": "https://kaggle.com/jaredlomeli"
       },
       "featured": true
     },
@@ -213,12 +263,15 @@
       "media": {
         "type": "image",
         "localSourcePath": "/public/images/toolkit-fim-demo.png",
-        "altText": "File Integrity Checker terminal output after a tamper test — detects a modified config file (CHANGED) and a deleted key file (MISSING) against a saved SHA-256 baseline"
+        "altText": "File Integrity Checker terminal output after a tamper test — detects a modified config file (CHANGED) and a deleted key file (MISSING) against a saved SHA-256 baseline",
+        "width": 947,
+        "height": 362
       },
       "links": {
         "github": null,
         "liveDemo": null,
-        "pdfReport": null
+        "pdfReport": null,
+        "caseStudy": "/public/case-studies/python-toolkit.html"
       },
       "featured": true
     },
@@ -239,7 +292,9 @@
       "media": {
         "type": "image",
         "localSourcePath": "/public/images/phys2a-engine-explorer.png",
-        "altText": "Interactive 3D Engine Explorer showing a cutaway ICE turbocharger model with a live part-info spec panel, from the ICE vs. EV Physics 2A companion site"
+        "altText": "Interactive 3D Engine Explorer showing a cutaway ICE turbocharger model with a live part-info spec panel, from the ICE vs. EV Physics 2A companion site",
+        "width": 1600,
+        "height": 859
       },
       "links": {
         "github": null,

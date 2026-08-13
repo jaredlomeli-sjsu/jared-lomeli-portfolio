@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cybersecurity Python Toolkit — Case Study | Jared Lomeli</title>
+    <meta
+      name="description"
+      content="Three stdlib-only Python security tools I built to practice SOC fundamentals hands-on — file integrity monitoring, password strength scoring, and SSH brute-force log parsing — plus a real limitation I found while writing this up."
+    />
+    <link rel="stylesheet" href="../../style.css" />
+    <style>
+      .case-study {
+        max-width: 760px;
+        margin: 0 auto;
+        padding: 3rem 1.5rem 5rem;
+      }
+
+      .case-back {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        font-family: var(--font-mono);
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        text-decoration: none;
+        margin-bottom: 2rem;
+      }
+
+      .case-back:hover {
+        color: var(--accent-color);
+      }
+
+      .case-eyebrow {
+        font-family: var(--font-mono);
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        font-size: 0.8rem;
+        color: var(--accent-color);
+        margin: 0 0 0.6rem;
+      }
+
+      .case-title {
+        font-size: clamp(1.7rem, 4vw, 2.3rem);
+        font-weight: 700;
+        line-height: 1.15;
+        margin: 0 0 0.9rem;
+      }
+
+      .case-dek {
+        color: var(--text-muted);
+        font-size: 1.05rem;
+        margin: 0 0 1rem;
+      }
+
+      .case-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.4rem;
+        margin-bottom: 2rem;
+      }
+
+      .case-hero {
+        width: 100%;
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
+        box-shadow: var(--shadow-card);
+        margin-bottom: 2.5rem;
+        display: block;
+      }
+
+      .case-study h2 {
+        font-size: 1.25rem;
+        font-weight: 700;
+        margin: 2.6rem 0 1rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid var(--accent-color);
+      }
+
+      .case-study h2:first-of-type {
+        margin-top: 0;
+      }
+
+      .case-study h3 {
+        font-size: 1.05rem;
+        font-weight: 700;
+        margin: 1.8rem 0 0.7rem;
+      }
+
+      .case-study p {
+        margin: 0 0 1rem;
+        line-height: 1.65;
+      }
+
+      .case-study ul {
+        margin: 0 0 1rem;
+        padding-left: 1.2rem;
+        line-height: 1.6;
+      }
+
+      .case-study li {
+        margin-bottom: 0.4rem;
+      }
+
+      .case-code-label {
+        font-family: var(--font-mono);
+        font-size: 0.78rem;
+        color: var(--text-muted);
+        margin: 0 0 0.5rem;
+      }
+
+      pre.case-code {
+        background: #1c1917;
+        color: #f5f3ef;
+        border-radius: 8px;
+        padding: 1rem 1.2rem;
+        overflow-x: auto;
+        margin: 0 0 1.5rem;
+        font-family: var(--font-mono);
+        font-size: 0.82rem;
+        line-height: 1.55;
+      }
+
+      pre.case-code .c {
+        color: #a8a29e;
+      }
+
+      pre.case-code .s {
+        color: #fbbf24;
+      }
+
+      pre.case-code .k {
+        color: #7dd3fc;
+      }
+
+      .case-callout {
+        background: var(--accent-glow);
+        border-left: 3px solid var(--accent-color);
+        border-radius: 6px;
+        padding: 1rem 1.2rem;
+        margin: 0 0 1.5rem;
+      }
+
+      .case-callout p:last-child {
+        margin-bottom: 0;
+      }
+
+      .case-callout-label {
+        font-family: var(--font-mono);
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        font-size: 0.75rem;
+        color: var(--accent-color);
+        margin: 0 0 0.5rem;
+      }
+
+      .case-footer {
+        margin-top: 3rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid var(--border-color);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="case-study">
+      <a class="case-back" href="/">&larr; Back to Portfolio</a>
+
+      <p class="case-eyebrow">Case Study</p>
+      <h1 class="case-title">Cybersecurity Python Toolkit</h1>
+      <p class="case-dek">
+        Three small Python tools, standard library only — no third-party
+        dependencies — built to practice the "detect and verify" side of
+        security operations by hand: file integrity monitoring, password
+        strength scoring, and SSH brute-force log parsing.
+      </p>
+      <div class="case-meta">
+        <span class="tag">Python</span>
+        <span class="tag">Security</span>
+        <span class="tag">Log Analysis</span>
+        <span class="tag">Cryptography</span>
+      </div>
+
+      <img
+        class="case-hero"
+        src="/public/images/toolkit-fim-demo.png"
+        alt="File Integrity Checker terminal output after a tamper test — detects a modified config file (CHANGED) and a deleted key file (MISSING) against a saved SHA-256 baseline"
+      />
+
+      <h2>The Problem</h2>
+      <p>
+        It's easy to read about file integrity monitoring, password policy, and
+        brute-force detection in a study guide without ever touching the
+        mechanics underneath. I wanted the opposite of that — three small,
+        self-contained scripts, stdlib only (<code>hashlib</code>,
+        <code>json</code>, <code>os</code>, <code>re</code>,
+        <code>collections</code>), each one forcing me to actually implement the
+        logic a real security tool would need instead of just describing it.
+      </p>
+
+      <h2>File Integrity Checker</h2>
+      <p>
+        Recursively SHA-256-fingerprints every file in a target folder, saves
+        the fingerprints as a JSON baseline, then re-hashes on demand and
+        reports each file <code>OK</code>, <code>CHANGED</code>, or
+        <code>MISSING</code> against that baseline — classic FIM logic, the same
+        idea behind the Wazuh FIM module in my Kali/Wazuh lab series, just
+        written from scratch.
+      </p>
+      <p class="case-code-label">
+        Hashing reads the file in 8,192-byte chunks rather than loading it
+        whole, so it doesn't choke on large files:
+      </p>
+      <pre class="case-code"><span class="c"># file_integrity_checker.py</span>
+<span class="k">def</span> sha256(path):
+    h = hashlib.sha256()
+    <span class="k">with</span> open(path, <span class="s">"rb"</span>) <span class="k">as</span> f:
+        <span class="k">for</span> chunk <span class="k">in</span> iter(<span class="k">lambda</span>: f.read(8192), b<span class="s">""</span>):
+            h.update(chunk)
+    <span class="k">return</span> h.hexdigest()</pre>
+      <p class="case-code-label">
+        Verify walks the saved baseline and re-hashes each path — status falls
+        out of a simple three-way comparison:
+      </p>
+      <pre class="case-code"><span class="c"># file_integrity_checker.py</span>
+<span class="k">for</span> p, original <span class="k">in</span> saved.items():
+    current = sha256(p) <span class="k">if</span> os.path.exists(p) <span class="k">else</span> <span class="k">None</span>
+    status = <span class="s">"OK"</span> <span class="k">if</span> current == original <span class="k">else</span> <span class="s">"CHANGED"</span> <span class="k">if</span> current <span class="k">else</span> <span class="s">"MISSING"</span></pre>
+      <p>
+        The screenshot above is a real tamper test: I baselined a sample folder,
+        then modified <code>config.txt</code>, deleted <code>keys.pem</code>,
+        and dropped in an untracked <code>backdoor.sh</code> before re-running
+        verify.
+      </p>
+      <div class="case-callout">
+        <p class="case-callout-label">Known limitation</p>
+        <p>
+          Writing this case study is what made me actually trace through the
+          <code>verify()</code> logic end to end — and it only loops over paths
+          already in the baseline. It never re-walks the folder to check for
+          files that weren't there before. That means the untracked
+          <code>backdoor.sh</code> I added during the tamper test was invisible
+          to this script; it only ever catches modified or deleted files, not
+          new ones. A real FIM tool needs a folder diff against the baseline,
+          not just a baseline replay — I'd add that next.
+        </p>
+      </div>
+
+      <h3>SSH Brute-Force Log Parser</h3>
+      <p>
+        Scans an auth log for <code>Failed password</code> lines, pulls the
+        source IP out with a regex, tallies attempts per IP with
+        <code>collections.Counter</code>, and flags anything over a configurable
+        threshold as a likely brute-force source:
+      </p>
+      <pre
+        class="case-code"
+      ><span class="c"># ssh_brute_force_log_parser.py</span>
+<span class="k">def</span> find_brute_force(logfile, threshold=10):
+    counts = Counter()
+    <span class="k">for</span> line <span class="k">in</span> logfile:
+        <span class="k">if</span> <span class="s">"Failed password"</span> <span class="k">in</span> line:
+            m = re.search(<span class="s">r"from (\d+\.\d+\.\d+\.\d+)"</span>, line)
+            <span class="k">if</span> m:
+                counts[m.group(1)] += 1
+
+    <span class="k">for</span> ip, n <span class="k">in</span> counts.most_common():
+        <span class="k">if</span> n >= threshold:
+            print(<span class="s">f"  {ip:16s}: {n} failed attempts"</span>)</pre>
+      <p>
+        Against the sample 41-line auth log in the repo, this flags 2 of 4
+        source IPs at a threshold of 10 — <code>192.168.1.10</code> at 23
+        attempts and <code>10.0.0.5</code> at 13. The match string is exactly
+        <code>"Failed password"</code>, case-sensitive — a small detail, but
+        it's exactly the kind of thing that silently breaks a real log parser if
+        the log format ever changes case.
+      </p>
+
+      <h3>Password Strength Checker</h3>
+      <p>
+        Scores an input 0&ndash;5 against five checks and maps the score to a
+        plain-English verdict:
+      </p>
+      <pre
+        class="case-code"
+      ><span class="c"># password_strength_checker.py</span>
+checks = {
+    <span class="s">"length >= 12"</span>:  len(pw) >= 12,
+    <span class="s">"has lowercase"</span>: any(c.islower() <span class="k">for</span> c <span class="k">in</span> pw),
+    <span class="s">"has uppercase"</span>: any(c.isupper() <span class="k">for</span> c <span class="k">in</span> pw),
+    <span class="s">"has digit"</span>:     any(c.isdigit() <span class="k">for</span> c <span class="k">in</span> pw),
+    <span class="s">"has symbol"</span>:    any(<span class="k">not</span> c.isalnum() <span class="k">for</span> c <span class="k">in</span> pw),
+}
+score = sum(checks.values())
+verdict = [<span class="s">"Very Weak"</span>, <span class="s">"Weak"</span>, <span class="s">"Okay"</span>, <span class="s">"Good"</span>, <span class="s">"Strong"</span>, <span class="s">"Excellent"</span>][score]</pre>
+      <p>
+        Deliberately simple — length and character-class checks, no dictionary
+        or breach-list lookup — since the point was practicing the scoring logic
+        itself, not shipping a production-grade password policy engine.
+      </p>
+
+      <h2>What I'd Do Differently</h2>
+      <p>
+        Beyond the FIM folder-diff gap above: none of the three scripts have
+        real unit tests, and both the FIM target folder and the password
+        checker's sample input are hardcoded at the bottom of the file rather
+        than taken as CLI arguments — fine for a practice project, the first
+        thing I'd change if these became real tools I used regularly.
+      </p>
+
+      <div class="case-footer">
+        <p style="color: var(--text-muted); font-size: 0.9rem">
+          This project isn't open-sourced yet, so this write-up is based
+          directly on the real code rather than a public repo. Have questions
+          about it?
+          <a href="mailto:jared.lomeli@sjsu.edu">Email me</a> — happy to walk
+          through any part of it.
+        </p>
+        <a class="case-back" href="/" style="margin-top: 1rem"
+          >&larr; Back to Portfolio</a
+        >
+      </div>
+    </div>
+  </body>
+</html>

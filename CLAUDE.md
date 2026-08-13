@@ -12,9 +12,16 @@ tool, not a resume showcase — don't fold its content into this repo, cross-lin
 
 - `data/highlights.json` — featured case-study cards. Each entry:
   `id, title, category, date, semester, course, summary, metrics[], tags[], media, links, featured`.
-- `data/coursework.json` — per-semester, per-course document archive:
-  `semesters[].courses[].documents[]` with `title, type, date, fileSizeBytes, formattedSize,
-publicPath, tags[], grade`.
+  Top-level `lastUpdated` (YYYY-MM-DD) drives the footer's "Last updated" text — bump it
+  alongside content changes instead of hand-editing the footer.
+- `category` is rendered through a fixed order in `app.js` (`CATEGORY_ORDER` /
+  `CATEGORY_LABELS`): `Credential` → `Project` → `Lab` → `Coursework`. Only `Credential`
+  and `Project` have real entries as of 2026-08-12; `Lab` and `Coursework` are reserved
+  for future content (e.g. individual SJSU coursework artifacts) and will render
+  correctly the moment a card uses them — no code changes needed to add a category that's
+  already in the list. `data/coursework.json` (the old per-semester document archive) was
+  deleted 2026-08-12 — dead since the Coursework Vault feature was removed 2026-08-09,
+  nothing referenced it.
 
 ## Component architecture
 

@@ -1,0 +1,410 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SOC Dashboard — Case Study | Jared Lomeli</title>
+    <meta
+      name="description"
+      content="How I built a Security Operations Center dashboard on the real CIC-IDS2017 dataset — the ETL defects I found and fixed, the dashboard design decisions, and what I'd do differently."
+    />
+    <link rel="stylesheet" href="../../style.css" />
+    <style>
+      .case-study {
+        max-width: 760px;
+        margin: 0 auto;
+        padding: 3rem 1.5rem 5rem;
+      }
+
+      .case-back {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        font-family: var(--font-mono);
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        text-decoration: none;
+        margin-bottom: 2rem;
+      }
+
+      .case-back:hover {
+        color: var(--accent-color);
+      }
+
+      .case-eyebrow {
+        font-family: var(--font-mono);
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        font-size: 0.8rem;
+        color: var(--accent-color);
+        margin: 0 0 0.6rem;
+      }
+
+      .case-title {
+        font-size: clamp(1.7rem, 4vw, 2.3rem);
+        font-weight: 700;
+        line-height: 1.15;
+        margin: 0 0 0.9rem;
+      }
+
+      .case-dek {
+        color: var(--text-muted);
+        font-size: 1.05rem;
+        margin: 0 0 1rem;
+      }
+
+      .case-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.4rem;
+        margin-bottom: 2rem;
+      }
+
+      .case-hero {
+        width: 100%;
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
+        box-shadow: var(--shadow-card);
+        margin-bottom: 2.5rem;
+        display: block;
+      }
+
+      .case-study h2 {
+        font-size: 1.25rem;
+        font-weight: 700;
+        margin: 2.6rem 0 1rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid var(--accent-color);
+      }
+
+      .case-study h2:first-of-type {
+        margin-top: 0;
+      }
+
+      .case-study p {
+        margin: 0 0 1rem;
+        line-height: 1.65;
+      }
+
+      .case-study ul {
+        margin: 0 0 1rem;
+        padding-left: 1.2rem;
+        line-height: 1.6;
+      }
+
+      .case-study li {
+        margin-bottom: 0.4rem;
+      }
+
+      table.case-services {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 0 0 1.5rem;
+        font-size: 0.9rem;
+      }
+
+      table.case-services th,
+      table.case-services td {
+        text-align: left;
+        padding: 0.55rem 0.7rem;
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      table.case-services th {
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        color: var(--text-muted);
+      }
+
+      table.case-services code {
+        font-family: var(--font-mono);
+        font-size: 0.85rem;
+      }
+
+      .case-code-label {
+        font-family: var(--font-mono);
+        font-size: 0.78rem;
+        color: var(--text-muted);
+        margin: 0 0 0.5rem;
+      }
+
+      pre.case-code {
+        background: #1c1917;
+        color: #f5f3ef;
+        border-radius: 8px;
+        padding: 1rem 1.2rem;
+        overflow-x: auto;
+        margin: 0 0 1.5rem;
+        font-family: var(--font-mono);
+        font-size: 0.82rem;
+        line-height: 1.55;
+      }
+
+      pre.case-code .c {
+        color: #a8a29e;
+      }
+
+      pre.case-code .s {
+        color: #fbbf24;
+      }
+
+      .case-callout {
+        background: var(--accent-glow);
+        border-left: 3px solid var(--accent-color);
+        border-radius: 6px;
+        padding: 1rem 1.2rem;
+        margin: 0 0 1.5rem;
+      }
+
+      .case-callout p:last-child {
+        margin-bottom: 0;
+      }
+
+      .case-callout-label {
+        font-family: var(--font-mono);
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        font-size: 0.75rem;
+        color: var(--accent-color);
+        margin: 0 0 0.5rem;
+      }
+
+      .case-footer {
+        margin-top: 3rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid var(--border-color);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="case-study">
+      <a class="case-back" href="/">&larr; Back to Portfolio</a>
+
+      <p class="case-eyebrow">Case Study</p>
+      <h1 class="case-title">SOC Dashboard — Network Intrusion Monitor</h1>
+      <p class="case-dek">
+        A locally-running Security Operations Center dashboard built on the real
+        CIC-IDS2017 network intrusion dataset — 2.83 million labeled flows in
+        Postgres, 17 Grafana panels provisioned as code, and a Python ETL
+        pipeline that had to fix five real data-quality defects before any of it
+        was trustworthy.
+      </p>
+      <div class="case-meta">
+        <span class="tag">Grafana</span>
+        <span class="tag">PostgreSQL</span>
+        <span class="tag">Docker</span>
+        <span class="tag">Python</span>
+        <span class="tag">Data Engineering</span>
+        <span class="tag">SOC</span>
+      </div>
+
+      <img
+        class="case-hero"
+        src="/public/images/soc-dashboard-grafana.png"
+        alt="Grafana SOC Analytics dashboard showing 2.83M total flows, 558K attack flows, 14 distinct attack types, a daily attack timeline, and attack type / attack family breakdown donut charts over the CIC-IDS2017 dataset"
+      />
+
+      <h2>The Problem</h2>
+      <p>
+        Most SOC-dashboard side projects I looked at while building this used
+        synthetic or mocked data — which makes the dashboard easy to demo but
+        proves nothing about handling a real, messy dataset. I wanted the
+        opposite problem: take a real, published network-intrusion dataset and
+        get it into a state where a security analyst could actually trust the
+        numbers on screen. That meant the interesting engineering work wasn't
+        the dashboard — it was the data underneath it.
+      </p>
+      <p>
+        <a
+          href="https://www.unb.ca/cic/datasets/ids-2017.html"
+          target="_blank"
+          rel="noopener"
+          >CIC-IDS2017</a
+        >
+        is a labeled network-flow dataset from the Canadian Institute for
+        Cybersecurity: 2,830,743 flows captured over five days in 2017, covering
+        benign traffic and 14 real attack types (DoS, DDoS, brute force,
+        infiltration, web attacks, port scans, and more). It's widely used in
+        intrusion-detection research, which also means its rough edges are well
+        known if you go looking — I found several the hard way instead.
+      </p>
+
+      <h2>Architecture</h2>
+      <p>
+        Everything runs locally via Docker Compose — no cloud hosting, no mock
+        data:
+      </p>
+      <table class="case-services">
+        <thead>
+          <tr>
+            <th>Service</th>
+            <th>Image</th>
+            <th>Purpose</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>postgres</code></td>
+            <td><code>postgres:16</code></td>
+            <td>Holds the <code>flows</code> table — all 2.8M rows</td>
+          </tr>
+          <tr>
+            <td><code>grafana</code></td>
+            <td><code>grafana/grafana-oss:11.4.0</code></td>
+            <td>Dashboard UI, auto-provisioned datasource and dashboard</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>
+        The Grafana datasource and the dashboard itself are both provisioned as
+        code (YAML + a versioned JSON dashboard definition), not hand-built
+        through the UI — so the whole dashboard is reproducible from a clean
+        checkout instead of living only in one browser's session state.
+      </p>
+
+      <h2>The Data Pipeline</h2>
+      <p>
+        The source data is 8 CSV files straight from CICFlowMeter, the tool that
+        generated the original dataset. Loading them naively into Postgres would
+        have quietly poisoned the dashboard. Three of the defects I found and
+        fixed:
+      </p>
+
+      <p class="case-code-label">
+        1. Mangled attack labels — a corrupted en-dash character had turned
+        three Web Attack categories into effectively three different strings
+        each, which would have split what should be one attack type across
+        multiple rows in every chart.
+      </p>
+      <pre class="case-code"><span class="c"># load_data.py</span>
+def normalize_label(label):
+    if not isinstance(label, str):
+        return label
+    label = label.strip()
+    if label == <span class="s">"BENIGN"</span>:
+        return label
+    if label.startswith(<span class="s">"Web Attack"</span>):
+        if <span class="s">"Brute Force"</span> in label:
+            return <span class="s">"Web Attack - Brute Force"</span>
+        if <span class="s">"XSS"</span> in label:
+            return <span class="s">"Web Attack - XSS"</span>
+        if <span class="s">"Sql Injection"</span> in label or <span class="s">"SQL Injection"</span> in label:
+            return <span class="s">"Web Attack - SQL Injection"</span>
+    return label</pre>
+
+      <p class="case-code-label">
+        2. <code>Infinity</code> and negative values in the rate columns — a
+        known CICFlowMeter quirk (division-by-zero on very short flows), not a
+        bug in this pipeline, but Postgres has no use for them.
+      </p>
+      <pre class="case-code"><span class="c"># load_data.py</span>
+for col in (<span class="s">"Flow Bytes/s"</span>, <span class="s">"Flow Packets/s"</span>):
+    df[col] = pd.to_numeric(df[col], errors=<span class="s">"coerce"</span>)
+    df[col] = df[col].replace([np.inf, -np.inf], np.nan)
+    df.loc[df[col] < 0, col] = np.nan</pre>
+
+      <p class="case-code-label">
+        3. Flow duration in microseconds — technically correct, practically
+        unreadable. A generated column keeps both units without duplicating data
+        or drifting out of sync.
+      </p>
+      <pre class="case-code"><span class="c">-- sql/schema.sql</span>
+flow_duration_seconds  DOUBLE PRECISION
+    GENERATED ALWAYS AS (<span class="s">"Flow Duration"</span> / 1000000.0) STORED</pre>
+
+      <p>
+        The other two defects: a duplicate <code>Fwd Header Length</code> column
+        in the raw CSVs (verified byte-for-byte identical to the first
+        occurrence before dropping it), and inconsistent leading whitespace in
+        the CSV headers themselves (<code>" Destination Port"</code> vs.
+        <code>"Destination Port"</code>) that would have silently broken any
+        exact-match column lookup.
+      </p>
+      <p>
+        The load itself streams each CSV in 50,000-row chunks through Postgres's
+        <code>COPY FROM STDIN</code> rather than row-by-row inserts, and the
+        whole script is idempotent — it truncates the table before every run, so
+        re-running it after a schema tweak never duplicates rows. End of load,
+        it prints the row counts against the dataset's published totals as a
+        sanity check: 2,830,743 total, 2,273,097 benign, 557,646 attack — all
+        three matched on the real run.
+      </p>
+
+      <h2>The Dashboard</h2>
+      <p>
+        17 panels total: 3 KPI cards up top, attack-type and attack-family
+        breakdowns, a daily attack timeline, per-port analysis, a behavioral
+        scatter plot, and a raw flow-record table for drilling into individual
+        flows. Four template variables —
+        <code>$day_session</code>, <code>$attack_type</code>,
+        <code>$dest_port</code>, <code>$class</code> — drive every panel, and
+        clicking almost anything (a bar, a pie slice, a KPI card, a table row)
+        sets the matching filter via Grafana data links.
+      </p>
+      <div class="case-callout">
+        <p class="case-callout-label">Design decision</p>
+        <p>
+          The <code>$class</code> filter (All / Benign / Attack) doesn't apply
+          to every panel, and that's deliberate rather than an oversight. Panels
+          where "benign vs. attack" is a meaningful, non-contradictory choice —
+          the KPI cards, the all-traffic port breakdown, the behavioral map, the
+          raw flow table — respect it normally. But panels that are inherently
+          attack-only (Top Attack Type, Attack Family Rollup, Per-Attack-Type
+          Deep Dive) or that already compare benign vs. attack side-by-side
+          within one query (the daily timeline, average packet size, SYN flag
+          rate) intentionally ignore it. Gating those by
+          <code>$class = Benign</code> wouldn't filter them usefully — it would
+          just force a guaranteed-empty chart, since their own query logic
+          already bakes in "attack" or "both classes." Every panel respects the
+          filter that's actually meaningful for its own shape, rather than every
+          panel technically obeying one global toggle.
+        </p>
+      </div>
+
+      <h2>Known Limitation</h2>
+      <p>
+        The Behavioral Signature Map — a scatter plot of average packet size
+        against flow duration, sized by flow count — uses Grafana's native XY
+        Chart panel with manual field mapping. That panel type only supports
+        coloring points by a numeric field, so I can't color points by attack
+        type (a text field) the way the rest of the dashboard's palette would
+        suggest. The workaround is hovering a point to read its attack type from
+        the tooltip instead of reading it off the color. Not a dealbreaker, but
+        a real constraint of the tool, not a design choice I'd have made if the
+        panel type supported it.
+      </p>
+
+      <h2>What I'd Do Differently</h2>
+      <p>
+        This is a local-only project by design — I wanted to prove out the data
+        engineering and dashboard design without also taking on cloud hosting
+        costs and security hardening for a portfolio piece. That said, the
+        honest next step before this ever runs anywhere besides my own machine:
+        the Grafana and Postgres credentials are still the Docker Compose
+        defaults, which is fine for a stack that only listens on localhost and
+        is exactly what I'd fix first before any hosted deploy. I'd also add a
+        lightweight test suite around
+        <code>load_data.py</code>'s cleaning functions instead of relying on the
+        end-of-run row-count check — that check catches a bad total, not a
+        subtly wrong label mapping.
+      </p>
+
+      <div class="case-footer">
+        <p style="color: var(--text-muted); font-size: 0.9rem">
+          This project isn't open-sourced yet, so this write-up is based
+          directly on the real, running code rather than a public repo. Have
+          questions about it?
+          <a href="mailto:jared.lomeli@sjsu.edu">Email me</a> — happy to walk
+          through any part of it.
+        </p>
+        <a class="case-back" href="/" style="margin-top: 1rem"
+          >&larr; Back to Portfolio</a
+        >
+      </div>
+    </div>
+  </body>
+</html>

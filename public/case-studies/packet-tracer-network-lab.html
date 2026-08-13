@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Segmented Enterprise Network Lab — Case Study | Jared Lomeli</title>
+    <meta
+      name="description"
+      content="A 3-VLAN enterprise network built in Cisco Packet Tracer covering Security+ SY0-701 Chapters 3-4 — segmentation, AAA, IDS, site-to-site VPN, WPA2-Enterprise wireless, and what I actually learned building it."
+    />
+    <link rel="stylesheet" href="../../style.css" />
+    <style>
+      .case-study {
+        max-width: 760px;
+        margin: 0 auto;
+        padding: 3rem 1.5rem 5rem;
+      }
+
+      .case-back {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        font-family: var(--font-mono);
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        text-decoration: none;
+        margin-bottom: 2rem;
+      }
+
+      .case-back:hover {
+        color: var(--accent-color);
+      }
+
+      .case-eyebrow {
+        font-family: var(--font-mono);
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        font-size: 0.8rem;
+        color: var(--accent-color);
+        margin: 0 0 0.6rem;
+      }
+
+      .case-title {
+        font-size: clamp(1.7rem, 4vw, 2.3rem);
+        font-weight: 700;
+        line-height: 1.15;
+        margin: 0 0 0.9rem;
+      }
+
+      .case-dek {
+        color: var(--text-muted);
+        font-size: 1.05rem;
+        margin: 0 0 1rem;
+      }
+
+      .case-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.4rem;
+        margin-bottom: 2rem;
+      }
+
+      .case-hero {
+        width: 100%;
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
+        box-shadow: var(--shadow-card);
+        margin-bottom: 2.5rem;
+        display: block;
+      }
+
+      .case-study h2 {
+        font-size: 1.25rem;
+        font-weight: 700;
+        margin: 2.6rem 0 1rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid var(--accent-color);
+      }
+
+      .case-study h2:first-of-type {
+        margin-top: 0;
+      }
+
+      .case-study h3 {
+        font-size: 1.02rem;
+        font-weight: 700;
+        margin: 1.6rem 0 0.6rem;
+      }
+
+      .case-study p {
+        margin: 0 0 1rem;
+        line-height: 1.65;
+      }
+
+      .case-study ul {
+        margin: 0 0 1rem;
+        padding-left: 1.2rem;
+        line-height: 1.6;
+      }
+
+      .case-study li {
+        margin-bottom: 0.4rem;
+      }
+
+      table.case-zones {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 0 0 1.5rem;
+        font-size: 0.88rem;
+      }
+
+      table.case-zones th,
+      table.case-zones td {
+        text-align: left;
+        padding: 0.55rem 0.7rem;
+        border-bottom: 1px solid var(--border-color);
+        vertical-align: top;
+      }
+
+      table.case-zones th {
+        font-family: var(--font-mono);
+        font-size: 0.72rem;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        color: var(--text-muted);
+      }
+
+      table.case-zones code {
+        font-family: var(--font-mono);
+        font-size: 0.82rem;
+      }
+
+      .case-config-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.2rem;
+        margin: 0 0 1.5rem;
+      }
+
+      .case-config-block h3 {
+        margin-top: 0;
+        font-size: 0.95rem;
+      }
+
+      .case-config-block ul {
+        margin: 0;
+        padding-left: 1.1rem;
+        font-size: 0.92rem;
+      }
+
+      .case-callout {
+        background: var(--accent-glow);
+        border-left: 3px solid var(--accent-color);
+        border-radius: 6px;
+        padding: 1rem 1.2rem;
+        margin: 0 0 1rem;
+      }
+
+      .case-callout p:last-child {
+        margin-bottom: 0;
+      }
+
+      .case-callout-label {
+        font-family: var(--font-mono);
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        font-size: 0.75rem;
+        color: var(--accent-color);
+        margin: 0 0 0.5rem;
+      }
+
+      .case-footer {
+        margin-top: 3rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid var(--border-color);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="case-study">
+      <a class="case-back" href="/">&larr; Back to Portfolio</a>
+
+      <p class="case-eyebrow">Case Study</p>
+      <h1 class="case-title">Segmented Enterprise Network Lab</h1>
+      <p class="case-dek">
+        A three-VLAN enterprise network built in Cisco Packet Tracer, exercising
+        Security+ SY0-701 Chapters 3&ndash;4 in a single working topology
+        &mdash; segmentation, AAA, detection, encrypted remote access, and
+        enterprise wireless, all in one build rather than five separate
+        exercises.
+      </p>
+      <div class="case-meta">
+        <span class="tag">Cisco Packet Tracer</span>
+        <span class="tag">Networking</span>
+        <span class="tag">VLANs</span>
+        <span class="tag">VPN</span>
+        <span class="tag">AAA</span>
+        <span class="tag">Security+</span>
+      </div>
+
+      <img
+        class="case-hero"
+        src="/public/images/packet-tracer-topology.png"
+        alt="Segmented enterprise network topology diagram — 3 VLANs, AAA servers, IDS, honeypot, and site-to-site IPSec VPN"
+      />
+
+      <h2>The Goal</h2>
+      <p>
+        Most Security+ study guides cover segmentation, AAA, IDS, VPNs, and
+        wireless security as separate, disconnected topics. I wanted to see how
+        they actually fit together on one network, so I built a single topology
+        in Cisco Packet Tracer that exercises all of it at once: three VLANs
+        behind a Layer-3 core switch, a full AAA stack, an IDS tap, a
+        site-to-site VPN to a remote branch, and WPA2-Enterprise wireless
+        &mdash; the same design decisions a small business network would
+        actually need to make together, not in isolation.
+      </p>
+
+      <h2>Network Zones</h2>
+      <table class="case-zones">
+        <thead>
+          <tr>
+            <th>Zone</th>
+            <th>VLAN</th>
+            <th>Subnet</th>
+            <th>What's in it</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Management / IT</td>
+            <td><code>10</code></td>
+            <td><code>192.168.10.0/24</code></td>
+            <td>
+              Jump server, TACACS+ server, RADIUS server, IDS monitor, syslog
+              server, honeypot, IT workstation
+            </td>
+          </tr>
+          <tr>
+            <td>Employees</td>
+            <td><code>20</code></td>
+            <td><code>192.168.20.0/24</code></td>
+            <td>Employee workstations</td>
+          </tr>
+          <tr>
+            <td>Servers / Wireless</td>
+            <td><code>30</code></td>
+            <td><code>192.168.30.0/24</code></td>
+            <td>DHCP/DNS server, wireless access point, wireless laptop</td>
+          </tr>
+          <tr>
+            <td>Remote Branch</td>
+            <td>&mdash;</td>
+            <td><code>10.20.0.0/24</code></td>
+            <td>
+              Remote router, remote switch, branch workstations &mdash; reached
+              via the site-to-site IPSec VPN
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <p>
+        One deliberate simplification from the guided lab this was based on:
+        Servers and Wireless share one VLAN here instead of a separate DMZ
+        subnet &mdash; a real tradeoff, not an oversight, made to keep the
+        topology to a size I could fully reason about end to end.
+      </p>
+
+      <h2>What's Configured</h2>
+      <div class="case-config-grid">
+        <div class="case-config-block">
+          <h3>Segmentation</h3>
+          <ul>
+            <li>3 VLANs on a Layer-3 core switch (Cisco 3560)</li>
+            <li>Inter-VLAN routing via SVIs</li>
+            <li>ACLs restricting traffic between zones</li>
+            <li>Port security (sticky MAC, violation = shutdown)</li>
+            <li>BPDU Guard on access ports</li>
+            <li>DHCP snooping, single trusted uplink</li>
+          </ul>
+        </div>
+        <div class="case-config-block">
+          <h3>AAA</h3>
+          <ul>
+            <li>TACACS+ for device administration</li>
+            <li>RADIUS for WPA2-Enterprise 802.1X</li>
+            <li>Local fallback authentication on network devices</li>
+          </ul>
+        </div>
+        <div class="case-config-block">
+          <h3>Detection &amp; Monitoring</h3>
+          <ul>
+            <li>IDS sensor fed by SPAN from the core switch</li>
+            <li>Centralized syslog from the edge router and switches</li>
+            <li>Honeypot decoy in the Management/IT zone</li>
+            <li>SNMP v3 on the edge router (SHA auth, AES-128)</li>
+          </ul>
+        </div>
+        <div class="case-config-block">
+          <h3>Remote Access &amp; Wireless</h3>
+          <ul>
+            <li>
+              Site-to-site IPSec VPN (IKEv1, AES-256, SHA-256, DH group 14,
+              pre-shared key)
+            </li>
+            <li>ACL-defined interesting traffic for the VPN</li>
+            <li>SSH-only device administration, Telnet disabled</li>
+            <li>WPA2-Enterprise via RADIUS, 802.1X port-based access</li>
+            <li>NAT/PAT overload on the edge router</li>
+          </ul>
+        </div>
+      </div>
+
+      <h2>What I Learned</h2>
+      <p>
+        The most useful part of building this wasn't any single configuration
+        &mdash; it was seeing where concepts that look similar on paper turn out
+        to solve different problems in practice:
+      </p>
+      <div class="case-callout">
+        <p class="case-callout-label">VLANs segment, they don't encrypt</p>
+        <p>
+          Traffic within a VLAN is still fully visible to anyone with SPAN-level
+          access. Segmentation controls where traffic can go, not whether it's
+          readable once it gets there &mdash; that's a separate problem VLANs
+          alone don't solve.
+        </p>
+      </div>
+      <div class="case-callout">
+        <p class="case-callout-label">
+          TACACS+ and RADIUS aren't interchangeable
+        </p>
+        <p>
+          TACACS+ is for device administration &mdash; it encrypts the full
+          packet and separates authentication, authorization, and accounting
+          into distinct steps. RADIUS is for network access, like 802.1X and VPN
+          logins. Same acronym-adjacent category, genuinely different jobs.
+        </p>
+      </div>
+      <div class="case-callout">
+        <p class="case-callout-label">
+          Sticky-MAC port security is a small control with an outsized payoff
+        </p>
+        <p>
+          The switch learns the first MAC address on a port and shuts the port
+          down the moment a different one shows up. Almost no configuration
+          effort for a control that directly blocks a whole class of
+          rogue-device and MAC-spoofing attempts.
+        </p>
+      </div>
+      <div class="case-callout">
+        <p class="case-callout-label">SNMP v1/v2 still show up in the wild</p>
+        <p>
+          Both send community strings in plaintext, and the defaults
+          (<code>public</code>/<code>private</code>) are still common on real,
+          unhardened devices. SNMP v3 with SHA authentication and AES encryption
+          is the only version I'd consider acceptable in production &mdash; it's
+          what's configured here.
+        </p>
+      </div>
+      <div class="case-callout">
+        <p class="case-callout-label">
+          WPA2-Personal and WPA2-Enterprise look similar, aren't
+        </p>
+        <p>
+          Personal shares one pre-shared key across every user on the network.
+          Enterprise gives each user their own credentials via RADIUS and 802.1X
+          &mdash; meaning a compromised or departing user can be revoked
+          individually instead of forcing a password change for everyone.
+        </p>
+      </div>
+
+      <div class="case-footer">
+        <p style="color: var(--text-muted); font-size: 0.9rem">
+          The full topology file (<code>.pkt</code>) and README are public on
+          GitHub if you want to open it in Packet Tracer yourself:
+          <a
+            href="https://github.com/jaredlomeli-sjsu/packet-tracer-security-plus-lab"
+            target="_blank"
+            rel="noopener"
+            >github.com/jaredlomeli-sjsu/packet-tracer-security-plus-lab</a
+          >
+        </p>
+        <a class="case-back" href="/" style="margin-top: 1rem"
+          >&larr; Back to Portfolio</a
+        >
+      </div>
+    </div>
+  </body>
+</html>
