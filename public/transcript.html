@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="../theme.js"></script>
+    <title>Transcript — Jared Lomeli</title>
+    <meta
+      name="description"
+      content="Jared Lomeli's unofficial San José State University transcript — coursework and grades to date, with student ID and birth date redacted."
+    />
+    <link rel="stylesheet" href="../style.css" />
+    <style>
+      .transcript-page {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 3rem 1.5rem 5rem;
+      }
+
+      .transcript-topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        margin-bottom: 2rem;
+      }
+
+      .transcript-back {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        font-family: var(--font-mono);
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        text-decoration: none;
+      }
+
+      .transcript-back:hover {
+        color: var(--accent-color);
+      }
+
+      .transcript-eyebrow {
+        font-family: var(--font-mono);
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        font-size: 0.8rem;
+        color: var(--accent-color);
+        margin: 0 0 0.6rem;
+      }
+
+      .transcript-title {
+        font-size: clamp(1.7rem, 4vw, 2.3rem);
+        font-weight: 700;
+        line-height: 1.15;
+        margin: 0 0 0.9rem;
+      }
+
+      .transcript-dek {
+        color: var(--text-muted);
+        font-size: 1.05rem;
+        margin: 0 0 2rem;
+      }
+
+      .transcript-frame-wrap {
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        box-shadow: var(--shadow-card);
+        overflow: hidden;
+        background: var(--bg-surface-hover);
+      }
+
+      #transcript-frame {
+        display: block;
+        width: 100%;
+        height: 85vh;
+        border: none;
+        background: white;
+      }
+
+      .transcript-fallback {
+        padding: 1.5rem;
+        text-align: center;
+        color: var(--text-muted);
+        font-size: 0.9rem;
+      }
+
+      .transcript-note {
+        font-family: var(--font-mono);
+        font-size: 0.78rem;
+        color: var(--text-muted);
+        margin: 1rem 0 0;
+      }
+
+      .transcript-footer {
+        margin-top: 3rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid var(--border-color);
+      }
+    </style>
+  </head>
+  <body>
+    <button type="button" class="btn theme-toggle-fixed" data-theme-toggle>
+      Dark Mode
+    </button>
+    <div class="transcript-page">
+      <div class="transcript-topbar">
+        <a class="transcript-back" href="/">&larr; Back to Portfolio</a>
+      </div>
+
+      <p class="transcript-eyebrow">Transcript</p>
+      <h1 class="transcript-title">Unofficial Transcript</h1>
+      <p class="transcript-dek">
+        San José State University — coursework and grades to date. Student ID
+        number and birth date have been redacted.
+      </p>
+
+      <div class="transcript-actions" style="margin-bottom: 2rem">
+        <a
+          class="btn btn-primary"
+          href="/public/Jared-Lomeli-Unofficial-Transcript.pdf"
+          download
+          >Download PDF</a
+        >
+        <a class="btn btn-outline" href="mailto:jared.lomeli@sjsu.edu"
+          >Email Jared</a
+        >
+      </div>
+
+      <div class="transcript-frame-wrap">
+        <iframe
+          id="transcript-frame"
+          src="/public/Jared-Lomeli-Unofficial-Transcript.pdf"
+          title="Jared Lomeli Unofficial Transcript"
+          loading="lazy"
+        ></iframe>
+        <p class="transcript-fallback">
+          If the transcript doesn't display above,
+          <a href="/public/Jared-Lomeli-Unofficial-Transcript.pdf"
+            >open it directly</a
+          >.
+        </p>
+      </div>
+
+      <p class="transcript-note">
+        Unofficial transcript printed from MySJSU. Not an official university
+        document.
+      </p>
+
+      <div class="transcript-footer">
+        <a class="transcript-back" href="/">&larr; Back to Portfolio</a>
+      </div>
+    </div>
+    <script src="/search.js"></script>
+  </body>
+</html>

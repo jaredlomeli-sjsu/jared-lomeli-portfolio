@@ -3,10 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="theme.js"></script>
     <title>Jared Lomeli — IT Support, Network &amp; SOC Projects</title>
     <meta
       name="description"
-      content="CompTIA Security+ certified SJSU Engineering Technology (CNSM) student. Hands-on projects in network segmentation, SIEM and log analysis, SOC dashboards, and AI agents. Seeking IT Support, Network/NOC, and SOC Analyst roles."
+      content="CompTIA Security+ certified SJSU Engineering Technology (CNSM) student with a minor in Business Management. Hands-on projects in network segmentation, SIEM and log analysis, SOC dashboards, and AI agents. Seeking IT Support, Network/NOC, and SOC Analyst roles."
     />
     <meta property="og:type" content="website" />
     <meta
@@ -15,7 +16,7 @@
     />
     <meta
       property="og:description"
-      content="CompTIA Security+ certified SJSU Engineering Technology (CNSM) student. Hands-on projects in network segmentation, SIEM and log analysis, SOC dashboards, and AI agents."
+      content="CompTIA Security+ certified SJSU Engineering Technology (CNSM) student with a minor in Business Management. Hands-on projects in network segmentation, SIEM and log analysis, SOC dashboards, and AI agents."
     />
     <meta
       property="og:image"
@@ -25,7 +26,7 @@
     <meta property="og:image:height" content="630" />
     <meta
       property="og:image:alt"
-      content="Jared Lomeli — IT Support, Network & SOC Projects. CompTIA Security+ Certified, SJSU Engineering Technology (CNSM) student."
+      content="Jared Lomeli — IT Support, Network & SOC Projects. CompTIA Security+ Certified, SJSU Engineering Technology (CNSM) student with a minor in Business Management."
     />
     <meta
       property="og:url"
@@ -38,7 +39,7 @@
     />
     <meta
       name="twitter:description"
-      content="CompTIA Security+ certified SJSU Engineering Technology (CNSM) student. Hands-on projects in network segmentation, SIEM and log analysis, SOC dashboards, and AI agents."
+      content="CompTIA Security+ certified SJSU Engineering Technology (CNSM) student with a minor in Business Management. Hands-on projects in network segmentation, SIEM and log analysis, SOC dashboards, and AI agents."
     />
     <meta
       name="twitter:image"
@@ -57,7 +58,7 @@
         "name": "Jared Lomeli",
         "url": "https://jared-lomeli-portfolio.vercel.app",
         "email": "mailto:jared.lomeli@sjsu.edu",
-        "jobTitle": "Engineering Technology (CNSM) Student",
+        "jobTitle": "Engineering Technology (CNSM) Student, Business Management Minor",
         "alumniOf": {
           "@type": "CollegeOrUniversity",
           "name": "San José State University"
@@ -88,6 +89,9 @@
     </script>
   </head>
   <body>
+    <button type="button" class="btn theme-toggle-fixed" data-theme-toggle>
+      Dark Mode
+    </button>
     <header id="hero">
       <div class="hero-inner">
         <h1 class="hero-name">Jared Lomeli</h1>
@@ -95,24 +99,35 @@
           CompTIA Security+ Certified &amp; SJSU CNSM Student
         </p>
         <p class="hero-tagline">
-          Engineering Technology (Computer Network System Management) student at
-          San José State University, building hands-on projects in networking,
-          security operations, and AI agents. Seeking IT Support, Network/NOC,
-          and SOC Analyst opportunities.
+          Engineering Technology (Computer Network System Management) student
+          with a minor in Business Management at San José State University,
+          building hands-on projects in networking, security operations, and AI
+          agents. Seeking IT Support, Network/NOC, and SOC Analyst
+          opportunities.
         </p>
         <p class="hero-location">San José, CA</p>
         <p class="hero-currently">
-          <strong>Currently</strong> — Fall 2026: Introduction to Networks (TECH
-          65), Introduction to Python Programming (TECH 30). Next up: CCNA study
-          and a home lab expansion. This site grows each semester through
-          graduation in June 2029.
+          <strong>Currently</strong> — Fall 2026: Introduction to Electronics
+          (TECH 60), Introduction to Python Programming (TECH 30), Careers in
+          Engineering Technology (TECH 15), Introduction to Networks (TECH 65),
+          and Business Statistics (BUS2 90), plus POLS C1000 at West Valley
+          College. Next up: CCNA study and a home lab expansion. This site grows
+          each semester through graduation in June 2029.
         </p>
         <div class="hero-actions">
           <a
             class="btn btn-primary"
-            href="/public/Jared-Lomeli-Resume.pdf"
-            download
-            >Résumé (PDF)</a
+            href="/public/resume.html"
+            target="_blank"
+            rel="noopener"
+            >Résumé</a
+          >
+          <a
+            class="btn btn-outline"
+            href="/public/transcript.html"
+            target="_blank"
+            rel="noopener"
+            >Transcript</a
           >
           <a
             class="btn btn-outline"
@@ -128,7 +143,11 @@
             rel="noopener"
             >GitHub</a
           >
-          <a class="btn btn-outline" href="mailto:jared.lomeli@sjsu.edu"
+          <a
+            class="btn btn-outline"
+            href="/public/contact.html"
+            target="_blank"
+            rel="noopener"
             >Email</a
           >
         </div>
@@ -172,11 +191,11 @@
 
     <main>
       <section
-        id="highlight-grid"
-        class="highlight-grid"
-        aria-label="Project highlights"
+        id="section-buttons"
+        class="section-buttons"
+        aria-label="Browse by section"
       >
-        <!-- HighlightGrid cards rendered here by app.js -->
+        <!-- one compact card per category, rendered by home.js -->
       </section>
     </main>
 
@@ -199,8 +218,9 @@
         >
       </p>
       <p>
-        B.S. Engineering Technology (CNSM), San José State University — expected
-        June 2029 · GPA 3.97 · Dean's Scholar · Member, SJSU NETS
+        B.S. Engineering Technology (CNSM), Minor in Business Management, San
+        José State University — expected June 2029 · GPA 3.96 · Dean's Scholar ·
+        Member, SJSU NETS
       </p>
       <p>
         CompTIA Security+ (SY0-701) · Google/Kaggle 5-Day Generative AI
@@ -209,43 +229,8 @@
       <p id="footer-updated" class="footer-updated">Last updated August 2026</p>
     </footer>
 
-    <dialog id="lightbox" class="lightbox-dialog" aria-label="Image preview">
-      <button
-        class="dialog-close"
-        data-close="lightbox"
-        type="button"
-        aria-label="Close image preview"
-      >
-        ✕
-      </button>
-      <img id="lightbox-image" src="" alt="" />
-      <p id="lightbox-caption" class="lightbox-caption"></p>
-    </dialog>
-
-    <dialog
-      id="pdf-viewer"
-      class="pdf-viewer-dialog"
-      aria-label="Document preview"
-    >
-      <div class="pdf-viewer-header">
-        <h2 id="pdf-viewer-title"></h2>
-        <button
-          class="dialog-close"
-          data-close="pdf-viewer"
-          type="button"
-          aria-label="Close document preview"
-        >
-          ✕
-        </button>
-      </div>
-      <iframe
-        id="pdf-viewer-frame"
-        loading="lazy"
-        title="Document preview"
-        src="about:blank"
-      ></iframe>
-    </dialog>
-
-    <script src="app.js"></script>
+    <script src="categories.js"></script>
+    <script src="home.js"></script>
+    <script src="/search.js"></script>
   </body>
 </html>

@@ -11,7 +11,8 @@ module.exports = defineConfig({
     screenshot: "only-on-failure",
   },
   webServer: {
-    command: "python -m http.server 4173",
+    // Clean-URL server so /credentials etc. resolve the same as on Vercel.
+    command: "node dev-server.js . 4173",
     url: "http://127.0.0.1:4173",
     reuseExistingServer: !process.env.CI,
     timeout: 30000,

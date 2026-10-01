@@ -1,0 +1,1297 @@
+<!doctype html>
+<script type="application/json" id="cowork-artifact-meta">
+  {
+    "name": "Us Markets 30yr Explorer",
+    "schemaVersion": 1,
+    "description": "Interactive explorer of S&P 500, NASDAQ Composite, and Dow Jones from 1996–2026, annotated with major events. Includes log/linear toggle, drawdown view, and a $/month DCA simulator. Data is illustrative monthly approximations."
+  }
+</script>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>U.S. Markets 1996–2026 Explorer</title>
+    <style>
+      :root {
+        color-scheme: light;
+      }
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background: transparent;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          "Helvetica Neue", Arial, sans-serif;
+        color: #1a1a1a;
+      }
+      .wrap {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 16px;
+      }
+      h1 {
+        font-size: 22px;
+        margin: 0 0 4px;
+        color: #1f3864;
+      }
+      .sub {
+        font-size: 13px;
+        color: #666;
+        margin-bottom: 16px;
+      }
+      .panel {
+        background: #fff;
+        border: 1px solid #e3e3e3;
+        border-radius: 10px;
+        padding: 14px;
+        margin-bottom: 14px;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+      }
+      .controls {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+      .controls label {
+        font-size: 13px;
+        color: #444;
+        margin-right: 4px;
+      }
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 10px;
+        border-radius: 999px;
+        border: 1px solid #d0d0d0;
+        background: #fafafa;
+        font-size: 12.5px;
+        cursor: pointer;
+        user-select: none;
+      }
+      .pill input {
+        margin: 0;
+      }
+      .pill.on {
+        background: #e8f0fb;
+        border-color: #2e74b5;
+        color: #1f3864;
+      }
+      .seg {
+        display: inline-flex;
+        border: 1px solid #d0d0d0;
+        border-radius: 8px;
+        overflow: hidden;
+      }
+      .seg button {
+        background: #fafafa;
+        border: 0;
+        padding: 6px 10px;
+        font-size: 12.5px;
+        cursor: pointer;
+        color: #444;
+      }
+      .seg button.on {
+        background: #1f3864;
+        color: #fff;
+      }
+      .chart-host {
+        height: 360px;
+        position: relative;
+      }
+      .legend-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        font-size: 12px;
+        color: #555;
+        margin-top: 6px;
+      }
+      .legend-row .sw {
+        display: inline-block;
+        width: 12px;
+        height: 12px;
+        border-radius: 3px;
+        vertical-align: middle;
+        margin-right: 5px;
+      }
+      .grid-2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+      }
+      .events {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 8px;
+      }
+      .ev {
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        padding: 8px 10px;
+        background: #fcfcfc;
+        cursor: pointer;
+        transition: all 0.15s;
+        font-size: 12.5px;
+      }
+      .ev:hover {
+        border-color: #2e74b5;
+        background: #f4f8fd;
+      }
+      .ev .yr {
+        font-weight: 600;
+        color: #1f3864;
+      }
+      .ev .ti {
+        color: #333;
+      }
+      .ev .tg {
+        display: inline-block;
+        font-size: 10px;
+        padding: 1px 6px;
+        border-radius: 999px;
+        margin-left: 4px;
+        vertical-align: middle;
+      }
+      .tg.crash {
+        background: #fde2e2;
+        color: #8a1f1f;
+      }
+      .tg.boom {
+        background: #ddf0db;
+        color: #1f5f1f;
+      }
+      .tg.policy {
+        background: #e2e8fd;
+        color: #1f3a8a;
+      }
+      .tg.macro {
+        background: #fff1cf;
+        color: #7a5d00;
+      }
+      .ev-detail {
+        display: none;
+        padding: 12px;
+        border: 1px solid #2e74b5;
+        background: #f4f8fd;
+        border-radius: 8px;
+        margin-top: 10px;
+        font-size: 13px;
+        line-height: 1.5;
+      }
+      .ev-detail.show {
+        display: block;
+      }
+      .ev-detail h3 {
+        margin: 0 0 6px;
+        color: #1f3864;
+        font-size: 14px;
+      }
+      .ev-detail .meta {
+        font-size: 11.5px;
+        color: #666;
+        margin-bottom: 8px;
+      }
+      .sim {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        gap: 8px;
+        align-items: end;
+      }
+      .sim label {
+        display: block;
+        font-size: 11px;
+        color: #666;
+        margin-bottom: 3px;
+      }
+      .sim input,
+      .sim select {
+        width: 100%;
+        padding: 5px 8px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        font-size: 13px;
+        box-sizing: border-box;
+      }
+      .sim-out {
+        background: #f7f9fc;
+        padding: 10px;
+        border-radius: 8px;
+        margin-top: 10px;
+        font-size: 13px;
+        line-height: 1.6;
+      }
+      .sim-out b {
+        color: #1f3864;
+      }
+      .footnote {
+        font-size: 11px;
+        color: #888;
+        margin-top: 6px;
+        line-height: 1.4;
+      }
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        gap: 10px;
+        margin-top: 8px;
+      }
+      .stat {
+        padding: 10px 12px;
+        background: #f7f9fc;
+        border-radius: 8px;
+      }
+      .stat .lbl {
+        font-size: 11px;
+        color: #666;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+      }
+      .stat .val {
+        font-size: 18px;
+        font-weight: 600;
+        color: #1f3864;
+      }
+      .stat .sub {
+        font-size: 11px;
+        color: #888;
+      }
+      .tabs {
+        display: flex;
+        border-bottom: 1px solid #e3e3e3;
+        margin-bottom: 12px;
+      }
+      .tabs button {
+        background: transparent;
+        border: 0;
+        padding: 8px 14px;
+        font-size: 13.5px;
+        color: #666;
+        cursor: pointer;
+        border-bottom: 2px solid transparent;
+      }
+      .tabs button.on {
+        color: #1f3864;
+        border-bottom-color: #1f3864;
+        font-weight: 600;
+      }
+      .tab {
+        display: none;
+      }
+      .tab.on {
+        display: block;
+      }
+      @media (max-width: 720px) {
+        .grid-2 {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <h1>U.S. Markets — 30-Year Explorer (1996–2026)</h1>
+      <div class="sub">
+        Click any event chip to read the why and how. Toggle indices, log scale,
+        and drawdown view. Data is monthly approximations for learning.
+      </div>
+
+      <div class="panel">
+        <div class="tabs">
+          <button class="on" data-tab="chart">Annotated chart</button>
+          <button data-tab="dca">DCA vs Lump-Sum simulator</button>
+          <button data-tab="dd">Drawdown view</button>
+        </div>
+
+        <!-- TAB 1: Chart -->
+        <div class="tab on" id="tab-chart">
+          <div class="controls">
+            <span class="pill on" data-idx="spx"
+              ><input type="checkbox" checked /> S&amp;P 500</span
+            >
+            <span class="pill on" data-idx="ndx"
+              ><input type="checkbox" checked /> NASDAQ Composite</span
+            >
+            <span class="pill on" data-idx="dji"
+              ><input type="checkbox" checked /> Dow Jones</span
+            >
+            <span style="flex: 1"></span>
+            <label>Scale:</label>
+            <span class="seg"
+              ><button class="on" data-scale="log">Log</button
+              ><button data-scale="linear">Linear</button></span
+            >
+            <label style="margin-left: 8px">Events:</label>
+            <span class="seg"
+              ><button class="on" data-evtoggle="on">On</button
+              ><button data-evtoggle="off">Off</button></span
+            >
+          </div>
+          <div class="chart-host"><canvas id="mainChart"></canvas></div>
+          <div class="legend-row">
+            <span
+              ><span class="sw" style="background: #2e74b5"></span>S&amp;P
+              500</span
+            >
+            <span
+              ><span class="sw" style="background: #c0392b"></span>NASDAQ
+              Composite</span
+            >
+            <span
+              ><span class="sw" style="background: #7f8c8d"></span>Dow
+              Jones</span
+            >
+            <span style="margin-left: auto; color: #999"
+              >All indexed to 100 at Jan 1996</span
+            >
+          </div>
+          <div class="footnote">
+            Tip: log scale is the right default for any chart over 5 years —
+            equal percentage moves take equal vertical space, so the dot-com run
+            looks like the dot-com run, not a tiny squiggle. Switch to linear
+            once to see why log matters.
+          </div>
+
+          <h3 style="margin: 18px 0 8px; font-size: 14px; color: #1f3864">
+            Major events — click to expand
+          </h3>
+          <div class="events" id="eventsList"></div>
+          <div class="ev-detail" id="evDetail"></div>
+        </div>
+
+        <!-- TAB 2: DCA -->
+        <div class="tab" id="tab-dca">
+          <div style="font-size: 13px; color: #444; margin-bottom: 10px">
+            Simulate $/month into a chosen index from a chosen start date
+            through April 2026. Compare against putting the same total as a lump
+            sum at the start.
+          </div>
+          <div class="sim">
+            <div>
+              <label>Index</label
+              ><select id="simIdx">
+                <option value="spx">S&amp;P 500</option>
+                <option value="ndx" selected>NASDAQ Composite</option>
+                <option value="dji">Dow Jones</option>
+              </select>
+            </div>
+            <div>
+              <label>Start month</label
+              ><select id="simStart"></select>
+            </div>
+            <div>
+              <label>$ / month</label
+              ><input
+                id="simAmt"
+                type="number"
+                min="10"
+                step="50"
+                value="500"
+              />
+            </div>
+            <div>
+              <button
+                id="simRun"
+                style="
+                  padding: 7px 14px;
+                  background: #1f3864;
+                  color: #fff;
+                  border: 0;
+                  border-radius: 6px;
+                  cursor: pointer;
+                  font-size: 13px;
+                "
+              >
+                Run
+              </button>
+            </div>
+          </div>
+          <div class="sim-out" id="simOut">
+            Pick a start month and amount, then click Run.
+          </div>
+          <div class="chart-host" style="height: 280px; margin-top: 12px">
+            <canvas id="dcaChart"></canvas>
+          </div>
+          <div class="footnote">
+            Note: doesn’t include dividends/reinvestment, fees, or taxes. Real
+            total-return numbers would be modestly higher across all paths.
+            Comparison between DCA and lump sum is the point.
+          </div>
+        </div>
+
+        <!-- TAB 3: Drawdowns -->
+        <div class="tab" id="tab-dd">
+          <div style="font-size: 13px; color: #444; margin-bottom: 10px">
+            Drawdown = % below the running peak. This is what losing actually
+            felt like, in real time. The flat top means at a new high; deep dips
+            mean deep underwater.
+          </div>
+          <div class="chart-host"><canvas id="ddChart"></canvas></div>
+          <div class="stats-grid" id="ddStats"></div>
+          <div class="footnote">
+            A 50% drawdown needs a 100% gain to recover; a 75% drawdown needs
+            300%; a 90% drawdown needs 900%. This is why avoiding ruin matters
+            more than maximizing the upside.
+          </div>
+        </div>
+      </div>
+
+      <div class="footnote" style="text-align: center">
+        Built for Jared’s long-term learning. Pair with the curriculum doc;
+        events here map to Chapter 5–6 cases.
+      </div>
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.js"
+      integrity="sha384-iU8HYtnGQ8Cy4zl7gbNMOhsDTTKX02BTXptVP/vqAWIaTfM7isw76iyZCsjL2eVi"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      // ============== DATA ==============
+      // Monthly approximations 1996-01 through 2026-04 (~364 points)
+      // Anchored to known year-end + key inflection values, smoothly interpolated.
+      // Illustrative for learning, not for trading.
+      const months = [];
+      {
+        const start = new Date(1996, 0, 1);
+        const end = new Date(2026, 3, 1);
+        const d = new Date(start);
+        while (d <= end) {
+          months.push(new Date(d));
+          d.setMonth(d.getMonth() + 1);
+        }
+      }
+
+      // Anchors: [yearMonthIndex, value]
+      function makeSeries(anchors, vol) {
+        const out = new Array(months.length).fill(0);
+        for (let i = 0; i < anchors.length - 1; i++) {
+          const [a, av] = anchors[i],
+            [b, bv] = anchors[i + 1];
+          for (let k = a; k <= b; k++) {
+            const t = (k - a) / (b - a || 1);
+            // log-linear interpolation between anchors so percentage paths look real
+            const v = Math.exp(
+              Math.log(av) + t * (Math.log(bv) - Math.log(av)),
+            );
+            // small deterministic wiggle so the line isn't a robot-perfect interp
+            const wiggle =
+              Math.sin(k * 1.7) * 0.5 +
+              Math.cos(k * 0.9) * 0.5 +
+              Math.sin(k * 0.3) * 0.4;
+            out[k] = v * (1 + wiggle * vol);
+          }
+        }
+        return out;
+      }
+
+      // month index helper: 0 = Jan 1996; (year-1996)*12 + (month-1)
+      const mi = (y, m) => (y - 1996) * 12 + (m - 1);
+
+      // S&P 500 anchors (approx month-end closes)
+      const spxAnchors = [
+        [mi(1996, 1), 636],
+        [mi(1996, 12), 740],
+        [mi(1997, 12), 970],
+        [mi(1998, 8), 957],
+        [mi(1998, 12), 1229],
+        [mi(1999, 12), 1469],
+        [mi(2000, 3), 1498],
+        [mi(2000, 9), 1436],
+        [mi(2001, 3), 1160],
+        [mi(2001, 9), 1040],
+        [mi(2001, 12), 1148],
+        [mi(2002, 7), 911],
+        [mi(2002, 10), 885],
+        [mi(2003, 3), 848],
+        [mi(2003, 12), 1112],
+        [mi(2004, 12), 1212],
+        [mi(2005, 12), 1248],
+        [mi(2006, 12), 1418],
+        [mi(2007, 10), 1549],
+        [mi(2007, 12), 1468],
+        [mi(2008, 9), 1166],
+        [mi(2008, 11), 896],
+        [mi(2009, 3), 798],
+        [mi(2009, 12), 1115],
+        [mi(2010, 12), 1257],
+        [mi(2011, 8), 1218],
+        [mi(2011, 12), 1257],
+        [mi(2012, 12), 1426],
+        [mi(2013, 12), 1848],
+        [mi(2014, 12), 2059],
+        [mi(2015, 8), 1972],
+        [mi(2015, 12), 2044],
+        [mi(2016, 2), 1932],
+        [mi(2016, 12), 2239],
+        [mi(2017, 12), 2674],
+        [mi(2018, 12), 2507],
+        [mi(2019, 12), 3231],
+        [mi(2020, 2), 2954],
+        [mi(2020, 3), 2585],
+        [mi(2020, 12), 3756],
+        [mi(2021, 12), 4766],
+        [mi(2022, 1), 4515],
+        [mi(2022, 6), 3785],
+        [mi(2022, 10), 3872],
+        [mi(2022, 12), 3840],
+        [mi(2023, 12), 4770],
+        [mi(2024, 7), 5522],
+        [mi(2024, 12), 5882],
+        [mi(2025, 4), 5611],
+        [mi(2025, 12), 6320],
+        [mi(2026, 4), 6750],
+      ];
+      const ndxAnchors = [
+        [mi(1996, 1), 1059],
+        [mi(1996, 12), 1291],
+        [mi(1997, 12), 1570],
+        [mi(1998, 8), 1499],
+        [mi(1998, 12), 2192],
+        [mi(1999, 12), 4069],
+        [mi(2000, 3), 4572],
+        [mi(2000, 9), 3673],
+        [mi(2001, 3), 1840],
+        [mi(2001, 9), 1499],
+        [mi(2001, 12), 1950],
+        [mi(2002, 7), 1328],
+        [mi(2002, 10), 1330],
+        [mi(2003, 3), 1342],
+        [mi(2003, 12), 2003],
+        [mi(2004, 12), 2175],
+        [mi(2005, 12), 2205],
+        [mi(2006, 12), 2415],
+        [mi(2007, 10), 2859],
+        [mi(2007, 12), 2652],
+        [mi(2008, 9), 2092],
+        [mi(2008, 11), 1535],
+        [mi(2009, 3), 1529],
+        [mi(2009, 12), 2269],
+        [mi(2010, 12), 2653],
+        [mi(2011, 8), 2579],
+        [mi(2011, 12), 2605],
+        [mi(2012, 12), 3020],
+        [mi(2013, 12), 4177],
+        [mi(2014, 12), 4736],
+        [mi(2015, 8), 4776],
+        [mi(2015, 12), 5007],
+        [mi(2016, 2), 4558],
+        [mi(2016, 12), 5383],
+        [mi(2017, 12), 6903],
+        [mi(2018, 12), 6635],
+        [mi(2019, 12), 8972],
+        [mi(2020, 2), 8567],
+        [mi(2020, 3), 7700],
+        [mi(2020, 12), 12888],
+        [mi(2021, 11), 15644],
+        [mi(2021, 12), 15645],
+        [mi(2022, 1), 14240],
+        [mi(2022, 6), 11028],
+        [mi(2022, 10), 10988],
+        [mi(2022, 12), 10466],
+        [mi(2023, 12), 15011],
+        [mi(2024, 7), 17726],
+        [mi(2024, 12), 19311],
+        [mi(2025, 4), 17446],
+        [mi(2025, 12), 21620],
+        [mi(2026, 4), 23150],
+      ];
+      const djiAnchors = [
+        [mi(1996, 1), 5395],
+        [mi(1996, 12), 6448],
+        [mi(1997, 12), 7908],
+        [mi(1998, 8), 7539],
+        [mi(1998, 12), 9181],
+        [mi(1999, 12), 11497],
+        [mi(2000, 1), 11722],
+        [mi(2000, 9), 10650],
+        [mi(2001, 3), 9879],
+        [mi(2001, 9), 8848],
+        [mi(2001, 12), 10022],
+        [mi(2002, 7), 8736],
+        [mi(2002, 10), 8397],
+        [mi(2003, 3), 7992],
+        [mi(2003, 12), 10454],
+        [mi(2004, 12), 10783],
+        [mi(2005, 12), 10718],
+        [mi(2006, 12), 12463],
+        [mi(2007, 10), 13930],
+        [mi(2007, 12), 13265],
+        [mi(2008, 9), 10851],
+        [mi(2008, 11), 8829],
+        [mi(2009, 3), 7609],
+        [mi(2009, 12), 10428],
+        [mi(2010, 12), 11578],
+        [mi(2011, 8), 11614],
+        [mi(2011, 12), 12218],
+        [mi(2012, 12), 13104],
+        [mi(2013, 12), 16577],
+        [mi(2014, 12), 17823],
+        [mi(2015, 8), 16528],
+        [mi(2015, 12), 17425],
+        [mi(2016, 2), 16517],
+        [mi(2016, 12), 19763],
+        [mi(2017, 12), 24719],
+        [mi(2018, 12), 23327],
+        [mi(2019, 12), 28538],
+        [mi(2020, 2), 25409],
+        [mi(2020, 3), 21917],
+        [mi(2020, 12), 30606],
+        [mi(2021, 12), 36338],
+        [mi(2022, 1), 35131],
+        [mi(2022, 6), 30775],
+        [mi(2022, 10), 32732],
+        [mi(2022, 12), 33147],
+        [mi(2023, 12), 37689],
+        [mi(2024, 7), 40842],
+        [mi(2024, 12), 42544],
+        [mi(2025, 4), 40670],
+        [mi(2025, 12), 44510],
+        [mi(2026, 4), 45980],
+      ];
+
+      const data = {
+        spx: makeSeries(spxAnchors, 0.012),
+        ndx: makeSeries(ndxAnchors, 0.018),
+        dji: makeSeries(djiAnchors, 0.011),
+      };
+      // indexed series (Jan 1996 = 100)
+      const idxData = {
+        spx: data.spx.map((v) => (v / data.spx[0]) * 100),
+        ndx: data.ndx.map((v) => (v / data.ndx[0]) * 100),
+        dji: data.dji.map((v) => (v / data.dji[0]) * 100),
+      };
+
+      // ============== EVENTS ==============
+      const events = [
+        {
+          y: 1996,
+          m: 12,
+          key: "96-IE",
+          title: "Greenspan: 'irrational exuberance'",
+          tag: "macro",
+          body: "Fed Chair Greenspan asks rhetorically how to know when irrational exuberance has 'unduly escalated' asset values. The S&P is at ~740. It will more than double before peaking in March 2000. The speech is famous mostly because the bull lasted three more years after it.",
+        },
+        {
+          y: 1997,
+          m: 7,
+          key: "97-AS",
+          title: "Asian Financial Crisis",
+          tag: "crash",
+          body: "Thailand devalues the baht; the contagion spreads through Indonesia, Malaysia, South Korea. U.S. markets wobble in fall 1997 (~10% drop) but recover. Lesson: emerging-market crises rarely end U.S. bull markets, but they can rattle them.",
+        },
+        {
+          y: 1998,
+          m: 9,
+          key: "98-LT",
+          title: "LTCM collapse / Russia default",
+          tag: "crash",
+          body: "Long-Term Capital Management — a hedge fund run by two Nobel laureates and Wall Street veterans — implodes after Russia defaults. The Fed organizes a private bailout and cuts rates. Many later argue the rate cuts fueled the dot-com blowoff. The S&P loses ~19% over a few weeks and recovers within months.",
+        },
+        {
+          y: 2000,
+          m: 3,
+          key: "00-PK",
+          title: "Dot-com peak",
+          tag: "crash",
+          body: "NASDAQ peaks at 5,048 on March 10, 2000. CAPE on the S&P 500 hits 44, the highest in U.S. history. Cisco is briefly the world's most valuable company at a P/E above 200. The recovery to a new NASDAQ high will not happen until 2015.",
+        },
+        {
+          y: 2001,
+          m: 9,
+          key: "01-91",
+          title: "9/11 attacks",
+          tag: "crash",
+          body: "Markets close for four days. When they reopen, S&P drops ~12% in the first week. The recession was already underway before the attacks; 9/11 amplified an existing downtrend rather than starting one.",
+        },
+        {
+          y: 2002,
+          m: 7,
+          key: "02-EN",
+          title: "Enron / WorldCom / Tyco fraud wave",
+          tag: "crash",
+          body: "A wave of accounting frauds destroys remaining trust in late-cycle tech and telecom names. Sarbanes-Oxley passes in July 2002. Markets bottom in October 2002.",
+        },
+        {
+          y: 2002,
+          m: 10,
+          key: "02-LO",
+          title: "Bear-market bottom",
+          tag: "boom",
+          body: "NASDAQ at 1,114, down 78% from 2000 peak. S&P 500 down 49%. New bull market begins. From this trough through October 2007, S&P doubles.",
+        },
+        {
+          y: 2007,
+          m: 10,
+          key: "07-PK",
+          title: "Pre-GFC peak",
+          tag: "crash",
+          body: "S&P 500 peaks at 1,565. Subprime mortgage stress is already visible (Bear Stearns hedge funds had collapsed in June). Most investors don't see what's coming.",
+        },
+        {
+          y: 2008,
+          m: 9,
+          key: "08-LE",
+          title: "Lehman fails",
+          tag: "crash",
+          body: "Lehman Brothers files Sept 15. AIG bailed out Sept 16. Money markets break the buck; commercial paper market freezes. The most acute phase of the GFC begins.",
+        },
+        {
+          y: 2009,
+          m: 3,
+          key: "09-LO",
+          title: "GFC bottom (S&P 666)",
+          tag: "boom",
+          body: "S&P 500 closes at 676 on March 9, 2009 (intraday low 666). Down 57% from 2007 peak. The next 11 years will be one of the longest bull markets on record. Holders who didn't sell — and especially those who kept buying — recovered everything within ~5.5 years.",
+        },
+        {
+          y: 2010,
+          m: 5,
+          key: "10-FC",
+          title: "Flash Crash",
+          tag: "crash",
+          body: "On May 6, 2010, the Dow drops ~9% in minutes and recovers most of it within an hour. A single trader (later prosecuted) and runaway algos caused it. Cosmetic from a long-term perspective; instructive about how fast markets can move.",
+        },
+        {
+          y: 2011,
+          m: 8,
+          key: "11-EU",
+          title: "European debt crisis / U.S. downgrade",
+          tag: "crash",
+          body: "S&P downgrades U.S. credit rating from AAA. European sovereign debt crisis at peak intensity. S&P 500 drops ~19% Aug-Oct 2011. Recovers within a year.",
+        },
+        {
+          y: 2015,
+          m: 8,
+          key: "15-CN",
+          title: "China growth scare",
+          tag: "crash",
+          body: "Yuan devaluation triggers global selloff. S&P drops ~12%. By Feb 2016 oil hits $26 and bottoms; markets recover. Useful as an example of a 'mid-cycle correction' that didn't end the bull market.",
+        },
+        {
+          y: 2018,
+          m: 12,
+          key: "18-Q4",
+          title: "Q4 2018 selloff",
+          tag: "crash",
+          body: "S&P drops ~20% from Sept high to Christmas Eve low on fears of Fed over-tightening + trade-war escalation. Powell pivots in early 2019 (the 'Powell pivot') and markets recover within months. Most investors who panicked here regretted it.",
+        },
+        {
+          y: 2020,
+          m: 3,
+          key: "20-CV",
+          title: "COVID crash and rebound",
+          tag: "crash",
+          body: "S&P falls 34% in 33 trading days — the fastest bear market in history. VIX hits 82. Fed announces unlimited QE on March 23; market bottoms within days. S&P up 70% over the next 12 months. Single best modern test of 'don't sell into panics.'",
+        },
+        {
+          y: 2021,
+          m: 11,
+          key: "21-PK",
+          title: "NASDAQ-100 peak",
+          tag: "crash",
+          body: "Mega-cap tech and unprofitable growth names peak. SPACs, IPOs, and crypto are euphoric. Inflation has begun rising; Fed still calling it transitory. The setup for 2022.",
+        },
+        {
+          y: 2022,
+          m: 6,
+          key: "22-CP",
+          title: "CPI 9.1% / Fed hikes 75bp",
+          tag: "policy",
+          body: "June 2022 CPI prints at 9.1%, highest since 1981. Fed begins hiking 75bp at a time, the most aggressive cycle since Volcker. By summer 2023 rates reach 5.25-5.50%. Long-duration assets (unprofitable tech, bonds, crypto) sell off hardest.",
+        },
+        {
+          y: 2022,
+          m: 10,
+          key: "22-LO",
+          title: "2022 bear-market bottom",
+          tag: "boom",
+          body: "NASDAQ-100 down 33% peak-to-trough. S&P 500 down 25%. Bonds had their worst year in modern history. Recovery begins quietly in November and accelerates in 2023.",
+        },
+        {
+          y: 2022,
+          m: 11,
+          key: "22-AI",
+          title: "ChatGPT released",
+          tag: "boom",
+          body: "OpenAI launches ChatGPT November 30, 2022. Within 60 days it reaches 100M users — fastest consumer adoption in history. NVIDIA reports step-function data center demand by Q1 2023. The AI cycle that drives 2023-2026 returns starts here.",
+        },
+        {
+          y: 2024,
+          m: 1,
+          key: "24-BT",
+          title: "Spot Bitcoin ETFs approved (incl. FBTC)",
+          tag: "policy",
+          body: "SEC approves spot Bitcoin ETFs January 10, 2024. FBTC, IBIT, and others launch. By end of 2024 they hold over $100B in assets — fastest ETF launch in history. Bitcoin trades to new ATH above $100K in late 2024.",
+        },
+        {
+          y: 2024,
+          m: 7,
+          key: "24-CR",
+          title: "CrowdStrike outage",
+          tag: "crash",
+          body: "July 19, 2024: a faulty CRWD update bricks ~8.5M Windows machines worldwide. Airlines, hospitals, banks affected. CRWD stock falls ~40% in days. Mostly recovers within months. Real-time example of single-stock event risk in a name in your book.",
+        },
+        {
+          y: 2025,
+          m: 4,
+          key: "25-TF",
+          title: "April 2025 tariff shock",
+          tag: "crash",
+          body: "Sweeping new tariffs announced April 2, 2025 trigger a sharp global selloff. S&P falls ~12-15% over the following weeks before stabilizing. A reminder that policy can move markets faster than fundamentals do.",
+        },
+      ];
+
+      // =============== UI WIRING ===============
+      const visibility = { spx: true, ndx: true, dji: true };
+      let scaleMode = "log";
+      let eventsOn = true;
+
+      const COLORS = { spx: "#2E74B5", ndx: "#C0392B", dji: "#7F8C8D" };
+      const NAMES = {
+        spx: "S&P 500",
+        ndx: "NASDAQ Composite",
+        dji: "Dow Jones",
+      };
+
+      function fmtMonth(d) {
+        return d.toLocaleDateString("en-US", {
+          month: "short",
+          year: "numeric",
+        });
+      }
+      const labels = months.map(fmtMonth);
+
+      // build event annotation plugin (vertical lines)
+      const annotations = {};
+      function rebuildAnnotations() {
+        for (const k of Object.keys(annotations)) delete annotations[k];
+        if (!eventsOn) return;
+        events.forEach((e) => {
+          const idx = mi(e.y, e.m);
+          if (idx < 0 || idx >= months.length) return;
+          annotations[e.key] = {
+            type: "line",
+            xMin: idx,
+            xMax: idx,
+            borderColor:
+              e.tag === "boom"
+                ? "#1f5f1f"
+                : e.tag === "crash"
+                  ? "#8a1f1f"
+                  : e.tag === "policy"
+                    ? "#1f3a8a"
+                    : "#7a5d00",
+            borderWidth: 1,
+            borderDash: [4, 3],
+            label: { display: false, content: e.title },
+          };
+        });
+      }
+      rebuildAnnotations();
+
+      // custom plugin to draw vertical lines (we don't have annotation plugin)
+      const verticalLinesPlugin = {
+        id: "verticalLines",
+        afterDraw(chart) {
+          if (!eventsOn) return;
+          const { ctx, chartArea: ca, scales } = chart;
+          if (!ca || !scales.x) return;
+          ctx.save();
+          events.forEach((e) => {
+            const idx = mi(e.y, e.m);
+            if (idx < 0 || idx >= months.length) return;
+            const x = scales.x.getPixelForValue(idx);
+            if (x < ca.left || x > ca.right) return;
+            ctx.beginPath();
+            ctx.strokeStyle =
+              e.tag === "boom"
+                ? "rgba(31,95,31,0.5)"
+                : e.tag === "crash"
+                  ? "rgba(138,31,31,0.5)"
+                  : e.tag === "policy"
+                    ? "rgba(31,58,138,0.5)"
+                    : "rgba(122,93,0,0.5)";
+            ctx.setLineDash([4, 3]);
+            ctx.lineWidth = 1;
+            ctx.moveTo(x, ca.top);
+            ctx.lineTo(x, ca.bottom);
+            ctx.stroke();
+          });
+          ctx.restore();
+        },
+      };
+
+      // ============ MAIN CHART ============
+      const mainCtx = document.getElementById("mainChart").getContext("2d");
+      let mainChart;
+
+      function buildMainDatasets() {
+        const ds = [];
+        for (const k of ["spx", "ndx", "dji"]) {
+          if (!visibility[k]) continue;
+          ds.push({
+            label: NAMES[k],
+            data: idxData[k],
+            borderColor: COLORS[k],
+            backgroundColor: COLORS[k] + "22",
+            borderWidth: 1.6,
+            pointRadius: 0,
+            pointHitRadius: 8,
+            tension: 0.1,
+          });
+        }
+        return ds;
+      }
+
+      function buildMainChart() {
+        if (mainChart) mainChart.destroy();
+        mainChart = new Chart(mainCtx, {
+          type: "line",
+          data: { labels, datasets: buildMainDatasets() },
+          plugins: [verticalLinesPlugin],
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: { mode: "index", intersect: false },
+            scales: {
+              x: {
+                ticks: { maxTicksLimit: 10, color: "#666" },
+                grid: { color: "#eee" },
+              },
+              y: {
+                type: scaleMode === "log" ? "logarithmic" : "linear",
+                ticks: {
+                  color: "#666",
+                  callback: (v) =>
+                    scaleMode === "log"
+                      ? v >= 1000
+                        ? (v / 1000).toFixed(0) + "k"
+                        : v
+                      : v,
+                },
+                grid: { color: "#eee" },
+                title: {
+                  display: true,
+                  text: "Indexed (Jan 1996 = 100)",
+                  color: "#666",
+                  font: { size: 11 },
+                },
+              },
+            },
+            plugins: {
+              legend: { display: false },
+              tooltip: {
+                callbacks: {
+                  title: (items) =>
+                    items.length ? labels[items[0].dataIndex] : "",
+                  label: (ctx) => {
+                    const k = Object.keys(NAMES).find(
+                      (x) => NAMES[x] === ctx.dataset.label,
+                    );
+                    const raw = data[k][ctx.dataIndex];
+                    return `${ctx.dataset.label}: ${ctx.parsed.y.toFixed(0)} (≈${raw.toFixed(0)})`;
+                  },
+                },
+              },
+            },
+          },
+        });
+      }
+      buildMainChart();
+
+      // pill toggles
+      document.querySelectorAll(".pill[data-idx]").forEach((p) => {
+        p.addEventListener("click", () => {
+          const k = p.dataset.idx;
+          visibility[k] = !visibility[k];
+          p.classList.toggle("on", visibility[k]);
+          p.querySelector("input").checked = visibility[k];
+          buildMainChart();
+        });
+      });
+      // scale toggle
+      document.querySelectorAll(".seg button[data-scale]").forEach((b) => {
+        b.addEventListener("click", () => {
+          document
+            .querySelectorAll(".seg button[data-scale]")
+            .forEach((x) => x.classList.remove("on"));
+          b.classList.add("on");
+          scaleMode = b.dataset.scale;
+          buildMainChart();
+        });
+      });
+      // events toggle
+      document.querySelectorAll(".seg button[data-evtoggle]").forEach((b) => {
+        b.addEventListener("click", () => {
+          document
+            .querySelectorAll(".seg button[data-evtoggle]")
+            .forEach((x) => x.classList.remove("on"));
+          b.classList.add("on");
+          eventsOn = b.dataset.evtoggle === "on";
+          buildMainChart();
+        });
+      });
+
+      // event chips
+      const evList = document.getElementById("eventsList");
+      events.forEach((e) => {
+        const el = document.createElement("div");
+        el.className = "ev";
+        el.innerHTML = `<div class="yr">${e.y}</div><div class="ti">${e.title}<span class="tg ${e.tag}">${e.tag}</span></div>`;
+        el.addEventListener("click", () => showEvent(e));
+        evList.appendChild(el);
+      });
+      function showEvent(e) {
+        const det = document.getElementById("evDetail");
+        det.innerHTML = `<h3>${e.title}</h3><div class="meta">${e.y}-${String(e.m).padStart(2, "0")} &nbsp;·&nbsp; <span class="tg ${e.tag}">${e.tag}</span></div><div>${e.body}</div>`;
+        det.classList.add("show");
+        det.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      }
+
+      // ============ TABS ============
+      document.querySelectorAll(".tabs button").forEach((b) => {
+        b.addEventListener("click", () => {
+          document
+            .querySelectorAll(".tabs button")
+            .forEach((x) => x.classList.remove("on"));
+          document
+            .querySelectorAll(".tab")
+            .forEach((x) => x.classList.remove("on"));
+          b.classList.add("on");
+          document.getElementById("tab-" + b.dataset.tab).classList.add("on");
+          if (b.dataset.tab === "dd") buildDDChart();
+        });
+      });
+
+      // ============ DCA TAB ============
+      const startSel = document.getElementById("simStart");
+      for (let i = 0; i < months.length - 12; i++) {
+        const o = document.createElement("option");
+        o.value = i;
+        o.textContent = labels[i];
+        startSel.appendChild(o);
+      }
+      // default to Jan 2010
+      startSel.value = mi(2010, 1);
+
+      let dcaChart = null;
+      function runSim() {
+        const idx = document.getElementById("simIdx").value;
+        const startI = +startSel.value;
+        const amt = Math.max(
+          10,
+          +document.getElementById("simAmt").value || 500,
+        );
+        const series = data[idx];
+        // DCA: buy amt worth of "shares" at series[i] each month from startI to end
+        let shares = 0;
+        let invested = 0;
+        const dcaPath = [];
+        for (let i = startI; i < series.length; i++) {
+          shares += amt / series[i];
+          invested += amt;
+          dcaPath.push({ x: labels[i], v: shares * series[i], invested });
+        }
+        const dcaFinal = dcaPath[dcaPath.length - 1].v;
+
+        // Lump sum: invest the same final 'invested' total at start
+        const lumpShares = invested / series[startI];
+        const lumpPath = [];
+        for (let i = startI; i < series.length; i++) {
+          lumpPath.push({ x: labels[i], v: lumpShares * series[i] });
+        }
+        const lumpFinal = lumpPath[lumpPath.length - 1].v;
+
+        const months_count = series.length - startI;
+        const years = months_count / 12;
+        const dcaCAGR = Math.pow(dcaFinal / invested, 1 / years) - 1; // approximation; ignores cash-flow weighting
+        const lumpCAGR = Math.pow(lumpFinal / invested, 1 / years) - 1;
+
+        document.getElementById("simOut").innerHTML =
+          `Investing <b>$${amt.toLocaleString()}/month</b> in <b>${NAMES[idx]}</b> from <b>${labels[startI]}</b> through ${labels[labels.length - 1]}:<br>` +
+          `&nbsp;&nbsp;Total contributed: <b>$${invested.toLocaleString()}</b><br>` +
+          `&nbsp;&nbsp;DCA ending value: <b>$${dcaFinal.toLocaleString(undefined, { maximumFractionDigits: 0 })}</b> (~${(dcaCAGR * 100).toFixed(1)}% / yr approx)<br>` +
+          `&nbsp;&nbsp;Lump-sum equivalent (same total at start): <b>$${lumpFinal.toLocaleString(undefined, { maximumFractionDigits: 0 })}</b> (~${(lumpCAGR * 100).toFixed(1)}% / yr approx)<br>` +
+          `&nbsp;&nbsp;Lump sum vs DCA: <b>${lumpFinal > dcaFinal ? "+" : ""}${((lumpFinal / dcaFinal - 1) * 100).toFixed(1)}%</b>`;
+
+        if (dcaChart) dcaChart.destroy();
+        dcaChart = new Chart(
+          document.getElementById("dcaChart").getContext("2d"),
+          {
+            type: "line",
+            data: {
+              labels: dcaPath.map((p) => p.x),
+              datasets: [
+                {
+                  label: "DCA value",
+                  data: dcaPath.map((p) => p.v),
+                  borderColor: "#2E74B5",
+                  backgroundColor: "#2E74B522",
+                  borderWidth: 1.5,
+                  pointRadius: 0,
+                  fill: false,
+                  tension: 0.1,
+                },
+                {
+                  label: "Lump sum value",
+                  data: lumpPath.map((p) => p.v),
+                  borderColor: "#1F8B4C",
+                  borderWidth: 1.5,
+                  pointRadius: 0,
+                  fill: false,
+                  tension: 0.1,
+                },
+                {
+                  label: "Total contributed",
+                  data: dcaPath.map((p) => p.invested),
+                  borderColor: "#999",
+                  borderWidth: 1,
+                  borderDash: [4, 3],
+                  pointRadius: 0,
+                  fill: false,
+                },
+              ],
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              interaction: { mode: "index", intersect: false },
+              scales: {
+                x: {
+                  ticks: { maxTicksLimit: 8, color: "#666" },
+                  grid: { color: "#eee" },
+                },
+                y: {
+                  ticks: {
+                    color: "#666",
+                    callback: (v) => "$" + (v / 1000).toFixed(0) + "k",
+                  },
+                  grid: { color: "#eee" },
+                },
+              },
+              plugins: {
+                legend: { labels: { boxWidth: 12, font: { size: 11 } } },
+              },
+            },
+          },
+        );
+      }
+      document.getElementById("simRun").addEventListener("click", runSim);
+      runSim();
+
+      // ============ DRAWDOWN TAB ============
+      let ddChart = null;
+      function computeDD(series) {
+        let peak = -Infinity;
+        return series.map((v) => {
+          peak = Math.max(peak, v);
+          return (v / peak - 1) * 100;
+        });
+      }
+      function buildDDChart() {
+        const ddSpx = computeDD(data.spx);
+        const ddNdx = computeDD(data.ndx);
+        const ddDji = computeDD(data.dji);
+
+        if (ddChart) ddChart.destroy();
+        ddChart = new Chart(
+          document.getElementById("ddChart").getContext("2d"),
+          {
+            type: "line",
+            data: {
+              labels,
+              datasets: [
+                {
+                  label: "S&P 500 drawdown",
+                  data: ddSpx,
+                  borderColor: "#2E74B5",
+                  backgroundColor: "#2E74B544",
+                  borderWidth: 1.2,
+                  pointRadius: 0,
+                  fill: "origin",
+                  tension: 0.1,
+                },
+                {
+                  label: "NASDAQ Composite drawdown",
+                  data: ddNdx,
+                  borderColor: "#C0392B",
+                  backgroundColor: "#C0392B33",
+                  borderWidth: 1.2,
+                  pointRadius: 0,
+                  fill: "origin",
+                  tension: 0.1,
+                },
+                {
+                  label: "Dow Jones drawdown",
+                  data: ddDji,
+                  borderColor: "#7F8C8D",
+                  backgroundColor: "#7F8C8D33",
+                  borderWidth: 1.2,
+                  pointRadius: 0,
+                  fill: "origin",
+                  tension: 0.1,
+                },
+              ],
+            },
+            plugins: [verticalLinesPlugin],
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              interaction: { mode: "index", intersect: false },
+              scales: {
+                x: {
+                  ticks: { maxTicksLimit: 10, color: "#666" },
+                  grid: { color: "#eee" },
+                },
+                y: {
+                  max: 0,
+                  ticks: { color: "#666", callback: (v) => v + "%" },
+                  grid: { color: "#eee" },
+                },
+              },
+              plugins: {
+                legend: { labels: { boxWidth: 12, font: { size: 11 } } },
+              },
+            },
+          },
+        );
+
+        // stats
+        const minDD = (arr) => Math.min(...arr);
+        const stats = [
+          {
+            lbl: "S&P 500 worst DD",
+            val: minDD(ddSpx).toFixed(1) + "%",
+            sub: "GFC, 2007-2009",
+          },
+          {
+            lbl: "NASDAQ worst DD",
+            val: minDD(ddNdx).toFixed(1) + "%",
+            sub: "Dot-com, 2000-2002",
+          },
+          {
+            lbl: "Dow worst DD",
+            val: minDD(ddDji).toFixed(1) + "%",
+            sub: "GFC, 2007-2009",
+          },
+          { lbl: "S&P 2022 DD", val: "~-25%", sub: "Jan 2022 → Oct 2022" },
+          { lbl: "NASDAQ 2022 DD", val: "~-33%", sub: "Nov 2021 → Oct 2022" },
+          { lbl: "COVID DD", val: "~-34%", sub: "Feb → Mar 2020 (S&P)" },
+        ];
+        const sg = document.getElementById("ddStats");
+        sg.innerHTML = "";
+        stats.forEach((s) => {
+          const d = document.createElement("div");
+          d.className = "stat";
+          d.innerHTML = `<div class="lbl">${s.lbl}</div><div class="val">${s.val}</div><div class="sub">${s.sub}</div>`;
+          sg.appendChild(d);
+        });
+      }
+    </script>
+  </body>
+</html>

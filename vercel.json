@@ -2,6 +2,12 @@
   "version": 2,
   "outputDirectory": ".",
   "cleanUrls": true,
+  "rewrites": [
+    {
+      "source": "/demo/:slug",
+      "destination": "/public/artifacts/:slug"
+    }
+  ],
   "headers": [
     {
       "source": "/public/documents/(.*)",
@@ -11,6 +17,26 @@
           "value": "public, max-age=31536000, immutable"
         },
         { "key": "Content-Disposition", "value": "inline" }
+      ]
+    },
+    {
+      "source": "/public/documents/tech-65/packet-tracer/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        },
+        { "key": "Content-Disposition", "value": "attachment" }
+      ]
+    },
+    {
+      "source": "/public/documents/tech-30/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        },
+        { "key": "Content-Disposition", "value": "attachment" }
       ]
     }
   ]

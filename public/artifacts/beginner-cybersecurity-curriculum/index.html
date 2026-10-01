@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Beginner Cybersecurity Curriculum</title>
+</head>
+<body>
+
+<h1>Beginner Cybersecurity Curriculum</h1>
+<p><em>A learning-oriented path covering electronics, networking, and entry-level cybersecurity. Organized by what to understand, with real-world applications, statistics, and visuals to ground each concept.</em></p>
+
+<h2>Modules at a Glance</h2>
+<ul>
+  <li>0 &mdash; Orientation</li>
+  <li>1 &mdash; Electronics Foundations</li>
+  <li>2 &mdash; How Computers Work</li>
+  <li>3 &mdash; The Unix Worldview</li>
+  <li>4 &mdash; Networking from the Wire Up</li>
+  <li>5 &mdash; Threats and Adversaries</li>
+  <li>6 &mdash; Cryptography as a User</li>
+  <li>7 &mdash; Defending Systems and Networks</li>
+  <li>8 &mdash; Web Application Security</li>
+  <li>9 &mdash; The Offensive Mindset</li>
+  <li>10 &mdash; Specialization Paths</li>
+</ul>
+
+<h3>Industry Pulse &mdash; Why This Field Matters</h3>
+<ul>
+  <li>Global cybercrime cost: ~$10.5 trillion/year by 2025 (Cybersecurity Ventures).</li>
+  <li>Average cost of a data breach: $4.88 million in 2024 (IBM Cost of a Data Breach Report).</li>
+  <li>Unfilled cybersecurity jobs worldwide: roughly 4 million (ISC2 Workforce Study).</li>
+  <li>Phishing remains involved in ~36% of breaches (Verizon DBIR 2024).</li>
+</ul>
+
+<h3>Global Cybercrime Cost (USD trillions)</h3>
+<table border="1" cellpadding="6">
+  <tr><th>Year</th><th>Cost (USD trillions)</th></tr>
+  <tr><td>2015</td><td>$3.0</td></tr>
+  <tr><td>2018</td><td>$4.5</td></tr>
+  <tr><td>2021</td><td>$6.0</td></tr>
+  <tr><td>2024</td><td>$9.2</td></tr>
+  <tr><td>2025 (est.)</td><td>$10.5</td></tr>
+</table>
+
+<hr>
+
+<h2>Module 0 &mdash; Orientation: What Cybersecurity Actually Is</h2>
+
+<h3>The shape of the field</h3>
+<ul>
+  <li>Cybersecurity is not one job. It is a constellation of disciplines.</li>
+  <li>Offensive work: red team, penetration testing, exploit development.</li>
+  <li>Defensive work: blue team, SOC analysis, incident response, forensics.</li>
+  <li>Governance work: risk, compliance, audit, policy.</li>
+  <li>Engineering work: AppSec, cloud security, identity, platform security.</li>
+</ul>
+
+<h3>Foundational concepts</h3>
+<ul>
+  <li><b>CIA Triad</b>: Confidentiality, Integrity, Availability.</li>
+  <li><b>AAA Model</b>: Authentication, Authorization, Accounting.</li>
+  <li><b>Risk</b> = Threat &times; Vulnerability &times; Impact.</li>
+  <li>Every control you ever deploy supports one of these properties.</li>
+</ul>
+
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/CIAJMK1209-en.svg/640px-CIAJMK1209-en.svg.png" alt="CIA Triad" width="380"><br>
+<em>The CIA Triad &mdash; the conceptual bedrock of every security control.</em></p>
+
+<p><b>Real-world application:</b> A hospital ransomware attack hits all three legs of the triad &mdash; patient records become unreadable (confidentiality and integrity threatened), and life-critical systems go offline (availability lost).</p>
+
+<p><b>You should be able to explain:</b> why availability is a security concern (not just reliability); why "the attacker only needs to be right once" is misleading; the difference between a vulnerability and a misconfiguration.</p>
+
+<hr>
+
+<h2>Module 1 &mdash; Electronics Foundations</h2>
+
+<h3>Why electronics matters for security</h3>
+<ul>
+  <li>At the lowest layer, cybersecurity is electricity.</li>
+  <li>Hardware implants, side-channel attacks, and IoT bugs all live here.</li>
+  <li>Physics-level attacks (Rowhammer, Spectre, voltage glitching) require this base.</li>
+</ul>
+
+<h3>The language of circuits</h3>
+<ul>
+  <li><b>Voltage</b> &mdash; potential difference (volts).</li>
+  <li><b>Current</b> &mdash; flow of charge (amps).</li>
+  <li><b>Resistance</b> &mdash; opposition to current (ohms).</li>
+  <li><b>Ohm's Law</b> &mdash; V = I &times; R. Memorize this one equation.</li>
+  <li><b>DC vs AC</b> &mdash; DC powers logic; AC arrives at the wall.</li>
+</ul>
+
+<h3>Core components</h3>
+<ul>
+  <li>Resistors limit current.</li>
+  <li>Capacitors store charge and smooth signals.</li>
+  <li>Inductors resist change in current.</li>
+  <li>Diodes enforce one-way flow.</li>
+  <li>Transistors amplify and switch &mdash; the keystone of all digital logic.</li>
+</ul>
+
+<h3>From transistors to computers</h3>
+<ul>
+  <li>Logic gates (AND, OR, NOT, NAND, XOR) are built from transistors.</li>
+  <li>Gates compose into adders, multiplexers, flip-flops.</li>
+  <li>Flip-flops compose into registers and memory.</li>
+  <li>Memory + ALU + control unit = a CPU.</li>
+  <li>A microcontroller is a tiny CPU on one chip &mdash; used in cars, bulbs, sensors.</li>
+</ul>
+
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Ohms_law_voltage_source.svg/480px-Ohms_law_voltage_source.svg.png" alt="Ohm's Law" width="280"><br>
+<em>Ohm's Law &mdash; V = I &times; R.</em></p>
+
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Arduino_Uno_-_R3.jpg/480px-Arduino_Uno_-_R3.jpg" alt="Arduino Uno" width="320"><br>
+<em>Arduino Uno &mdash; a beginner microcontroller for hands-on learning.</em></p>
+
+<h3>Transistors per Chip Over Time (Moore's Law)</h3>
+<table border="1" cellpadding="6">
+  <tr><th>Year</th><th>Transistors per chip</th></tr>
+  <tr><td>1971</td><td>2,300</td></tr>
+  <tr><td>1980</td><td>29,000</td></tr>
+  <tr><td>1990</td><td>1,180,000</td></tr>
+  <tr><td>2000</td><td>42,000,000</td></tr>
+  <tr><td>2010</td><td>1.17 billion</td></tr>
+  <tr><td>2020</td><td>39.5 billion</td></tr>
+  <tr><td>2024</td><td>134 billion</td></tr>
+</table>
+
+<p><b>Real-world application:</b> The Stuxnet worm (2010) crossed from software into the physical world &mdash; manipulating Siemens PLC firmware to spin Iranian centrifuges to destruction. Without electronics literacy, you cannot read that story.</p>
+
+<p><b>Quick stats:</b></p>
+<ul>
+  <li>~30 billion IoT devices online by 2025 (IoT Analytics).</li>
+  <li>~98% of IoT traffic is unencrypted (Palo Alto Unit 42).</li>
+  <li>57% of IoT devices are vulnerable to medium- or high-severity attacks.</li>
+</ul>
+
+<p><b>You should be able to explain:</b> what a transistor does in plain language; why digital logic is built from NAND gates so often; why every "smart" device is a security concern by default.</p>
+
+<hr>
+
+<h2>Module 2 &mdash; How Computers Work</h2>
+
+<h3>Why this matters</h3>
+<ul>
+  <li>Buffer overflows live in the gap between what programmers think computers do and what they actually do.</li>
+  <li>Privilege escalation, race conditions, rootkits &mdash; all rooted here.</li>
+</ul>
+
+<h3>Representation</h3>
+<ul>
+  <li>Binary is the substrate.</li>
+  <li>Hexadecimal is the human-readable shorthand.</li>
+  <li>Two's complement is how negative numbers are encoded.</li>
+  <li>ASCII and Unicode encode text into bytes.</li>
+</ul>
+
+<h3>Architecture (von Neumann)</h3>
+<ul>
+  <li>CPU connected to memory and I/O over buses.</li>
+  <li>Fetch&ndash;decode&ndash;execute cycle drives every instruction.</li>
+  <li>Code and data share memory &mdash; which is why data can become code.</li>
+  <li>Memory hierarchy: registers &rarr; cache &rarr; RAM &rarr; disk (each slower, larger).</li>
+</ul>
+
+<pre>
++---------------------------------+
+|              CPU                |
+|   ALU --- Registers --- Control |
++---------------------------------+
+              |
+         System Bus
+              |
+       +------+------+
+       |             |
+      RAM           I/O
+</pre>
+
+<h3>The operating system</h3>
+<ul>
+  <li>Schedules processes &mdash; gives each one CPU time.</li>
+  <li>Provides virtual memory &mdash; illusion that each process owns the machine.</li>
+  <li>Mediates hardware access through system calls.</li>
+  <li>Enforces user mode vs. kernel mode boundary.</li>
+  <li>Almost every privilege escalation is that boundary failing.</li>
+</ul>
+
+<h3>The boot chain</h3>
+<ul>
+  <li>Firmware (BIOS / UEFI) &rarr; Bootloader &rarr; Kernel &rarr; Init system.</li>
+  <li>Earliest code wins &mdash; so rootkits and bootkits hide there.</li>
+</ul>
+
+<p><b>Real-world application:</b> The Spectre and Meltdown vulnerabilities (2018) exploited speculative execution in CPUs &mdash; a hardware-level optimization &mdash; to leak memory across security boundaries. Affected nearly every CPU made in 20 years.</p>
+
+<p><b>You should be able to explain:</b> the difference between a process and a thread; why virtual memory exists; what happens when a program calls open(); why "ring 0" is the phrase attackers care about.</p>
+
+<hr>
+
+<h2>Module 3 &mdash; The Unix Worldview</h2>
+
+<h3>Why Unix</h3>
+<ul>
+  <li>Linux powers most of the internet.</li>
+  <li>Almost every security tool is built on it.</li>
+  <li>The Unix philosophy &mdash; small composable programs &mdash; shapes how security work is done.</li>
+</ul>
+
+<h3>Core concepts</h3>
+<ul>
+  <li>The file system is a tree &mdash; devices and processes are also files.</li>
+  <li>Permissions: read, write, execute &times; user, group, other.</li>
+  <li>Special bits: SUID, SGID, sticky &mdash; source of countless privilege escalations.</li>
+  <li>Every process has: a parent, an environment, file descriptors, a UID.</li>
+  <li>The shell is a programming language, not just a prompt.</li>
+</ul>
+
+<h3>Tools to know cold</h3>
+<ul>
+  <li>grep, awk, sed &mdash; text processing.</li>
+  <li>find, xargs &mdash; locating and acting on files.</li>
+  <li>cut, sort, uniq, tr &mdash; column-level data wrangling.</li>
+  <li>ps, top, htop &mdash; process inspection.</li>
+  <li>ssh, scp, rsync &mdash; remote access and transfer.</li>
+</ul>
+
+<h3>Public Web Server OS Share</h3>
+<table border="1" cellpadding="6">
+  <tr><th>OS</th><th>Share</th></tr>
+  <tr><td>Linux / Unix</td><td>~76%</td></tr>
+  <tr><td>Windows</td><td>~22%</td></tr>
+  <tr><td>Other</td><td>~2%</td></tr>
+</table>
+
+<p><b>Real-world application:</b> The 2021 Log4Shell vulnerability was triaged across the world from the Linux command line. Defenders used grep, find, and curl to identify vulnerable servers &mdash; basic Unix fluency was the difference between hours and weeks of response time.</p>
+
+<p><b>You should be able to explain:</b> what chmod 4755 does and why an attacker would care; why sudo is more nuanced than "run as root"; what a pipe does at the kernel level.</p>
+
+<hr>
+
+<h2>Module 4 &mdash; Networking from the Wire Up</h2>
+
+<h3>The layered mental model</h3>
+<ul>
+  <li>Most attacks traverse a network &mdash; you must be able to reason about it.</li>
+  <li>The OSI model has 7 layers; the TCP/IP model collapses it to 4.</li>
+  <li>Each layer hides the layer below and exposes a service to the layer above.</li>
+</ul>
+
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Osi-model-jb.svg/640px-Osi-model-jb.svg.png" alt="OSI Model" width="400"><br>
+<em>The OSI seven-layer model &mdash; every networking concept maps here.</em></p>
+
+<h3>Layer 2 &mdash; Ethernet &amp; Switching</h3>
+<ul>
+  <li>MAC addresses identify network interfaces.</li>
+  <li>Switches forward frames using a learned MAC-to-port map.</li>
+  <li>ARP bridges link layer to network layer (IP &rarr; MAC).</li>
+  <li>ARP is unauthenticated &rarr; ARP spoofing is the first attack to learn.</li>
+</ul>
+
+<h3>Layer 3 &mdash; IP &amp; Routing</h3>
+<ul>
+  <li>IPv4 = 32 bits; IPv6 = 128 bits.</li>
+  <li>Subnetting partitions an address space using a mask.</li>
+  <li>CIDR notation: /24 = 256 addresses, /16 = 65,536.</li>
+  <li>RFC 1918 reserves private ranges (10.x, 172.16.x, 192.168.x).</li>
+  <li>NAT lets many private addresses share one public one.</li>
+</ul>
+
+<h3>Layer 4 &mdash; TCP &amp; UDP</h3>
+<ul>
+  <li>TCP &mdash; connection-oriented, reliable byte stream.</li>
+  <li>3-way handshake: SYN &rarr; SYN-ACK &rarr; ACK.</li>
+  <li>UDP &mdash; connectionless, fast, easier to spoof and abuse for amplification.</li>
+</ul>
+
+<pre>
+   Client                              Server
+     |---------- SYN (seq=x) ---------->|
+     |<------ SYN-ACK (ack=x+1) --------|
+     |---------- ACK (ack=y+1) -------->|
+     |       Connection established     |
+</pre>
+
+<h3>Layer 7 &mdash; Application protocols</h3>
+<ul>
+  <li>HTTP / HTTPS &mdash; web request-response.</li>
+  <li>DNS &mdash; names &rarr; addresses (cache poisoning, hijacking, tunneling).</li>
+  <li>SMTP / IMAP / POP3 &mdash; email plumbing.</li>
+  <li>SSH &mdash; authenticated remote shells.</li>
+  <li>DHCP &mdash; hands out IPs to joining clients.</li>
+</ul>
+
+<h3>Common Port Numbers Worth Memorizing</h3>
+<table border="1" cellpadding="6">
+  <tr><th>Service</th><th>Port</th></tr>
+  <tr><td>SSH</td><td>22</td></tr>
+  <tr><td>SMTP</td><td>25</td></tr>
+  <tr><td>DNS</td><td>53</td></tr>
+  <tr><td>HTTP</td><td>80</td></tr>
+  <tr><td>HTTPS</td><td>443</td></tr>
+  <tr><td>SMB</td><td>445</td></tr>
+  <tr><td>RDP</td><td>3389</td></tr>
+</table>
+
+<h3>Practical analysis tools</h3>
+<ul>
+  <li><b>Wireshark / tcpdump</b> &mdash; capture and decode traffic.</li>
+  <li><b>Nmap</b> &mdash; discover hosts and probe ports.</li>
+  <li><b>scapy</b> &mdash; craft custom packets in Python.</li>
+</ul>
+
+<p><b>Real-world application:</b> The Mirai botnet (2016) scanned the internet for IoT devices using default credentials on port 23 (Telnet) and port 2323. At its peak it took down DNS provider Dyn &mdash; knocking Twitter, Netflix, and Reddit offline. Defense started with watching the right ports.</p>
+
+<p><b>You should be able to explain:</b> what happens, end-to-end, when you type a URL into a browser; why a SYN flood works; the difference between a switch, a router, and a firewall.</p>
+
+<hr>
+
+<h2>Module 5 &mdash; Threats and Adversaries</h2>
+
+<h3>Who attacks, and why</h3>
+<ul>
+  <li><b>Script kiddies</b> &mdash; run other people's tools; low skill, high noise.</li>
+  <li><b>Criminal groups</b> &mdash; optimize for revenue (ransomware, BEC, fraud).</li>
+  <li><b>Hacktivists</b> &mdash; pursue political goals.</li>
+  <li><b>Insiders</b> &mdash; abuse legitimate access.</li>
+  <li><b>Nation-states</b> &mdash; long timelines, deep budgets, custom tooling.</li>
+</ul>
+
+<h3>Frameworks worth internalizing</h3>
+<ul>
+  <li><b>MITRE ATT&amp;CK</b> &mdash; matrix of real-world tactics and techniques.</li>
+  <li><b>Cyber Kill Chain</b> &mdash; Recon &rarr; Weaponize &rarr; Deliver &rarr; Exploit &rarr; Install &rarr; C2 &rarr; Actions.</li>
+  <li><b>STRIDE</b> &mdash; Spoofing, Tampering, Repudiation, Info disclosure, DoS, Elevation.</li>
+</ul>
+
+<h3>Major attack categories</h3>
+<ul>
+  <li><b>Social engineering</b> &mdash; phishing, vishing, pretexting.</li>
+  <li><b>Malware</b> &mdash; viruses, worms, trojans, ransomware, rootkits, info-stealers.</li>
+  <li><b>Denial of service</b> &mdash; volumetric, protocol, application-layer.</li>
+  <li><b>On-path (MITM)</b> &mdash; intercepting and modifying traffic.</li>
+  <li><b>Password attacks</b> &mdash; brute force, credential stuffing, dictionary.</li>
+  <li><b>Injection</b> &mdash; SQL, command, template &mdash; data interpreted as code.</li>
+</ul>
+
+<h3>How Breaches Begin (Verizon DBIR 2024)</h3>
+<table border="1" cellpadding="6">
+  <tr><th>Vector</th><th>% of breaches</th></tr>
+  <tr><td>Stolen credentials</td><td>38%</td></tr>
+  <tr><td>Phishing</td><td>36%</td></tr>
+  <tr><td>Exploit vulnerability</td><td>18%</td></tr>
+  <tr><td>Misconfiguration</td><td>15%</td></tr>
+  <tr><td>Other</td><td>10%</td></tr>
+</table>
+
+<h3>Average Ransomware Payment by Year (USD)</h3>
+<table border="1" cellpadding="6">
+  <tr><th>Year</th><th>Avg payment</th></tr>
+  <tr><td>2018</td><td>$6,700</td></tr>
+  <tr><td>2019</td><td>$41,000</td></tr>
+  <tr><td>2020</td><td>$154,000</td></tr>
+  <tr><td>2021</td><td>$322,000</td></tr>
+  <tr><td>2022</td><td>$408,000</td></tr>
+  <tr><td>2023</td><td>$740,000</td></tr>
+</table>
+
+<p><b>Real-world application:</b> The 2020 SolarWinds attack saw a nation-state actor compromise the Orion software build pipeline, distributing trojanized updates to 18,000 organizations including Fortune 500 companies and US federal agencies. A textbook supply-chain attack you can map across the entire ATT&amp;CK matrix.</p>
+
+<p><b>Threat numbers:</b></p>
+<ul>
+  <li>~3.4 billion phishing emails sent per day (Valimail).</li>
+  <li>Ransomware victims paid an estimated $1.1 billion in 2023 (Chainalysis).</li>
+  <li>Median dwell time before detection: 10 days (Mandiant M-Trends 2024).</li>
+</ul>
+
+<p><b>You should be able to explain:</b> why phishing remains effective despite decades of awareness training; the difference between a worm and a virus; why ransomware is fundamentally a business model.</p>
+
+<hr>
+
+<h2>Module 6 &mdash; Cryptography as a User</h2>
+
+<h3>The primitives</h3>
+<ul>
+  <li><b>Symmetric encryption</b> &mdash; one shared key. Standard: AES.</li>
+  <li><b>Asymmetric encryption</b> &mdash; keypair. RSA, ECC.</li>
+  <li><b>Hashing</b> &mdash; one-way fingerprint. SHA-256, SHA-3.</li>
+  <li><b>HMAC</b> &mdash; hashing with a secret key, for authentication.</li>
+  <li><b>Digital signatures</b> &mdash; combine asymmetric crypto and hashing.</li>
+</ul>
+
+<h3>Modes matter</h3>
+<ul>
+  <li>ECB mode leaks structure &mdash; never use it.</li>
+  <li>CBC mode is OK with proper IVs and padding.</li>
+  <li>GCM mode is the modern default &mdash; encryption + integrity.</li>
+</ul>
+
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Tux.jpg/240px-Tux.jpg" alt="Original Tux" width="180">
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Tux_ecb.jpg/240px-Tux_ecb.jpg" alt="Tux ECB" width="180">
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Tux_secure.jpg/240px-Tux_secure.jpg" alt="Tux secure" width="180"><br>
+<em>Original &mdash; ECB mode (structure leaks) &mdash; secure mode (looks like noise).</em></p>
+
+<h3>Public Key Infrastructure (PKI)</h3>
+<ul>
+  <li>Certificate Authorities sign certificates.</li>
+  <li>Browsers ship with a list of trusted root CAs.</li>
+  <li>TLS uses certificates to authenticate servers.</li>
+  <li>The chain of trust is what stops impersonation of bank.com.</li>
+</ul>
+
+<h3>Password storage</h3>
+<ul>
+  <li>Plain hashing is not enough &mdash; rainbow tables defeat it.</li>
+  <li>Use a <b>salt</b> &mdash; unique per user.</li>
+  <li>Use a <b>slow function</b> &mdash; bcrypt, scrypt, or Argon2.</li>
+</ul>
+
+<h3>Time to Crack an 8-Character Password (Brute Force)</h3>
+<table border="1" cellpadding="6">
+  <tr><th>Composition</th><th>Estimated time</th></tr>
+  <tr><td>Lowercase only</td><td>Seconds</td></tr>
+  <tr><td>Mixed case</td><td>Minutes</td></tr>
+  <tr><td>Mixed case + numbers</td><td>Hours</td></tr>
+  <tr><td>Mixed case + numbers + symbols</td><td>Days to weeks</td></tr>
+  <tr><td>Random 12+ char</td><td>Centuries</td></tr>
+</table>
+
+<p><b>Real-world application:</b> The 2012 LinkedIn breach exposed 117 million passwords stored as unsalted SHA-1 hashes. Within days, more than 90% were cracked. The same data still appears in credential-stuffing attacks today.</p>
+
+<p><b>You should be able to explain:</b> why ECB is broken with a single picture; why hashing alone is insufficient for password storage; what a Certificate Authority is actually attesting to.</p>
+
+<hr>
+
+<h2>Module 7 &mdash; Defending Systems and Networks</h2>
+
+<h3>Defense in depth</h3>
+<ul>
+  <li>No single mechanism is sufficient.</li>
+  <li>Assume any one layer will eventually fail.</li>
+  <li>Ask: what catches the attacker next?</li>
+</ul>
+
+<h3>Firewalls</h3>
+<ul>
+  <li>Packet filter &mdash; looks at each packet in isolation.</li>
+  <li>Stateful &mdash; tracks connections, allows reply traffic.</li>
+  <li>Application-layer &mdash; understands HTTP, DNS, etc.</li>
+  <li>On Linux: iptables / nftables.</li>
+</ul>
+
+<h3>IDS / IPS</h3>
+<ul>
+  <li><b>Signature-based</b> &mdash; matches known-bad patterns.</li>
+  <li><b>Anomaly-based</b> &mdash; flags unusual behavior.</li>
+  <li>Open-source standards: <b>Snort</b>, <b>Suricata</b>, <b>Zeek</b>.</li>
+</ul>
+
+<h3>Endpoint protection</h3>
+<ul>
+  <li>Classic AV &mdash; signature matching.</li>
+  <li>EDR &mdash; records process, network, file behavior; chains events.</li>
+  <li>XDR &mdash; extends across endpoint, network, cloud, identity.</li>
+</ul>
+
+<h3>SIEM and logging</h3>
+<ul>
+  <li>Centralize logs from across the environment.</li>
+  <li>Correlate events into alerts.</li>
+  <li>Common stacks: Wazuh, Elastic, Splunk.</li>
+</ul>
+
+<h3>Hardening and hygiene</h3>
+<ul>
+  <li>Disable services you do not use.</li>
+  <li>Patch promptly &mdash; most exploits target known CVEs.</li>
+  <li>Follow CIS benchmarks.</li>
+  <li>3-2-1 backup rule: 3 copies, 2 media, 1 off-site.</li>
+</ul>
+
+<h3>Identity is the new perimeter</h3>
+<ul>
+  <li>Multi-factor authentication &mdash; phishing-resistant where possible.</li>
+  <li>Least privilege.</li>
+  <li>Zero trust &mdash; authenticate every request, trust no network.</li>
+</ul>
+
+<h3>Mean Time to Identify and Contain a Breach (IBM 2024)</h3>
+<table border="1" cellpadding="6">
+  <tr><th>Stage</th><th>Days</th></tr>
+  <tr><td>Identify</td><td>194</td></tr>
+  <tr><td>Contain</td><td>64</td></tr>
+  <tr><td>Total lifecycle</td><td>258</td></tr>
+</table>
+
+<p><b>Real-world application:</b> Google's BeyondCorp project replaced VPN-based perimeter security with a zero-trust model after the 2009 Aurora attacks. Today, no Google employee is trusted by network location &mdash; only by identity, device posture, and request context.</p>
+
+<p><b>You should be able to explain:</b> why "we have a firewall" is not an answer to anything; what an EDR sees that an antivirus does not; the failure mode of an alerting system nobody reads.</p>
+
+<hr>
+
+<h2>Module 8 &mdash; Web Application Security</h2>
+
+<h3>How the web works (in 30 seconds)</h3>
+<ul>
+  <li>HTTP is stateless &mdash; request goes out, response comes back.</li>
+  <li>Cookies and sessions fake state on top of it.</li>
+  <li>Browsers enforce the <b>same-origin policy</b>.</li>
+  <li>CORS opens controlled holes in that policy.</li>
+</ul>
+
+<h3>OWASP Top 10 (2021)</h3>
+<ul>
+  <li>A01 &mdash; Broken Access Control.</li>
+  <li>A02 &mdash; Cryptographic Failures.</li>
+  <li>A03 &mdash; Injection (SQL, command, LDAP).</li>
+  <li>A04 &mdash; Insecure Design.</li>
+  <li>A05 &mdash; Security Misconfiguration.</li>
+  <li>A06 &mdash; Vulnerable &amp; Outdated Components.</li>
+  <li>A07 &mdash; Identification &amp; Auth Failures.</li>
+  <li>A08 &mdash; Software &amp; Data Integrity Failures.</li>
+  <li>A09 &mdash; Logging &amp; Monitoring Failures.</li>
+  <li>A10 &mdash; Server-Side Request Forgery (SSRF).</li>
+</ul>
+
+<h3>Attacks worth deep study</h3>
+<ul>
+  <li><b>SQL injection</b> &mdash; input becomes query syntax.</li>
+  <li><b>XSS</b> &mdash; input becomes script in someone else's browser.</li>
+  <li><b>CSRF</b> &mdash; victim's browser is tricked into sending an authenticated request.</li>
+  <li><b>SSRF</b> &mdash; server is tricked into making requests to internal targets.</li>
+  <li><b>IDOR</b> &mdash; change a URL ID, get someone else's data.</li>
+</ul>
+
+<h3>Web Vulnerability Frequency (HackerOne 2023)</h3>
+<table border="1" cellpadding="6">
+  <tr><th>Category</th><th>Share</th></tr>
+  <tr><td>XSS</td><td>21%</td></tr>
+  <tr><td>IDOR</td><td>17%</td></tr>
+  <tr><td>Information disclosure</td><td>14%</td></tr>
+  <tr><td>SQL injection</td><td>9%</td></tr>
+  <tr><td>SSRF</td><td>6%</td></tr>
+  <tr><td>CSRF</td><td>5%</td></tr>
+  <tr><td>Other</td><td>28%</td></tr>
+</table>
+
+<p><b>Real-world application:</b> The 2017 Equifax breach &mdash; 147 million records exposed &mdash; began with a single unpatched Apache Struts CVE on a public web app. Categorically: A06 (vulnerable components). One missed patch, $1.4 billion in penalties.</p>
+
+<p><b>You should be able to explain:</b> why the same-origin policy exists; what makes XSS different from SQLi in terms of who gets attacked; why prepared statements are not optional.</p>
+
+<hr>
+
+<h2>Module 9 &mdash; The Offensive Mindset</h2>
+
+<h3>The pentest methodology</h3>
+<ul>
+  <li><b>Reconnaissance</b> &mdash; gather public info, no contact.</li>
+  <li><b>Scanning</b> &mdash; probe for hosts and services.</li>
+  <li><b>Enumeration</b> &mdash; extract detail (versions, users, shares).</li>
+  <li><b>Exploitation</b> &mdash; turn vulnerability into access.</li>
+  <li><b>Post-exploitation</b> &mdash; persist, escalate, pivot.</li>
+  <li><b>Reporting</b> &mdash; where the actual value gets delivered.</li>
+</ul>
+
+<h3>Beginner-friendly platforms</h3>
+<ul>
+  <li><b>TryHackMe</b> &mdash; guided rooms, gentle ramp.</li>
+  <li><b>HackTheBox</b> &mdash; unguided machines, harder.</li>
+  <li><b>PortSwigger Web Academy</b> &mdash; best free web-exploit training.</li>
+  <li><b>PicoCTF</b> &mdash; gamified intro for younger learners.</li>
+  <li><b>OverTheWire</b> &mdash; Linux &amp; networking wargames.</li>
+</ul>
+
+<h3>The legal and ethical frame</h3>
+<ul>
+  <li>Test only systems you own or have explicit written permission for.</li>
+  <li>The Computer Fraud and Abuse Act (US) treats unauthorized access as a serious crime.</li>
+  <li>The line between "researcher" and "criminal" is paperwork.</li>
+</ul>
+
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Kali-dragon-icon.svg/240px-Kali-dragon-icon.svg.png" alt="Kali Linux" width="160"><br>
+<em>Kali Linux &mdash; the standard distribution for offensive work.</em></p>
+
+<p><b>Real-world application:</b> Bug bounty programs from Google, Microsoft, and Apple paid out over $250 million combined since inception. Researchers using only the platforms above have built six-figure incomes &mdash; the offensive mindset has a market.</p>
+
+<p><b>You should be able to explain:</b> the difference between a vulnerability scanner and a penetration test; why reporting is the hardest part; what "scope" means in an engagement.</p>
+
+<hr>
+
+<h2>Module 10 &mdash; Specialization Paths</h2>
+
+<h3>Where to go next</h3>
+<ul>
+  <li><b>Blue team</b> &mdash; SOC, IR, threat hunting, forensics.</li>
+  <li><b>Red team</b> &mdash; pentest, exploit dev, adversary emulation.</li>
+  <li><b>AppSec</b> &mdash; code review, threat modeling, SAST/DAST.</li>
+  <li><b>Cloud security</b> &mdash; AWS, Azure, GCP &mdash; each its own world.</li>
+  <li><b>GRC</b> &mdash; governance, risk, audit, compliance.</li>
+  <li><b>OT / ICS security</b> &mdash; industrial control, critical infrastructure.</li>
+</ul>
+
+<h3>First certifications worth pursuing</h3>
+<ul>
+  <li>Foundation: CompTIA Security+.</li>
+  <li>Offensive: eJPT, then PNPT or OSCP.</li>
+  <li>Defensive: BTL1, CySA+, GCIH.</li>
+  <li>Cloud: AWS Security Specialty, CCSP.</li>
+  <li>Senior: CISSP (after 5 years experience).</li>
+</ul>
+
+<h3>Median US Salary by Cybersecurity Role (Lightcast 2024)</h3>
+<table border="1" cellpadding="6">
+  <tr><th>Role</th><th>Median USD</th></tr>
+  <tr><td>SOC Analyst I</td><td>$72,000</td></tr>
+  <tr><td>Pentester</td><td>$119,000</td></tr>
+  <tr><td>Security Engineer</td><td>$128,000</td></tr>
+  <tr><td>AppSec Engineer</td><td>$142,000</td></tr>
+  <tr><td>Cloud Security Engineer</td><td>$148,000</td></tr>
+  <tr><td>CISO</td><td>$235,000</td></tr>
+</table>
+
+<p><b>Career outlook:</b></p>
+<ul>
+  <li>BLS projects 32% growth in information security analyst roles 2022&ndash;2032.</li>
+  <li>~3.5 million unfilled roles globally (ISC2 2024).</li>
+  <li>Median US base salary: $120,360 (BLS 2023).</li>
+</ul>
+
+<h3>Operating principles</h3>
+<ul>
+  <li>Read the documentation before the blog post.</li>
+  <li>Build the lab before the writeup.</li>
+  <li>Write up everything as if teaching it.</li>
+  <li>Stay legal &mdash; always.</li>
+  <li>The field rewards persistence over talent.</li>
+</ul>
+
+</body>
+</html>

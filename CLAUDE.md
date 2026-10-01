@@ -14,6 +14,35 @@ tool, not a resume showcase — don't fold its content into this repo, cross-lin
   `id, title, category, date, semester, course, summary, metrics[], tags[], media, links, featured`.
   Top-level `lastUpdated` (YYYY-MM-DD) drives the footer's "Last updated" text — bump it
   alongside content changes instead of hand-editing the footer.
+- **`date` = the date of the underlying work itself** — when the lab / project /
+  assignment was actually done or submitted (from the file's own date), **not** the day
+  the card was added to this site. All grids are date-sorted, **newest first by default**
+  (the Sort control only switches to oldest-first); there is no "curated array order"
+  view any more, so `date` must be accurate.
+- **Collection cards** (added 2026-09-09): a card with `"kind": "collection"` renders
+  with a standout full-width copper frame + "Ongoing collection" badge, and shows a
+  `downloads: [{label, type, size, date, source, path}]` list instead of a single
+  `pdfReport` button. `"pinned": true` floats it to the top of its grid ahead of the
+  date-sorted cards.
+  - **GLOBAL RULE (Jared, 2026-09-21): documents the browser can render open in-page,
+    never as a raw download.** `grid.js` picks behavior per entry from `path`'s
+    extension: `.pdf` → opens in the existing in-page PDF viewer (same modal as
+    `links.pdfReport`, via `openPdfViewer(path, label)`); `.png`/`.jpg`/`.jpeg` → opens
+    in the lightbox (`openLightbox`). Both render as a `<button class="download-item
+download-item--view">`, not an `<a>`, and never carry the `download` attribute.
+    `.py` source opens in an in-page code viewer (`openCodeViewer`, fetched as text into the
+    shared `#pdf-viewer` dialog). `links.video` plays in-page too (`openVideoViewer`: local
+    `.mp4` in a `<video>`, YouTube via a youtube-nocookie iframe; other hosts stay links). Only
+    formats the browser genuinely can't render fall back to a real `<a download>` —
+    currently just Cisco Packet Tracer's `.pka`/`.pkt` (2026-09-29). Don't add a new non-`.pdf`/image download type without checking
+    whether it can be embedded first.
+  - Used for the TECH 65 Packet Tracer file archive (`.pka`/`.pkt`, the deliberate
+    download exception) — one collection card per class holds every Packet Tracer file
+    for that class; individual lab cards stay normal and reference it. Files under
+    `public/documents/<course>/packet-tracer/`. See `[[portfolio-packet-tracer-files]]`.
+    The same collection pattern (now embedded, not download) also holds TECH 65's
+    Wireshark labs, TECH 65's switch-configuration labs, TECH 60's circuit-analysis
+    labs, and each class's Assignments set.
 - `category` is rendered through a fixed order in `app.js` (`CATEGORY_ORDER` /
   `CATEGORY_LABELS`): `Credential` → `Project` → `Lab` → `Coursework`. Only `Credential`
   and `Project` have real entries as of 2026-08-12; `Lab` and `Coursework` are reserved
@@ -58,7 +87,7 @@ deploy** → copy into `public/documents/[semester]/[course]/` and `public/image
 1. **Cybersecurity Fundamentals Python Toolkit** — source:
    `D:\School Backup\Personal - Jared Lomeli\Extra curricular\Cybersecurity fundamentals\Python Code`.
    ⚠️ Fix before ingesting: hardcoded OneDrive paths in two scripts, and the test
-   password `"Aliciacarlyle123!"` in `Password Strength Checker.py` — genericize it.
+   password `[redacted]` in `Password Strength Checker.py` — genericize it.
 2. **Segmented Enterprise Network Lab (Packet Tracer)** — source:
    `D:\Projects\GitHub\packet-tracer-security-plus-lab` (has `topology.png`).
 3. **Kali/Metasploitable/Wazuh SIEM Lab Series** — source: `D:\Projects\GitHub\linux-learning`
@@ -184,3 +213,113 @@ instead of leaving `media: null`; swap it for a real `type: "image"` entry once 
 provides one. No image capture tooling (browser/OS screenshot) was available this
 session — a synthetic rendered "terminal output" graphic was offered as an alternative
 but Jared preferred the placeholder and a real screenshot later.
+
+**2026-09-07 — large session: filters, three new pages, three new Lab entries, dark
+mode, and bio-text updates.** Purpose of the project was clarified this session: it's
+an active documentation project for Jared's entire undergrad career (through expected
+graduation June 2029), covering all coursework/projects/extracurriculars, big and
+small — but the site's recruiter-facing resume framing (see top of this file) stays
+intentional, not a mismatch to fix. "Personal use only" means no one else will likely
+view the live site, not that the tone should change.
+
+- **`HighlightGrid` filtering** — new `#filter-bar`/`#filter-panel` dropdown in
+  `index.html`, driven by `appState.filters` in `app.js` (`getFilteredHighlights`,
+  `sortHighlightsByDate`, rewritten `renderHighlightGrid`). Three combinable filters:
+  Type (multi-select checkboxes, one per category via `getAllFilterableCategories` —
+  includes categories with zero entries so far, e.g. Assignment), a date range
+  (native `<input type="date">` From/To), and a chronological/reverse-chronological
+  sort. Category headings stay grouped whenever the Type filter is active (or when no
+  filter at all is active — the original curated view); with Type inactive, a
+  date-range and/or sort selection instead flattens into one ungrouped, date-sorted
+  list. Added a new `Assignment` category (`CATEGORY_ORDER`/`CATEGORY_LABELS`) even
+  though no entries use it yet, so it's ready in the Type filter.
+- **New `Lab` category populated for the first time** — 3 entries added to
+  `data/highlights.json`: TECH 60 Lab 0 (resistor color codes, DMM verification),
+  TECH 60 Lab 1 (LED circuit, Kirchhoff's Voltage Law), and TECH 65 Lab 2 (configuring
+  a Cisco switch via console). Source docs copied into
+  `public/documents/tech-60/lab-{0,1}.pdf` and
+  `public/documents/tech-65/lab-2-switch-console.docx`. The TECH 65 entry uses a real
+  screenshot from Jared's actual submission (extracted from the source .docx's
+  embedded media, confirmed with Jared which images were his real terminal output vs.
+  the assignment template's stock diagrams) at
+  `public/images/tech65-lab2-switch-config.png`; the two TECH 60 entries still use
+  `media.type: "placeholder"` — real photos exist in their source PDFs but weren't
+  extracted this session. TECH 65 Lab 1 intentionally not added yet (TBD per Jared).
+- **Résumé flow changed** — `public/Jared-Lomeli-Resume.pdf` replaced with
+  `Jared_Lomeli_CNSM_v6.pdf`. The hero's Résumé button no longer downloads directly;
+  it now opens new `public/resume.html` (inline PDF preview via `<iframe>` +
+  "Download PDF" button), matching the site's existing "internal document link opens
+  in a new tab" convention used elsewhere for write-ups/case studies.
+- **New `public/contact.html`** — hero's Email button now opens this page instead of
+  a direct `mailto:`. Lists two addresses, School (`jared.lomeli@sjsu.edu`) and
+  Professional (`jaredlomelicnsm@gmail.com`), each with its own `mailto:` button.
+- **New `public/transcript.html` + hero "Transcript" button** — same pattern as
+  `resume.html` (topbar, dek, dark-mode toggle), but the document doesn't exist yet:
+  shows a dashed-border placeholder instead of an iframe. Has an inline HTML comment
+  documenting exactly how to wire up the real PDF once Jared provides it (mirror
+  resume.html's iframe + Download PDF button).
+- **Dark mode** — new `theme.js` (repo root, sibling to `app.js`/`style.css`) applies
+  a `data-theme` attribute from `localStorage` before first paint (no flash) and
+  wires any `[data-theme-toggle]` button. `style.css` gained dark-mode token
+  overrides both via `:root[data-theme="dark"]` (explicit toggle) and
+  `@media (prefers-color-scheme: dark)` (system default when no explicit choice
+  stored yet) — same variable names, so every page/case-study that already uses the
+  CSS custom properties inherits it automatically. Toggle button (`.theme-toggle-fixed`
+  in `style.css`, `position: fixed; top/right: 1rem`) added to `index.html`,
+  `resume.html`, `contact.html`, and `transcript.html` — fixed to the top-right corner
+  of the viewport on each page, stays put while scrolling, not part of the normal
+  button rows. Not added to
+  the pre-existing case-study pages (`public/case-studies/*.html`) this
+  session — they still get dark mode for free via `prefers-color-scheme`, just no
+  manual toggle control on those specific pages yet.
+- **Bio text updated sitewide** (hero tagline, footer, `resume.html` dek, meta
+  descriptions, JSON-LD `jobTitle`) to mention the Business Management minor, and the
+  footer GPA corrected from 3.97 to 3.96. Hero's "Currently" line expanded from 2 to
+  all 6 Fall 2026 classes: TECH 60 (Introduction to Electronics), TECH 30
+  (Introduction to Python Programming), TECH 15 (Careers in Engineering Technology),
+  TECH 65 (Introduction to Networks), BUS2 90 (Business Statistics), and POLS C1000
+  at West Valley College.
+- **Test suite grew from 7 to 13 tests** — added a `filters` describe block in
+  `tests/smoke.spec.js` covering the toggle open/close, Type-filter narrowing,
+  date-range filtering, sort ordering, the empty-results state, and Clear filters.
+  Confirmed one pre-existing flaky test (`lightbox modal › opens on card image
+click`, skips if `.highlight-card-media img` isn't in the DOM yet at test start) —
+  not new, not caused by this session's changes, just a `count()`-vs-async-render
+  race in a test that predates this session.
+- **Left an HTML comment in `index.html`** (inside `#highlight-grid`) noting the idea
+  Jared liked: populate the `Coursework`/`Assignment` categories with smaller
+  individual class assignments going forward — both are already fully wired up, just
+  need entries in `data/highlights.json`.
+- Session ran entirely on the F: drive at Jared's explicit request (no edits to C:/D:/E:
+  drives); a Vercel CLI device-login flow attempted in this environment failed to
+  authenticate genuinely (reported false "signed in" success, `vercel whoami` kept
+  returning `Not authorized`) — nothing from this session has been deployed yet.
+
+**Ready to deploy — for the next session.** All 2026-09-07 changes above are complete
+and verified locally (13/13 Playwright tests passing via `npm run test:e2e`). Nothing
+is pending that blocks a deploy.
+
+- **Deploy command:** `vercel deploy --prod`, run from this repo's root. The project
+  is already linked — `.vercel/project.json` has `projectId: prj_IjBiqkGmsUfFSb4sFFazaELNiiPR`,
+  `orgId: team_XxEmKd5HvgOZVe26WI9bmjvF` — so `vercel link` is not needed.
+  `vercel.json` still correctly pins `"outputDirectory": "."` (needed because a
+  `public/` folder exists — see the 2026-08-08 deploy note above for why).
+- **Auth, if it's still broken:** this session's sandboxed environment could not
+  complete a real Vercel login — `vercel login`'s device-code flow reported false
+  "Congratulations! You are now signed in" success twice, but `vercel whoami`
+  immediately went back to `Error: Not authorized` both times. If a fresh session
+  hits the same thing, don't keep retrying the same flow. Two working alternatives:
+  (a) run `vercel login` in Jared's own terminal outside Claude Code and complete it
+  for real in a browser, or (b) have Jared generate a token at
+  vercel.com/account/tokens and deploy non-interactively with
+  `vercel deploy --prod --token=<token>`.
+- **Open follow-ups, not blockers, just not forgotten:**
+  - TECH 60 Lab 0/1 (`data/highlights.json`) still use `media.type: "placeholder"`.
+    Real photos exist in `public/documents/tech-60/lab-{0,1}.pdf` if Jared wants one
+    extracted and swapped in.
+  - `public/transcript.html` is a placeholder page — Jared said he'll provide the
+    actual transcript PDF later; see the inline HTML comment in that file for exactly
+    what to change.
+  - The two TECH 60 lab summaries publicly name Jared's lab partners (two classmates) — flagged to Jared, not yet confirmed as okay.
+  - POLS C1000's full course title is still unknown — Jared said leave it as a bare
+    code for now.

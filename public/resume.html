@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="../theme.js"></script>
+    <title>Résumé — Jared Lomeli</title>
+    <meta
+      name="description"
+      content="Jared Lomeli's résumé — CompTIA Security+ certified SJSU Engineering Technology (CNSM) student with a minor in Business Management, seeking IT Support, Network/NOC, and SOC Analyst opportunities."
+    />
+    <link rel="stylesheet" href="../style.css" />
+    <style>
+      .resume-page {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 3rem 1.5rem 5rem;
+      }
+
+      .resume-back {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        font-family: var(--font-mono);
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        text-decoration: none;
+        margin-bottom: 2rem;
+      }
+
+      .resume-back:hover {
+        color: var(--accent-color);
+      }
+
+      .resume-eyebrow {
+        font-family: var(--font-mono);
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        font-size: 0.8rem;
+        color: var(--accent-color);
+        margin: 0 0 0.6rem;
+      }
+
+      .resume-title {
+        font-size: clamp(1.7rem, 4vw, 2.3rem);
+        font-weight: 700;
+        line-height: 1.15;
+        margin: 0 0 0.9rem;
+      }
+
+      .resume-dek {
+        color: var(--text-muted);
+        font-size: 1.05rem;
+        margin: 0 0 1.5rem;
+      }
+
+      .resume-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        margin-bottom: 2rem;
+      }
+
+      .resume-frame-wrap {
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        box-shadow: var(--shadow-card);
+        overflow: hidden;
+        background: var(--bg-surface-hover);
+      }
+
+      #resume-frame {
+        display: block;
+        width: 100%;
+        height: 85vh;
+        border: none;
+        background: white;
+      }
+
+      .resume-fallback {
+        padding: 1.5rem;
+        text-align: center;
+        color: var(--text-muted);
+        font-size: 0.9rem;
+      }
+
+      .resume-footer {
+        margin-top: 3rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid var(--border-color);
+      }
+    </style>
+  </head>
+  <body>
+    <button type="button" class="btn theme-toggle-fixed" data-theme-toggle>
+      Dark Mode
+    </button>
+    <div class="resume-page">
+      <a class="resume-back" href="/">&larr; Back to Portfolio</a>
+
+      <p class="resume-eyebrow">Résumé</p>
+      <h1 class="resume-title">Jared Lomeli</h1>
+      <p class="resume-dek">
+        CompTIA Security+ certified · B.S. Engineering Technology (CNSM), Minor
+        in Business Management, San José State University — seeking IT Support,
+        Network/NOC, and SOC Analyst opportunities.
+      </p>
+
+      <div class="resume-actions">
+        <a
+          class="btn btn-primary"
+          href="/public/Jared-Lomeli-Resume.pdf"
+          download
+          >Download PDF</a
+        >
+        <a class="btn btn-outline" href="mailto:jared.lomeli@sjsu.edu"
+          >Email Jared</a
+        >
+      </div>
+
+      <div class="resume-frame-wrap">
+        <iframe
+          id="resume-frame"
+          src="/public/Jared-Lomeli-Resume.pdf"
+          title="Jared Lomeli Résumé"
+          loading="lazy"
+        ></iframe>
+        <p class="resume-fallback">
+          If the résumé doesn't display above,
+          <a href="/public/Jared-Lomeli-Resume.pdf">open it directly</a>.
+        </p>
+      </div>
+
+      <div class="resume-footer">
+        <a class="resume-back" href="/">&larr; Back to Portfolio</a>
+      </div>
+    </div>
+    <script src="/search.js"></script>
+  </body>
+</html>

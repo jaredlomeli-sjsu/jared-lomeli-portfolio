@@ -1,7 +1,8 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "version": "1.0.0",
-  "lastUpdated": "2026-08-12",
+  "lastUpdated": "2026-09-30",
+  "_dateNote": "An item's `date` is the date of the underlying work itself (when the lab/project/assignment was done or submitted), NOT the date the card was added to this site. Grids are sorted newest-first by this date.",
   "highlights": [
     {
       "id": "hl-2026-comptia-security-plus",
@@ -11,7 +12,7 @@
       "starred": true,
       "semester": null,
       "course": null,
-      "summary": "CompTIA Security+ ce (SY0-701) certification, valid through July 2029 — the exam I built an 800-question interactive study guide for while preparing (see below).",
+      "summary": "CompTIA Security+ ce (SY0-701) — a foundational, vendor-neutral certification validating baseline skills across security operations, threats and vulnerabilities, security architecture, and governance, risk, and compliance. Included on the DoD 8140 approved baseline list. Earned July 2026, valid through July 2029.",
       "metrics": [
         "90 questions, 90 minutes, 750-of-900 to pass",
         "5 weighted domains: General Security Concepts, Threats/Vulnerabilities/Mitigations, Security Architecture, Security Operations, Security Program Management",
@@ -28,20 +29,255 @@
       "links": {
         "github": null,
         "liveDemo": null,
-        "pdfReport": null,
+        "pdfReport": "/public/documents/credentials/comptia-security-plus-ce-certificate.pdf",
         "verify": "https://cp.certmetrics.com/CompTIA/en/public/verify/credential/425e1ca8051246a4b59ecdc016009659"
       },
       "featured": true
     },
     {
-      "id": "hl-2026-cisco-linux-unhatched",
+      "id": "hl-2026-cisco-linux-unhatched-cert",
       "title": "Cisco NDG Linux Unhatched",
       "category": "Credential",
+      "date": "2026-07-06",
+      "starred": false,
+      "semester": null,
+      "course": "Cisco Networking Academy",
+      "summary": "Student-level Statement of Achievement from Cisco Networking Academy (in collaboration with NDG) for completing Linux Unhatched — a free, self-paced introduction to the Linux command line taught in a browser-based lab on a live Linux VM. Covers filesystem navigation, file and directory operations, searching and extracting data from files, basic shell scripting, users, permissions and ownership, and querying network configuration.",
+      "metrics": [
+        "9 assessed competencies across CLI navigation, file operations, text search/extraction, scripting, users, permissions, and network config",
+        "Self-paced, browser-based labs on a live Linux VM — no local install",
+        "Issued July 2026 by Cisco Networking Academy, verifiable via Credly"
+      ],
+      "tags": ["Linux", "Cisco", "NDG", "Certificate", "Command Line"],
+      "media": {
+        "type": "image",
+        "localSourcePath": "/public/images/linux-unhatched-cert.png",
+        "altText": "Cisco Networking Academy / NDG Statement of Achievement certifying Jared Lomeli completed the Linux Unhatched course, issued July 6, 2026, listing nine Linux command-line competencies",
+        "width": 1901,
+        "height": 1469
+      },
+      "links": {
+        "github": null,
+        "liveDemo": null,
+        "pdfReport": null,
+        "verify": "https://www.credly.com/badges/ea74e248-2db2-47c0-b0b0-e375b6a3d6b4/public_url"
+      },
+      "featured": false
+    },
+    {
+      "id": "hl-2026-kaggle-google-ai-agents-vibe-coding",
+      "title": "5-Day AI Agents: Intensive Vibe Coding Course",
+      "category": "Credential",
+      "date": "2026-07-30",
+      "starred": false,
+      "semester": null,
+      "course": "Kaggle & Google",
+      "summary": "Completion badge for the Kaggle x Google 5-Day AI Agents intensive — a hands-on cohort course on designing, building, and evaluating LLM agent systems (tool use, multi-agent orchestration, memory, and guardrails), taught \"vibe coding\" style with AI-assisted implementation. Completed with a submitted capstone: the Nexus Technologies IT Helpdesk Triage Agent (see Extra Curricular → Educational).",
+      "metrics": [
+        "5-day instructor-led cohort with daily hands-on agent-building assignments",
+        "Capstone submitted and reviewed — a multi-agent IT helpdesk triage system on Google ADK 2.0",
+        "Badge issued July 30, 2026 by Kaggle and Google"
+      ],
+      "tags": ["AI Agents", "Kaggle", "Google", "LLM", "Certificate"],
+      "media": {
+        "type": "image",
+        "localSourcePath": "/public/images/kaggle-google-ai-agents-vibe-coding-badge.png",
+        "altText": "Kaggle and Google certificate stating Jared Lomeli earned the 5-Day AI Agents: Intensive Vibe Coding Course badge on July 30, 2026",
+        "width": 1600,
+        "height": 987
+      },
+      "links": {
+        "github": null,
+        "liveDemo": null,
+        "pdfReport": null,
+        "verify": "https://www.kaggle.com/jaredlomeli"
+      },
+      "featured": false
+    },
+    {
+      "id": "hl-2025-cisco-intro-to-cybersecurity",
+      "title": "Cisco Introduction to Cybersecurity",
+      "category": "Credential",
+      "date": "2025-09-20",
+      "starred": false,
+      "semester": null,
+      "course": "Cisco Networking Academy",
+      "summary": "Student-level Certificate of Course Completion from Cisco Networking Academy for the Introduction to Cybersecurity course — a foundational, self-paced overview of what cybersecurity is and why it matters, the most common threats, attacks, and vulnerabilities, how to protect yourself and an organization online, and the range of career paths in the field.",
+      "metrics": [
+        "5 course competencies — online safety, common threats/attacks/vulnerabilities, personal protection, organizational defense, and cybersecurity careers",
+        "Self-paced Cisco Networking Academy course, browser-based",
+        "Issued September 2025 by Cisco Networking Academy"
+      ],
+      "tags": ["Cybersecurity", "Cisco", "Fundamentals", "Certificate"],
+      "media": {
+        "type": "image",
+        "localSourcePath": "/public/images/intro-to-cybersecurity-cert.png",
+        "altText": "Cisco Networking Academy Certificate of Course Completion certifying Jared Lomeli completed the Introduction to Cybersecurity course, issued September 20, 2025",
+        "width": 1901,
+        "height": 1469
+      },
+      "links": {
+        "github": null,
+        "liveDemo": null,
+        "pdfReport": null,
+        "verify": "https://www.credly.com/badges/0060d1cd-9a1b-46fa-b021-89225f4b19de"
+      },
+      "featured": false
+    },
+    {
+      "id": "hl-2026-ibm-cybersecurity-fundamentals",
+      "title": "IBM Cybersecurity Fundamentals",
+      "category": "Credential",
+      "date": "2026-06-25",
+      "starred": false,
+      "semester": null,
+      "course": "IBM SkillsBuild",
+      "summary": "IBM SkillsBuild digital credential for the Cybersecurity Fundamentals learning path — a foundational course on core security concepts, common attack types and vulnerabilities, defensive practices across networks and endpoints, and the roles that make up a security team. Issued as a Credly-verifiable badge.",
+      "metrics": [
+        "IBM SkillsBuild learning path covering foundational cybersecurity concepts, threats, and defenses",
+        "Digital badge issued June 25, 2026 by IBM SkillsBuild",
+        "Publicly verifiable on Credly"
+      ],
+      "tags": [
+        "Cybersecurity",
+        "IBM",
+        "IBM SkillsBuild",
+        "Fundamentals",
+        "Certificate"
+      ],
+      "media": {
+        "type": "image",
+        "localSourcePath": "/public/images/ibm-cybersecurity-fundamentals-cert.png",
+        "altText": "IBM SkillsBuild certificate recognizing Jared Lomeli for completing the Cybersecurity Fundamentals credential, issued June 25, 2026",
+        "width": 2060,
+        "height": 1592
+      },
+      "links": {
+        "github": null,
+        "liveDemo": null,
+        "pdfReport": null,
+        "verify": "https://www.credly.com/badges/f66f2949-cdfe-43cc-9e39-96d1f2e7cca7"
+      },
+      "featured": false
+    },
+    {
+      "id": "hl-2026-claude-code-in-action",
+      "title": "Claude Code in Action",
+      "category": "Credential",
+      "date": "2026-07-05",
+      "starred": false,
+      "semester": null,
+      "course": "Anthropic Education",
+      "summary": "Certificate of completion from Anthropic Education for Claude Code in Action — a course on working with Claude Code, Anthropic's agentic coding tool for the terminal. Covers driving the agent across a real codebase: multi-step edits, context management, tool and MCP use, and custom commands and hooks.",
+      "metrics": [
+        "Anthropic-authored course on Claude Code, the agentic CLI coding tool",
+        "Real-codebase workflows: multi-file edits, context control, MCP tools, custom commands and hooks",
+        "Completed July 5, 2026 — verifiable via Anthropic Education (Skilljar)"
+      ],
+      "tags": [
+        "Claude Code",
+        "Anthropic",
+        "AI Tooling",
+        "Developer Tools",
+        "Certificate"
+      ],
+      "media": {
+        "type": "image",
+        "localSourcePath": "/public/images/claude-code-in-action-cert.png",
+        "altText": "Anthropic Certificate of Completion stating Jared Lomeli has completed Claude Code in Action",
+        "width": 2376,
+        "height": 1836
+      },
+      "links": {
+        "github": null,
+        "liveDemo": null,
+        "pdfReport": null,
+        "verify": "https://verify.skilljar.com/c/myxc4xmnosh8"
+      },
+      "featured": false
+    },
+    {
+      "id": "hl-2026-claude-cowork-intro",
+      "title": "Introduction to Claude Cowork",
+      "category": "Credential",
+      "date": "2026-07-01",
+      "starred": false,
+      "semester": null,
+      "course": "Anthropic Education",
+      "summary": "Certificate of completion from Anthropic Education for Introduction to Claude Cowork — a course teaching non-technical knowledge workers how to delegate multi-step tasks and automate workflows using Claude's desktop and cloud agent capabilities.",
+      "metrics": [
+        "Introductory Anthropic course on Claude Cowork for non-technical knowledge workers",
+        "Focus on delegating multi-step tasks and automating workflows with Claude's desktop and cloud agents",
+        "Completed July 1, 2026 — verifiable via Anthropic Education (Skilljar)"
+      ],
+      "tags": [
+        "Claude Cowork",
+        "Anthropic",
+        "AI Tooling",
+        "Automation",
+        "Certificate"
+      ],
+      "media": {
+        "type": "image",
+        "localSourcePath": "/public/images/claude-cowork-intro-cert.png",
+        "altText": "Anthropic Certificate of Completion stating Jared Lomeli has completed Introduction to Claude Cowork",
+        "width": 2376,
+        "height": 1836
+      },
+      "links": {
+        "github": null,
+        "liveDemo": null,
+        "pdfReport": null,
+        "verify": "https://verify.skilljar.com/c/tfawnaarv3fb"
+      },
+      "featured": false
+    },
+    {
+      "id": "hl-2026-thinkcloudly-cybersecurity-bootcamp",
+      "title": "Cybersecurity Bootcamp — ThinkCloudly",
+      "category": "Credential",
+      "date": "2026-06-29",
+      "starred": false,
+      "semester": null,
+      "course": "ThinkCloudly",
+      "summary": "Certificate of participation from ThinkCloudly for a Cybersecurity bootcamp held June 25-29, 2026 — 5 hours of instructor-led training, awarding 5 CPE credits.",
+      "metrics": [
+        "5 hours of instructor-led cybersecurity training over 5 days (June 25-29, 2026)",
+        "5 CPE (Continuing Professional Education) credits",
+        "Certificate of participation No. TC-072026-1V084FC-34330, issued by ThinkCloudly"
+      ],
+      "tags": [
+        "Cybersecurity",
+        "ThinkCloudly",
+        "Bootcamp",
+        "CPE",
+        "Certificate"
+      ],
+      "media": {
+        "type": "image",
+        "localSourcePath": "/public/images/thinkcloudly-cybersecurity-cert.png",
+        "altText": "ThinkCloudly Certificate of Participation stating Jared Lomeli attended a 5-hour Cybersecurity bootcamp held June 25 to 29, 2026",
+        "width": 2526,
+        "height": 1786
+      },
+      "links": {
+        "github": null,
+        "liveDemo": null,
+        "pdfReport": null,
+        "verify": null
+      },
+      "featured": false
+    },
+    {
+      "id": "hl-2026-linux-unhatched-writeup",
+      "title": "Linux Unhatched — Command Reference & Write-Up",
+      "category": "Extra Curricular",
+      "subcategory": "Educational",
       "date": "2026-07-07",
       "starred": false,
       "semester": null,
       "course": "Cisco Networking Academy (NDG)",
-      "summary": "Course report and command reference for Linux Unhatched, a free 8-hour self-paced Cisco Networking Academy course. Written up from my own course notes, with dual sysadmin-vs-cybersecurity context for each command since I was studying toward Security+ (SY0-701) at the same time.",
+      "summary": "A self-directed study write-up from Cisco's free 8-hour Linux Unhatched course — a structured command reference covering 26 commands across 6 categories, each with syntax, key flags, a worked example, and dual sysadmin-vs-cybersecurity context, plus a condensed cheat sheet. Compiled from my own course notes and mapped to current Security+ (SY0-701) exam domains.",
       "metrics": [
         "26 commands/concepts across 6 categories, each with syntax, key flags, a worked example, and sysadmin vs. cybersecurity context",
         "Condensed command cheat sheet for fast reference",
@@ -60,12 +296,66 @@
         "liveDemo": "/public/documents/self-study/cisco-linux-unhatched/course-report.html",
         "pdfReport": null
       },
+      "featured": false,
+      "subsubcategory": "Extra"
+    },
+    {
+      "id": "hl-2026-secplus-study-materials",
+      "title": "Security+ SY0-701 — Study Materials & Gap Analyses",
+      "category": "Extra Curricular",
+      "subcategory": "Educational",
+      "subsubcategory": "Extra",
+      "date": "2026-07-16",
+      "starred": false,
+      "semester": null,
+      "course": "CompTIA Security+ SY0-701 Prep",
+      "kind": "collection",
+      "pinned": false,
+      "summary": "Study notes and coverage audits produced while preparing for the CompTIA Security+ (SY0-701) exam: a printed chapter-notes export from the study guide I built, plus two gap analyses that diff that guide's glossary and content against the official CompTIA exam objectives (v5.0) and acronym list.",
+      "metrics": [
+        "3 documents — Chapters 1–2 study notes (Security Basics & Identity and Access Management) and two gap analyses",
+        "Round 2 gap analysis checked all 477 named exam-objective items against the glossary and full site text: 63% were glossary headwords and only 48 (10%) were absent from the entire site",
+        "The glossary analysis diffed a 625-entry glossary against the exam objectives and the ~322-item official acronym appendix and ranked the gaps into three priority tiers"
+      ],
+      "tags": [
+        "Security+",
+        "SY0-701",
+        "Study Notes",
+        "Gap Analysis",
+        "Exam Prep"
+      ],
+      "media": null,
+      "downloads": [
+        {
+          "label": "Chapters 1–2 Study Notes — Security Basics & Identity and Access Management",
+          "type": "PDF",
+          "size": "925 KB",
+          "date": "2026-07-16",
+          "path": "/public/documents/security-plus/ch-1-2-security-basics-and-iam-notes.pdf"
+        },
+        {
+          "label": "Glossary Coverage Gap Analysis",
+          "type": "PDF",
+          "size": "65 KB",
+          "date": "2026-07-15",
+          "path": "/public/documents/security-plus/glossary-gap-analysis.pdf"
+        },
+        {
+          "label": "Gap Analysis Round 2 — Post-Update Verification",
+          "type": "PDF",
+          "size": "73 KB",
+          "date": "2026-07-15",
+          "path": "/public/documents/security-plus/gap-analysis-round-2.pdf"
+        }
+      ],
+      "links": {},
       "featured": false
     },
     {
       "id": "hl-2026-secplus-study-guide",
       "title": "Security+ SY0-701 Interactive Study Guide",
-      "category": "Project",
+      "category": "Extra Curricular",
+      "subcategory": "Educational",
       "date": "2026-06-17",
       "starred": true,
       "semester": null,
@@ -96,7 +386,8 @@
         "liveDemo": "https://securityplus-studyguide.vercel.app",
         "pdfReport": null
       },
-      "featured": true
+      "featured": true,
+      "subsubcategory": "Extra"
     },
     {
       "id": "hl-2026-soc-dashboard-grafana",
@@ -211,11 +502,12 @@
     {
       "id": "hl-2026-nexus-helpdesk-triage-agent",
       "title": "Nexus Technologies IT Helpdesk Triage Agent",
-      "category": "Project",
+      "category": "Extra Curricular",
+      "subcategory": "Educational",
       "date": "2026-07-18",
       "semester": null,
-      "course": "Google / Kaggle 5-Day Generative AI Intensive — Capstone (Agents for Business track)",
-      "summary": "Multi-agent IT helpdesk triage system built on Google ADK 2.0 that routes support tickets to one of three paths: instant auto-resolve via keyword matching, security escalation via prompt-injection/phishing screening before any LLM call, or human review with two Gemini agents drafting a response. Includes a custom MCP tool server and a FastAPI supervisor dashboard. Built as the capstone for the Google/Kaggle 5-Day AI Agents Intensive.",
+      "course": "Capstone project — Kaggle & Google 5-Day AI Agents intensive",
+      "summary": "Multi-agent IT helpdesk triage system built on Google ADK 2.0 that routes support tickets to one of three paths: instant auto-resolve via keyword matching, security escalation via prompt-injection/phishing screening before any LLM call, or human review with two Gemini agents drafting a response. Includes a custom MCP tool server and a FastAPI supervisor dashboard. Built as the capstone project for a Kaggle & Google 5-day AI agents intensive.",
       "metrics": [
         "3-way ticket routing (auto-resolve / security-escalate / human-review)",
         "17 unit tests, no API key required",
@@ -228,8 +520,7 @@
         "MCP",
         "FastAPI",
         "AI Agents",
-        "Security",
-        "AI Agents Intensive Badge"
+        "Security"
       ],
       "media": {
         "type": "image",
@@ -241,15 +532,16 @@
       "links": {
         "github": "https://github.com/jaredlomeli-sjsu/google-kaggle-5day-intensive",
         "liveDemo": "https://www.kaggle.com/code/jaredlomeli/nexusbot-v4",
-        "pdfReport": null,
-        "verify": "https://kaggle.com/jaredlomeli"
+        "pdfReport": null
       },
-      "featured": true
+      "featured": true,
+      "subsubcategory": "Extra"
     },
     {
       "id": "hl-2026-cybersecurity-python-toolkit",
       "title": "Cybersecurity Python Toolkit",
-      "category": "Project",
+      "category": "Extra Curricular",
+      "subcategory": "Educational",
       "date": "2026-05-11",
       "semester": null,
       "course": null,
@@ -273,15 +565,441 @@
         "pdfReport": null,
         "caseStudy": "/public/case-studies/python-toolkit.html"
       },
-      "featured": true
+      "featured": true,
+      "subsubcategory": "Extra"
+    },
+    {
+      "id": "hl-2026-ice-ev-engine-explorer",
+      "title": "ICE vs. EV Engine Explorer",
+      "category": "Extra Curricular",
+      "subcategory": "Educational",
+      "date": "2026-04-24",
+      "semester": null,
+      "course": "Self-directed — extended from a Physics 2A final project",
+      "summary": "A self-built interactive learning site and narrated video on why internal combustion engines lose roughly 80% of their fuel energy to heat, built around a 2021 Dodge Charger R/T 5.7L HEMI V8 and compared against EV thermal management using Phase Change Materials. The centerpiece is an embedded 3D engine explorer with a live part-info panel and a quiz mode. It began as a Physics 2A final project and was carried further as an independent web build.",
+      "metrics": [
+        "Interactive 3D ICE vs. EV engine explorer with a live part-info panel and quiz mode",
+        "9-part narrated video walkthrough",
+        "Companion site built with vanilla web tech and published live"
+      ],
+      "tags": ["Web Design", "Interactive", "Thermodynamics", "Physics"],
+      "media": {
+        "type": "image",
+        "localSourcePath": "/public/images/phys2a-engine-explorer.png",
+        "altText": "Interactive 3D Engine Explorer showing a cutaway ICE turbocharger model with a live part-info spec panel, from the ICE vs. EV companion site",
+        "width": 1600,
+        "height": 859
+      },
+      "links": {
+        "github": null,
+        "liveDemo": "https://superlative-mandazi-3b5f4b.netlify.app/",
+        "pdfReport": null,
+        "video": "https://youtu.be/1qZuOk2-g6U"
+      },
+      "featured": true,
+      "subsubcategory": "Extra"
+    },
+    {
+      "id": "hl-2026-practice-trading-platform",
+      "title": "Practice Trading Platform",
+      "category": "Extra Curricular",
+      "subcategory": "Educational",
+      "date": "2026-05-11",
+      "starred": false,
+      "semester": null,
+      "course": null,
+      "summary": "A solo-built, free web paper-trading simulator — a practice brokerage aimed at college students, built with Claude Code. Deliberately un-gamified: no leaderboards, no points, just real (delayed) market data and real account structures. Next.js on Vercel with a Supabase/Drizzle backend.",
+      "metrics": [
+        "Next.js 14 (App Router, TypeScript) + Supabase (Postgres, Auth) + Drizzle ORM on Vercel — email auth, onboarding, and 5 fixed accounts (2 taxable, Roth IRA, 401(k), a second brokerage) with unlimited instant resets",
+        "Order-execution engine with FIFO tax-lot tracking, touch-and-fill limit/stop orders, and fractional shares to 6 decimal places; per-account holdings, statistics, and portfolio-value snapshots",
+        "Live pricing from yahoo-finance2 (stocks/ETFs, ~30-year history) and the Coinbase Exchange API (crypto); backed by a 9-table Postgres schema and a full PRD / technical-architecture / database-schema doc set"
+      ],
+      "tags": [
+        "Next.js",
+        "TypeScript",
+        "Supabase",
+        "Drizzle ORM",
+        "Fintech",
+        "Vercel"
+      ],
+      "media": null,
+      "links": {},
+      "featured": false,
+      "subsubcategory": "Extra"
+    },
+    {
+      "id": "hl-2026-gmail-mcp-server",
+      "title": "Gmail MCP Server",
+      "category": "Extra Curricular",
+      "subcategory": "Educational",
+      "date": "2026-09-05",
+      "starred": false,
+      "semester": null,
+      "course": null,
+      "summary": "A private Model Context Protocol server exposing read (and fallback send) access to one Gmail mailbox over Streamable HTTP, built to feed a scheduled Claude routine. Next.js on Vercel, bearer-token auth, with a homepage and privacy policy so the Google OAuth app can be published to production.",
+      "metrics": [
+        "4 MCP tools — search_threads, get_thread, get_message, send_message — served over a bearer-token-authenticated Streamable HTTP endpoint (/api/mcp)",
+        "Google OAuth (Desktop client) with a refresh-token minting script; all four secrets held in Vercel environment variables, never in source",
+        "Deployed serverless on Vercel with / and /privacy pages so the Google OAuth app can pass production review"
+      ],
+      "tags": [
+        "MCP",
+        "Next.js",
+        "TypeScript",
+        "Google OAuth",
+        "Gmail API",
+        "Vercel"
+      ],
+      "media": null,
+      "links": {},
+      "featured": false,
+      "subsubcategory": "Extra"
+    },
+    {
+      "id": "hl-2026-cisco-data-analytics-essentials",
+      "title": "Cisco Data Analytics Essentials",
+      "category": "Extra Curricular",
+      "subcategory": "Educational",
+      "date": "2026-07-09",
+      "starred": false,
+      "semester": null,
+      "course": null,
+      "summary": "Self-paced Cisco Networking Academy course covering data-analytics fundamentals — framing the right analytics questions, data-portfolio research requirements, and core Excel data-handling skills. Still in progress; no finished capstone deliverable yet.",
+      "metrics": [
+        "5 of 6 NetAcad interactive labs completed",
+        "Labs covered: asking the right analytics questions, data-portfolio research requirements, and Excel fundamentals through basic data implementation and practice"
+      ],
+      "tags": ["Cisco NetAcad", "Data Analytics", "Excel"],
+      "media": null,
+      "links": {},
+      "featured": false,
+      "subsubcategory": "Extra"
+    },
+    {
+      "id": "hl-2026-inspiron-15-internals",
+      "title": "Dell Inspiron 15 5570 — Interactive Internal Layout",
+      "category": "Extra Curricular",
+      "subcategory": "Educational",
+      "date": "2026-06-26",
+      "starred": false,
+      "semester": null,
+      "course": null,
+      "summary": "A single-file HTML/SVG teardown reference for a 2018 Dell Inspiron 15 5570 with the base cover removed. Click any component to see its function, removal steps, screw table, warnings, and the matching Dell service-manual page. Built with Claude Code as a hands-on reassembly aid.",
+      "metrics": [
+        "About 13 labelled components, each drawn procedurally in SVG (no photo assets), with a Realistic/Schematic view toggle and a colour-coded screw map",
+        "Component coordinates placed from the Dell service manual's exploded view on a 380 x 260 mm / 10 mm grid, so sizes check against the real chassis with a ruler",
+        "Category filters (Power / Compute / Storage / Wireless / Thermal / Audio), full keyboard navigation, a one-page landscape print layout, dark mode, and a localStorage-persisted view"
+      ],
+      "tags": ["HTML", "SVG", "Hardware", "Reference"],
+      "media": null,
+      "links": {
+        "liveDemo": "https://inspiron-15-internals.vercel.app"
+      },
+      "featured": false,
+      "subsubcategory": "Extra"
+    },
+    {
+      "id": "hl-2026-cybersec-practice-terminal",
+      "title": "CyberSec Practice Terminal",
+      "category": "Extra Curricular",
+      "subcategory": "Educational",
+      "date": "2026-05-14",
+      "starred": false,
+      "semester": null,
+      "course": null,
+      "summary": "A browser-based, green-on-black command-line quiz game for drilling security and Linux fundamentals. A single self-contained HTML file runs a fake terminal that walks through 100 questions with hints, worked explanations, and command examples.",
+      "metrics": [
+        "100 questions across three difficulty tiers (34 / 33 / 33) and four topics - networking, Linux, general security, and OSINT",
+        "Four question formats - flashcard, fill-in-the-blank, scenario, and type-the-command - each with a hint, a worked explanation, and a realistic example",
+        "One self-contained HTML file, keyboard-driven, no framework or build step; runs offline in any browser"
+      ],
+      "tags": ["JavaScript", "Cybersecurity", "Linux", "Game"],
+      "media": null,
+      "links": {
+        "liveDemo": "https://cybersec-practice-terminal.vercel.app"
+      },
+      "featured": false,
+      "subsubcategory": "Extra"
+    },
+    {
+      "id": "hl-2026-us-markets-30yr-explorer",
+      "title": "U.S. Markets 1996-2026 Explorer",
+      "category": "Extra Curricular",
+      "subcategory": "Educational",
+      "date": "2026-04-25",
+      "starred": false,
+      "semester": null,
+      "course": null,
+      "summary": "An interactive study tool for 30 years of U.S. market history - S&P 500, NASDAQ Composite, and Dow Jones indexed to a common start and annotated with major crashes, booms, and policy events. Includes a drawdown view and a dollar-cost-averaging vs. lump-sum simulator. Index data is illustrative monthly approximations, built for learning.",
+      "metrics": [
+        "Three indices on one chart indexed to 100 at January 1996, with a log/linear toggle and click-to-expand notes on each major crash, boom, and policy event",
+        "A drawdown tab plots peak-to-trough declines; a simulator tab compares a monthly dollar-cost-averaged contribution against an equivalent lump sum from any start month",
+        "Single HTML file with canvas-drawn charts; values are illustrative monthly approximations and exclude dividends, fees, and taxes"
+      ],
+      "tags": ["JavaScript", "Data Visualization", "Finance", "Canvas"],
+      "media": null,
+      "links": {
+        "liveDemo": "https://us-markets-30yr-explorer.vercel.app"
+      },
+      "featured": false,
+      "subsubcategory": "Extra"
+    },
+    {
+      "id": "hl-2026-beginner-cybersecurity-curriculum",
+      "title": "Beginner Cybersecurity Curriculum",
+      "category": "Extra Curricular",
+      "subcategory": "Educational",
+      "date": "2026-04-29",
+      "starred": false,
+      "semester": null,
+      "course": null,
+      "summary": "A self-authored, single-file learning path that builds from electronics up through entry-level cybersecurity. Eleven modules, each pairing the concepts to understand with a real-world application, cited industry statistics, and a short 'you should be able to explain…' self-check.",
+      "metrics": [
+        "11 modules: Orientation, Electronics Foundations, How Computers Work, the Unix Worldview, Networking from the Wire Up, Threats & Adversaries, Cryptography as a User, Defending Systems & Networks, Web Application Security, the Offensive Mindset, and Specialization Paths",
+        "Each concept is grounded with a real-world application and an explicit self-check of what the reader should be able to explain",
+        "Cited industry figures (breach cost, workforce gap, phishing share) plus inline data tables — global cybercrime cost, Moore's-Law transistor counts, and brute-force crack times"
+      ],
+      "tags": ["HTML", "Cybersecurity", "Networking", "Curriculum"],
+      "media": null,
+      "links": {
+        "liveDemo": "https://jared-lomeli-portfolio.vercel.app/demo/beginner-cybersecurity-curriculum"
+      },
+      "featured": false,
+      "subsubcategory": "Extra"
+    },
+    {
+      "id": "hl-2026-us-markets-curriculum",
+      "title": "Long-Term U.S. Markets — A 30-Year Curriculum",
+      "category": "Extra Curricular",
+      "subcategory": "Educational",
+      "date": "2026-04-29",
+      "starred": false,
+      "semester": null,
+      "course": null,
+      "summary": "A self-authored 14-chapter curriculum on reading U.S. equity markets over multiple timeframes — index mechanics, chart literacy, a phase-by-phase history of 1996–2026, portfolio-and-behavioral theory, and a curated reading list. Generalized from a personal study guide for publication; it is a learning document, not investment advice.",
+      "metrics": [
+        "14 chapters covering the four major U.S. indices, log-scale and drawdown reading, factor investing (MPT → CAPM → Fama-French), and behavioral finance",
+        "A phase-by-phase walk through 1996–2026 with deep-dive case studies (Cisco, Amazon, NVIDIA, the semiconductor cycle, Black Monday, COVID)",
+        "Figures cite their sources (S&P SPIVA, Morningstar, Shiller, Siegel, FRED, Vanguard/Fidelity); ~28-page embedded PDF"
+      ],
+      "tags": ["Finance", "Markets", "Curriculum", "Self-Study"],
+      "media": null,
+      "links": {
+        "pdfReport": "/public/documents/us-markets-curriculum/long-term-us-markets-curriculum.pdf"
+      },
+      "featured": false,
+      "subsubcategory": "Extra"
+    },
+    {
+      "id": "hl-2026-iphone11-teardown-spec",
+      "title": "iPhone 11 Teardown — Interactive Artifact Design Spec",
+      "category": "Extra Curricular",
+      "subcategory": "Educational",
+      "date": "2026-05-14",
+      "starred": false,
+      "semester": null,
+      "course": null,
+      "summary": "A complete build specification for an unbuilt project: a single-file interactive iPhone 11 teardown where parts are removed one at a time in disassembly order, each opening a detailed info card, with full undo history. The document defines the parts list, visual system, and implementation plan; the artifact itself was never built.",
+      "metrics": [
+        "43-part disassembly sequence, each entry carrying the info-card copy (function, connections, specs) to show when the part is removed",
+        "Full visual spec: a 9-category colour system, exploded-stack layer order, a layout wireframe, and photo-integration instructions (base64-embedded SVG image layers under ~0.4-opacity part overlays)",
+        "Implementation plan: a JS state machine (removed set + history stack), unlock/lock dependency logic, and a 16-item build checklist"
+      ],
+      "tags": ["Spec", "Hardware", "UX Design"],
+      "media": null,
+      "links": {
+        "pdfReport": "/public/documents/iphone11-teardown-spec/iphone11-teardown-spec.pdf"
+      },
+      "featured": false,
+      "subsubcategory": "Extra"
+    },
+    {
+      "id": "hl-2026-linux-security-architecture",
+      "title": "Linux Security Architecture — Interactive Infographic",
+      "category": "Extra Curricular",
+      "subcategory": "Educational",
+      "date": "2026-06-23",
+      "starred": false,
+      "semester": null,
+      "course": null,
+      "summary": "A single-page interactive infographic I designed that maps four core Linux security domains — firewall configuration, network reconnaissance, SSH/encryption, and log auditing — to the specific commands that implement each. Every panel pairs a plain-language explanation with real command syntax and an animated diagram of the underlying mechanism.",
+      "metrics": [
+        "Four domains — defense, recon, encrypt, audit — each mapped to its Linux tooling (iptables/ufw/netfilter, nmap, ssh-keygen, journalctl/auditd)",
+        "Port-policy table contrasting denied plaintext services (Telnet 23, FTP 21) with allowed encrypted ones (SSH 22, HTTPS 443)",
+        "Animated mechanisms: iptables packet evaluation, a 4-stage nmap scan, SSH key exchange to an AES-256 session, and the syslog to /var/log to alert pipeline",
+        "Per-panel command references: iptables -A INPUT ... -j DROP, nmap -sV -O, ssh-keygen -t rsa -b 4096, tail -f /var/log/auth.log, journalctl _COMM=sshd"
+      ],
+      "tags": [
+        "Linux",
+        "Security",
+        "Networking",
+        "SSH",
+        "Firewall",
+        "Infographic"
+      ],
+      "media": null,
+      "links": {
+        "liveDemo": "https://jared-lomeli-portfolio.vercel.app/demo/linux-security-architecture"
+      },
+      "featured": false,
+      "subsubcategory": "Extra"
+    },
+    {
+      "id": "hl-2026-scheduled-claude-agents",
+      "title": "Scheduled Claude Code Routines — Personal Automation Suite",
+      "category": "Extra Curricular",
+      "subcategory": "Educational",
+      "date": "2026-09-06",
+      "starred": false,
+      "semester": null,
+      "course": null,
+      "summary": "Four Claude Code cloud routines I wrote that run unattended on a daily schedule and deliver a finished result with no supervision: a two-account inbox digest, a next-day calendar briefing, a Canvas-to-monday.com school-task sync, and a US-market after-close recap email. Each is built to survive missed runs and a stateless sandbox — recovering its own history, resolving its own date in Pacific time, and always sending something so a silent failure stays visible.",
+      "metrics": [
+        "4 routines on daily/weekday cron: inbox summary (two Gmail accounts, spam included), next-day schedule (three calendars merged and deduped), school-tasks sync (Canvas events into a monday.com board, one group per class), and a US-market after-close recap (indices, top movers, top-10 Nasdaq by market cap, BTC/ETH, upcoming splits and IPOs, earnings calendar, fed/state watch)",
+        "Stateless-sandbox persistence, three ways: none for the digests, an external system of record for the sync (the monday.com board, with archived-item lookup so completed items aren't recreated every run), and a machine-readable STATE line embedded in each sent recap that the next run parses back out of sent mail",
+        "Missed-run resilience: each routine resolves \"today\" in Pacific time from a UTC sandbox clock, rolls weekends back to the last trading day, and backfills up to 10 missed weekdays oldest-first",
+        "Hardening: inbound mail treated as untrusted data and never as instructions (prompt-injection defense); UTC-to-Pacific conversion before taking a calendar date so due dates don't land a day late; Gmail-safe rendering as colored monospace text bars because Gmail strips images and background-only divs; mandatory post-send integrity check with a one-corrected-resend cap",
+        "Always-send contract — every routine emails even on a zero-result run, because a silent run is indistinguishable from a broken one"
+      ],
+      "tags": ["Automation", "AI Agents", "Claude Code", "Scheduling", "APIs"],
+      "media": null,
+      "links": {},
+      "featured": false,
+      "subsubcategory": "Extra"
+    },
+    {
+      "id": "hl-2026-grade-tracker-portfolio",
+      "title": "Grade Tracker & Drive Portfolio Builder",
+      "category": "Extra Curricular",
+      "subcategory": "Educational",
+      "date": "2026-03-23",
+      "starred": false,
+      "semester": null,
+      "course": null,
+      "summary": "A multi-page web app I built to pull my schoolwork into one place: a Google Drive OAuth flow that scans my Drive and auto-builds a dated assignment portfolio plus a full college-timeline view, alongside a Canvas grade tracker. The Drive side works end to end; the Canvas grade sync was coded against the LMS API but never got working API access, so it stands with its page structure and a manual-entry fallback in place but live sync unfinished.",
+      "metrics": [
+        "Google Drive integration (drive.readonly OAuth via Google Identity Services): scans Docs, Slides, Sheets, PDFs and images, groups them by subject and month, and exports a per-subject ZIP of PDFs",
+        "\"My College Journey\" timeline view of every assignment, lab and project, with a batch \"Generate All Summaries\" action over the scanned files",
+        "Canvas grade tracker: institution URL plus a personal access token, pulling /api/v1/courses?include[]=total_scores through a bundled local Node CORS proxy (proxy.js, port 3001); CSV and PDF export",
+        "Manual-course fallback (flagged with a \"manual\" badge) for when the Canvas API isn't reachable — the state it shipped in, since working Canvas API access was never obtained",
+        "Five hand-written pages, no framework; tokens and results cached in localStorage; guided in-app walkthrough for creating the Google Cloud project"
+      ],
+      "tags": [
+        "Web App",
+        "OAuth",
+        "Google Drive API",
+        "Canvas LMS API",
+        "Vanilla JS"
+      ],
+      "media": null,
+      "links": {},
+      "featured": false,
+      "subsubcategory": "Extra"
+    },
+    {
+      "id": "hl-2026-color-by-number",
+      "title": "Pandas & Bamboo — Color by Number",
+      "category": "Extra Curricular",
+      "subcategory": "For Fun",
+      "date": "2026-07-13",
+      "starred": false,
+      "semester": null,
+      "course": null,
+      "summary": "An original single-page color-by-number game — a tall, scrolling cartoon scene of giant pandas and red pandas eating bamboo, drawn as numbered SVG regions you fill from a palette. Static Vite app, no backend; built with Claude Code over six phases.",
+      "metrics": [
+        "Hand-authored artwork: procedurally-built panda, red-panda, and background layers assembled into under 500 numbered SVG regions with non-overlapping label placement",
+        "Coloring engine with palette swatches, an eraser, a 'solve it' shortcut, per-region progress, and a confetti completion celebration",
+        "Progress saved to localStorage, finished art exports to PNG, static build deployed on Vercel"
+      ],
+      "tags": ["JavaScript", "Vite", "SVG", "Game", "Vercel"],
+      "media": null,
+      "links": {
+        "liveDemo": "https://pandas-color-by-number.vercel.app"
+      },
+      "featured": false
+    },
+    {
+      "id": "hl-2026-greeting-card-sites",
+      "title": "Anniversary & Mother's Day Card Sites",
+      "category": "Extra Curricular",
+      "subcategory": "For Fun",
+      "date": "2026-05-07",
+      "starred": false,
+      "semester": null,
+      "course": null,
+      "summary": "A pair of personal single-page interactive greeting cards — a 3rd-anniversary card and a 2026 Mother's Day card — each a self-contained animated HTML page with no framework or build step. Deployed on Vercel as the 'cards-site' project and shared via short links.",
+      "metrics": [
+        "Two standalone animated HTML/CSS/JS card pages (~31 KB each), hand-built",
+        "Deployed on Vercel, each shared through its own bit.ly short link"
+      ],
+      "tags": ["HTML", "CSS", "JavaScript", "Animation", "Vercel"],
+      "media": null,
+      "links": {},
+      "featured": false
+    },
+    {
+      "id": "hl-2026-vtracker",
+      "title": "VTRACKER — Valorant Stat Tracker",
+      "category": "Extra Curricular",
+      "subcategory": "For Fun",
+      "date": "2026-03-14",
+      "starred": false,
+      "semester": null,
+      "course": null,
+      "summary": "A multi-page Valorant stats site — leaderboard, live match view, match history, rank history, agent stats, and player profile — pulling from the community Henrik Dev API through a Vercel serverless proxy that keeps the API key server-side.",
+      "metrics": [
+        "7 vanilla-JS HTML pages (leaderboard, live, match history, rank history, agents, profile, home), no framework",
+        "Vercel serverless function proxies the Henrik Dev Valorant API so the key stays in an environment variable, never exposed to the browser"
+      ],
+      "tags": [
+        "JavaScript",
+        "Vercel",
+        "Serverless",
+        "API Integration",
+        "Gaming"
+      ],
+      "media": null,
+      "links": {},
+      "featured": false
+    },
+    {
+      "id": "hl-2026-discord-calorie-tracker",
+      "title": "Discord Food, Exercise & Weight Tracker",
+      "category": "Extra Curricular",
+      "subcategory": "For Fun",
+      "date": "2026-09-12",
+      "starred": false,
+      "semester": null,
+      "course": null,
+      "summary": "A personal Discord bot for logging meals, workouts, and body weight in plain free-text messages — no app to open, no food database to search. A once-daily Anthropic cloud routine reads the day's messages, reasons out calorie/macro/burn estimates itself, stores them, and replies with an end-of-day summary against a personalized calorie goal.",
+      "metrics": [
+        "Next.js (App Router, TypeScript) + Neon Postgres via Drizzle ORM on Vercel, with dashboard pages for today's log, history, trends, and goal settings",
+        "Once-daily scheduled Claude Code cloud routine (not a pay-per-token API call) fetches new Discord DMs and posts parsed entries through a secret-protected ingest API — idempotent by Discord message ID so re-runs never double-log",
+        "Mifflin-St Jeor BMR/TDEE goal calculation from a stored profile and the latest logged weight, verified end-to-end against real data"
+      ],
+      "tags": [
+        "Next.js",
+        "TypeScript",
+        "Discord API",
+        "Neon Postgres",
+        "Vercel",
+        "Automation"
+      ],
+      "media": null,
+      "links": {},
+      "featured": false
     },
     {
       "id": "hl-2026-phys2a-ice-ev-mechanics",
       "title": "Mechanics & Heat Loss in ICE vs. EV Engines",
-      "category": "Project",
+      "category": "Coursework",
+      "subcategory": "Semester 2",
+      "subsubcategory": "Technical",
+      "subsubsubcategory": "Assignments",
       "date": "2026-04-24",
       "semester": "Semester 2 (West Valley College)",
       "course": "PHYS 2A — West Valley College",
+      "courseCode": "PHYS 2A",
       "summary": "Cross-disciplinary Physics 2A final project analyzing why internal combustion engines lose roughly 80% of fuel energy to heat loss, using a 2021 Dodge Charger R/T 5.7L HEMI V8 as a real-world reference, then comparing that inefficiency against EVs using Phase Change Materials for thermal management. Delivered as a narrated video plus an interactive digital poster website with an embedded 3D engine explorer.",
       "metrics": [
         "9-part narrated video presentation",
@@ -303,6 +1021,1650 @@
         "video": "https://youtu.be/1qZuOk2-g6U"
       },
       "featured": true
+    },
+    {
+      "id": "hl-2026-tech60-final-simon-says",
+      "title": "TECH 60 Final — Simon Says Memory Game",
+      "category": "Coursework",
+      "subcategory": "Semester 3",
+      "subsubcategory": "Technical",
+      "subsubsubcategory": "Labs",
+      "date": "2026-11-28",
+      "semester": "Semester 3 (San José State University)",
+      "course": "TECH 60 — Introduction to Electronics",
+      "courseCode": "TECH 60",
+      "summary": "Team final project for TECH 60: a Simon Says memory game built on an ELEGOO Arduino UNO R3. The board flashes a pattern on four colored LEDs with a buzzer click, and the player repeats it on four push buttons; each round adds one random color and plays slightly faster, and the game ends on a wrong press or a 3-second timeout. Simulated in Wokwi, built on a breadboard, and documented with a project summary, a demo video, and an interactive 3D wiring guide.",
+      "metrics": [
+        "Hardware — 4 LEDs with resistors (D2–D5), 4 push buttons (D6–D9) using the internal pull-up resistors with 20 ms debouncing, and a buzzer (D10), all on a half-size breadboard",
+        "Game logic — stores up to 50 steps, replays the whole sequence every round, and speeds up 25 ms per round from 500 ms to a 200 ms floor (reached at round 13)",
+        "Interactive hole-by-hole 3D wiring guide, 33-second demo video, and a two-page project summary"
+      ],
+      "tags": ["Electronics", "TECH 60", "Arduino", "Embedded C++"],
+      "media": {
+        "type": "image",
+        "localSourcePath": "/public/images/tech60-final-simon-says.jpg",
+        "altText": "Top-down photo of the finished Simon Says build: an ELEGOO Arduino UNO R3 wired with colored jumper wires to a small breadboard holding four LEDs, four push buttons, resistors, and a buzzer, with the red LED lit",
+        "width": 1400,
+        "height": 1540
+      },
+      "links": {
+        "github": null,
+        "liveDemo": "https://jared-lomeli-portfolio.vercel.app/demo/simon-says-wiring",
+        "pdfReport": "/public/documents/tech-60/final-simon-says-project-summary.pdf",
+        "video": "/public/videos/tech60-final-simon-says-demo.mp4"
+      },
+      "featured": false
+    },
+    {
+      "id": "hl-tech60-labs",
+      "title": "TECH 60 — Circuit Analysis Labs",
+      "category": "Coursework",
+      "subcategory": "Semester 3",
+      "subsubcategory": "Technical",
+      "subsubsubcategory": "Labs",
+      "date": null,
+      "semester": "Semester 3 (San José State University)",
+      "course": "TECH 60 — Introduction to Electronics",
+      "courseCode": "TECH 60",
+      "kind": "collection",
+      "pinned": true,
+      "summary": "A running collection of every circuit-analysis lab from TECH 60 — Introduction to Electronics. Each lab is checked three ways — hand calculation, Multisim simulation, and a physical breadboard build — and the report opens right here on the page. This one card holds all of the class's labs — past, current, and future — instead of a separate card for each lab.",
+      "metrics": [
+        "5 labs so far — Lab 0 (resistor color-code decoding + DMM verification), Lab 1 (LED circuit & Kirchhoff's Voltage Law), Lab 2 (3-resistor series circuit, Ohm's Law & KVL), Lab 4 (voltage-divider rule & loading effects), and Lab 6 (parallel circuit, Current Divider Rule & Kirchhoff's Current Law)",
+        "Every lab cross-checked three ways — hand calculation, Multisim simulation, and a physical breadboard build — comparing predicted vs. measured error",
+        "Grows as later modules add more TECH 60 labs"
+      ],
+      "tags": ["Electronics", "TECH 60", "Circuit Analysis", "Multisim"],
+      "media": null,
+      "downloads": [
+        {
+          "label": "Lab 0 — Resistor Color Code & DMM Verification",
+          "type": "PDF",
+          "size": "1.5 MB",
+          "date": "2026-08-26",
+          "path": "/public/documents/tech-60/lab-0.pdf"
+        },
+        {
+          "label": "Lab 1 — LED Circuit & Kirchhoff's Voltage Law",
+          "type": "PDF",
+          "size": "1.4 MB",
+          "date": "2026-09-02",
+          "path": "/public/documents/tech-60/lab-1.pdf"
+        },
+        {
+          "label": "Lab 2 — Series Circuit, Ohm's Law & Kirchhoff's Voltage Law",
+          "type": "PDF",
+          "size": "2.1 MB",
+          "date": "2026-09-09",
+          "path": "/public/documents/tech-60/lab-2.pdf"
+        },
+        {
+          "label": "Lab 4 — Voltage Divider Rule & Loading Effects",
+          "type": "PDF",
+          "size": "3.9 MB",
+          "date": "2026-09-16",
+          "path": "/public/documents/tech-60/lab-4.pdf"
+        },
+        {
+          "label": "Lab 6 — Parallel Circuit, Current Divider Rule & Kirchhoff's Current Law",
+          "type": "PDF",
+          "size": "1.5 MB",
+          "date": "2026-09-30",
+          "path": "/public/documents/tech-60/lab-6.pdf"
+        }
+      ],
+      "links": {},
+      "featured": false
+    },
+    {
+      "id": "hl-2026-tech65-lab3",
+      "title": "TECH 65 Lab 3 — Building an Ethernet Crossover Cable",
+      "category": "Coursework",
+      "subcategory": "Semester 3",
+      "subsubcategory": "Technical",
+      "subsubsubcategory": "Labs",
+      "date": "2026-09-14",
+      "semester": "Semester 3 (San José State University)",
+      "course": "TECH 65 — Introduction to Networks",
+      "courseCode": "TECH 65",
+      "summary": "Hands-on physical-layer lab: analyzed the TIA/EIA 568-A and 568-B Ethernet wiring standards and pinouts, then built and terminated an Ethernet crossover cable by hand (568-A on one end, 568-B on the other) and tested it by connecting two PCs directly via their NICs and pinging between them.",
+      "metrics": [
+        "Terminated both ends of a Cat 5/5e cable with RJ-45 connectors — 568-A standard on one end, 568-B on the other — using a crimping tool, wire stripper, and cutter",
+        "Verified the crossover wiring against the 568-A/568-B pinout tables for all four wire pairs",
+        "Connected two PCs point-to-point over the finished cable (192.168.1.1 / .2, /24) and confirmed connectivity with a successful ping in both directions"
+      ],
+      "tags": ["Networking", "TECH 65", "Cabling", "TIA/EIA 568"],
+      "media": {
+        "type": "image",
+        "localSourcePath": "/public/images/tech65-lab3-crossover-cable.jpeg",
+        "altText": "A hand-terminated red RJ-45 Ethernet crossover cable on a classroom desk, with both connector ends visible",
+        "width": 1600,
+        "height": 1200
+      },
+      "links": {
+        "github": null,
+        "liveDemo": null,
+        "pdfReport": "/public/documents/tech-65/lab-3-ethernet-crossover-cable.pdf"
+      },
+      "featured": false
+    },
+    {
+      "id": "hl-tech65-wireshark-labs",
+      "title": "TECH 65 — Wireshark Labs",
+      "category": "Coursework",
+      "subcategory": "Semester 3",
+      "subsubcategory": "Technical",
+      "subsubsubcategory": "Labs",
+      "date": null,
+      "semester": "Semester 3 (San José State University)",
+      "course": "TECH 65 — Introduction to Networks",
+      "courseCode": "TECH 65",
+      "kind": "collection",
+      "pinned": true,
+      "summary": "A running collection of every Wireshark packet-analysis lab from TECH 65 — Introduction to Networks. Each entry is the completed lab report (PDF). This one card holds all of the class's Wireshark labs — past, current, and future — instead of a separate card for each lab.",
+      "metrics": [
+        "2 labs so far — 3.7.10 (capturing and comparing local vs. remote ICMP and ICMPv6 ping traffic) and 7.1.6 (examining Ethernet II frame headers, ARP, and how a router re-frames traffic)",
+        "Skills: capturing and filtering live traffic, reading Ethernet II and IP headers, MAC vs. IP addressing for local and remote hosts, ARP, and vendor OUIs",
+        "Grows as later modules add more Wireshark labs"
+      ],
+      "tags": [
+        "Networking",
+        "TECH 65",
+        "Wireshark",
+        "Packet Analysis",
+        "ICMP",
+        "ARP",
+        "Ethernet"
+      ],
+      "media": null,
+      "downloads": [
+        {
+          "label": "Lab 3.7.10 — Use Wireshark to View Network Traffic",
+          "type": "PDF",
+          "size": "630 KB",
+          "date": "2026-09-21",
+          "source": "NetAcad",
+          "path": "/public/documents/tech-65/wireshark/3.7.10-use-wireshark-to-view-network-traffic.pdf"
+        },
+        {
+          "label": "Lab 7.1.6 — Use Wireshark to Examine Ethernet Frames",
+          "type": "PDF",
+          "size": "378 KB",
+          "date": "2026-09-21",
+          "source": "NetAcad",
+          "path": "/public/documents/tech-65/wireshark/7.1.6-use-wireshark-to-examine-ethernet-frames.pdf"
+        }
+      ],
+      "links": {},
+      "featured": false
+    },
+    {
+      "id": "hl-tech65-switch-config-labs",
+      "title": "TECH 65 — Switch Configuration Labs",
+      "category": "Coursework",
+      "subcategory": "Semester 3",
+      "subsubcategory": "Technical",
+      "subsubsubcategory": "Labs",
+      "date": null,
+      "semester": "Semester 3 (San José State University)",
+      "course": "TECH 65 — Introduction to Networks",
+      "courseCode": "TECH 65",
+      "kind": "collection",
+      "pinned": true,
+      "summary": "A running collection of every switch-configuration and MAC-address lab from TECH 65 — Introduction to Networks: accessing and configuring a Cisco switch from a factory-default state, then verifying connectivity and analyzing MAC addresses across switches and PCs. This one card holds all of the class's switch-configuration labs — past, current, and future — instead of a separate card for each lab.",
+      "metrics": [
+        "3 labs so far — Lab 2 (initial console configuration of a Cisco 2960 from factory defaults), 7.2.7 (analyzing PC and switch MAC addresses via ipconfig, show interfaces, and show mac address-table), and 7.3.7 (building a 2-switch topology and observing how switches learn MAC addresses)",
+        "Skills: Cisco IOS console/CLI access, hostname/VLAN/SVI configuration, show mac address-table, show arp, MAC address structure (OUI + serial)",
+        "Grows as later modules add more switch-configuration labs"
+      ],
+      "tags": [
+        "Networking",
+        "TECH 65",
+        "Cisco IOS",
+        "Switching",
+        "MAC Address"
+      ],
+      "media": null,
+      "downloads": [
+        {
+          "label": "Lab 2 — Configuring a Cisco Switch via Console",
+          "type": "PDF",
+          "size": "334 KB",
+          "date": "2026-08-31",
+          "source": "NetAcad",
+          "path": "/public/documents/tech-65/switch-config/lab-2-configuring-a-switch-via-console.pdf"
+        },
+        {
+          "label": "Lab 7.2.7 — View Network Device MAC Addresses",
+          "type": "PDF",
+          "size": "275 KB",
+          "date": "2026-09-21",
+          "source": "NetAcad",
+          "path": "/public/documents/tech-65/switch-config/7.2.7-view-network-device-mac-addresses.pdf"
+        },
+        {
+          "label": "Lab 7.3.7 — View the Switch MAC Address Table (connectivity screenshot)",
+          "type": "Screenshot (.png)",
+          "size": "379 KB",
+          "date": "2026-09-21",
+          "source": "NetAcad",
+          "path": "/public/documents/tech-65/switch-config/7.3.7-connectivity-verification.png"
+        }
+      ],
+      "links": {},
+      "featured": false
+    },
+    {
+      "id": "hl-2026-phys-2a-lab-1-measurements-uncertainties",
+      "title": "PHYS 2A — Lab 1: Measurements & Uncertainties",
+      "category": "Coursework",
+      "subcategory": "Semester 2",
+      "subsubcategory": "Technical",
+      "subsubsubcategory": "Labs",
+      "date": "2026-02-02",
+      "starred": false,
+      "semester": "Semester 2 (West Valley College)",
+      "course": "PHYS 2A",
+      "courseCode": "PHYS 2A",
+      "summary": "First PHYS 2A lab, on measurement and uncertainty. Uses the method of similar triangles to measure a large object indirectly from a string, a stick of known length, and eye-to-object distances, then compares that against a direct tape measurement. Propagates the individual uncertainties into a total percent uncertainty and reflects on the largest error sources.",
+      "metrics": [
+        "Indirect (similar-triangles) measurement compared to a direct measurement — the estimate landed about 29.9 cm off",
+        "Total propagated uncertainty of roughly 13.9% from three sources: baseline, stick, and string measurements",
+        "Reflection identifies fixes — finer markings, repeated trials with averaging, measuring in daylight"
+      ],
+      "tags": ["Physics", "PHYS 2A", "Measurement"],
+      "media": null,
+      "links": {
+        "github": null,
+        "liveDemo": null,
+        "pdfReport": "/public/documents/phys-2a/lab-1-measurements-uncertainties.pdf"
+      },
+      "featured": false
+    },
+    {
+      "id": "hl-2026-phys-2a-lab-2-1d-motion",
+      "title": "PHYS 2A — Lab 2: 1-D Motion",
+      "category": "Coursework",
+      "subcategory": "Semester 2",
+      "subsubcategory": "Technical",
+      "subsubsubcategory": "Labs",
+      "date": "2026-02-07",
+      "starred": false,
+      "semester": "Semester 2 (West Valley College)",
+      "course": "PHYS 2A",
+      "courseCode": "PHYS 2A",
+      "summary": "One-dimensional motion lab using a wireless Smart Cart on a track with a hanging mass over a pulley. Records position, velocity, and acceleration versus time in PASCO Capstone, fits a constant-acceleration model, and examines how measurement error propagates into the results. Closes on the advantages and limits of mathematical models — good for prediction and analysis, but blind to unmodeled forces and dependent on data quality.",
+      "metrics": [
+        "Constant-acceleration motion measured with a Smart Cart and analyzed against a kinematic model in PASCO Capstone",
+        "Discusses error propagation and the trade-offs of mathematical modeling — assumed-constant forces, sensitivity to poor data"
+      ],
+      "tags": ["Physics", "PHYS 2A", "Kinematics"],
+      "media": null,
+      "links": {
+        "github": null,
+        "liveDemo": null,
+        "pdfReport": "/public/documents/phys-2a/lab-2-1d-motion.pdf"
+      },
+      "featured": false
+    },
+    {
+      "id": "hl-2026-phys-2a-lab-3-projectile-motion",
+      "title": "PHYS 2A — Lab 3: Projectile Motion",
+      "category": "Coursework",
+      "subcategory": "Semester 2",
+      "subsubcategory": "Technical",
+      "subsubsubcategory": "Labs",
+      "date": "2026-02-20",
+      "starred": false,
+      "semester": "Semester 2 (West Valley College)",
+      "course": "PHYS 2A",
+      "courseCode": "PHYS 2A",
+      "summary": "Projectile-motion lab predicting where a spring-gun projectile will land. Measures the launch speed with a photogate, uses kinematics to predict the range, then fires onto carbon paper to compare predicted and actual landing points. Analyzes the outcome in terms of accuracy versus precision and random versus systematic error. Includes the group's data spreadsheet as an appendix.",
+      "metrics": [
+        "Photogate launch speed to kinematic range prediction to carbon-paper landing test",
+        "Statistical analysis — mean, standard deviation of the mean, standard error — separating random from systematic error",
+        "Finding: precise but not accurate; systematic error and Capstone data failures shifted the whole cluster off target"
+      ],
+      "tags": ["Physics", "PHYS 2A", "Kinematics"],
+      "media": null,
+      "links": {
+        "github": null,
+        "liveDemo": null,
+        "pdfReport": "/public/documents/phys-2a/lab-3-projectile-motion.pdf"
+      },
+      "featured": false
+    },
+    {
+      "id": "hl-2026-phys-2a-lab-4-newtons-second-law",
+      "title": "PHYS 2A — Lab 4: Newton's Second Law",
+      "category": "Coursework",
+      "subcategory": "Semester 2",
+      "subsubcategory": "Technical",
+      "subsubsubcategory": "Labs",
+      "date": "2026-02-27",
+      "starred": false,
+      "semester": "Semester 2 (West Valley College)",
+      "course": "PHYS 2A",
+      "courseCode": "PHYS 2A",
+      "summary": "Newton's second law lab relating net force to acceleration with a cart, force sensor, and hanging-mass system on a track. Experiment 1 varies the hanging weight and measures the cart's acceleration; the planned Experiment 2 (acceleration versus cart mass) was designed and predicted analytically but not run for lack of time. Includes the group's data spreadsheet as an appendix.",
+      "metrics": [
+        "Experiment 1: net force versus acceleration measured across seven hanging-mass values with a force sensor and PASCO Capstone",
+        "Experiment 2 (a vs. m) planned and predicted (inverse proportionality from a = F/m) but not collected — noted as a time constraint"
+      ],
+      "tags": ["Physics", "PHYS 2A", "Newton's Laws"],
+      "media": null,
+      "links": {
+        "github": null,
+        "liveDemo": null,
+        "pdfReport": "/public/documents/phys-2a/lab-4-newtons-second-law.pdf"
+      },
+      "featured": false
+    },
+    {
+      "id": "hl-2026-phys-2a-lab-5-friction",
+      "title": "PHYS 2A — Lab 5: Friction",
+      "category": "Coursework",
+      "subcategory": "Semester 2",
+      "subsubcategory": "Technical",
+      "subsubsubcategory": "Labs",
+      "date": "2026-03-06",
+      "starred": false,
+      "semester": "Semester 2 (West Valley College)",
+      "course": "PHYS 2A",
+      "courseCode": "PHYS 2A",
+      "summary": "Friction lab on an inclined plane and a horizontal surface. Draws free-body diagrams, applies Newton's first law, and uses a force sensor with PASCO Capstone to record a force-versus-time curve while pulling a block from rest into motion — identifying the static region, the point of maximum static friction, and the kinetic-friction region. Includes the group's data spreadsheet as an appendix.",
+      "metrics": [
+        "Free-body analysis plus a Capstone force-versus-time trace marking static, maximum-static, and kinetic-friction regions",
+        "Static and kinetic friction characterized from inclined-plane and tabletop trials"
+      ],
+      "tags": ["Physics", "PHYS 2A", "Newton's Laws"],
+      "media": null,
+      "links": {
+        "github": null,
+        "liveDemo": null,
+        "pdfReport": "/public/documents/phys-2a/lab-5-friction.pdf"
+      },
+      "featured": false
+    },
+    {
+      "id": "hl-2026-phys-2a-lab-6-twirly-bob",
+      "title": "PHYS 2A — Lab 6: Twirly Bob (Circular Motion)",
+      "category": "Coursework",
+      "subcategory": "Semester 2",
+      "subsubcategory": "Technical",
+      "subsubsubcategory": "Labs",
+      "date": "2026-03-20",
+      "starred": false,
+      "semester": "Semester 2 (West Valley College)",
+      "course": "PHYS 2A",
+      "courseCode": "PHYS 2A",
+      "summary": "'Twirly bob' lab on uniform circular motion and centripetal force. Swings a mass on a string in a horizontal circle (hard hat and goggles required), draws free-body diagrams for the bob and its hanging counterweight, and applies Newton's laws to compute the centripetal acceleration and the force keeping the bob on its circular path, then compares against measured data. Includes the group's data spreadsheet as an appendix.",
+      "metrics": [
+        "Centripetal acceleration and force computed from period, radius, and mass, with free-body diagrams for each mass in the system",
+        "The group's first lab turning circular-motion observations into analyzed data; reflection traces outliers to the spinning mass drifting downward"
+      ],
+      "tags": ["Physics", "PHYS 2A", "Circular Motion"],
+      "media": null,
+      "links": {
+        "github": null,
+        "liveDemo": null,
+        "pdfReport": "/public/documents/phys-2a/lab-6-twirly-bob.pdf"
+      },
+      "featured": false
+    },
+    {
+      "id": "hl-2026-phys-2a-lab-7-rotating-penny",
+      "title": "PHYS 2A — Lab 7: Rotating Penny",
+      "category": "Coursework",
+      "subcategory": "Semester 2",
+      "subsubcategory": "Technical",
+      "subsubsubcategory": "Labs",
+      "date": "2026-03-20",
+      "starred": false,
+      "semester": "Semester 2 (West Valley College)",
+      "course": "PHYS 2A",
+      "courseCode": "PHYS 2A",
+      "summary": "Circular-motion lab studying a penny on a turntable undergoing non-uniform (angular-accelerating) rotation. Applies Newton's laws to the forces on the penny — normal, gravity, and friction — and splits friction into a radial component that changes direction and a tangential component that changes speed. Measures angular acceleration from the position, velocity, and acceleration graphs and derives when the penny slips. Includes the group's data spreadsheet as an appendix.",
+      "metrics": [
+        "Angular position, velocity, and acceleration graphs read and compared to their linear x/v/a analogues from kinematics",
+        "Sliding condition derived: the penny slips once the required friction exceeds maximum static friction, at which point net force and acceleration become nonzero"
+      ],
+      "tags": ["Physics", "PHYS 2A", "Circular Motion"],
+      "media": null,
+      "links": {
+        "github": null,
+        "liveDemo": null,
+        "pdfReport": "/public/documents/phys-2a/lab-7-rotating-penny.pdf"
+      },
+      "featured": false
+    },
+    {
+      "id": "hl-2026-phys-2a-lab-8-work-and-energy",
+      "title": "PHYS 2A — Lab 8: Work and Energy",
+      "category": "Coursework",
+      "subcategory": "Semester 2",
+      "subsubcategory": "Technical",
+      "subsubsubcategory": "Labs",
+      "date": "2026-03-28",
+      "starred": false,
+      "semester": "Semester 2 (West Valley College)",
+      "course": "PHYS 2A",
+      "courseCode": "PHYS 2A",
+      "summary": "Work-and-energy lab on an air track: a cart is pulled by a hanging mass over a near-frictionless pulley and, in a second experiment, launched by a compressed spring. Uses work-energy relationships to predict the cart's speed, then cross-checks the spring constant found from the launch against a direct force-sensor measurement. Report only — the data spreadsheet in the source folder is corrupted.",
+      "metrics": [
+        "Cart speed predicted with the work-energy theorem and compared against a Newton's-second-law approach",
+        "Spring constant from the launch (1.11) vs. the force-sensor value (1.15) — a 3.4% difference; the force sensor is trusted more for excluding external forces"
+      ],
+      "tags": ["Physics", "PHYS 2A", "Energy"],
+      "media": null,
+      "links": {
+        "github": null,
+        "liveDemo": null,
+        "pdfReport": "/public/documents/phys-2a/lab-8-work-and-energy.pdf"
+      },
+      "featured": false
+    },
+    {
+      "id": "hl-2026-phys-2a-lab-10-rotational-equilibrium",
+      "title": "PHYS 2A — Lab 10: Rotational Equilibrium",
+      "category": "Coursework",
+      "subcategory": "Semester 2",
+      "subsubcategory": "Technical",
+      "subsubsubcategory": "Labs",
+      "date": "2026-04-17",
+      "starred": false,
+      "semester": "Semester 2 (West Valley College)",
+      "course": "PHYS 2A",
+      "courseCode": "PHYS 2A",
+      "summary": "Statics and torque lab done ahead of the CH9 unit. Balances a meter stick on a pivot with clamped masses to predict an unknown mass from rotational equilibrium — locating the stick's center of mass, then solving the sum-of-torques and sum-of-forces equations. No sensors; measurements taken with error bars and analyzed by hand. Includes the group's data spreadsheet as an appendix.",
+      "metrics": [
+        "Unknown mass predicted from a torque-balance equation using the meter stick's mass, its center of mass, and two known masses' positions",
+        "Explains why the pivot's normal force drops out of the torque calculation, with extended free-body diagrams showing action/reaction pairs"
+      ],
+      "tags": ["Physics", "PHYS 2A", "Torque"],
+      "media": null,
+      "links": {
+        "github": null,
+        "liveDemo": null,
+        "pdfReport": "/public/documents/phys-2a/lab-10-rotational-equilibrium.pdf"
+      },
+      "featured": false
+    },
+    {
+      "id": "hl-2026-phys-2a-lab-11-rotational-inertia",
+      "title": "PHYS 2A — Lab 11: Rotational Inertia",
+      "category": "Coursework",
+      "subcategory": "Semester 2",
+      "subsubcategory": "Technical",
+      "subsubsubcategory": "Labs",
+      "date": "2026-04-24",
+      "starred": false,
+      "semester": "Semester 2 (West Valley College)",
+      "course": "PHYS 2A",
+      "courseCode": "PHYS 2A",
+      "summary": "Rotational-inertia lab: a horizontal rod with two movable masses is spun by a falling hanging mass while PASCO Capstone records angular acceleration, which is used to compute the system's rotational inertia. Varies how far the masses sit from the rotation axis and compares the experimental results against a theoretical model. Includes the group's data spreadsheet as an appendix.",
+      "metrics": [
+        "Rotational inertia determined from measured angular acceleration for several mass positions; I-vs-r shows a linear best fit — resistance to rotation rises as mass moves outward",
+        "Sample calculations for net force, tension, net torque, and rotational inertia; discusses extending the setup to test energy conservation (Mgh = 1/2 mv^2 + 1/2 Iw^2)"
+      ],
+      "tags": ["Physics", "PHYS 2A", "Rotational Motion"],
+      "media": null,
+      "links": {
+        "github": null,
+        "liveDemo": null,
+        "pdfReport": "/public/documents/phys-2a/lab-11-rotational-inertia.pdf"
+      },
+      "featured": false
+    },
+    {
+      "id": "hl-2026-phys-2a-lab-13-temp-pressure-density-buoyancy",
+      "title": "PHYS 2A — Lab 13: Temperature, Pressure, Density & Buoyancy",
+      "category": "Coursework",
+      "subcategory": "Semester 2",
+      "subsubcategory": "Technical",
+      "subsubsubcategory": "Labs",
+      "date": "2026-05-08",
+      "starred": false,
+      "semester": "Semester 2 (West Valley College)",
+      "course": "PHYS 2A",
+      "courseCode": "PHYS 2A",
+      "summary": "Four-station exploratory lab on the thermal and physical properties of materials and water — temperature, pressure, density, and buoyancy. Stations include a vapor-pressure flask demonstration and hot-vs-ice-water comparisons, with written analysis connecting results to reduced boiling point at altitude and Archimedes' water-displacement method for testing density. Includes the group's data spreadsheet as an appendix.",
+      "metrics": [
+        "Four rotating stations, roughly 30-45 minutes each, with measurements and observations recorded per station",
+        "Applied questions — why rice cooks slower at altitude (lower atmospheric pressure lowers the boiling point), and Archimedes' displacement test of King Hiero's crown"
+      ],
+      "tags": ["Physics", "PHYS 2A", "Thermodynamics"],
+      "media": null,
+      "links": {
+        "github": null,
+        "liveDemo": null,
+        "pdfReport": "/public/documents/phys-2a/lab-13-temperature-pressure-density-buoyancy.pdf"
+      },
+      "featured": false
+    },
+    {
+      "id": "hl-2026-phys-2a-practicum-4-newtons-second-law",
+      "title": "PHYS 2A — Practicum 4: Newton's Second Law",
+      "category": "Coursework",
+      "subcategory": "Semester 2",
+      "subsubcategory": "Technical",
+      "subsubsubcategory": "Labs",
+      "date": "2026-05-11",
+      "starred": false,
+      "semester": "Semester 2 (West Valley College)",
+      "course": "PHYS 2A",
+      "courseCode": "PHYS 2A",
+      "summary": "Individual practicum (practical exam) on Newton's second law — the same cart, force-sensor, and hanging-mass setup as Lab 4, run and analyzed solo. A spreadsheet records mass, weight, applied force, and measured acceleration across trials to check the net-force and acceleration relationship.",
+      "metrics": [
+        "Solo assessment: mass, weight, applied force, and acceleration recorded and analyzed per trial",
+        "Checks the linear net-force vs. acceleration relationship (a = F/m) from the individual data"
+      ],
+      "tags": ["Physics", "PHYS 2A", "Newton's Laws"],
+      "media": null,
+      "links": {
+        "github": null,
+        "liveDemo": null,
+        "pdfReport": "/public/documents/phys-2a/practicum-4-newtons-second-law.pdf"
+      },
+      "featured": false
+    },
+    {
+      "id": "hl-tech65-packet-tracer-collection",
+      "title": "TECH 65 — Packet Tracer File Collection",
+      "category": "Coursework",
+      "subcategory": "Semester 3",
+      "subsubcategory": "Technical",
+      "subsubsubcategory": "Assignments",
+      "date": null,
+      "semester": "Semester 3 (San José State University)",
+      "course": "TECH 65 — Introduction to Networks",
+      "courseCode": "TECH 65",
+      "kind": "collection",
+      "pinned": true,
+      "summary": "A running archive of every Cisco Packet Tracer activity (.pka) and network (.pkt) file from TECH 65 — Introduction to Networks. Download any file and open it in Packet Tracer. This one card holds every Packet Tracer file for the class — past, current, and future — so labs and assignments that use Packet Tracer link back here for their files instead of carrying their own copies.",
+      "metrics": [
+        "21 files — 1 Packet Tracer network (.pkt) file plus 20 Packet Tracer activities (.pka), including the end-of-Module-2 skills test in both of its versions, spanning Modules 1–9",
+        "Covers navigating the Cisco IOS, initial switch configuration, basic connectivity, end-device setup, the TCP/IP & OSI models in action, a wired-and-wireless LAN, physical-layer exploration and connection in physical mode, and identifying MAC/IP addresses and reading the ARP table",
+        "Grows as later modules add more Packet Tracer files"
+      ],
+      "tags": ["Cisco Packet Tracer", "TECH 65", "Networking"],
+      "media": null,
+      "downloads": [
+        {
+          "label": "Network Start — Introduction",
+          "type": "Packet Tracer network (.pkt)",
+          "size": "96 KB",
+          "date": "2026-08-24",
+          "source": "NetAcad",
+          "path": "/public/documents/tech-65/packet-tracer/intro-00-network-start.pkt"
+        },
+        {
+          "label": "Intro Exercise 1",
+          "type": "Packet Tracer activity (.pka)",
+          "size": "419 KB",
+          "date": "2026-08-24",
+          "source": "NetAcad",
+          "path": "/public/documents/tech-65/packet-tracer/intro-exercise-1.pka"
+        },
+        {
+          "label": "Intro Exercise 2",
+          "type": "Packet Tracer activity (.pka)",
+          "size": "323 KB",
+          "date": "2026-08-24",
+          "source": "NetAcad",
+          "path": "/public/documents/tech-65/packet-tracer/intro-exercise-2.pka"
+        },
+        {
+          "label": "Intro Exercise 3",
+          "type": "Packet Tracer activity (.pka)",
+          "size": "262 KB",
+          "date": "2026-08-24",
+          "source": "NetAcad",
+          "path": "/public/documents/tech-65/packet-tracer/intro-exercise-3.pka"
+        },
+        {
+          "label": "2.3.7 — Navigate the IOS",
+          "type": "Packet Tracer activity (.pka)",
+          "size": "202 KB",
+          "date": "2026-08-24",
+          "source": "NetAcad",
+          "path": "/public/documents/tech-65/packet-tracer/2.3.7-navigate-the-ios.pka"
+        },
+        {
+          "label": "2.5.5 — Configure Initial Switch Settings",
+          "type": "Packet Tracer activity (.pka)",
+          "size": "231 KB",
+          "date": "2026-08-26",
+          "source": "NetAcad",
+          "path": "/public/documents/tech-65/packet-tracer/2.5.5-configure-initial-switch-settings.pka"
+        },
+        {
+          "label": "2.7.6 — Implement Basic Connectivity",
+          "type": "Packet Tracer activity (.pka)",
+          "size": "559 KB",
+          "date": "2026-09-02",
+          "source": "NetAcad",
+          "path": "/public/documents/tech-65/packet-tracer/2.7.6-implement-basic-connectivity.pka"
+        },
+        {
+          "label": "2.9.1 — Basic Switch and End Device Configuration",
+          "type": "Packet Tracer activity (.pka)",
+          "size": "229 KB",
+          "date": "2026-09-02",
+          "source": "NetAcad",
+          "path": "/public/documents/tech-65/packet-tracer/2.9.1-basic-switch-and-end-device-configuration.pka"
+        },
+        {
+          "label": "2.9.2 — Basic Switch and End Device Configuration (Physical Mode)",
+          "type": "Packet Tracer activity (.pka)",
+          "size": "408 KB",
+          "date": "2026-08-27",
+          "source": "NetAcad",
+          "path": "/public/documents/tech-65/packet-tracer/2.9.2-basic-switch-end-device-config-physical-mode.pka"
+        },
+        {
+          "label": "2.9.2 — Basic Switch and End Device Configuration (Physical Mode) — later attempt",
+          "type": "Packet Tracer activity (.pka)",
+          "size": "499 KB",
+          "date": "2026-09-02",
+          "source": "NetAcad",
+          "path": "/public/documents/tech-65/packet-tracer/2.9.2-basic-switch-end-device-config-physical-mode-attempt-2.pka"
+        },
+        {
+          "label": "3.5.5 — Investigate the TCP/IP and OSI Models in Action",
+          "type": "Packet Tracer activity (.pka)",
+          "size": "622 KB",
+          "date": "2026-09-04",
+          "source": "NetAcad",
+          "path": "/public/documents/tech-65/packet-tracer/3.5.5-investigate-tcp-ip-and-osi-models.pka"
+        },
+        {
+          "label": "3.5.5 — Investigate the TCP/IP and OSI Models in Action — later attempt",
+          "type": "Packet Tracer activity (.pka)",
+          "size": "621 KB",
+          "date": "2026-09-09",
+          "source": "NetAcad",
+          "path": "/public/documents/tech-65/packet-tracer/3.5.5-investigate-tcp-ip-and-osi-models-attempt-2.pka"
+        },
+        {
+          "label": "Chapter 2 Test — Basic Switch Configuration",
+          "type": "Packet Tracer activity (.pka)",
+          "size": "287 KB",
+          "date": "2026-09-09",
+          "source": "TECH 65 skills test",
+          "path": "/public/documents/tech-65/packet-tracer/chapter-2-test-basic-switch-configuration.pka"
+        },
+        {
+          "label": "4.6.5 — Connect a Wired and Wireless LAN",
+          "type": "Packet Tracer activity (.pka)",
+          "size": "574 KB",
+          "date": "2026-09-10",
+          "source": "NetAcad",
+          "path": "/public/documents/tech-65/packet-tracer/4.6.5-connect-a-wired-and-wireless-lan.pka"
+        },
+        {
+          "label": "4.7.1 — Physical Layer Exploration (Physical Mode)",
+          "type": "Packet Tracer activity (.pka)",
+          "size": "8.0 MB",
+          "date": "2026-09-10",
+          "source": "NetAcad",
+          "path": "/public/documents/tech-65/packet-tracer/4.7.1-physical-layer-exploration-physical-mode.pka"
+        },
+        {
+          "label": "4.7.1 — Physical Layer Exploration (Physical Mode) — later attempt",
+          "type": "Packet Tracer activity (.pka)",
+          "size": "8.0 MB",
+          "date": "2026-09-10",
+          "source": "NetAcad",
+          "path": "/public/documents/tech-65/packet-tracer/4.7.1-physical-layer-exploration-physical-mode-attempt-2.pka"
+        },
+        {
+          "label": "4.7.2 — Connect the Physical Layer",
+          "type": "Packet Tracer activity (.pka)",
+          "size": "535 KB",
+          "date": "2026-09-14",
+          "source": "NetAcad",
+          "path": "/public/documents/tech-65/packet-tracer/4.7.2-connect-the-physical-layer.pka"
+        },
+        {
+          "label": "7.2.2 — Packet Tracer Activity",
+          "type": "Packet Tracer activity (.pka)",
+          "size": "214 KB",
+          "date": "2026-09-28",
+          "source": "NetAcad",
+          "path": "/public/documents/tech-65/packet-tracer/7.2.2-packet-tracer-activity.pka"
+        },
+        {
+          "label": "9.1.3 — Identify MAC and IP Addresses",
+          "type": "Packet Tracer activity (.pka)",
+          "size": "670 KB",
+          "date": "2026-09-28",
+          "source": "NetAcad",
+          "path": "/public/documents/tech-65/packet-tracer/9.1.3-identify-mac-and-ip-addresses.pka"
+        },
+        {
+          "label": "9.2.9 — Examine the ARP Table",
+          "type": "Packet Tracer activity (.pka)",
+          "size": "689 KB",
+          "date": "2026-09-28",
+          "source": "NetAcad",
+          "path": "/public/documents/tech-65/packet-tracer/9.2.9-examine-the-arp-table.pka"
+        },
+        {
+          "label": "Basic Switch Configuration v7.0 — Skills Test (no-checkmarks version)",
+          "type": "Packet Tracer activity (.pka)",
+          "size": "288 KB",
+          "date": "2026-09-30",
+          "source": "TECH 65 skills test",
+          "path": "/public/documents/tech-65/packet-tracer/basic-switch-config-v7-no-checkmarks.pka"
+        }
+      ],
+      "links": {},
+      "featured": false
+    },
+    {
+      "id": "hl-2026-tech65-lab1",
+      "title": "TECH 65 Lab 1 — Introduction to Packet Tracer",
+      "category": "Coursework",
+      "subcategory": "Semester 3",
+      "subsubcategory": "Technical",
+      "subsubsubcategory": "Labs",
+      "date": "2026-08-24",
+      "semester": "Semester 3 (San José State University)",
+      "course": "TECH 65 — Introduction to Networks",
+      "courseCode": "TECH 65",
+      "summary": "The first lab of the course: the Cisco NetAcad “Introduction to Packet Tracer” orientation set, done in the 2026-08-24 lab session alongside Module 1, “Networking Today.” It introduces the Packet Tracer network simulator — moving around the logical and physical workspaces, placing and cabling devices from the toolbar, configuring end devices, and testing connectivity in Realtime and Simulation modes — as preparation for building and configuring networks in every later lab. There is no written report for this one; the deliverable is the four Packet Tracer files themselves.",
+      "metrics": [
+        "First lab of TECH 65, completed 2026-08-24 with Module 1 “Networking Today” (instructor Richard Grotegut)",
+        "Four files: one .pkt starter network plus three auto-graded .pka activities (Intro Exercise 1–3)",
+        "Cisco Packet Tracer v9.0.1; lab work done in teams, in person in room E490 and remotely"
+      ],
+      "tags": ["Cisco Packet Tracer", "TECH 65", "Networking"],
+      "media": null,
+      "links": {
+        "related": "/semester-3-technical-assignments#hl-hl-tech65-packet-tracer-collection",
+        "relatedLabel": "Download the Packet Tracer files"
+      },
+      "featured": false
+    },
+    {
+      "id": "hl-2026-tech30-python-activities",
+      "title": "TECH 30 — Python Programming Activities",
+      "category": "Coursework",
+      "subcategory": "Semester 3",
+      "subsubcategory": "Technical",
+      "subsubsubcategory": "Assignments",
+      "date": null,
+      "semester": "Semester 3 (San José State University)",
+      "course": "TECH 30 — Introduction to Python Programming",
+      "courseCode": "TECH 30",
+      "summary": "A running set of the graded Python activities from TECH 30 — Introduction to Python Programming, added as the course goes on. Download the source for any activity.",
+      "metrics": [
+        "5 activities so far — arithmetic & I/O, built-in collection types, conditional logic, loop-based accumulation, and string counting & splitting"
+      ],
+      "tags": ["Python", "TECH 30", "Programming"],
+      "media": null,
+      "links": {},
+      "featured": false,
+      "kind": "collection",
+      "pinned": true,
+      "downloads": [
+        {
+          "label": "Activity 1 — Operators & Console I/O",
+          "type": "Python source (.py)",
+          "size": "603 B",
+          "date": "2026-09-01",
+          "path": "/public/documents/tech-30/activity-1.py"
+        },
+        {
+          "label": "Activity 2 — Tuples, Lists, Sets & Dictionaries",
+          "type": "Python source (.py)",
+          "size": "473 B",
+          "date": "2026-09-03",
+          "path": "/public/documents/tech-30/activity-2.py"
+        },
+        {
+          "label": "Activity 3 — Chained vs. Nested Conditionals",
+          "type": "Python source (.py)",
+          "size": "1.0 KB",
+          "date": "2026-09-08",
+          "path": "/public/documents/tech-30/activity-3.py"
+        },
+        {
+          "label": "Activity 4 — Loops & Accumulation",
+          "type": "Python source (.py)",
+          "size": "742 B",
+          "date": "2026-09-15",
+          "path": "/public/documents/tech-30/activity-4.py"
+        },
+        {
+          "label": "Activity 5 — String Counting & Splitting",
+          "type": "Python source (.py)",
+          "size": "498 B",
+          "date": "2026-09-22",
+          "path": "/public/documents/tech-30/activity-5.py"
+        }
+      ]
+    },
+    {
+      "id": "hl-2026-tech15-assignments",
+      "title": "TECH 15 — Career & Professional-Development Assignments",
+      "category": "Coursework",
+      "subcategory": "Semester 3",
+      "subsubcategory": "Technical",
+      "subsubsubcategory": "Assignments",
+      "date": null,
+      "semester": "Semester 3 (San José State University)",
+      "course": "TECH 15 — Careers in Engineering Technology",
+      "courseCode": "TECH 15",
+      "kind": "collection",
+      "pinned": true,
+      "summary": "A running set of the written assignments from TECH 15 — Careers in Engineering Technology, a seminar on career planning, résumés, internships, and industry guest speakers. Added as the course goes on.",
+      "metrics": [
+        "6 assignments so far — an introductory slideshow, a career-services résumé/ATS session summary, a study-abroad guest-speaker summary, a financial-aid & scholarships guest-speaker summary, a NETS / SME / augmented-reality guest-speaker summary, and an Archer Aviation guest-speaker summary"
+      ],
+      "tags": ["Career Development", "TECH 15", "Professional Writing"],
+      "media": null,
+      "downloads": [
+        {
+          "label": "Assignment 1 — Introduction Slideshow",
+          "type": "PDF",
+          "size": "795 KB",
+          "date": "2026-08-25",
+          "path": "/public/documents/tech-15/assignment-1-introduction-slideshow.pdf"
+        },
+        {
+          "label": "Assignment 2 — Career Center Résumé / ATS Session Summary",
+          "type": "PDF",
+          "size": "46 KB",
+          "date": "2026-08-26",
+          "path": "/public/documents/tech-15/assignment-2-career-session-summary.pdf"
+        },
+        {
+          "label": "Assignment 3 — Study-Abroad Guest Speaker Summary",
+          "type": "PDF",
+          "size": "48 KB",
+          "date": "2026-09-02",
+          "path": "/public/documents/tech-15/assignment-3-study-abroad-speaker.pdf"
+        },
+        {
+          "label": "Assignment 4 — Financial Aid & Scholarships Guest Speaker Summary",
+          "type": "PDF",
+          "size": "54 KB",
+          "date": "2026-09-10",
+          "path": "/public/documents/tech-15/assignment-4-financial-aid-speaker-summary.pdf"
+        },
+        {
+          "label": "Assignment #3 — NETS, SME & Augmented Reality Guest Speakers",
+          "type": "PDF",
+          "size": "44 KB",
+          "date": "2026-09-21",
+          "path": "/public/documents/tech-15/assignment-3-nets-sme-augmented-reality.pdf"
+        },
+        {
+          "label": "Assignment 6 — Archer Aviation Guest Speaker Summary",
+          "type": "PDF",
+          "size": "39 KB",
+          "date": "2026-09-28",
+          "path": "/public/documents/tech-15/assignment-6-archer-aviation-speaker-summary.pdf"
+        }
+      ],
+      "links": {},
+      "featured": false
+    },
+    {
+      "id": "hl-bus3-12-assignments",
+      "title": "BUS3 12 — Personal & Professional Development Assignments",
+      "category": "Coursework",
+      "subcategory": "Semester 1",
+      "subsubcategory": "Non-technical",
+      "subsubsubcategory": "Assignments",
+      "date": null,
+      "semester": "Semester 1 (San José State University)",
+      "course": "BUS3 12",
+      "courseCode": "BUS3 12",
+      "kind": "collection",
+      "pinned": true,
+      "summary": "The full set of assignments from BUS3 12 — a first-year seminar covering academic planning, personal finance, career preparation, and personal wellness.",
+      "metrics": [
+        "4 assignments — a four-year academic plan, a personal-budget case study, a résumé & cover letter, and a personal wellness plan"
+      ],
+      "tags": [
+        "BUS3 12",
+        "Academic Planning",
+        "Personal Finance",
+        "Career Development"
+      ],
+      "media": null,
+      "downloads": [
+        {
+          "label": "Four-Year Academic Plan",
+          "type": "PDF",
+          "size": "59 KB",
+          "date": "2025-09-10",
+          "path": "/public/documents/bus3-12/four-year-academic-plan.pdf"
+        },
+        {
+          "label": "Personal Finance Case Study",
+          "type": "PDF",
+          "size": "74 KB",
+          "date": "2025-09-22",
+          "path": "/public/documents/bus3-12/case-study-budget.pdf"
+        },
+        {
+          "label": "Résumé & Cover Letter",
+          "type": "PDF",
+          "size": "123 KB",
+          "date": "2025-10-25",
+          "path": "/public/documents/bus3-12/resume-cover-letter.pdf"
+        },
+        {
+          "label": "Personal Wellness Plan",
+          "type": "PDF",
+          "size": "50 KB",
+          "date": "2025-12-03",
+          "path": "/public/documents/bus3-12/personal-wellness-plan.pdf"
+        }
+      ],
+      "links": {},
+      "featured": false
+    },
+    {
+      "id": "hl-comm-20-assignments",
+      "title": "COMM 20 — Public Speaking Assignments",
+      "category": "Coursework",
+      "subcategory": "Semester 1",
+      "subsubcategory": "Non-technical",
+      "subsubsubcategory": "Assignments",
+      "date": null,
+      "semester": "Semester 1 (San José State University)",
+      "course": "COMM 20",
+      "courseCode": "COMM 20",
+      "kind": "collection",
+      "pinned": true,
+      "summary": "Every graded assignment from COMM 20 — Public Speaking: speech self-evaluations and reflections, an informative and a group persuasive speech, and two rounds of peer review.",
+      "metrics": [
+        "6 assignments — a first-speech self-evaluation, a storytelling-speech reflection, an informative speech, a group persuasive speech, and two peer-review sets"
+      ],
+      "tags": ["COMM 20", "Public Speaking", "Peer Review"],
+      "media": null,
+      "downloads": [
+        {
+          "label": "First Speech Self-Evaluation",
+          "type": "PDF",
+          "size": "79 KB",
+          "date": "2025-09-08",
+          "path": "/public/documents/comm-20/first-speech-self-evaluation.pdf"
+        },
+        {
+          "label": "Storytelling Speech Reflection",
+          "type": "PDF",
+          "size": "49 KB",
+          "date": "2025-09-29",
+          "path": "/public/documents/comm-20/storytelling-speech-reflection.pdf"
+        },
+        {
+          "label": "Informative Speech: Stock Market Timeline",
+          "type": "PDF",
+          "size": "60 KB",
+          "date": "2025-10-20",
+          "path": "/public/documents/comm-20/informative-speech-stock-market.pdf"
+        },
+        {
+          "label": "Peer Reviews: Persuasive Speech Round 1",
+          "type": "PDF",
+          "size": "73 KB",
+          "date": "2025-11-10",
+          "path": "/public/documents/comm-20/peer-reviews-persuasive-speech-1.pdf"
+        },
+        {
+          "label": "Group Persuasive Speech: Child Hunger in Sudan",
+          "type": "PDF",
+          "size": "145 KB",
+          "date": "2025-11-24",
+          "path": "/public/documents/comm-20/group-persuasive-speech-sudan.pdf"
+        },
+        {
+          "label": "Peer Reviews: Final Speeches",
+          "type": "PDF",
+          "size": "51 KB",
+          "date": "2025-12-01",
+          "path": "/public/documents/comm-20/final-speeches-peer-reviews.pdf"
+        }
+      ],
+      "links": {},
+      "featured": false
+    },
+    {
+      "id": "hl-engl-1a-assignments",
+      "title": "ENGL 1A — Writing & Rhetoric Assignments",
+      "category": "Coursework",
+      "subcategory": "Semester 1",
+      "subsubcategory": "Non-technical",
+      "subsubsubcategory": "Assignments",
+      "date": null,
+      "semester": "Semester 1 (San José State University)",
+      "course": "ENGL 1A",
+      "courseCode": "ENGL 1A",
+      "kind": "collection",
+      "pinned": true,
+      "summary": "The complete ENGL 1A writing portfolio: rhetorical-analysis essays, reflective pieces, peer reviews, and a final advocacy webpage project.",
+      "metrics": [
+        "10 assignments — 4 rhetorical-analysis essays, 2 reflections, 2 peer-review sets, a rhetorical scavenger hunt, and a final advocacy webpage"
+      ],
+      "tags": ["ENGL 1A", "Rhetoric", "Essay", "Peer Review"],
+      "media": null,
+      "downloads": [
+        {
+          "label": "Critical Essay: A State of Extremes",
+          "type": "PDF",
+          "size": "74 KB",
+          "date": "2025-08-25",
+          "path": "/public/documents/engl-1a/critical-essay-state-of-extremes.pdf"
+        },
+        {
+          "label": "Rhetorical Scavenger Hunt",
+          "type": "PDF",
+          "size": "503 KB",
+          "date": "2025-08-27",
+          "path": "/public/documents/engl-1a/rhetorical-scavenger-hunt.pdf"
+        },
+        {
+          "label": "Digital Legacy Collage Reflection",
+          "type": "PDF",
+          "size": "50 KB",
+          "date": "2025-09-01",
+          "path": "/public/documents/engl-1a/digital-legacy-collage-reflection.pdf"
+        },
+        {
+          "label": "Brand Project Peer Assessments",
+          "type": "PDF",
+          "size": "86 KB",
+          "date": "2025-09-17",
+          "path": "/public/documents/engl-1a/brand-project-peer-assessments.pdf"
+        },
+        {
+          "label": "Advertisement Analysis",
+          "type": "PDF",
+          "size": "130 KB",
+          "date": "2025-10-01",
+          "path": "/public/documents/engl-1a/advertisement-analysis.pdf"
+        },
+        {
+          "label": "Meme Rhetorical Analysis",
+          "type": "PDF",
+          "size": "43 KB",
+          "date": "2025-10-06",
+          "path": "/public/documents/engl-1a/meme-rhetorical-analysis.pdf"
+        },
+        {
+          "label": "Portfolio Reflection",
+          "type": "PDF",
+          "size": "74 KB",
+          "date": "2025-11-17",
+          "path": "/public/documents/engl-1a/portfolio-reflection.pdf"
+        },
+        {
+          "label": "Film Essay Draft Peer Reviews",
+          "type": "PDF",
+          "size": "87 KB",
+          "date": "2025-11-19",
+          "path": "/public/documents/engl-1a/film-essay-draft-peer-reviews.pdf"
+        },
+        {
+          "label": "Film Essay: Tobacco Industry & Whistleblowing",
+          "type": "PDF",
+          "size": "87 KB",
+          "date": "2025-11-26",
+          "path": "/public/documents/engl-1a/film-essay-tobacco-whistleblowing.pdf"
+        },
+        {
+          "label": "Advocacy Webpage: Media Analysis & Reflection",
+          "type": "PDF",
+          "size": "90 KB",
+          "date": "2025-12-03",
+          "path": "/public/documents/engl-1a/advocacy-webpage-media-analysis.pdf"
+        }
+      ],
+      "links": {},
+      "featured": false
+    },
+    {
+      "id": "hl-engl-2-assignments",
+      "title": "ENGL 2 — Argument & Research Writing Assignments",
+      "category": "Coursework",
+      "subcategory": "Semester 2",
+      "subsubcategory": "Non-technical",
+      "subsubsubcategory": "Assignments",
+      "date": null,
+      "semester": "Semester 2 (San José State University)",
+      "course": "ENGL 2",
+      "courseCode": "ENGL 2",
+      "kind": "collection",
+      "pinned": true,
+      "summary": "The full ENGL 2 portfolio — a persuasive research sequence building toward an argument about the American mental-health crisis, plus a reflective portfolio essay.",
+      "metrics": [
+        "5 assignments — 3 argument essays, an annotated bibliography, and a portfolio reflection"
+      ],
+      "tags": ["ENGL 2", "Rhetoric", "Essay", "Research"],
+      "media": null,
+      "downloads": [
+        {
+          "label": "Essay 1: Aligning Purpose, Identity & Work",
+          "type": "PDF",
+          "size": "106 KB",
+          "date": "2026-02-11",
+          "path": "/public/documents/engl-2/essay-1-purpose-identity-work.pdf"
+        },
+        {
+          "label": "Essay 2: The Cost of a Click",
+          "type": "PDF",
+          "size": "53 KB",
+          "date": "2026-03-25",
+          "path": "/public/documents/engl-2/essay-2-price-of-shame.pdf"
+        },
+        {
+          "label": "Annotated Bibliography: The American Mental Health Crisis",
+          "type": "PDF",
+          "size": "129 KB",
+          "date": "2026-04-12",
+          "path": "/public/documents/engl-2/annotated-bibliography-mental-health-crisis.pdf"
+        },
+        {
+          "label": "Essay 3: Systemic Failures Behind the American Mental Health Crisis",
+          "type": "PDF",
+          "size": "126 KB",
+          "date": "2026-04-22",
+          "path": "/public/documents/engl-2/essay-3-mental-health-systemic-failures.pdf"
+        },
+        {
+          "label": "Portfolio Reflection",
+          "type": "PDF",
+          "size": "83 KB",
+          "date": "2026-05-04",
+          "path": "/public/documents/engl-2/portfolio-reflection.pdf"
+        }
+      ],
+      "links": {},
+      "featured": false
+    },
+    {
+      "id": "hl-hist-15-assignments",
+      "title": "HIST 15 — U.S. History Essays",
+      "category": "Coursework",
+      "subcategory": "Semester 2",
+      "subsubcategory": "Non-technical",
+      "subsubsubcategory": "Assignments",
+      "date": null,
+      "semester": "Semester 2 (San José State University)",
+      "course": "HIST 15",
+      "courseCode": "HIST 15",
+      "kind": "collection",
+      "pinned": true,
+      "summary": "Every written assignment from HIST 15 — three “Modern Connection” essays linking U.S. history to present-day issues, a participation essay on the farmworker movement, and an extra-credit essay on Modoc resistance.",
+      "metrics": [
+        "5 assignments — 3 Modern Connection comparative essays, a participation essay, and an extra-credit essay"
+      ],
+      "tags": ["HIST 15", "History", "Comparative Essay", "Essay"],
+      "media": null,
+      "downloads": [
+        {
+          "label": "Modern Connection Essay 1: Market Revolution & the Internet",
+          "type": "PDF",
+          "size": "108 KB",
+          "date": "2026-03-22",
+          "path": "/public/documents/hist-15/modern-connection-essay-1-market-internet.pdf"
+        },
+        {
+          "label": "Modern Connection Essay 2: Voting Rights, Jim Crow to Today",
+          "type": "PDF",
+          "size": "135 KB",
+          "date": "2026-04-15",
+          "path": "/public/documents/hist-15/modern-connection-essay-2-voting-rights.pdf"
+        },
+        {
+          "label": "Participate: Maria Moreno & the Farmworker Movement",
+          "type": "PDF",
+          "size": "139 KB",
+          "date": "2026-04-20",
+          "path": "/public/documents/hist-15/participate-maria-moreno.pdf"
+        },
+        {
+          "label": "Modern Connection Essay 3: Incarceration & Detention Camps",
+          "type": "PDF",
+          "size": "154 KB",
+          "date": "2026-04-25",
+          "path": "/public/documents/hist-15/modern-connection-essay-3-incarceration-detention.pdf"
+        },
+        {
+          "label": "Extra Credit: Modoc Resistance to Removal",
+          "type": "PDF",
+          "size": "53 KB",
+          "date": "2026-04-25",
+          "path": "/public/documents/hist-15/extra-credit-modoc-resistance.pdf"
+        }
+      ],
+      "links": {},
+      "featured": false
+    },
+    {
+      "id": "hl-2026-professional-resumes-collection",
+      "title": "Résumé — Version History",
+      "category": "Professional Documents",
+      "subcategory": "Resumes",
+      "subsubcategory": "Past",
+      "date": null,
+      "semester": null,
+      "course": null,
+      "kind": "collection",
+      "pinned": true,
+      "summary": "Every prior résumé version, kept as a record of how it evolved over the course of the internship/job search. The current résumé is on the site's Résumé page — this is the archive of everything before it.",
+      "metrics": ["7 versions, June–September 2026"],
+      "tags": ["Résumé", "Career"],
+      "media": null,
+      "links": {},
+      "downloads": [
+        {
+          "label": "Résumé v0",
+          "type": "PDF",
+          "size": "99 KB",
+          "date": "2026-06-17",
+          "path": "/public/documents/professional/resumes/jared-lomeli-resume-v0.pdf"
+        },
+        {
+          "label": "Résumé v1",
+          "type": "PDF",
+          "size": "112 KB",
+          "date": "2026-06-20",
+          "path": "/public/documents/professional/resumes/jared-lomeli-resume-v1.pdf"
+        },
+        {
+          "label": "Résumé v2",
+          "type": "PDF",
+          "size": "108 KB",
+          "date": "2026-06-24",
+          "path": "/public/documents/professional/resumes/jared-lomeli-resume-v2.pdf"
+        },
+        {
+          "label": "Résumé v3",
+          "type": "PDF",
+          "size": "91 KB",
+          "date": "2026-08-12",
+          "path": "/public/documents/professional/resumes/jared-lomeli-resume-v3.pdf"
+        },
+        {
+          "label": "Résumé v4",
+          "type": "PDF",
+          "size": "107 KB",
+          "date": "2026-08-24",
+          "path": "/public/documents/professional/resumes/jared-lomeli-resume-v4.pdf"
+        },
+        {
+          "label": "Résumé v5",
+          "type": "PDF",
+          "size": "78 KB",
+          "date": "2026-08-26",
+          "path": "/public/documents/professional/resumes/jared-lomeli-resume-v5.pdf"
+        },
+        {
+          "label": "Résumé v6",
+          "type": "PDF",
+          "size": "96 KB",
+          "date": "2026-09-07",
+          "path": "/public/documents/professional/resumes/jared-lomeli-resume-v6.pdf"
+        }
+      ],
+      "featured": false
+    },
+    {
+      "id": "hl-2026-professional-resume-current",
+      "title": "Résumé — Current (v6.1)",
+      "category": "Professional Documents",
+      "subcategory": "Resumes",
+      "subsubcategory": "Current",
+      "date": "2026-09-13",
+      "semester": null,
+      "course": null,
+      "summary": "The current résumé, kept up to date as coursework and projects are added. Same file used everywhere else on the site (the homepage's Résumé button, /public/resume.html).",
+      "metrics": ["Jared_Lomeli_CNSM_v6.pdf"],
+      "tags": ["Résumé", "Career"],
+      "media": {
+        "type": "image",
+        "localSourcePath": "/public/images/resume-current-preview.png",
+        "altText": "First page of Jared Lomeli's current resume",
+        "width": 1224,
+        "height": 1584
+      },
+      "links": {
+        "pdfReport": "/public/Jared-Lomeli-Resume.pdf"
+      },
+      "featured": false
+    },
+    {
+      "id": "hl-2026-professional-cover-letters-collection",
+      "title": "Cover Letters",
+      "category": "Professional Documents",
+      "subcategory": "Cover Letters",
+      "date": null,
+      "semester": null,
+      "course": null,
+      "kind": "collection",
+      "pinned": true,
+      "summary": "Cover letters written for internship and job applications, each tailored to the specific role and team.",
+      "metrics": ["11 cover letters, June–September 2026"],
+      "tags": ["Cover Letter", "Career"],
+      "media": null,
+      "links": {},
+      "downloads": [
+        {
+          "label": "City of Santa Clara — System Support Intern",
+          "type": "PDF",
+          "size": "49 KB",
+          "date": "2026-06-17",
+          "path": "/public/documents/professional/cover-letters/city-of-santa-clara-system-support-intern.pdf"
+        },
+        {
+          "label": "Rising Up Together — IT Support Intern",
+          "type": "PDF",
+          "size": "116 KB",
+          "date": "2026-06-20",
+          "path": "/public/documents/professional/cover-letters/rising-up-together-it-support-intern.pdf"
+        },
+        {
+          "label": "Western Digital — IT Applications Intern",
+          "type": "PDF",
+          "size": "3 KB",
+          "date": "2026-07-01",
+          "path": "/public/documents/professional/cover-letters/western-digital-it-applications-intern.pdf"
+        },
+        {
+          "label": "SJSU ITS — AI DevOps Team Internship",
+          "type": "PDF",
+          "size": "43 KB",
+          "date": "2026-09-04",
+          "path": "/public/documents/professional/cover-letters/ai-devops-internship.pdf"
+        },
+        {
+          "label": "ONEOK Inc. — Cyber Security Intern",
+          "type": "PDF",
+          "size": "52 KB",
+          "date": "2026-09-04",
+          "path": "/public/documents/professional/cover-letters/oneok-inc.pdf"
+        },
+        {
+          "label": "ONEOK Inc. — IT Applications Professional Intern",
+          "type": "PDF",
+          "size": "41 KB",
+          "date": "2026-09-04",
+          "path": "/public/documents/professional/cover-letters/oneok-inc-it.pdf"
+        },
+        {
+          "label": "Rysun Labs Inc. — IT Data Engineer Intern",
+          "type": "PDF",
+          "size": "52 KB",
+          "date": "2026-09-04",
+          "path": "/public/documents/professional/cover-letters/rysun-labs-inc.pdf"
+        },
+        {
+          "label": "Midpeninsula Regional Open Space District — IST Intern",
+          "type": "PDF",
+          "size": "58 KB",
+          "date": "2026-09-11",
+          "path": "/public/documents/professional/cover-letters/midpen-ist-intern.pdf"
+        },
+        {
+          "label": "CISA — Volunteer Student Intern",
+          "type": "PDF",
+          "size": "39 KB",
+          "date": "2026-09-12",
+          "path": "/public/documents/professional/cover-letters/cisa-volunteer-student-intern.pdf"
+        },
+        {
+          "label": "Honeywell Aerospace — Cyber Security Intern",
+          "type": "PDF",
+          "size": "43 KB",
+          "date": "2026-09-12",
+          "path": "/public/documents/professional/cover-letters/honeywell-aerospace-cyber-security-intern.pdf"
+        },
+        {
+          "label": "Google — SWE/SRE Intern",
+          "type": "PDF",
+          "size": "40 KB",
+          "date": "2026-09-13",
+          "path": "/public/documents/professional/cover-letters/google-swe-sre-intern.pdf"
+        }
+      ],
+      "featured": false
+    },
+    {
+      "id": "hl-2026-professional-other-documents-collection",
+      "title": "Other Application Documents",
+      "category": "Professional Documents",
+      "subcategory": "Other Documents",
+      "date": null,
+      "semester": null,
+      "course": null,
+      "kind": "collection",
+      "pinned": true,
+      "summary": "Supporting documents used alongside the résumé — transcripts and the current class schedule.",
+      "metrics": ["3 documents"],
+      "tags": ["Transcript", "Career"],
+      "media": null,
+      "links": {},
+      "downloads": [
+        {
+          "label": "Academic Transcript — West Valley College",
+          "type": "PDF",
+          "size": "102 KB",
+          "date": "2026-06-17",
+          "path": "/public/documents/professional/other-documents/academic-transcript-wvm.pdf"
+        },
+        {
+          "label": "Unofficial Transcript — San José State University",
+          "type": "PDF",
+          "size": "288 KB",
+          "date": "2026-09-08",
+          "path": "/public/Jared-Lomeli-Unofficial-Transcript.pdf"
+        },
+        {
+          "label": "Fall 2026 Class Schedule",
+          "type": "PDF",
+          "size": "79 KB",
+          "date": "2026-06-17",
+          "path": "/public/documents/professional/other-documents/fall-2026-class-schedule.pdf"
+        }
+      ],
+      "featured": false
+    },
+    {
+      "id": "hl-2026-secplus-study-guide-project",
+      "title": "Security+ SY0-701 Interactive Study Guide",
+      "category": "Project",
+      "date": "2026-06-17",
+      "starred": true,
+      "semester": null,
+      "course": "CompTIA Security+ SY0-701 Prep",
+      "summary": "Self-built exam-prep site covering all 5 weighted SY0-701 domains — 11 chapter study-note pages with original interactive diagrams, a quiz/flashcard/PBQ practice engine, a 1,090-term glossary, and a keyword-retrieval study assistant with an optional in-browser LLM. Built June 2026 while studying for the exam, then reopened and expanded through August 2026 with a Linux Lab: a simulated shell with guided lessons, free play, and SEC+ scenario challenges. Vanilla HTML/CSS/JS, no build step.",
+      "metrics": [
+        "800-question bank, domain-weighted within ~1-4.5 points of the real SY0-701 exam distribution (verified via a full glossary cross-reference)",
+        "50 PBQ labs (38 row-matching + 12 scenario) plus a simulated Linux shell with 8 lessons and 5 SEC+ challenges",
+        "1,090-term glossary and 11 interactive chapter diagrams"
+      ],
+      "tags": [
+        "Security+",
+        "SY0-701",
+        "JavaScript",
+        "Study Tool",
+        "Linux Lab",
+        "Web Design"
+      ],
+      "media": {
+        "type": "image",
+        "localSourcePath": "/public/images/secplus-study-site-home.png",
+        "altText": "Security+ SY0-701 study guide homepage showing the exam-facts panel (750/900 to pass, 90 questions, 90 minutes), master port reference, and chapter navigation",
+        "width": 1600,
+        "height": 862
+      },
+      "links": {
+        "github": "https://github.com/jaredlomeli-sjsu/comptia-secplus-study-guide",
+        "liveDemo": "https://securityplus-studyguide.vercel.app",
+        "pdfReport": null
+      },
+      "featured": true
+    },
+    {
+      "id": "hl-2026-nexus-helpdesk-triage-agent-project",
+      "title": "Nexus Technologies IT Helpdesk Triage Agent",
+      "category": "Project",
+      "date": "2026-07-18",
+      "semester": null,
+      "course": "Capstone project — Kaggle & Google 5-Day AI Agents intensive",
+      "summary": "Multi-agent IT helpdesk triage system built on Google ADK 2.0 that routes support tickets to one of three paths: instant auto-resolve via keyword matching, security escalation via prompt-injection/phishing screening before any LLM call, or human review with two Gemini agents drafting a response. Includes a custom MCP tool server and a FastAPI supervisor dashboard. Built as the capstone project for a Kaggle & Google 5-day AI agents intensive.",
+      "metrics": [
+        "3-way ticket routing (auto-resolve / security-escalate / human-review)",
+        "17 unit tests, no API key required",
+        "21 KB articles + 17 threat keywords + 7 prompt-injection patterns screened pre-LLM"
+      ],
+      "tags": [
+        "Python",
+        "Google ADK",
+        "Gemini",
+        "MCP",
+        "FastAPI",
+        "AI Agents",
+        "Security"
+      ],
+      "media": {
+        "type": "image",
+        "localSourcePath": "/public/images/nexusbot-notebook.png",
+        "altText": "NexusBot.v4 Kaggle notebook showing the inline test suite covering all routing paths and MCP agent skills, 17 unit tests with no API key required",
+        "width": 1600,
+        "height": 860
+      },
+      "links": {
+        "github": "https://github.com/jaredlomeli-sjsu/google-kaggle-5day-intensive",
+        "liveDemo": "https://www.kaggle.com/code/jaredlomeli/nexusbot-v4",
+        "pdfReport": null
+      },
+      "featured": true
+    },
+    {
+      "id": "hl-2026-ice-ev-engine-explorer-project",
+      "title": "ICE vs. EV Engine Explorer",
+      "category": "Project",
+      "date": "2026-04-24",
+      "semester": null,
+      "course": "Self-directed — extended from a Physics 2A final project",
+      "summary": "A self-built interactive learning site and narrated video on why internal combustion engines lose roughly 80% of their fuel energy to heat, built around a 2021 Dodge Charger R/T 5.7L HEMI V8 and compared against EV thermal management using Phase Change Materials. The centerpiece is an embedded 3D engine explorer with a live part-info panel and a quiz mode. It began as a Physics 2A final project and was carried further as an independent web build.",
+      "metrics": [
+        "Interactive 3D ICE vs. EV engine explorer with a live part-info panel and quiz mode",
+        "9-part narrated video walkthrough",
+        "Companion site built with vanilla web tech and published live"
+      ],
+      "tags": ["Web Design", "Interactive", "Thermodynamics", "Physics"],
+      "media": {
+        "type": "image",
+        "localSourcePath": "/public/images/phys2a-engine-explorer.png",
+        "altText": "Interactive 3D Engine Explorer showing a cutaway ICE turbocharger model with a live part-info spec panel, from the ICE vs. EV companion site",
+        "width": 1600,
+        "height": 859
+      },
+      "links": {
+        "github": null,
+        "liveDemo": "https://superlative-mandazi-3b5f4b.netlify.app/",
+        "pdfReport": null,
+        "video": "https://youtu.be/1qZuOk2-g6U"
+      },
+      "featured": true
+    },
+    {
+      "id": "hl-2026-kali-cli-vs-ubuntu-gui-lab",
+      "title": "Linux CLI vs. GUI Comparison Lab",
+      "category": "Project",
+      "date": "2026-09-13",
+      "semester": null,
+      "course": "Self-directed — companion to Cisco Networking Academy Linux Essentials",
+      "summary": "A self-authored, 11-topic hands-on lab pairing Kali Linux terminal commands with the equivalent Ubuntu Desktop GUI action, built as a companion to the in-progress Cisco Networking Academy Linux Essentials course. Each topic walks through a CLI step, the matching GUI step, and a compare-and-reflect note, built around the idea that the command line and the graphical desktop are two interfaces onto the exact same underlying Linux system rather than two unrelated things to memorize.",
+      "metrics": [
+        "11 topics: identity & location, filesystem navigation, permissions, search, users & groups, processes, disk usage, package management, and basic networking",
+        "Built and run across two VirtualBox VMs — an existing Kali Linux VM (CLI) and a newly built Ubuntu Desktop 26.04 LTS VM (GUI)",
+        "Written as a companion resource, not a replacement — assumes command syntax is covered by the course itself and focuses on building the CLI/GUI mental model"
+      ],
+      "tags": ["Linux", "Cisco Networking Academy", "VirtualBox"],
+      "media": null,
+      "links": {
+        "github": null,
+        "liveDemo": null,
+        "pdfReport": "/public/documents/kali-cli-vs-ubuntu-gui-lab/kali-cli-vs-ubuntu-gui-lab.pdf"
+      },
+      "featured": false
+    },
+    {
+      "id": "hl-2026-nets-raspberry-pi-workshop",
+      "title": "NETS Workshop — Headless Raspberry Pi 4B Setup",
+      "category": "Extra Curricular",
+      "subcategory": "Educational",
+      "date": "2026-09-17",
+      "starred": false,
+      "semester": null,
+      "course": null,
+      "summary": "A hands-on workshop with SJSU's Network Engineering and Technology Society (NETS): flashed Raspberry Pi OS Lite (headless) to a microSD card, brought the Pi 4B up over an SSH-only connection from the E490 lab desktops via direct Ethernet, then moved it onto sjsu_guest Wi-Fi so it could run independent of the wired link. Finished by installing a set of CLI quality-of-life tools.",
+      "metrics": [
+        "Headless provisioning: Raspberry Pi OS Lite flashed to microSD, no monitor/keyboard ever attached",
+        "Administered entirely over SSH from the E490 lab desktops via a direct Ethernet connection",
+        "Migrated the Pi from wired Ethernet to sjsu_guest Wi-Fi without losing the active session",
+        "Installed eza, bat, btop, and ncdu for day-to-day CLI use"
+      ],
+      "tags": ["Raspberry Pi", "Linux", "SSH", "Networking", "NETS"],
+      "media": {
+        "type": "image",
+        "localSourcePath": "/public/images/nets-raspberry-pi-workshop.jpg",
+        "altText": "Dell monitor at an SJSU E490 lab desk showing an active SSH session into a Raspberry Pi during a NETS workshop",
+        "width": 1600,
+        "height": 1200
+      },
+      "links": {
+        "pdfReport": "/public/documents/nets/raspberry-pi-workshop.pdf"
+      },
+      "featured": false,
+      "subsubcategory": "NETS"
+    },
+    {
+      "id": "hl-2026-nets-pihole-dns-adblocking",
+      "title": "NETS Workshop Part 2 — Pi-hole Network-Wide DNS Ad-Blocking",
+      "category": "Extra Curricular",
+      "subcategory": "Educational",
+      "date": "2026-09-21",
+      "starred": false,
+      "semester": null,
+      "course": null,
+      "summary": "NETS' second Raspberry Pi workshop covered setting up network-wide DNS ad-blocking; since I was unavailable for the scheduled session, I built it myself ahead of time as a follow-up to the first NETS Pi workshop. Set a static IP on the same Raspberry Pi 4B, ran the official Pi-hole installer, and pointed the home network's DNS at it.",
+      "metrics": [
+        "Set a static IP on the Raspberry Pi 4B so it stays addressable as the network's DNS server",
+        "Installed Pi-hole via the official interactive installer, then verified it on one device before repointing the whole router",
+        "Pointed the home network's DNS at the Pi; running continuously since, over 2,000 queries blocked",
+        "Dashboard shows 76,230 domains active across blocklists"
+      ],
+      "tags": [
+        "Raspberry Pi",
+        "Pi-hole",
+        "DNS",
+        "DHCP",
+        "SSH",
+        "Networking",
+        "NETS",
+        "Homelab"
+      ],
+      "media": {
+        "type": "image",
+        "localSourcePath": "/public/images/nets-pihole-dashboard.png",
+        "altText": "Pi-hole admin dashboard showing total queries, queries blocked, percentage blocked, and domains on blocklists for the Raspberry Pi running DNS ad-blocking",
+        "width": 1600,
+        "height": 952
+      },
+      "links": {},
+      "featured": false,
+      "subsubcategory": "NETS"
     }
   ]
 }

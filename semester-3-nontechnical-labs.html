@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="theme.js"></script>
+    <title>Coursework · Semester 3 · Non-technical · Labs — Jared Lomeli</title>
+    <meta name="description" content="Non-technical Labs from Jared Lomeli's third semester of university." />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Coursework · Semester 3 · Non-technical · Labs — Jared Lomeli" />
+    <meta property="og:description" content="Non-technical Labs from Jared Lomeli's third semester of university." />
+    <meta property="og:url" content="https://jared-lomeli-portfolio.vercel.app/semester-3-nontechnical-labs" />
+    <meta property="og:image" content="https://jared-lomeli-portfolio.vercel.app/public/images/og-image.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="canonical" href="https://jared-lomeli-portfolio.vercel.app/semester-3-nontechnical-labs" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23d97706'/%3E%3Ctext x='32' y='43' font-family='Georgia,serif' font-size='30' font-weight='700' fill='%23ffffff' text-anchor='middle'%3EJL%3C/text%3E%3C/svg%3E" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="category-page">
+    <button type="button" class="btn theme-toggle-fixed" data-theme-toggle>
+      Dark Mode
+    </button>
+
+    <div class="category-hero">
+      <div class="category-head">
+        <a class="category-back" href="/semester-3-nontechnical">&larr; Non-technical</a>
+        <p class="category-eyebrow">Non-technical</p>
+        <h1 class="category-title">Labs</h1>
+        <p class="category-dek">Labs from my third semester non-technical classes.</p>
+      </div>
+
+      <nav
+        id="section-nav"
+        class="section-nav"
+        data-current="coursework"
+        aria-label="Portfolio sections"
+      ></nav>
+      <nav
+        id="section-subnav"
+        class="section-nav section-subnav"
+        data-parent="coursework"
+        data-current="semester-3"
+        aria-label="Coursework sections"
+      ></nav>
+      <nav
+        id="section-subsubnav"
+        class="section-nav section-subnav"
+        data-parent="semester-3"
+        data-current="semester-3-nontechnical"
+        aria-label="Semester 3 sections"
+      ></nav>
+      <nav
+        id="section-subsubsubnav"
+        class="section-nav section-subnav"
+        data-parent="semester-3-nontechnical"
+        data-current="semester-3-nontechnical-labs"
+        aria-label="Non-technical sections"
+      ></nav>
+    </div>
+
+    <main>
+      <section id="filter-bar" class="filter-bar" aria-label="Filter entries">
+        <button
+          type="button"
+          id="filter-toggle"
+          class="btn btn-outline filter-toggle"
+          aria-expanded="false"
+          aria-controls="filter-panel"
+        >
+          Filters
+          <span id="filter-count" class="filter-count" hidden>0</span>
+          <svg class="filter-chevron" viewBox="0 0 16 16" width="12" height="12" aria-hidden="true">
+            <path d="M2 5l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </button>
+        <div id="filter-panel" class="filter-panel" hidden>
+          <div class="filter-group">
+            <p class="filter-group-label">Course</p>
+            <div id="filter-course-options" class="filter-checkboxes">
+              <label class="filter-checkbox"><input type="checkbox" value="TECH 15" /> TECH 15</label>
+              <label class="filter-checkbox"><input type="checkbox" value="TECH 30" /> TECH 30</label>
+              <label class="filter-checkbox"><input type="checkbox" value="TECH 60" /> TECH 60</label>
+              <label class="filter-checkbox"><input type="checkbox" value="TECH 65" /> TECH 65</label>
+              <label class="filter-checkbox"><input type="checkbox" value="BUS2 90" /> BUS2 90</label>
+              <label class="filter-checkbox"><input type="checkbox" value="POLS C1000" /> POLS C1000</label>
+            </div>
+          </div>
+          <div class="filter-group">
+            <p class="filter-group-label">Date range</p>
+            <div class="filter-date-range">
+              <label>From <input type="date" id="filter-date-from" /></label>
+              <label>To <input type="date" id="filter-date-to" /></label>
+            </div>
+          </div>
+          <div class="filter-group">
+            <p class="filter-group-label">Sort</p>
+            <select id="filter-sort" class="filter-sort-select">
+              <option value="desc" selected>Newest first</option>
+              <option value="asc">Oldest first</option>
+            </select>
+          </div>
+          <div class="filter-actions">
+            <button type="button" id="filter-clear" class="btn btn-link">Clear filters</button>
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="highlight-grid"
+        class="highlight-grid"
+        data-category="Coursework"
+        data-subcategory="Semester 3"
+        data-subsubcategory="Non-technical"
+        data-subsubsubcategory="Labs"
+        aria-label="Labs"
+      >
+        <!-- cards rendered by grid.js -->
+      </section>
+    </main>
+
+    <footer class="category-footer">
+      <a class="category-back" href="/semester-3-nontechnical">&larr; Non-technical</a>
+    </footer>
+
+    <dialog id="lightbox" class="lightbox-dialog" aria-label="Image preview">
+      <button class="dialog-close" data-close="lightbox" type="button" aria-label="Close image preview">✕</button>
+      <img id="lightbox-image" src="" alt="" />
+      <p id="lightbox-caption" class="lightbox-caption"></p>
+    </dialog>
+
+    <dialog id="pdf-viewer" class="pdf-viewer-dialog" aria-label="Document preview">
+      <div class="pdf-viewer-header">
+        <h2 id="pdf-viewer-title"></h2>
+        <button class="dialog-close" data-close="pdf-viewer" type="button" aria-label="Close document preview">✕</button>
+      </div>
+      <iframe id="pdf-viewer-frame" loading="lazy" title="Document preview" src="about:blank"></iframe>
+    </dialog>
+
+    <script src="categories.js"></script>
+    <script src="grid.js"></script>
+    <script src="nav.js"></script>
+    <script src="/search.js"></script>
+  </body>
+</html>

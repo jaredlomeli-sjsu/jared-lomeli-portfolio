@@ -1,0 +1,539 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Simon Says wiring, hole by hole</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barlow+Semi+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--mat:#2f4c49;--paper:#f3f5f4;--ink:#16201e;--muted:#566562;--line:#d3dbd9;--chip:#e3e9e7;--done:#2e8a4e;--focus:#0d63a5;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--paper:#141c1b;--ink:#e3eae8;--muted:#9aaaa6;--line:#2a3735;--chip:#1e2927;--done:#5cc47f;--focus:#6fb2ee}}
+:root[data-theme="dark"]{--paper:#141c1b;--ink:#e3eae8;--muted:#9aaaa6;--line:#2a3735;--chip:#1e2927;--done:#5cc47f;--focus:#6fb2ee}
+*,*::before,*::after{box-sizing:inherit}
+html{height:100%;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;height:100%;background:var(--paper);color:var(--ink);font-family:Barlow,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;font-size:16px;line-height:1.5}
+.app{display:grid;grid-template-columns:minmax(0,1fr) 390px;height:100%}
+.stage{position:relative;background:var(--mat);min-height:0;overflow:hidden}
+.stage canvas{display:block;touch-action:none}
+.toolbar{position:absolute;top:12px;left:12px;right:12px;display:flex;flex-wrap:wrap;gap:8px;pointer-events:none}
+.toolbar>*{pointer-events:auto}
+.seg{display:flex;gap:2px;padding:3px;border-radius:9px;background:rgba(9,19,18,.6)}
+.seg button,.tog{font:600 14px/1 "Barlow Semi Condensed",Barlow,sans-serif;color:#dbe5e3;background:transparent;border:0;border-radius:6px;padding:9px 11px;cursor:pointer}
+.tog{background:rgba(9,19,18,.6);border-radius:9px;padding:12px 13px}
+.seg button[aria-pressed="true"],.tog[aria-pressed="true"]{background:#eaf0ee;color:#15201e}
+button:focus-visible,.step-body:focus-visible,input:focus-visible{outline:2px solid #ffd23f;outline-offset:2px}
+.hint{position:absolute;left:12px;bottom:12px;font-size:13px;color:#d3dedc;background:rgba(9,19,18,.55);padding:6px 10px;border-radius:6px;max-width:calc(100% - 24px)}
+.tip{position:absolute;pointer-events:none;background:#fcfdfc;color:#141c1a;border-radius:7px;padding:8px 11px;font-size:14px;line-height:1.35;max-width:270px;box-shadow:0 3px 14px rgba(0,0,0,.35);opacity:0;transition:opacity .12s}
+.tip strong{display:block;font-weight:600;margin-bottom:2px}
+.fail{position:absolute;inset:0;display:none;align-items:center;justify-content:center;padding:24px;color:#e8efed;text-align:center}
+aside{overflow-y:auto;border-left:1px solid var(--line);padding:24px 22px 32px}
+h1{font:700 27px/1.1 "Barlow Semi Condensed",Barlow,sans-serif;margin:0 0 8px}
+.sub{color:var(--muted);margin:0 0 18px;font-size:15px;max-width:34em}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px}
+.count{font-size:14px;color:var(--muted);font-variant-numeric:tabular-nums}
+.all{font:600 14px/1 "Barlow Semi Condensed",Barlow,sans-serif;color:var(--ink);background:var(--chip);border:1px solid var(--line);border-radius:7px;padding:8px 11px;cursor:pointer}
+ol.steps{list-style:none;margin:0;padding:0}
+.step{display:grid;grid-template-columns:26px minmax(0,1fr);gap:10px;padding:12px 10px;border:1px solid transparent;border-radius:10px}
+.step.active{background:var(--chip);border-color:var(--line)}
+.step input{width:20px;height:20px;margin:3px 0 0;accent-color:var(--done);cursor:pointer}
+.step-body{cursor:pointer;border-radius:6px}
+.step .t{display:flex;gap:8px;align-items:baseline;font:600 17px/1.25 "Barlow Semi Condensed",Barlow,sans-serif}
+.step .n{color:var(--muted);min-width:1.3em;font-variant-numeric:tabular-nums}
+.step.done .t .name{text-decoration:line-through;text-decoration-thickness:1.5px;color:var(--muted)}
+.step ul{list-style:none;margin:6px 0 0;padding:0;font-size:14.5px;color:var(--muted)}
+.step li{padding:2px 0}
+.h{font-weight:600;color:var(--ink);font-variant-numeric:tabular-nums}
+.sw{display:inline-block;width:11px;height:11px;border-radius:2px;margin-right:6px;border:1px solid rgba(0,0,0,.25);vertical-align:-1px}
+.notes{margin-top:20px;padding-top:16px;border-top:1px solid var(--line);font-size:14.5px;color:var(--muted)}
+.notes h2{font:600 17px/1.2 "Barlow Semi Condensed",Barlow,sans-serif;color:var(--ink);margin:0 0 8px}
+.notes p{margin:0 0 9px}
+@media (max-width:860px){html,body{height:auto}.app{display:block;height:auto}.stage{height:62vh;height:62svh}aside{border-left:0;border-top:1px solid var(--line)}}
+@media (prefers-reduced-motion:reduce){.tip{transition:none}}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="stage" id="stage">
+    <div class="toolbar">
+      <div class="seg" role="group" aria-label="Camera view">
+        <button type="button" data-view="angled" aria-pressed="true">Angled</button>
+        <button type="button" data-view="top" aria-pressed="false">Top down</button>
+        <button type="button" data-view="front" aria-pressed="false">Front</button>
+        <button type="button" data-view="leds" aria-pressed="false">LED close-up</button>
+      </div>
+      <button type="button" class="tog" id="labelsBtn" aria-pressed="true">Labels</button>
+    </div>
+    <div class="tip" id="tip" role="status" aria-live="polite"></div>
+    <div class="hint">Drag to orbit, scroll or pinch to zoom, right-drag to pan. Hover any part for its exact holes.</div>
+    <div class="fail" id="fail">This model needs WebGL, which isn't available in this browser. Try opening it in Chrome, Edge, or Safari.</div>
+  </div>
+  <aside>
+    <h1>Simon Says wiring, hole by hole</h1>
+    <p class="sub">ELEGOO UNO R3 on a half-size 400-point breadboard (30 columns). Pick a step to isolate it in the model; the yellow rings mark the exact holes.</p>
+    <div class="bar"><span class="count" id="count">0 of 10 placed</span><button type="button" class="all" id="showAll">Show everything</button></div>
+    <ol class="steps" id="steps"></ol>
+    <div class="notes">
+      <h2>Reading the board</h2>
+      <p>Holes are named by row letter and column number, so <span class="h">j5</span> means row j, column 5. Columns are printed along both long edges every five holes.</p>
+      <p>In each column, rows a to e are connected to each other, and rows f to j are connected to each other. The center gap keeps the two halves apart, which is why resistors, buttons, and the buzzer bridge it.</p>
+      <p>Every ground goes to the <span class="h">−</span> rail beside row a (the one with the blue line). Each rail is 25 connected holes in 5 groups of 5, so any hole in that rail works if the exact one is hard to reach.</p>
+      <p>Only the LEDs and buzzer have a direction. The LED's long leg is +, and the buzzer's + is marked on top. Resistors and buttons work either way round.</p>
+      <p>Each color's LED and button share a wire color, black is the ground wire from the UNO, and orange is the buzzer. White is left as a spare. Any color works electrically.</p>
+      <p>The short ground links are 100 Ω resistors (brown, black, black, black, brown), each bridging row a to the − rail hole right below it. They add a little resistance, so the LEDs run slightly dimmer than with plain wire. The buttons aren't affected.</p>
+    </div>
+  </aside>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/three@0.147.0/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.147.0/examples/js/controls/OrbitControls.js"></script>
+<script>
+(async function(){
+const stage=document.getElementById('stage');
+const tip=document.getElementById('tip');
+const failBox=document.getElementById('fail');
+const stepsEl=document.getElementById('steps');
+const countEl=document.getElementById('count');
+const P=2.54;
+const colX=c=>(c-15.5)*P;
+const ROWZ={a:13.97,b:11.43,c:8.89,d:6.35,e:3.81,f:-3.81,g:-6.35,h:-8.89,i:-11.43,j:-13.97};
+const RAIL={botNeg:19.05,botPos:21.59,topNeg:-19.05,topPos:-21.59};
+const railCols=[];for(let c=2;c<=30;c++)if((c-2)%6!==5)railCols.push(c);
+const BB={W:82.5,D:54.6,H:8.5};
+const COLORS={black:0x202020,red:0xd7263d,orange:0xf07a1a,yellow:0xf2c230,green:0x2e9e44,blue:0x2466d6,white:0xececec};
+const hex=n=>'#'+n.toString(16).padStart(6,'0');
+const h=s=>`<span class="h">${s}</span>`;
+const sw=c=>`<span class="sw" style="background:${hex(c)}"></span>`;
+
+const steps=[];
+const saved=(()=>{try{return JSON.parse(localStorage.getItem('simon-build-v1')||'[]')}catch(e){return []}})();
+function saveDone(){try{localStorage.setItem('simon-build-v1',JSON.stringify(steps.map(s=>s.done)))}catch(e){}}
+
+if(!window.THREE){failBox.style.display='flex';buildList();return;}
+try{await document.fonts.ready}catch(e){}
+
+let renderer;
+try{renderer=new THREE.WebGLRenderer({antialias:true});}catch(e){failBox.style.display='flex';buildList();return;}
+renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,2));
+renderer.outputEncoding=THREE.sRGBEncoding;
+renderer.shadowMap.enabled=true;
+renderer.shadowMap.type=THREE.PCFSoftShadowMap;
+stage.insertBefore(renderer.domElement,stage.firstChild);
+const aniso=renderer.capabilities.getMaxAnisotropy();
+
+const scene=new THREE.Scene();
+scene.background=new THREE.Color(0x2f4c49);
+scene.fog=new THREE.Fog(0x2f4c49,450,950);
+const camera=new THREE.PerspectiveCamera(35,1,1,2000);
+camera.position.set(28,110,125);
+const controls=new THREE.OrbitControls(camera,renderer.domElement);
+controls.enableDamping=true;
+controls.target.set(0,0,-28);
+controls.maxPolarAngle=Math.PI*0.49;
+controls.minDistance=30;
+controls.maxDistance=520;
+
+scene.add(new THREE.HemisphereLight(0xffffff,0x3a4a48,0.55));
+const sun=new THREE.DirectionalLight(0xffffff,0.95);
+sun.position.set(-120,260,160);
+sun.castShadow=true;
+Object.assign(sun.shadow.camera,{left:-170,right:170,top:170,bottom:-170,near:10,far:700});
+sun.shadow.mapSize.set(2048,2048);
+sun.shadow.bias=-0.0004;
+scene.add(sun);
+const fill=new THREE.DirectionalLight(0xcfe3ff,0.35);
+fill.position.set(160,120,-140);
+scene.add(fill);
+
+function M(o){const m=new THREE.MeshStandardMaterial(o);m.userData.base=o.opacity!==undefined?o.opacity:1;return m;}
+function mesh(geo,mat){const m=new THREE.Mesh(geo,mat);m.castShadow=true;m.receiveShadow=true;return m;}
+function tex(canvas){const t=new THREE.CanvasTexture(canvas);t.encoding=THREE.sRGBEncoding;t.anisotropy=aniso;return t;}
+const metal=()=>M({color:0xc9ccd0,metalness:0.85,roughness:0.35});
+
+(function floor(){
+  const c=document.createElement('canvas');c.width=c.height=256;
+  const g=c.getContext('2d');
+  g.fillStyle='#33514e';g.fillRect(0,0,256,256);
+  g.strokeStyle='rgba(255,255,255,.06)';g.lineWidth=2;
+  for(let i=0;i<=256;i+=64){g.beginPath();g.moveTo(i,0);g.lineTo(i,256);g.stroke();g.beginPath();g.moveTo(0,i);g.lineTo(256,i);g.stroke();}
+  const t=tex(c);t.wrapS=t.wrapT=THREE.RepeatWrapping;t.repeat.set(1400/80,1400/80);
+  const f=new THREE.Mesh(new THREE.PlaneGeometry(1400,1400),new THREE.MeshStandardMaterial({map:t,roughness:0.95}));
+  f.rotation.x=-Math.PI/2;f.position.y=-BB.H;f.receiveShadow=true;scene.add(f);
+})();
+
+function breadboardTexture(){
+  const px=12,W=BB.W,D=BB.D;
+  const c=document.createElement('canvas');c.width=Math.round(W*px);c.height=Math.round(D*px);
+  const g=c.getContext('2d');
+  const X=x=>(x+W/2)*px,Z=z=>(z+D/2)*px;
+  g.fillStyle='#eef0ef';g.fillRect(0,0,c.width,c.height);
+  g.fillStyle='#d9dcdb';g.fillRect(0,Z(-1.9),c.width,3.8*px);
+  g.fillStyle='#c2c6c5';g.fillRect(0,Z(-0.45),c.width,0.9*px);
+  const hole=(x,z)=>{const s=1.15*px;g.fillStyle='#2a2d2c';g.fillRect(X(x)-s/2,Z(z)-s/2,s,s);};
+  for(let col=1;col<=30;col++)for(const r in ROWZ)hole(colX(col),ROWZ[r]);
+  for(const col of railCols)for(const z of Object.values(RAIL))hole(colX(col),z);
+  const line=(z,color)=>{g.fillStyle=color;g.fillRect(X(colX(1.4)),Z(z)-0.25*px,(colX(30.6)-colX(1.4))*px,0.5*px);};
+  line(17.6,'#2a64c8');line(23.2,'#d23b3b');line(-17.6,'#2a64c8');line(-23.2,'#d23b3b');
+  g.textAlign='center';g.textBaseline='middle';g.fillStyle='#6b7371';
+  g.font=`600 ${1.8*px}px Barlow, Arial, sans-serif`;
+  for(const r in ROWZ){g.fillText(r,X(colX(0)),Z(ROWZ[r]));g.fillText(r,X(colX(31)),Z(ROWZ[r]));}
+  g.font=`600 ${1.6*px}px Barlow, Arial, sans-serif`;
+  for(let col=1;col<=30;col++)if(col===1||col%5===0){g.fillText(col,X(colX(col)),Z(15.95));g.fillText(col,X(colX(col)),Z(-15.95));}
+  g.font=`700 ${2.4*px}px Barlow, Arial, sans-serif`;
+  for(const z of [RAIL.botNeg,RAIL.topNeg]){g.fillStyle='#2a64c8';g.fillText('−',X(colX(0)),Z(z));g.fillText('−',X(colX(31)),Z(z));}
+  for(const z of [RAIL.botPos,RAIL.topPos]){g.fillStyle='#d23b3b';g.fillText('+',X(colX(0)),Z(z));g.fillText('+',X(colX(31)),Z(z));}
+  return tex(c);
+}
+const pickables=[];
+const bbSide=M({color:0xe6e8e7,roughness:0.7});
+const breadboard=mesh(new THREE.BoxGeometry(BB.W,BB.H,BB.D),[bbSide,bbSide,M({map:breadboardTexture(),roughness:0.75}),bbSide,bbSide,bbSide]);
+breadboard.position.y=-BB.H/2;
+breadboard.userData.info={t:'Breadboard, 400 points (30 columns)',d:'Rows a–e connect within each column, rows f–j do too. The center gap splits them. Each rail is 25 holes in 5 groups of 5.'};
+scene.add(breadboard);pickables.push(breadboard);
+
+const hole=n=>new THREE.Vector3(colX(parseInt(n.slice(1),10)),0,ROWZ[n[0]]);
+const railHole=col=>new THREE.Vector3(colX(col),0,RAIL.botNeg);
+
+const UW=68.58,UH=53.34,PCB_T=1.6,PCB_TOP=-3.9,HDR=8.5;
+const uno=new THREE.Group();
+uno.position.set(13,0,-66);
+uno.rotation.y=Math.PI;
+uno.userData.info={t:'ELEGOO UNO R3',d:'Digital header faces the breadboard. USB-B on the right side goes to your laptop.'};
+scene.add(uno);pickables.push(uno);
+const L=(xs,ys,y)=>new THREE.Vector3(xs-UW/2,y,-(ys-UH/2));
+function ubox(w,hh,d,xs,ys,y0,mat){const m=mesh(new THREE.BoxGeometry(w,hh,d),mat);m.position.copy(L(xs,ys,y0+hh/2));uno.add(m);return m;}
+function ucyl(r,hh,xs,ys,y0,mat){const m=mesh(new THREE.CylinderGeometry(r,r,hh,28),mat);m.position.copy(L(xs,ys,y0+hh/2));uno.add(m);return m;}
+
+function unoTexture(){
+  const px=12,c=document.createElement('canvas');c.width=Math.round(UW*px);c.height=Math.round(UH*px);
+  const g=c.getContext('2d');const X=x=>x*px,Y=y=>(UH-y)*px;
+  g.fillStyle='#0f64a8';g.fillRect(0,0,c.width,c.height);
+  g.strokeStyle='rgba(255,255,255,.08)';g.lineWidth=0.35*px;
+  const traces=[[[12,46],[30,46],[34,42],[46,42]],[[10,30],[18,30],[22,26],[30,26]],[[40,14],[40,10],[46,6]],[[64,12],[60,16],[60,24]],[[14,20],[26,20]],[[50,34],[62,34],[66,38]]];
+  for(const t of traces){g.beginPath();t.forEach((p,i)=>i?g.lineTo(X(p[0]),Y(p[1])):g.moveTo(X(p[0]),Y(p[1])));g.stroke();}
+  for(const [x,y] of [[14,2.5],[15.3,50.7],[66.1,7.6],[66.1,35.5]]){g.fillStyle='#d9dde0';g.beginPath();g.arc(X(x),Y(y),1.9*px,0,7);g.fill();g.fillStyle='#132f45';g.beginPath();g.arc(X(x),Y(y),1.5*px,0,7);g.fill();}
+  g.fillStyle='#f4f7fa';g.textAlign='center';g.textBaseline='middle';
+  g.font=`700 ${6*px}px "Barlow Semi Condensed", Arial, sans-serif`;g.fillText('ELEGOO',X(47),Y(37));
+  g.font=`600 ${3.4*px}px "Barlow Semi Condensed", Arial, sans-serif`;g.fillText('UNO R3',X(47),Y(31));
+  g.font=`600 ${1.9*px}px Barlow, Arial, sans-serif`;g.fillText('DIGITAL (PWM~)',X(50),Y(41.8));
+  g.fillText('POWER',X(34.3),Y(11.6));g.fillText('ANALOG IN',X(54.6),Y(11.6));
+  g.font=`600 ${1.4*px}px Barlow, Arial, sans-serif`;
+  g.fillText('L',X(29.6),Y(44));g.fillText('TX',X(30),Y(40.5));g.fillText('RX',X(30),Y(38.5));g.fillText('ON',X(58.3),Y(42));g.fillText('RESET',X(13.5),Y(48.3));g.fillText('ICSP',X(64.2),Y(35));
+  const rot=(txt,x,y,align)=>{g.save();g.translate(X(x),Y(y));g.rotate(-Math.PI/2);g.textAlign=align;g.fillText(txt,0,0);g.restore();};
+  const dl=[['0',66.04],['1',63.5],['2',60.96],['~3',58.42],['4',55.88],['~5',53.34],['~6',50.8],['7',48.26],['8',44.2],['~9',41.66],['~10',39.12],['~11',36.58],['12',34.04],['13',31.5],['GND',28.96],['AREF',26.42],['SDA',23.88],['SCL',21.34]];
+  for(const [t,x] of dl)rot(t,x,48,'right');
+  const pl=[['IOREF',27.94],['RESET',30.48],['3.3V',33.02],['5V',35.56],['GND',38.1],['GND',40.64],['VIN',43.18],['A0',48.26],['A1',50.8],['A2',53.34],['A3',55.88],['A4',58.42],['A5',60.96]];
+  for(const [t,x] of pl)rot(t,x,4.6,'left');
+  return tex(c);
+}
+function chipTexture(){
+  const c=document.createElement('canvas');c.width=712;c.height=152;const g=c.getContext('2d');
+  g.fillStyle='#1b1c1e';g.fillRect(0,0,712,152);
+  g.fillStyle='#101112';g.beginPath();g.arc(0,76,22,-Math.PI/2,Math.PI/2);g.fill();
+  g.fillStyle='#8f959a';g.textAlign='center';g.textBaseline='middle';
+  g.font='600 54px Barlow, Arial, sans-serif';g.fillText('ATMEGA328P-PU',356,62);
+  g.font='500 34px Barlow, Arial, sans-serif';g.fillText('1934',356,114);
+  return tex(c);
+}
+
+ubox(UW,PCB_T,UH,UW/2,UH/2,PCB_TOP-PCB_T,M({color:0x0f64a8,roughness:0.55}));
+const silk=new THREE.Mesh(new THREE.PlaneGeometry(UW,UH),M({map:unoTexture(),roughness:0.5}));
+silk.rotation.x=-Math.PI/2;silk.position.copy(L(UW/2,UH/2,PCB_TOP+0.02));silk.receiveShadow=true;uno.add(silk);
+const feetMat=M({color:0xdfe6e4,roughness:0.4,transparent:true,opacity:0.75});
+for(const [x,y] of [[14,2.5],[15.3,50.7],[66.1,7.6],[66.1,35.5]])ucyl(2.4,3,x,y,-BB.H,feetMat);
+const hdrMat=M({color:0x151617,roughness:0.6});
+const holeMat=new THREE.MeshBasicMaterial({color:0x050505});
+function header(xs,ys){
+  const n=xs.length,x0=Math.min(...xs),x1=Math.max(...xs);
+  ubox(n*P,HDR,P,(x0+x1)/2,ys,PCB_TOP,hdrMat);
+  for(const x of xs){const q=new THREE.Mesh(new THREE.PlaneGeometry(1.0,1.0),holeMat);q.rotation.x=-Math.PI/2;q.position.copy(L(x,ys,PCB_TOP+HDR+0.02));uno.add(q);}
+}
+const DPIN={D0:66.04,D1:63.5,D2:60.96,D3:58.42,D4:55.88,D5:53.34,D6:50.8,D7:48.26,D8:44.2,D9:41.66,D10:39.12,D11:36.58,D12:34.04,D13:31.5,GND:28.96,AREF:26.42,SDA:23.88,SCL:21.34};
+header(['D0','D1','D2','D3','D4','D5','D6','D7'].map(k=>DPIN[k]),50.8);
+header(['D8','D9','D10','D11','D12','D13','GND','AREF','SDA','SCL'].map(k=>DPIN[k]),50.8);
+header([25.4,27.94,30.48,33.02,35.56,38.1,40.64,43.18],2.54);
+header([48.26,50.8,53.34,55.88,58.42,60.96],2.54);
+const black=M({color:0x17181a,roughness:0.6});
+ubox(16,10.9,12,1.8,38.1,PCB_TOP,M({color:0xcfd3d7,metalness:0.9,roughness:0.28}));
+ubox(0.3,7.4,8.4,-6.25,38.1,PCB_TOP+1.7,M({color:0x0c0c0d,roughness:0.9}));
+ubox(14.2,11,9,5.3,7.8,PCB_TOP,M({color:0x0e0e0f,roughness:0.8}));
+const jack=mesh(new THREE.CylinderGeometry(3.1,3.1,0.4,24),M({color:0x050505}));jack.rotation.z=Math.PI/2;jack.position.copy(L(-1.95,7.8,PCB_TOP+5.6));uno.add(jack);
+ubox(37.5,1.6,10.2,48.3,21.6,PCB_TOP,black);
+ubox(35.6,3.4,7.6,48.3,21.6,PCB_TOP+1.6,M({color:0x1b1c1e,roughness:0.6}));
+const legMatU=metal();
+for(let i=0;i<14;i++)for(const s of [-1,1])ubox(0.5,1.8,0.6,48.3-16.51+i*P,21.6+s*4.05,PCB_TOP+1.6,legMatU);
+const chipTop=new THREE.Mesh(new THREE.PlaneGeometry(35.6,7.6),M({map:chipTexture(),roughness:0.6}));
+chipTop.rotation.x=-Math.PI/2;chipTop.position.copy(L(48.3,21.6,PCB_TOP+5.02));uno.add(chipTop);
+ubox(11,3.6,4.7,24,24,PCB_TOP,M({color:0xd5d8dc,metalness:0.9,roughness:0.25}));
+ubox(5,1,5,22,38,PCB_TOP,black);
+ubox(6.5,1.6,3.5,15,15.5,PCB_TOP,black);
+ubox(3,0.3,2.4,15,17.6,PCB_TOP,metal());
+const capMat=M({color:0xb9bec4,metalness:0.7,roughness:0.3});
+ucyl(3,5.8,16.5,8,PCB_TOP,capMat);ucyl(3,5.8,22.8,8,PCB_TOP,capMat);
+ubox(6,1.6,6,6.5,48.3,PCB_TOP,metal());
+ucyl(1.7,1.4,6.5,48.3,PCB_TOP+1.6,M({color:0xd63232,roughness:0.5}));
+const smd=c=>M({color:c,roughness:0.4,emissive:c,emissiveIntensity:0.15});
+ubox(1.6,0.6,0.8,27.5,44,PCB_TOP,smd(0xf0c040));ubox(1.6,0.6,0.8,27.5,40.5,PCB_TOP,smd(0xf0c040));ubox(1.6,0.6,0.8,27.5,38.5,PCB_TOP,smd(0xf0c040));ubox(1.6,0.6,0.8,61,42,PCB_TOP,smd(0x3fd060));
+ubox(5.08,2.5,7.62,64.2,30,PCB_TOP,black);
+const gold=M({color:0xd8b25a,metalness:0.9,roughness:0.3});
+for(const dx of [-1.27,1.27])for(const dy of [-2.54,0,2.54])ubox(0.64,6,0.64,64.2+dx,30+dy,PCB_TOP,gold);
+uno.updateMatrixWorld(true);
+const pinWorld=name=>uno.localToWorld(L(DPIN[name],50.8,PCB_TOP+HDR));
+
+const markerMat=new THREE.MeshBasicMaterial({color:0xffd23f});
+function ring(p,r){const m=new THREE.Mesh(new THREE.TorusGeometry(r||1.3,0.24,8,28),markerMat);m.rotation.x=Math.PI/2;m.position.set(p.x,p.y+0.15,p.z);return m;}
+
+const labels=new THREE.Group();scene.add(labels);
+function label(text,pos,step,size){
+  const fs=48,c=document.createElement('canvas'),g=c.getContext('2d');
+  const font=`600 ${fs}px "Barlow Semi Condensed", Arial, sans-serif`;
+  g.font=font;const w=Math.ceil(g.measureText(text).width)+30;c.width=w;c.height=fs+24;
+  g.font=font;g.fillStyle='rgba(14,24,22,.88)';
+  const r=14;g.beginPath();g.moveTo(r,0);g.lineTo(w-r,0);g.quadraticCurveTo(w,0,w,r);g.lineTo(w,c.height-r);g.quadraticCurveTo(w,c.height,w-r,c.height);g.lineTo(r,c.height);g.quadraticCurveTo(0,c.height,0,c.height-r);g.lineTo(0,r);g.quadraticCurveTo(0,0,r,0);g.fill();
+  g.fillStyle='#ffffff';g.textAlign='center';g.textBaseline='middle';g.fillText(text,w/2,c.height/2+2);
+  const s=new THREE.Sprite(new THREE.SpriteMaterial({map:tex(c),depthTest:false,transparent:true}));
+  const hh=size||3;s.scale.set(hh*w/c.height,hh,1);s.position.copy(pos);s.renderOrder=10;s.userData.step=step;labels.add(s);return s;
+}
+
+function jumper(pA,pB,color,arc){
+  const g=new THREE.Group();
+  const shortSleeve=pA.distanceTo(pB)<12;
+  const wireMat=M({color,roughness:0.45});
+  const sleeveMat=M({color,roughness:0.55});
+  const tipMat=metal();
+  for(const p of [pA,pB]){
+    const t=mesh(new THREE.CylinderGeometry(0.32,0.32,4,10),tipMat);t.position.set(p.x,p.y-1.5,p.z);g.add(t);
+    const s=mesh(new THREE.CylinderGeometry(0.95,0.95,shortSleeve?2.5:5,14),sleeveMat);s.position.set(p.x,p.y+(shortSleeve?1.75:3),p.z);g.add(s);
+  }
+  const a=pA.clone().add(new THREE.Vector3(0,5.5,0)),d=pB.clone().add(new THREE.Vector3(0,5.5,0));
+  const rise=Math.min(8,arc*0.6);
+  const shortRun=a.distanceTo(d)<12;
+  if(shortRun){a.y-=2.5;d.y-=2.5;}
+  const mid=a.clone().lerp(d,0.5);mid.y=Math.max(a.y,d.y)+arc;
+  const curve=new THREE.CatmullRomCurve3([a,a.clone().add(new THREE.Vector3(0,rise,0)),mid,d.clone().add(new THREE.Vector3(0,rise,0)),d],false,'centripetal');
+  g.add(mesh(new THREE.TubeGeometry(curve,90,0.7,10,false),wireMat));
+  return g;
+}
+const BANDS220=[0xd12b2b,0xd12b2b,0x1a1a1a,0x1a1a1a,0x8b4a1f];
+const BANDS100=[0x8b4a1f,0x1a1a1a,0x1a1a1a,0x1a1a1a,0x8b4a1f];
+function makeResistor(col,zA,zB,bands){
+  const g=new THREE.Group(),x=colX(col),Y=3.3,lead=metal(),zc=(zA+zB)/2,dir=Math.sign(zB-zA);
+  for(const [zh,sd] of [[zA,-dir],[zB,dir]]){
+    const v=mesh(new THREE.CylinderGeometry(0.25,0.25,Y+3,8),lead);v.position.set(x,(Y-3)/2,zh);g.add(v);
+    const ze=zc+sd*2.8,len=Math.abs(zh-ze)+0.3;
+    const hz=mesh(new THREE.CylinderGeometry(0.25,0.25,len,8),lead);hz.rotation.x=Math.PI/2;hz.position.set(x,Y,(zh+ze)/2);g.add(hz);
+  }
+  const b=mesh(new THREE.CapsuleGeometry(1.15,3.9,6,16),M({color:0x6fa9d9,roughness:0.55}));b.rotation.x=Math.PI/2;b.position.set(x,Y,zc);g.add(b);
+  [-2.0,-1.2,-0.4,0.4,1.8].forEach((o,n)=>{const r=mesh(new THREE.CylinderGeometry(1.2,1.2,0.42,20),M({color:bands[n],roughness:0.5}));r.rotation.x=Math.PI/2;r.position.set(x,Y,zc+o*dir);g.add(r);});
+  return g;
+}
+const ledMeshes=[];
+function makeLED(col,color){
+  const g=new THREE.Group(),xa=colX(col),xk=colX(col+1),z=ROWZ.c,xc=(xa+xk)/2,lead=metal();
+  const la=mesh(new THREE.CylinderGeometry(0.25,0.25,6.5,8),lead);la.position.set(xa,0.25,z);g.add(la);
+  const lk=mesh(new THREE.CylinderGeometry(0.25,0.25,6.5,8),lead);lk.position.set(xk,0.25,z);g.add(lk);
+  const mat=M({color,transparent:true,opacity:0.82,roughness:0.15,emissive:color,emissiveIntensity:0.18});
+  const fl=mesh(new THREE.CylinderGeometry(2.9,2.9,1,32),mat);fl.position.set(xc,4,z);g.add(fl);
+  const bd=mesh(new THREE.CylinderGeometry(2.5,2.5,4.8,32),mat);bd.position.set(xc,6.9,z);g.add(bd);
+  const dm=mesh(new THREE.SphereGeometry(2.5,32,16,0,Math.PI*2,0,Math.PI/2),mat);dm.position.set(xc,9.3,z);g.add(dm);
+  const inner=M({color:0x6d6f72,metalness:0.6,roughness:0.4});
+  const an=mesh(new THREE.BoxGeometry(0.5,2.2,0.3),inner);an.position.set(xa+0.35,5.4,z);g.add(an);
+  const ca=mesh(new THREE.BoxGeometry(1.3,2.6,0.3),inner);ca.position.set(xk-0.55,5.6,z);g.add(ca);
+  ledMeshes.push(mat);
+  return g;
+}
+function makeButton(col){
+  const g=new THREE.Group(),x0=colX(col),x2=colX(col+2),xc=colX(col+1),legM=metal();
+  for(const x of [x0,x2])for(const s of [-1,1]){
+    const v=mesh(new THREE.BoxGeometry(0.7,4.3,0.3),legM);v.position.set(x,-0.85,s*3.81);g.add(v);
+    const hz=mesh(new THREE.BoxGeometry(0.7,0.3,1.0),legM);hz.position.set(x,1.2,s*3.4);g.add(hz);
+  }
+  const body=mesh(new THREE.BoxGeometry(6,3.3,6),M({color:0x1c1d1f,roughness:0.7}));body.position.set(xc,2.15,0);g.add(body);
+  const plate=mesh(new THREE.BoxGeometry(6.05,0.25,6.05),M({color:0xc7cacd,metalness:0.85,roughness:0.3}));plate.position.set(xc,3.92,0);g.add(plate);
+  const cap=mesh(new THREE.CylinderGeometry(1.75,1.75,1.7,28),M({color:0x141516,roughness:0.6}));cap.position.set(xc,4.9,0);g.add(cap);
+  return g;
+}
+function makeBuzzer(col){
+  const g=new THREE.Group(),x=colX(col),lead=metal();
+  for(const s of [-1,1]){const v=mesh(new THREE.CylinderGeometry(0.3,0.3,3.6,8),lead);v.position.set(x,-1.2,s*3.81);g.add(v);}
+  const body=mesh(new THREE.CylinderGeometry(6,6,9.4,40),M({color:0x121314,roughness:0.8}));body.position.set(x,5.3,0);g.add(body);
+  const c=document.createElement('canvas');c.width=c.height=256;const s=c.getContext('2d');
+  s.fillStyle='#f3f3ef';s.beginPath();s.arc(128,128,128,0,7);s.fill();
+  s.fillStyle='#55595c';s.textAlign='center';s.textBaseline='middle';s.font='600 24px Barlow, Arial, sans-serif';
+  s.fillText('REMOVE SEAL',128,126);s.fillText('AFTER WASHING',128,154);
+  s.fillStyle='#1e1f20';s.font='700 54px Barlow, Arial, sans-serif';s.fillText('+',128,52);
+  const st=new THREE.Mesh(new THREE.CircleGeometry(5.3,40),M({map:tex(c),roughness:0.6}));st.rotation.x=-Math.PI/2;st.position.set(x,10.02,0);st.receiveShadow=true;g.add(st);
+  return g;
+}
+
+function addStep(title,lines){const s={title,lines,objs:[],markers:new THREE.Group(),done:false};s.markers.visible=false;scene.add(s.markers);steps.push(s);return s;}
+function put(s,obj,t,d){obj.userData.info={t,d};obj.userData.step=steps.indexOf(s);scene.add(obj);s.objs.push(obj);pickables.push(obj);}
+function mark(s,points){for(const p of points)s.markers.add(ring(p));}
+
+const LEDS=[
+  {name:'Red',col:1,pin:'D2',led:0xff2b2b,wire:COLORS.red,w:'Red'},
+  {name:'Green',col:4,pin:'D3',led:0x34d058,wire:COLORS.green,w:'Green'},
+  {name:'Yellow',col:7,pin:'D4',led:0xffd21f,wire:COLORS.yellow,w:'Yellow'},
+  {name:'Blue',col:10,pin:'D5',led:0x2f7bff,wire:COLORS.blue,w:'Blue'}];
+const BTNS=[
+  {name:'Red',col:13,pin:'D6',wire:COLORS.red,w:'Red'},
+  {name:'Green',col:16,pin:'D7',wire:COLORS.green,w:'Green'},
+  {name:'Yellow',col:19,pin:'D8',wire:COLORS.yellow,w:'Yellow'},
+  {name:'Blue',col:22,pin:'D9',wire:COLORS.blue,w:'Blue'}];
+const pinOrder=['D2','D3','D4','D5','D6','D7','D8','D9','D10','GND'];
+const arcFor=pin=>10+pinOrder.indexOf(pin)*1.8;
+function pinLabel(pin,step){const i=pinOrder.indexOf(pin);label(pin,pinWorld(pin).add(new THREE.Vector3(0,4,-5-(i%2)*4.5)),step,2.8);}
+
+{
+  const s=addStep('Ground bus',[`${sw(COLORS.black)}Black jumper: UNO ${h('GND')} (next to pin 13) to the ${h('−')} rail beside row a`]);
+  put(s,jumper(pinWorld('GND'),railHole(26),COLORS.black,26),'Black jumper, ground','UNO GND to the − rail. Every part returns to ground through this rail.');
+  mark(s,[pinWorld('GND'),railHole(26)]);
+  pinLabel('GND',0);
+}
+for(const L2 of LEDS){
+  const c=L2.col,k=c+1;
+  const s=addStep(`${L2.name} LED`,[
+    `220 Ω resistor: ${h('f'+c)} to ${h('e'+c)}, across the center gap`,
+    `${L2.name} LED: long leg in ${h('c'+c)}, short leg in ${h('c'+k)}`,
+    `100 Ω resistor: ${h('a'+k)} to the ${h('−')} rail hole right below it`,
+    `${sw(L2.wire)}${L2.w} jumper: UNO ${h(L2.pin)} to ${h('j'+c)}`]);
+  const i=steps.length-1;
+  put(s,makeResistor(c,ROWZ.f,ROWZ.e,BANDS220),'220 Ω resistor','Red, red, black, black, brown bands. Legs in f'+c+' and e'+c+'. Either direction works.');
+  const led=makeLED(c,L2.led);put(s,led,`${L2.name} LED`,`Long leg (+) in c${c}, short leg (−) in c${k}.`);
+  put(s,makeResistor(k,ROWZ.a,RAIL.botNeg,BANDS100),'100 Ω ground link','Brown, black, black, black, brown bands. Legs in a'+k+' and the − rail hole right below it. Either direction works.');
+  put(s,jumper(pinWorld(L2.pin),hole('j'+c),L2.wire,arcFor(L2.pin)),`${L2.w} jumper, signal`,`UNO ${L2.pin} to j${c}.`);
+  mark(s,[hole('f'+c),hole('e'+c),hole('c'+c),hole('c'+k),hole('a'+k),railHole(k),hole('j'+c),pinWorld(L2.pin)]);
+  pinLabel(L2.pin,i);
+  label('j'+c,hole('j'+c).add(new THREE.Vector3(0,2.5,-5.5)),i,2.6);
+  label(`${L2.name} LED`,new THREE.Vector3(colX(c)+1.27,15,ROWZ.c+2+(i%2)*3.2),i,2.2);
+}
+for(const B of BTNS){
+  const c=B.col,k=c+2;
+  const s=addStep(`Button for ${B.name.toLowerCase()}`,[
+    `Button straddling the gap: legs in ${h('e'+c)}, ${h('e'+k)}, ${h('f'+c)}, ${h('f'+k)}`,
+    `${sw(B.wire)}${B.w} jumper: UNO ${h(B.pin)} to ${h('j'+c)}`,
+    `100 Ω resistor: ${h('a'+k)} to the ${h('−')} rail hole right below it`]);
+  const i=steps.length-1;
+  put(s,makeButton(c),`${B.name} button`,`Legs in e${c}, e${k}, f${c}, f${k}. Signal and ground land on diagonal legs, so it always switches.`);
+  put(s,jumper(pinWorld(B.pin),hole('j'+c),B.wire,arcFor(B.pin)),`${B.w} jumper, signal`,`UNO ${B.pin} to j${c}.`);
+  put(s,makeResistor(k,ROWZ.a,RAIL.botNeg,BANDS100),'100 Ω ground link','Brown, black, black, black, brown bands. Legs in a'+k+' and the − rail hole right below it. Either direction works.');
+  mark(s,[hole('e'+c),hole('e'+k),hole('f'+c),hole('f'+k),hole('j'+c),hole('a'+k),railHole(k),pinWorld(B.pin)]);
+  pinLabel(B.pin,i);
+  label('j'+c,hole('j'+c).add(new THREE.Vector3(0,2.5,-5.5)),i,2.6);
+  label(`${B.name} button`,new THREE.Vector3(colX(c+1),10,5+(i%2)*3.2),i,2.2);
+}
+{
+  const s=addStep('Buzzer',[
+    `Active buzzer across the gap: ${h('+')} leg in ${h('f28')}, other leg in ${h('e28')}`,
+    `${sw(COLORS.orange)}Orange jumper: UNO ${h('D10')} to ${h('j28')}`,
+    `100 Ω resistor: ${h('a28')} to the ${h('−')} rail hole right below it`]);
+  const i=steps.length-1;
+  put(s,makeBuzzer(28),'Active buzzer','+ leg (marked on top, longer) in f28, other leg in e28.');
+  put(s,jumper(pinWorld('D10'),hole('j28'),COLORS.orange,arcFor('D10')),'Orange jumper, signal','UNO D10 to j28.');
+  put(s,makeResistor(28,ROWZ.a,RAIL.botNeg,BANDS100),'100 Ω ground link','Brown, black, black, black, brown bands. Legs in a'+28+' and the − rail hole right below it. Either direction works.');
+  mark(s,[hole('f28'),hole('e28'),hole('j28'),hole('a28'),railHole(28),pinWorld('D10')]);
+  pinLabel('D10',i);
+  label('j28',hole('j28').add(new THREE.Vector3(0,2.5,-5.5)),i,2.6);
+  label('Buzzer',new THREE.Vector3(colX(28),17,0),i,2.2);
+}
+label('− rail = ground',new THREE.Vector3(colX(6),2,26),undefined,2.2);
+
+let active=null,labelsOn=true;
+function setOpacity(obj,f){
+  obj.traverse(o=>{
+    if(!o.material)return;
+    for(const m of Array.isArray(o.material)?o.material:[o.material]){
+      const base=m.userData.base!==undefined?m.userData.base:1;
+      const wasT=m.transparent;
+      m.opacity=base*f;m.transparent=base<1||f<1;m.depthWrite=f>=1;o.castShadow=f>=1;
+      if(wasT!==m.transparent)m.needsUpdate=true;
+    }
+  });
+}
+function applyFocus(i){
+  active=i;
+  steps.forEach((s,k)=>{const f=(i===null||k===i)?1:0.12;s.objs.forEach(o=>setOpacity(o,f));s.markers.visible=(k===i);});
+  labels.children.forEach(l=>{l.visible=labelsOn&&(i===null||l.userData.step===undefined||l.userData.step===i);});
+  [...stepsEl.children].forEach((li,k)=>li.classList.toggle('active',k===i));
+}
+
+buildList();
+applyFocus(null);
+
+document.getElementById('showAll').addEventListener('click',()=>applyFocus(null));
+const labelsBtn=document.getElementById('labelsBtn');
+labelsBtn.addEventListener('click',()=>{labelsOn=!labelsOn;labelsBtn.setAttribute('aria-pressed',String(labelsOn));applyFocus(active);});
+
+const VIEWS={angled:{p:[28,110,125],t:[0,0,-28]},top:{p:[0,245,-29],t:[0,0,-30]},front:{p:[0,42,145],t:[0,4,-22]},leds:{p:[-18,56,60],t:[-24,2,2]}};
+const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+let tween=null;
+function flyTo(v){
+  const p1=new THREE.Vector3(...v.p),t1=new THREE.Vector3(...v.t);
+  if(reduce){camera.position.copy(p1);controls.target.copy(t1);return;}
+  tween={p0:camera.position.clone(),t0:controls.target.clone(),p1,t1,start:performance.now(),dur:700};
+}
+document.querySelectorAll('[data-view]').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('[data-view]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));
+  flyTo(VIEWS[b.dataset.view]);
+}));
+controls.addEventListener('start',()=>{tween=null;});
+
+function resize(){const r=stage.getBoundingClientRect();renderer.setSize(r.width,r.height);camera.aspect=r.width/Math.max(r.height,1);camera.updateProjectionMatrix();}
+new ResizeObserver(resize).observe(stage);resize();
+
+const ray=new THREE.Raycaster(),ptr=new THREE.Vector2();
+function pick(e){
+  const r=renderer.domElement.getBoundingClientRect();
+  ptr.set(((e.clientX-r.left)/r.width)*2-1,-((e.clientY-r.top)/r.height)*2+1);
+  ray.setFromCamera(ptr,camera);
+  for(const hit of ray.intersectObjects(pickables,true)){
+    let o=hit.object;while(o&&!o.userData.info)o=o.parent;
+    if(!o)continue;
+    if(active!==null&&o.userData.step!==undefined&&o.userData.step!==active)continue;
+    return o;
+  }
+  return null;
+}
+function showTip(o,e){
+  if(!o){tip.style.opacity=0;return;}
+  const r=stage.getBoundingClientRect();
+  tip.innerHTML=`<strong>${o.userData.info.t}</strong>${o.userData.info.d}`;
+  const x=Math.min(e.clientX-r.left+14,r.width-tip.offsetWidth-8),y=Math.min(e.clientY-r.top+14,r.height-tip.offsetHeight-8);
+  tip.style.left=Math.max(8,x)+'px';tip.style.top=Math.max(8,y)+'px';tip.style.opacity=1;
+}
+let down=null;
+renderer.domElement.addEventListener('pointermove',e=>{if(e.pointerType==='mouse'&&!e.buttons)showTip(pick(e),e);});
+renderer.domElement.addEventListener('pointerleave',()=>{tip.style.opacity=0;});
+renderer.domElement.addEventListener('pointerdown',e=>{down={x:e.clientX,y:e.clientY};});
+renderer.domElement.addEventListener('pointerup',e=>{
+  if(!down||Math.hypot(e.clientX-down.x,e.clientY-down.y)>5)return;
+  const o=pick(e);showTip(o,e);
+  if(o&&o.userData.step!==undefined)applyFocus(o.userData.step);
+});
+
+function loop(now){
+  if(tween){let k=Math.min(1,(now-tween.start)/tween.dur);k=k<0.5?2*k*k:1-Math.pow(-2*k+2,2)/2;camera.position.lerpVectors(tween.p0,tween.p1,k);controls.target.lerpVectors(tween.t0,tween.t1,k);if(k>=1)tween=null;}
+  controls.update();renderer.render(scene,camera);requestAnimationFrame(loop);
+}
+requestAnimationFrame(loop);
+
+function buildList(){
+  stepsEl.innerHTML='';
+  steps.forEach((s,i)=>{
+    s.done=!!saved[i];
+    const li=document.createElement('li');li.className='step'+(s.done?' done':'');
+    li.innerHTML=`<input type="checkbox" aria-label="Mark step ${i+1} placed"${s.done?' checked':''}><div class="step-body" role="button" tabindex="0" aria-label="Show step ${i+1} in the model"><div class="t"><span class="n">${i+1}</span><span class="name">${s.title}</span></div><ul>${s.lines.map(l=>`<li>${l}</li>`).join('')}</ul></div>`;
+    const cb=li.querySelector('input'),body=li.querySelector('.step-body');
+    cb.addEventListener('change',()=>{s.done=cb.checked;li.classList.toggle('done',s.done);saveDone();updateCount();});
+    const go=()=>{if(typeof applyFocus==='function')applyFocus(i);};
+    body.addEventListener('click',go);
+    body.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();go();}});
+    stepsEl.appendChild(li);
+  });
+  updateCount();
+}
+function updateCount(){countEl.textContent=`${steps.filter(s=>s.done).length} of ${steps.length} placed`;}
+})();
+</script>
+</body>
+</html>

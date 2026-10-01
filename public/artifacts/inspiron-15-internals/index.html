@@ -1,0 +1,2947 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Dell Inspiron 15 5570 — Internal Layout</title>
+    <style>
+      :root {
+        --bg: #f6f7f9;
+        --panel: #ffffff;
+        --ink: #1a1d23;
+        --muted: #5b6472;
+        --rule: #d8dde4;
+        --chassis: #cfd2d6;
+        --chassis-stroke: #8a92a0;
+        --grid: rgba(0, 0, 0, 0.06);
+        --power: #d97706;
+        --compute: #2563eb;
+        --storage: #059669;
+        --wireless: #7c3aed;
+        --thermal: #dc2626;
+        --audio: #0d9488;
+        --cable: #ea580c;
+        --warn-bg: #fef2f2;
+        --warn-bd: #fecaca;
+        --warn-fg: #991b1b;
+        --focus: #1d4ed8;
+      }
+      [data-theme="dark"] {
+        --bg: #0e1116;
+        --panel: #161a21;
+        --ink: #e7ecf3;
+        --muted: #98a2b3;
+        --rule: #2a313b;
+        --chassis: #2a2e35;
+        --chassis-stroke: #4a525e;
+        --grid: rgba(255, 255, 255, 0.05);
+        --power: #f59e0b;
+        --compute: #60a5fa;
+        --storage: #34d399;
+        --wireless: #a78bfa;
+        --thermal: #f87171;
+        --audio: #2dd4bf;
+        --cable: #fb923c;
+        --warn-bg: #2a1414;
+        --warn-bd: #5b1d1d;
+        --warn-fg: #fca5a5;
+        --focus: #93c5fd;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+        color: var(--ink);
+        font:
+          14px/1.45 -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          Roboto,
+          "Helvetica Neue",
+          Arial,
+          sans-serif;
+      }
+      header {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 10px 16px;
+        border-bottom: 1px solid var(--rule);
+        background: var(--panel);
+        position: sticky;
+        top: 0;
+        z-index: 5;
+        flex-wrap: wrap;
+      }
+      header h1 {
+        font-size: 14px;
+        margin: 0;
+        font-weight: 600;
+        letter-spacing: 0.2px;
+      }
+      header .sub {
+        color: var(--muted);
+        font-size: 12px;
+      }
+      .grow {
+        flex: 1;
+      }
+      .toolbar {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        flex-wrap: wrap;
+      }
+      .chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 4px 10px;
+        border-radius: 999px;
+        border: 1px solid var(--rule);
+        background: transparent;
+        color: var(--ink);
+        font-size: 12px;
+        cursor: pointer;
+      }
+      .chip:hover {
+        border-color: var(--ink);
+      }
+      .chip[aria-pressed="true"] {
+        background: var(--ink);
+        color: var(--panel);
+        border-color: var(--ink);
+      }
+      .chip .swatch {
+        width: 10px;
+        height: 10px;
+        border-radius: 2px;
+        display: inline-block;
+      }
+      .chip.cat-power .swatch {
+        background: var(--power);
+      }
+      .chip.cat-compute .swatch {
+        background: var(--compute);
+      }
+      .chip.cat-storage .swatch {
+        background: var(--storage);
+      }
+      .chip.cat-wireless .swatch {
+        background: var(--wireless);
+      }
+      .chip.cat-thermal .swatch {
+        background: var(--thermal);
+      }
+      .chip.cat-audio .swatch {
+        background: var(--audio);
+      }
+      .btn {
+        padding: 4px 10px;
+        border-radius: 6px;
+        border: 1px solid var(--rule);
+        background: var(--panel);
+        color: var(--ink);
+        font-size: 12px;
+        cursor: pointer;
+      }
+      .btn:hover {
+        border-color: var(--ink);
+      }
+      main {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 360px;
+        gap: 0;
+        height: calc(100vh - 56px);
+      }
+      @media (max-width: 900px) {
+        main {
+          grid-template-columns: 1fr;
+          height: auto;
+        }
+        #panel {
+          position: static;
+          max-height: none;
+        }
+      }
+      #stage {
+        padding: 16px;
+        overflow: auto;
+      }
+      #panel {
+        background: var(--panel);
+        border-left: 1px solid var(--rule);
+        overflow: auto;
+        padding: 16px;
+      }
+      svg.diagram {
+        width: 100%;
+        height: auto;
+        max-height: calc(100vh - 100px);
+        display: block;
+        user-select: none;
+      }
+
+      .comp {
+        cursor: pointer;
+        transition:
+          filter 0.15s,
+          opacity 0.2s;
+      }
+      .comp:hover {
+        filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.4));
+      }
+      .comp:focus {
+        outline: none;
+      }
+      .comp.dim {
+        opacity: 0.25;
+      }
+      .comp.selected .selection-ring {
+        opacity: 1;
+      }
+      .selection-ring {
+        fill: none;
+        stroke: var(--focus);
+        stroke-width: 1.8;
+        opacity: 0;
+        stroke-dasharray: 3 2;
+        pointer-events: none;
+      }
+      .comp:focus .selection-ring {
+        opacity: 1;
+      }
+
+      /* Schematic-mode shape colors (only used inside #schematic-layer) */
+      #schematic-layer .comp-shape {
+        stroke-width: 1.2;
+      }
+      #schematic-layer .cat-power .comp-shape {
+        fill: var(--power);
+        stroke: #92400e;
+      }
+      #schematic-layer .cat-compute .comp-shape {
+        fill: var(--compute);
+        stroke: #1e40af;
+      }
+      #schematic-layer .cat-storage .comp-shape {
+        fill: var(--storage);
+        stroke: #065f46;
+      }
+      #schematic-layer .cat-wireless .comp-shape {
+        fill: var(--wireless);
+        stroke: #5b21b6;
+      }
+      #schematic-layer .cat-thermal .comp-shape {
+        fill: var(--thermal);
+        stroke: #991b1b;
+      }
+      #schematic-layer .cat-audio .comp-shape {
+        fill: var(--audio);
+        stroke: #115e59;
+      }
+      .comp-label {
+        font-size: 6px;
+        fill: #fff;
+        pointer-events: none;
+        text-anchor: middle;
+        font-weight: 700;
+        paint-order: stroke;
+        stroke: rgba(0, 0, 0, 0.55);
+        stroke-width: 0.6;
+      }
+      #realistic-layer .comp-label {
+        fill: #fff;
+        stroke: rgba(0, 0, 0, 0.7);
+        stroke-width: 0.6;
+      }
+
+      .cable {
+        stroke: var(--cable);
+        stroke-width: 1;
+        fill: none;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+      .cables[data-show="false"] {
+        display: none;
+      }
+      .screwmap[data-show="false"] {
+        display: none;
+      }
+      .screw-dot {
+        stroke: #000;
+        stroke-width: 0.3;
+      }
+      .screw-M2x3 {
+        fill: #fbbf24;
+      }
+      .screw-M2x4 {
+        fill: #f97316;
+      }
+      .screw-M2x5 {
+        fill: #ef4444;
+      }
+      .screw-M2\.5x5 {
+        fill: #8b5cf6;
+      }
+      .screw-M3x3 {
+        fill: #14b8a6;
+      }
+
+      #realistic-layer[data-show="false"],
+      #schematic-layer[data-show="false"] {
+        display: none;
+      }
+
+      .tooltip {
+        position: fixed;
+        background: var(--ink);
+        color: var(--panel);
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 12px;
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity 0.12s;
+        z-index: 100;
+      }
+      .tooltip[data-show="true"] {
+        opacity: 1;
+      }
+
+      #panel h2 {
+        font-size: 16px;
+        margin: 0 0 4px;
+      }
+      #panel .badge {
+        display: inline-block;
+        padding: 2px 8px;
+        border-radius: 4px;
+        font-size: 11px;
+        color: #fff;
+        font-weight: 600;
+        letter-spacing: 0.3px;
+        text-transform: uppercase;
+        margin-bottom: 12px;
+      }
+      #panel .badge[data-cat="power"] {
+        background: var(--power);
+      }
+      #panel .badge[data-cat="compute"] {
+        background: var(--compute);
+      }
+      #panel .badge[data-cat="storage"] {
+        background: var(--storage);
+      }
+      #panel .badge[data-cat="wireless"] {
+        background: var(--wireless);
+      }
+      #panel .badge[data-cat="thermal"] {
+        background: var(--thermal);
+      }
+      #panel .badge[data-cat="audio"] {
+        background: var(--audio);
+      }
+      #panel section {
+        margin-top: 12px;
+      }
+      #panel h3 {
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.6px;
+        color: var(--muted);
+        margin: 0 0 6px;
+      }
+      #panel ol,
+      #panel ul {
+        padding-left: 18px;
+        margin: 0;
+      }
+      #panel ol li,
+      #panel ul li {
+        margin-bottom: 4px;
+      }
+      #panel table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 12px;
+      }
+      #panel th,
+      #panel td {
+        text-align: left;
+        padding: 4px 6px;
+        border-bottom: 1px solid var(--rule);
+      }
+      .warn {
+        background: var(--warn-bg);
+        border: 1px solid var(--warn-bd);
+        color: var(--warn-fg);
+        padding: 8px 10px;
+        border-radius: 6px;
+        font-size: 12px;
+      }
+      .empty {
+        color: var(--muted);
+        padding: 40px 0;
+        text-align: center;
+        font-size: 13px;
+      }
+      .manual-ref {
+        color: var(--muted);
+        font-size: 11px;
+      }
+      .legend {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        padding: 8px 0 0;
+        font-size: 11px;
+        color: var(--muted);
+        flex-wrap: wrap;
+      }
+      .legend span.dot {
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        margin-right: 4px;
+        vertical-align: middle;
+      }
+
+      @media print {
+        header,
+        #panel {
+          display: none !important;
+        }
+        main {
+          grid-template-columns: 1fr;
+          height: auto;
+        }
+        body {
+          background: white;
+        }
+        #stage {
+          padding: 0;
+        }
+        svg.diagram {
+          max-height: none;
+          width: 100%;
+          height: 95vh;
+        }
+        @page {
+          size: landscape;
+          margin: 12mm;
+        }
+        .comp-label {
+          font-size: 4.5px;
+        }
+        .comp.dim {
+          opacity: 1;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>
+        Dell Inspiron 15 5570
+        <span class="sub"
+          >— Internal layout (base cover removed) · Reg. P75F001</span
+        >
+      </h1>
+      <div class="grow"></div>
+      <div class="toolbar" id="filters">
+        <button class="chip cat-power" data-cat="power" aria-pressed="true">
+          <span class="swatch"></span>Power
+        </button>
+        <button class="chip cat-compute" data-cat="compute" aria-pressed="true">
+          <span class="swatch"></span>Compute
+        </button>
+        <button class="chip cat-storage" data-cat="storage" aria-pressed="true">
+          <span class="swatch"></span>Storage
+        </button>
+        <button
+          class="chip cat-wireless"
+          data-cat="wireless"
+          aria-pressed="true"
+        >
+          <span class="swatch"></span>Wireless
+        </button>
+        <button class="chip cat-thermal" data-cat="thermal" aria-pressed="true">
+          <span class="swatch"></span>Thermal
+        </button>
+        <button class="chip cat-audio" data-cat="audio" aria-pressed="true">
+          <span class="swatch"></span>Audio
+        </button>
+      </div>
+      <div class="toolbar">
+        <button class="btn" id="toggleView" aria-pressed="true">
+          View: Realistic
+        </button>
+        <button class="btn" id="toggleCables" aria-pressed="true">
+          Cables: on
+        </button>
+        <button class="btn" id="toggleScrews" aria-pressed="false">
+          Screw map: off
+        </button>
+        <button class="btn" id="reset">Reset</button>
+        <button class="btn" id="toggleTheme" aria-pressed="false">Dark</button>
+      </div>
+    </header>
+
+    <main>
+      <div id="stage">
+        <svg
+          class="diagram"
+          viewBox="0 0 380 260"
+          xmlns="http://www.w3.org/2000/svg"
+          role="img"
+          aria-label="Top-down view of Dell Inspiron 15 5570 internals with base cover removed"
+        >
+          <defs>
+            <!-- Brushed magnesium-alloy palmrest texture -->
+            <filter id="brushed" x="0" y="0" width="100%" height="100%">
+              <feTurbulence
+                type="turbulence"
+                baseFrequency="1.2 0.04"
+                numOctaves="2"
+                seed="3"
+                result="t"
+              />
+              <feColorMatrix
+                in="t"
+                values="0 0 0 0 0.78  0 0 0 0 0.80  0 0 0 0 0.83  0 0 0 0.35 0"
+              />
+              <feComposite in2="SourceGraphic" operator="in" />
+            </filter>
+            <!-- Subtle PCB green base -->
+            <filter id="pcbNoise" x="0" y="0" width="100%" height="100%">
+              <feTurbulence
+                type="fractalNoise"
+                baseFrequency="2.8"
+                numOctaves="2"
+                seed="7"
+                result="t"
+              />
+              <feColorMatrix
+                in="t"
+                values="0 0 0 0 0.04  0 0 0 0 0.18  0 0 0 0 0.09  0 0 0 0.4 0"
+              />
+              <feComposite in2="SourceGraphic" operator="in" />
+            </filter>
+            <!-- Drop shadow for chassis & components -->
+            <filter
+              id="dropShadow"
+              x="-10%"
+              y="-10%"
+              width="120%"
+              height="120%"
+            >
+              <feGaussianBlur in="SourceAlpha" stdDeviation="0.6" />
+              <feOffset dx="0.4" dy="0.8" result="o" />
+              <feComponentTransfer>
+                <feFuncA type="linear" slope="0.55" />
+              </feComponentTransfer>
+              <feMerge>
+                <feMergeNode />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+            <filter
+              id="chassisShadow"
+              x="-5%"
+              y="-5%"
+              width="110%"
+              height="115%"
+            >
+              <feGaussianBlur in="SourceAlpha" stdDeviation="1.6" />
+              <feOffset dx="0.6" dy="1.6" result="o" />
+              <feComponentTransfer>
+                <feFuncA type="linear" slope="0.45" />
+              </feComponentTransfer>
+              <feMerge>
+                <feMergeNode />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+            <filter id="motionBlur">
+              <feGaussianBlur stdDeviation="0.45 0.05" />
+            </filter>
+
+            <!-- Lighting overlay (top-left highlight, bottom-right shadow) -->
+            <linearGradient id="lighting" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#ffffff" stop-opacity="0.32" />
+              <stop offset="55%" stop-color="#ffffff" stop-opacity="0" />
+              <stop offset="100%" stop-color="#000000" stop-opacity="0.22" />
+            </linearGradient>
+
+            <!-- Material gradients -->
+            <linearGradient id="copper" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#e3b07a" />
+              <stop offset="50%" stop-color="#c98551" />
+              <stop offset="100%" stop-color="#8b4513" />
+            </linearGradient>
+            <linearGradient id="copperHorizontal" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stop-color="#9c5a2c" />
+              <stop offset="50%" stop-color="#d49a5c" />
+              <stop offset="100%" stop-color="#9c5a2c" />
+            </linearGradient>
+            <linearGradient id="pcbGreen" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#13522c" />
+              <stop offset="100%" stop-color="#0a3d1f" />
+            </linearGradient>
+            <linearGradient id="pcbGreenDark" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#0d4423" />
+              <stop offset="100%" stop-color="#082e16" />
+            </linearGradient>
+            <linearGradient id="batteryCell" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#34363a" />
+              <stop offset="40%" stop-color="#1a1a1a" />
+              <stop offset="100%" stop-color="#0a0a0a" />
+            </linearGradient>
+            <linearGradient id="brushedMetal" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#e8eaef" />
+              <stop offset="50%" stop-color="#bcc1ca" />
+              <stop offset="100%" stop-color="#8a8f99" />
+            </linearGradient>
+            <linearGradient id="fanHousing" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#3a3f47" />
+              <stop offset="100%" stop-color="#181b21" />
+            </linearGradient>
+            <radialGradient id="fanHub" cx="0.5" cy="0.5" r="0.5">
+              <stop offset="0%" stop-color="#5a6068" />
+              <stop offset="60%" stop-color="#2c3036" />
+              <stop offset="100%" stop-color="#0a0c10" />
+            </radialGradient>
+            <radialGradient id="coinCell" cx="0.4" cy="0.35" r="0.7">
+              <stop offset="0%" stop-color="#f4f5f7" />
+              <stop offset="55%" stop-color="#b9bdc6" />
+              <stop offset="100%" stop-color="#6c7079" />
+            </radialGradient>
+            <linearGradient id="ribbon" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#f0d27a" />
+              <stop offset="50%" stop-color="#d9b35a" />
+              <stop offset="100%" stop-color="#9d7c30" />
+            </linearGradient>
+            <linearGradient id="goldContact" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#fce98a" />
+              <stop offset="100%" stop-color="#b8902b" />
+            </linearGradient>
+
+            <!-- Speaker mesh: tiny dot grid -->
+            <pattern
+              id="speakerMesh"
+              width="1.4"
+              height="1.4"
+              patternUnits="userSpaceOnUse"
+            >
+              <rect width="1.4" height="1.4" fill="#0a0a0a" />
+              <circle cx="0.7" cy="0.7" r="0.25" fill="#3a3a3a" />
+            </pattern>
+            <!-- Brushed metal pattern for touchpad / HDD -->
+            <pattern
+              id="brushedStripes"
+              width="2"
+              height="0.3"
+              patternUnits="userSpaceOnUse"
+            >
+              <rect width="2" height="0.3" fill="url(#brushedMetal)" />
+              <line
+                x1="0"
+                y1="0.15"
+                x2="2"
+                y2="0.15"
+                stroke="#9aa0aa"
+                stroke-width="0.05"
+                opacity="0.6"
+              />
+            </pattern>
+
+            <!-- Reusable: small IC chip (black square w/ silkscreen) -->
+            <symbol id="icChip" viewBox="0 0 10 10">
+              <rect width="10" height="10" fill="#0e0e10" rx="0.4" />
+              <rect
+                x="0.5"
+                y="0.5"
+                width="9"
+                height="9"
+                fill="none"
+                stroke="#2a2a2c"
+                stroke-width="0.15"
+              />
+              <circle cx="1.5" cy="1.5" r="0.5" fill="#1d1d20" />
+              <text
+                x="5"
+                y="6"
+                font-size="2.4"
+                fill="#bababa"
+                text-anchor="middle"
+                font-family="ui-monospace,Menlo,Consolas,monospace"
+              >
+                IC
+              </text>
+            </symbol>
+            <!-- Reusable: DRAM chip on RAM stick -->
+            <symbol id="dramChip" viewBox="0 0 8 5">
+              <rect width="8" height="5" fill="#0e0e10" rx="0.3" />
+              <text
+                x="4"
+                y="3.4"
+                font-size="1.6"
+                fill="#9c9c9c"
+                text-anchor="middle"
+                font-family="ui-monospace,Menlo,Consolas,monospace"
+              >
+                K4A
+              </text>
+            </symbol>
+          </defs>
+
+          <!-- Drop shadow under chassis -->
+          <rect
+            x="3"
+            y="6"
+            width="374"
+            height="252"
+            rx="9"
+            ry="9"
+            fill="rgba(0,0,0,.18)"
+            filter="url(#chassisShadow)"
+          />
+
+          <!-- Chassis base: brushed magnesium -->
+          <g>
+            <rect
+              x="5"
+              y="5"
+              width="370"
+              height="250"
+              rx="8"
+              ry="8"
+              fill="var(--chassis)"
+              stroke="var(--chassis-stroke)"
+              stroke-width="0.8"
+            />
+            <rect
+              x="5"
+              y="5"
+              width="370"
+              height="250"
+              rx="8"
+              ry="8"
+              fill="#cfd2d6"
+              filter="url(#brushed)"
+              opacity="0.55"
+            />
+            <!-- Subtle internal cavity outline (where the bottom cover sat) -->
+            <rect
+              x="9"
+              y="9"
+              width="362"
+              height="242"
+              rx="6"
+              ry="6"
+              fill="none"
+              stroke="#7c828c"
+              stroke-width="0.25"
+              stroke-dasharray="0.8 0.6"
+              opacity="0.5"
+            />
+          </g>
+
+          <!-- Perimeter screw holes (where bottom cover screws thread) -->
+          <g id="coverScrews" aria-hidden="true">
+            <!-- placed by JS -->
+          </g>
+
+          <!-- Edge labels -->
+          <text
+            x="190"
+            y="14"
+            text-anchor="middle"
+            font-size="5"
+            fill="#5b6472"
+          >
+            HINGE (back) · display assembly above
+          </text>
+          <text
+            x="190"
+            y="252"
+            text-anchor="middle"
+            font-size="5"
+            fill="#5b6472"
+          >
+            PALMREST (front) · touchpad &amp; keyboard above
+          </text>
+          <text
+            x="10"
+            y="135"
+            font-size="5"
+            fill="#5b6472"
+            transform="rotate(-90 10 135)"
+          >
+            LEFT
+          </text>
+          <text
+            x="370"
+            y="135"
+            font-size="5"
+            fill="#5b6472"
+            transform="rotate(90 370 135)"
+          >
+            RIGHT
+          </text>
+
+          <!-- Layers -->
+          <g id="realistic-layer" data-show="true"></g>
+          <g id="schematic-layer" data-show="false"></g>
+          <g id="cables" class="cables" data-show="true"></g>
+          <g id="screwmap" class="screwmap" data-show="false"></g>
+
+          <!-- Top-left lighting overlay (sits above components for cohesive lighting) -->
+          <rect
+            x="5"
+            y="5"
+            width="370"
+            height="250"
+            rx="8"
+            ry="8"
+            fill="url(#lighting)"
+            pointer-events="none"
+          />
+        </svg>
+        <div class="legend">
+          <span><span class="dot" style="background: #fbbf24"></span>M2×3</span>
+          <span><span class="dot" style="background: #f97316"></span>M2×4</span>
+          <span><span class="dot" style="background: #ef4444"></span>M2×5</span>
+          <span
+            ><span class="dot" style="background: #8b5cf6"></span>M2.5×5</span
+          >
+          <span><span class="dot" style="background: #14b8a6"></span>M3×3</span>
+          <span style="margin-left: auto"
+            >grid scale = 10 mm · viewBox 380×260 mm (≈ 15.6″ chassis)</span
+          >
+        </div>
+      </div>
+
+      <aside id="panel" aria-live="polite">
+        <div id="panelBody">
+          <div class="empty">
+            Click a component to see removal notes, screws, and warnings.<br /><br />
+            <span class="manual-ref"
+              >Source: Dell Inspiron 5570 Service Manual (P75F001).<br />
+              dl.dell.com/topicspdf/inspiron-15-5570-laptop_service-manual_en-us.pdf</span
+            >
+          </div>
+        </div>
+      </aside>
+    </main>
+
+    <div class="tooltip" id="tooltip" role="tooltip"></div>
+
+    <script>
+      /* ====== Component data (UNCHANGED from prior pass) ====== */
+      const COMPONENTS = [
+        {
+          id: "system-board",
+          label: "System board (motherboard)",
+          short: "Motherboard",
+          category: "compute",
+          shape: "rect",
+          geometry: { x: 70, y: 20, w: 215, h: 130 },
+          function:
+            "Hosts CPU, chipset, RAM slots, M.2 WLAN slot, USB/HDMI I/O, and every cable connector. Spans the rear half of the chassis from hinge edge toward the battery.",
+          removalNotes: [
+            "Disconnect ALL cables first: battery, display (eDP), I/O ribbon, fan, speaker, touchpad, keyboard, power-button.",
+            "Remove the WLAN card, heat sink, and fan before lifting.",
+            "Remove the single M2×4 screw securing the board.",
+            "Lift from the right (USB side) and slide left to clear the I/O ports.",
+          ],
+          screws: [{ type: "M2×4", count: 1 }],
+          warnings: [],
+          manualRef: "Removing the system board (p. 53)",
+        },
+        {
+          id: "battery",
+          label: "Battery (3-cell 42 Wh or 4-cell 56 Wh)",
+          short: "Battery",
+          category: "power",
+          shape: "rect",
+          geometry: { x: 110, y: 155, w: 200, h: 80 },
+          function:
+            "Primary DC source when unplugged. Feeds the system board through the battery connector at the top-right edge of the cell pack.",
+          removalNotes: [
+            "Disconnect the battery cable from the system board FIRST — before any other component work.",
+            "Remove 4× M2×3 screws (3-cell) or 5× M2×3 screws (4-cell) securing the battery.",
+            "Lift from the front edge; do not pry near the cells.",
+          ],
+          screws: [{ type: "M2×3", count: 4 }],
+          warnings: [
+            "Puncturing a Li-ion cell can cause thermal runaway. Use plastic spudgers only — never metal.",
+          ],
+          manualRef: "Removing the battery (p. 19)",
+        },
+        {
+          id: "hdd",
+          label: '2.5" hard drive assembly',
+          short: "HDD",
+          category: "storage",
+          shape: "rect",
+          geometry: { x: 18, y: 150, w: 88, h: 80 },
+          function:
+            "Optional spinning or SATA SSD storage in the front-left bay. Connects to the system board via a short ribbon and SATA interposer.",
+          removalNotes: [
+            "Disconnect the hard-drive cable from the system board (lift the latch first).",
+            "Remove 2× M2×3 screws securing the assembly to the palmrest.",
+            "Lift the assembly out of the bay.",
+            "Remove 4× M3×3 screws from the bracket to free the bare drive.",
+          ],
+          screws: [
+            { type: "M2×3", count: 2 },
+            { type: "M3×3", count: 4 },
+          ],
+          warnings: [],
+          manualRef: "Removing the hard-drive assembly (p. 23)",
+        },
+        {
+          id: "ram",
+          label: "Memory (SO-DIMM slots ×2, DDR4)",
+          short: "RAM",
+          category: "compute",
+          shape: "rect",
+          geometry: { x: 135, y: 65, w: 80, h: 40 },
+          function:
+            "Two stacked DDR4 SO-DIMM slots on the system board. Slot 1 (lower) populates first; both must be removed to upgrade slot 1.",
+          removalNotes: [
+            "Spread the securing clips at each end of the slot until the module pops up.",
+            "Slide the module straight out at the 20° rest angle.",
+            "Repeat for the second slot if present.",
+          ],
+          screws: [],
+          warnings: [
+            "Hold modules by the edges — fingerprints on the gold fingers cause flaky boots.",
+          ],
+          manualRef: "Removing the memory modules (p. 27)",
+        },
+        {
+          id: "wlan",
+          label: "M.2 2230 WLAN card",
+          short: "WLAN",
+          category: "wireless",
+          shape: "rect",
+          geometry: { x: 222, y: 35, w: 32, h: 22 },
+          function:
+            "Half-mini M.2 wireless + Bluetooth combo card. Two U.FL antenna leads (MAIN = black, AUX = white/grey) clip onto the gold contacts.",
+          removalNotes: [
+            "Carefully unclip both antenna leads — pull straight up, never sideways.",
+            "Remove the M2×3 screw securing the card bracket.",
+            "Slide the card out of its slot at the 20° rest angle.",
+          ],
+          screws: [{ type: "M2×3", count: 1 }],
+          warnings: [
+            "The U.FL connectors are fragile — bent leads will degrade RF performance.",
+          ],
+          manualRef: "Removing the wireless card (p. 30)",
+        },
+        {
+          id: "fan",
+          label: "Cooling fan",
+          short: "Fan",
+          category: "thermal",
+          shape: "rect",
+          geometry: { x: 235, y: 25, w: 50, h: 50 },
+          function:
+            "Centrifugal blower drawing air through the keyboard and exhausting through the rear-right vent. Tied to the heatpipe via the fin stack.",
+          removalNotes: [
+            "Disconnect the fan power cable from the system board.",
+            "Unroute the display (eDP) cable from the guides on the fan shroud.",
+            "Remove 3× M2.5×5 screws.",
+            "Lift the fan out.",
+          ],
+          screws: [{ type: "M2.5×5", count: 3 }],
+          warnings: [],
+          manualRef: "Removing the fan (p. 33)",
+        },
+        {
+          id: "heatsink",
+          label: "Heat sink + heatpipe",
+          short: "Heatsink",
+          category: "thermal",
+          shape: "polygon",
+          geometry: { points: "140,55 235,55 235,75 220,80 175,80 140,75" },
+          function:
+            "Copper heatpipe over the CPU (and dGPU on UMA-vs-discrete configs), capped by aluminum fins inside the fan housing. Pre-applied thermal paste — clean and re-apply if removed.",
+          removalNotes: [
+            "Loosen captive screws in the order stamped on the heat sink (1 → 2 → 3 → 4).",
+            "Lift straight up — do not twist (paste can stick the CPU IHS to the heat sink).",
+            "Clean old paste with isopropyl 91%+ and a lint-free wipe; re-apply pea-sized dot of fresh paste before reinstall.",
+          ],
+          screws: [{ type: "Captive (numbered)", count: 4 }],
+          warnings: [
+            "Re-tighten in numbered order to avoid uneven die pressure. Never run the system without paste.",
+          ],
+          manualRef: "Removing the heat sink (p. 36)",
+        },
+        {
+          id: "io-board",
+          label: "I/O daughterboard",
+          short: "I/O board",
+          category: "compute",
+          shape: "rect",
+          geometry: { x: 15, y: 90, w: 50, h: 50 },
+          function:
+            "Left-side daughterboard carrying the SD card reader, audio jack, and (on some SKUs) the power button. Connects to the main board via a ribbon cable.",
+          removalNotes: [
+            "Disconnect the coin-cell battery cable (it routes through the I/O board area).",
+            "Disconnect the I/O-board ribbon from the system board.",
+            "Remove the M2×4 screw securing the board.",
+            "Lift the board out of the palmrest.",
+          ],
+          screws: [{ type: "M2×4", count: 1 }],
+          warnings: [],
+          manualRef: "Removing the I/O board (p. 45)",
+        },
+        {
+          id: "coin-cell",
+          label: "Coin-cell (CMOS) battery",
+          short: "CMOS",
+          category: "power",
+          shape: "rect",
+          geometry: { x: 70, y: 138, w: 14, h: 14 },
+          function:
+            "CR2032-class cell keeping RTC and BIOS NVRAM alive when the main battery is removed. Wired (not socketed) on the 5570 — uses a 2-pin lead to the system board.",
+          removalNotes: [
+            "Disconnect the coin-cell cable from the system board.",
+            "Peel the cell free from the adhesive pad.",
+            "After reinstall: BIOS time/date will reset on first boot — re-enter setup.",
+          ],
+          screws: [],
+          warnings: [],
+          manualRef: "Removing the coin-cell battery (p. 32)",
+        },
+        {
+          id: "speaker-left",
+          label: "Left speaker",
+          short: "L spkr",
+          category: "audio",
+          shape: "rect",
+          geometry: { x: 12, y: 218, w: 55, h: 28 },
+          function:
+            "Bottom-firing driver in the front-left corner. Seated on rubber grommets to damp vibration into the chassis.",
+          removalNotes: [
+            "Disconnect the speaker cable from the system board.",
+            "Unroute the cable from its chassis guides.",
+            "Lift the speaker out — rubber grommets stay with the speaker.",
+          ],
+          screws: [],
+          warnings: [],
+          manualRef: "Removing the speakers (p. 41)",
+        },
+        {
+          id: "speaker-right",
+          label: "Right speaker",
+          short: "R spkr",
+          category: "audio",
+          shape: "rect",
+          geometry: { x: 313, y: 218, w: 55, h: 28 },
+          function:
+            "Bottom-firing driver in the front-right corner. Shares the same harness as the left speaker.",
+          removalNotes: [
+            "Disconnect the speaker cable from the system board.",
+            "Unroute the cable from its chassis guides (runs along the front edge).",
+            "Lift the speaker out.",
+          ],
+          screws: [],
+          warnings: [],
+          manualRef: "Removing the speakers (p. 41)",
+        },
+        {
+          id: "power-button",
+          label: "Power button board",
+          short: "Power btn",
+          category: "power",
+          shape: "rect",
+          geometry: { x: 288, y: 95, w: 25, h: 18 },
+          function:
+            "Small board with the tactile power switch. Connects to the system board via a short ribbon. Some SKUs integrate this into the I/O board.",
+          removalNotes: [
+            "Disconnect the power-button ribbon from the system board.",
+            "Remove the M2×3 screw securing the board.",
+            "Lift the board out.",
+          ],
+          screws: [{ type: "M2×3", count: 1 }],
+          warnings: [],
+          manualRef: "Removing the power-button board (p. 49)",
+        },
+        {
+          id: "touchpad",
+          label: "Touchpad (underside view)",
+          short: "Touchpad",
+          category: "compute",
+          shape: "rect",
+          geometry: { x: 140, y: 195, w: 110, h: 45 },
+          function:
+            "Mounted in the palmrest — visible as a metal plate from the underside. Connects to the system board via a ZIF ribbon under the battery.",
+          removalNotes: [
+            "Battery must be out first (the touchpad ribbon routes beneath it).",
+            "Lift the ZIF latch on the system board and slide the ribbon free.",
+            "Peel the gasket tape, then remove the touchpad-bracket screws to free the pad.",
+          ],
+          screws: [{ type: "M2×2 (bracket)", count: 4 }],
+          warnings: [
+            "The touchpad is part of the palmrest assembly on most 5570 SKUs — full replacement means swapping the palmrest.",
+          ],
+          manualRef: "Removing the touchpad (p. 50)",
+        },
+      ];
+
+      /* ====== Cables (UNCHANGED) ====== */
+      const CABLES = [
+        {
+          id: "batt-conn",
+          label: "Battery → system board",
+          kind: "wire-power",
+          routing: [
+            [300, 165],
+            [300, 150],
+            [285, 150],
+          ],
+          notes:
+            "Pull the connector straight up by the plastic shroud — never the wires.",
+        },
+        {
+          id: "edp",
+          label: "Display (eDP) cable",
+          kind: "ribbon",
+          routing: [
+            [200, 7],
+            [200, 25],
+            [225, 40],
+          ],
+          notes:
+            "Lift the small black retention flap on the ZIF before pulling. Routes over the fan shroud.",
+        },
+        {
+          id: "kbd-ribbon",
+          label: "Keyboard ribbon (ZIF)",
+          kind: "ribbon",
+          routing: [
+            [175, 150],
+            [175, 135],
+          ],
+          notes: "Black ZIF latch — flip up 90°, then slide ribbon out.",
+        },
+        {
+          id: "touchpad",
+          label: "Touchpad ribbon",
+          kind: "ribbon",
+          routing: [
+            [195, 195],
+            [195, 145],
+          ],
+          notes: "Routes under the battery — battery must be unseated first.",
+        },
+        {
+          id: "spk-left",
+          label: "Left speaker cable",
+          kind: "wire-signal",
+          routing: [
+            [40, 218],
+            [40, 150],
+            [70, 145],
+          ],
+          notes:
+            "Runs along the chassis edge — re-seat in the guide ribs on reassembly.",
+        },
+        {
+          id: "spk-right",
+          label: "Right speaker cable",
+          kind: "wire-signal",
+          routing: [
+            [340, 218],
+            [340, 150],
+            [285, 145],
+          ],
+          notes:
+            "Shares the same harness as the left speaker — keep the splitter on the right side.",
+        },
+        {
+          id: "io-ribbon",
+          label: "I/O board ribbon",
+          kind: "ribbon",
+          routing: [
+            [65, 115],
+            [80, 115],
+          ],
+          notes: "Short ribbon — both ends are ZIF latches.",
+        },
+        {
+          id: "ant-main",
+          label: "WLAN antenna — MAIN (black)",
+          kind: "coax-black",
+          routing: [
+            [238, 40],
+            [238, 12],
+            [290, 12],
+          ],
+          notes:
+            "Black lead. Push straight down onto the gold pad — listen for the click.",
+        },
+        {
+          id: "ant-aux",
+          label: "WLAN antenna — AUX (white/grey)",
+          kind: "coax-white",
+          routing: [
+            [245, 40],
+            [245, 9],
+            [90, 9],
+          ],
+          notes:
+            "White/grey lead. Routes along the hinge edge to the opposite antenna.",
+        },
+        {
+          id: "fan-power",
+          label: "Fan power connector",
+          kind: "wire-power",
+          routing: [
+            [245, 75],
+            [245, 90],
+            [260, 90],
+          ],
+          notes: "Small 4-pin connector — orientation keyed.",
+        },
+        {
+          id: "pwr-btn",
+          label: "Power-button cable",
+          kind: "ribbon",
+          routing: [
+            [290, 113],
+            [285, 130],
+          ],
+          notes: "ZIF on the system board — flip latch before pulling.",
+        },
+        {
+          id: "hdd-ribbon",
+          label: "Hard-drive ribbon",
+          kind: "ribbon",
+          routing: [
+            [105, 190],
+            [120, 190],
+            [120, 150],
+          ],
+          notes: "Latching FFC connector at the system-board end.",
+        },
+        {
+          id: "coin-cell-cable",
+          label: "Coin-cell lead",
+          kind: "wire-signal",
+          routing: [
+            [84, 145],
+            [100, 145],
+          ],
+          notes: "Two-pin connector — keyed; do not force.",
+        },
+      ];
+
+      /* ====== Screws (UNCHANGED) ====== */
+      const SCREWS = [
+        { type: "M2x3", x: 130, y: 162 },
+        { type: "M2x3", x: 295, y: 162 },
+        { type: "M2x3", x: 130, y: 228 },
+        { type: "M2x3", x: 295, y: 228 },
+        { type: "M2x3", x: 26, y: 158 },
+        { type: "M2x3", x: 98, y: 222 },
+        { type: "M3x3", x: 22, y: 168 },
+        { type: "M3x3", x: 102, y: 168 },
+        { type: "M3x3", x: 22, y: 212 },
+        { type: "M3x3", x: 102, y: 212 },
+        { type: "M2x3", x: 251, y: 46 },
+        { type: "M2.5x5", x: 242, y: 30 },
+        { type: "M2.5x5", x: 280, y: 30 },
+        { type: "M2.5x5", x: 280, y: 70 },
+        { type: "M2x4", x: 22, y: 96 },
+        { type: "M2x3", x: 308, y: 100 },
+        { type: "M2x4", x: 145, y: 25 },
+      ];
+
+      /* ====== Bottom-cover screw holes (perimeter, where service-manual maps them) ====== */
+      const COVER_SCREWS = [
+        [20, 15],
+        [80, 12],
+        [150, 12],
+        [220, 12],
+        [290, 12],
+        [345, 15], // back row
+        [15, 80],
+        [15, 150],
+        [15, 220], // left edge
+        [365, 80],
+        [365, 150],
+        [365, 220], // right edge
+        [50, 245],
+        [120, 245],
+        [200, 245],
+        [280, 245],
+        [345, 245], // front row
+      ];
+
+      /* ====== Helpers ====== */
+      const SVG_NS = "http://www.w3.org/2000/svg";
+      function el(name, attrs = {}, parent = null) {
+        const n = document.createElementNS(SVG_NS, name);
+        for (const [k, v] of Object.entries(attrs)) n.setAttribute(k, v);
+        if (parent) parent.appendChild(n);
+        return n;
+      }
+      function centroidOf(c) {
+        if (c.shape === "rect") {
+          const { x, y, w, h } = c.geometry;
+          return [x + w / 2, y + h / 2];
+        } else {
+          const pts = c.geometry.points
+            .split(/\s+/)
+            .map((p) => p.split(",").map(Number));
+          return [
+            pts.reduce((a, p) => a + p[0], 0) / pts.length,
+            pts.reduce((a, p) => a + p[1], 0) / pts.length,
+          ];
+        }
+      }
+
+      /* ====== Schematic (flat) renderer — preserved from the previous build ====== */
+      function renderSchematic(parent) {
+        COMPONENTS.forEach((c) => {
+          const g = el(
+            "g",
+            {
+              class: `comp cat-${c.category}`,
+              "data-id": c.id,
+              "data-cat": c.category,
+              tabindex: "0",
+              role: "button",
+              "aria-label": `${c.label}. ${c.function}`,
+              filter: "url(#dropShadow)",
+            },
+            parent,
+          );
+          if (c.shape === "rect") {
+            const { x, y, w, h } = c.geometry;
+            el(
+              "rect",
+              { class: "comp-shape", x, y, width: w, height: h, rx: 2, ry: 2 },
+              g,
+            );
+          } else {
+            el(
+              "polygon",
+              { class: "comp-shape", points: c.geometry.points },
+              g,
+            );
+          }
+          const [cx, cy] = centroidOf(c);
+          const lbl = el("text", { class: "comp-label", x: cx, y: cy + 2 }, g);
+          lbl.textContent = c.short;
+          addSelectionRing(g, c);
+          wireEvents(g, c);
+        });
+      }
+
+      /* ====== Realistic renderer ====== */
+      function renderRealistic(parent) {
+        COMPONENTS.forEach((c) => {
+          const g = el(
+            "g",
+            {
+              class: `comp cat-${c.category}`,
+              "data-id": c.id,
+              "data-cat": c.category,
+              tabindex: "0",
+              role: "button",
+              "aria-label": `${c.label}. ${c.function}`,
+              filter: "url(#dropShadow)",
+            },
+            parent,
+          );
+          const drawer = REAL_DRAWERS[c.id];
+          if (drawer) drawer(g, c);
+          else drawFallback(g, c);
+          addSelectionRing(g, c);
+          wireEvents(g, c);
+        });
+      }
+
+      function addSelectionRing(g, c) {
+        if (c.shape === "rect") {
+          const { x, y, w, h } = c.geometry;
+          el(
+            "rect",
+            {
+              class: "selection-ring",
+              x: x - 2,
+              y: y - 2,
+              width: w + 4,
+              height: h + 4,
+              rx: 4,
+              ry: 4,
+            },
+            g,
+          );
+        } else {
+          el(
+            "polygon",
+            {
+              class: "selection-ring",
+              points: c.geometry.points,
+              transform: `scale(1.04) translate(${-centroidOf(c)[0] * 0.04} ${-centroidOf(c)[1] * 0.04})`,
+            },
+            g,
+          );
+        }
+      }
+
+      function wireEvents(g, c) {
+        g.addEventListener("mouseenter", (e) => showTip(e, c.label));
+        g.addEventListener("mousemove", moveTip);
+        g.addEventListener("mouseleave", hideTip);
+        g.addEventListener("click", () => select(c.id));
+        g.addEventListener("keydown", (e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            select(c.id);
+          }
+        });
+      }
+
+      function drawFallback(g, c) {
+        if (c.shape === "rect") {
+          const { x, y, w, h } = c.geometry;
+          el(
+            "rect",
+            {
+              x,
+              y,
+              width: w,
+              height: h,
+              rx: 2,
+              fill: "#444",
+              stroke: "#000",
+              "stroke-width": 0.3,
+            },
+            g,
+          );
+        } else {
+          el(
+            "polygon",
+            {
+              points: c.geometry.points,
+              fill: "#444",
+              stroke: "#000",
+              "stroke-width": 0.3,
+            },
+            g,
+          );
+        }
+        const [cx, cy] = centroidOf(c);
+        const lbl = el("text", { class: "comp-label", x: cx, y: cy + 2 }, g);
+        lbl.textContent = c.short;
+      }
+
+      /* ----- Per-component realistic drawers ----- */
+      const REAL_DRAWERS = {
+        "system-board": (g, c) => {
+          const { x, y, w, h } = c.geometry;
+          // PCB base
+          el(
+            "rect",
+            { x, y, width: w, height: h, rx: 1.5, fill: "url(#pcbGreen)" },
+            g,
+          );
+          el(
+            "rect",
+            {
+              x,
+              y,
+              width: w,
+              height: h,
+              rx: 1.5,
+              filter: "url(#pcbNoise)",
+              opacity: 0.7,
+            },
+            g,
+          );
+          // Top inner border (silkscreen)
+          el(
+            "rect",
+            {
+              x: x + 1.5,
+              y: y + 1.5,
+              width: w - 3,
+              height: h - 3,
+              rx: 1,
+              fill: "none",
+              stroke: "#e8d27c",
+              "stroke-width": 0.18,
+              opacity: 0.55,
+            },
+            g,
+          );
+          // Copper trace polylines (decorative)
+          const traces = [
+            `M${x + 8} ${y + 10} L${x + w - 12} ${y + 10} L${x + w - 12} ${y + 25}`,
+            `M${x + 12} ${y + 30} L${x + 12} ${y + h - 12} L${x + w - 20} ${y + h - 12}`,
+            `M${x + w - 30} ${y + 8} L${x + w - 30} ${y + h - 20}`,
+            `M${x + 30} ${y + h - 30} L${x + w - 40} ${y + h - 30}`,
+          ];
+          traces.forEach((d) =>
+            el(
+              "path",
+              {
+                d,
+                fill: "none",
+                stroke: "#c89a3c",
+                "stroke-width": 0.25,
+                opacity: 0.55,
+              },
+              g,
+            ),
+          );
+          // ICs scattered around the board
+          const icPositions = [
+            [x + 20, y + 24, 14, 14], // CPU package
+            [x + 38, y + 22, 10, 10], // chipset
+            [x + 58, y + 90, 8, 8],
+            [x + 90, y + 18, 6, 6],
+            [x + w - 22, y + 50, 9, 9],
+            [x + w - 50, y + 95, 7, 7],
+          ];
+          icPositions.forEach(([px, py, pw, ph]) => {
+            el(
+              "use",
+              { href: "#icChip", x: px, y: py, width: pw, height: ph },
+              g,
+            );
+          });
+          // CPU silver IHS
+          el(
+            "rect",
+            {
+              x: x + 21,
+              y: y + 25,
+              width: 12,
+              height: 12,
+              rx: 0.4,
+              fill: "url(#brushedMetal)",
+              stroke: "#3a3e44",
+              "stroke-width": 0.2,
+            },
+            g,
+          );
+          el(
+            "text",
+            {
+              x: x + 27,
+              y: y + 32,
+              "font-size": 2.4,
+              fill: "#3a3e44",
+              "text-anchor": "middle",
+              "font-family": "ui-monospace,Menlo,Consolas,monospace",
+            },
+            g,
+          ).textContent = "i5";
+          // USB / HDMI port silhouettes on right edge
+          [
+            [x + w - 2, y + 20, 3, 6],
+            [x + w - 2, y + 30, 3, 6],
+            [x + w - 2, y + 45, 3, 5],
+          ].forEach(([px, py, pw, ph]) => {
+            el(
+              "rect",
+              {
+                x: px - pw + 0.5,
+                y: py,
+                width: pw,
+                height: ph,
+                fill: "#3a3e44",
+                stroke: "#000",
+                "stroke-width": 0.2,
+              },
+              g,
+            );
+          });
+          // M.2 slot (where WLAN/SSD seats) — gold connector strip
+          el(
+            "rect",
+            {
+              x: x + 150,
+              y: y + 18,
+              width: 22,
+              height: 2,
+              fill: "url(#goldContact)",
+            },
+            g,
+          );
+          // Silkscreen text
+          el(
+            "text",
+            {
+              x: x + w - 6,
+              y: y + h - 3,
+              "font-size": 2.2,
+              fill: "#e8d27c",
+              "text-anchor": "end",
+              opacity: 0.7,
+              "font-family": "ui-monospace,Menlo,Consolas,monospace",
+            },
+            g,
+          ).textContent = "P75F MB";
+        },
+
+        battery: (g, c) => {
+          const { x, y, w, h } = c.geometry;
+          // Wrapper
+          el(
+            "rect",
+            {
+              x,
+              y,
+              width: w,
+              height: h,
+              rx: 3,
+              fill: "url(#batteryCell)",
+              stroke: "#000",
+              "stroke-width": 0.3,
+            },
+            g,
+          );
+          // 3 cells: vertical grooves
+          const cellW = w / 3;
+          for (let i = 1; i < 3; i++) {
+            el(
+              "line",
+              {
+                x1: x + i * cellW,
+                y1: y + 3,
+                x2: x + i * cellW,
+                y2: y + h - 3,
+                stroke: "#000",
+                "stroke-width": 0.5,
+                opacity: 0.7,
+              },
+              g,
+            );
+          }
+          // Highlight strip (top-left lighting)
+          el(
+            "rect",
+            {
+              x: x + 2,
+              y: y + 2,
+              width: w - 4,
+              height: 6,
+              rx: 2,
+              fill: "#ffffff",
+              opacity: 0.07,
+            },
+            g,
+          );
+          // Copper tabs on the connector side (right-top)
+          el(
+            "rect",
+            {
+              x: x + w - 18,
+              y: y - 2,
+              width: 12,
+              height: 4,
+              rx: 0.5,
+              fill: "url(#copperHorizontal)",
+              stroke: "#000",
+              "stroke-width": 0.2,
+            },
+            g,
+          );
+          // Li-ion text
+          el(
+            "text",
+            {
+              x: x + w / 2,
+              y: y + h - 4,
+              "font-size": 4,
+              fill: "#9ca0a8",
+              "text-anchor": "middle",
+              opacity: 0.6,
+              "font-family": "ui-monospace,Menlo,Consolas,monospace",
+            },
+            g,
+          ).textContent = "Li-ion 42Wh";
+          el(
+            "text",
+            {
+              x: x + w / 2,
+              y: y + 8,
+              "font-size": 2.8,
+              fill: "#6b6f78",
+              "text-anchor": "middle",
+              opacity: 0.7,
+              "font-family": "ui-monospace,Menlo,Consolas,monospace",
+            },
+            g,
+          ).textContent = "DELL P/N";
+        },
+
+        hdd: (g, c) => {
+          const { x, y, w, h } = c.geometry;
+          el(
+            "rect",
+            {
+              x,
+              y,
+              width: w,
+              height: h,
+              rx: 1.2,
+              fill: "url(#brushedMetal)",
+              stroke: "#4a4e57",
+              "stroke-width": 0.4,
+            },
+            g,
+          );
+          el(
+            "rect",
+            {
+              x,
+              y,
+              width: w,
+              height: h,
+              rx: 1.2,
+              fill: "url(#brushedStripes)",
+              opacity: 0.4,
+            },
+            g,
+          );
+          // Spindle indicator
+          el(
+            "circle",
+            {
+              cx: x + w * 0.55,
+              cy: y + h * 0.5,
+              r: 12,
+              fill: "none",
+              stroke: "#6e737d",
+              "stroke-width": 0.3,
+              opacity: 0.6,
+            },
+            g,
+          );
+          el(
+            "circle",
+            { cx: x + w * 0.55, cy: y + h * 0.5, r: 1.6, fill: "#3a3e44" },
+            g,
+          );
+          // Label area
+          el(
+            "rect",
+            {
+              x: x + 6,
+              y: y + 6,
+              width: w - 12,
+              height: 14,
+              rx: 0.5,
+              fill: "#e8eaef",
+              stroke: "#9aa0aa",
+              "stroke-width": 0.2,
+            },
+            g,
+          );
+          el(
+            "text",
+            {
+              x: x + w / 2,
+              y: y + 15,
+              "font-size": 3.4,
+              fill: "#3a3e44",
+              "text-anchor": "middle",
+              "font-family": "ui-monospace,Menlo,Consolas,monospace",
+            },
+            g,
+          ).textContent = "1TB · 5400rpm";
+          // 4 mounting screws
+          [
+            [x + 4, y + 4],
+            [x + w - 4, y + 4],
+            [x + 4, y + h - 4],
+            [x + w - 4, y + h - 4],
+          ].forEach(([sx, sy]) => {
+            el(
+              "circle",
+              {
+                cx: sx,
+                cy: sy,
+                r: 1,
+                fill: "#2a2e35",
+                stroke: "#000",
+                "stroke-width": 0.2,
+              },
+              g,
+            );
+          });
+        },
+
+        ram: (g, c) => {
+          const { x, y, w, h } = c.geometry;
+          // Two stacked SO-DIMMs
+          for (let i = 0; i < 2; i++) {
+            const sy = y + i * (h / 2);
+            const sh = h / 2 - 1;
+            el(
+              "rect",
+              {
+                x,
+                y: sy,
+                width: w,
+                height: sh,
+                rx: 1,
+                fill: "url(#pcbGreen)",
+                stroke: "#082e16",
+                "stroke-width": 0.3,
+              },
+              g,
+            );
+            el(
+              "rect",
+              {
+                x,
+                y: sy,
+                width: w,
+                height: sh,
+                rx: 1,
+                filter: "url(#pcbNoise)",
+                opacity: 0.5,
+              },
+              g,
+            );
+            // 4 DRAM chips
+            for (let k = 0; k < 4; k++) {
+              el(
+                "use",
+                {
+                  href: "#dramChip",
+                  x: x + 4 + k * ((w - 8) / 4),
+                  y: sy + 4,
+                  width: (w - 8) / 4 - 1.5,
+                  height: sh - 8,
+                },
+                g,
+              );
+            }
+            // Gold edge connector (bottom of each)
+            el(
+              "rect",
+              {
+                x: x + 1.5,
+                y: sy + sh - 1.6,
+                width: w - 3,
+                height: 1.4,
+                fill: "url(#goldContact)",
+              },
+              g,
+            );
+            // Small notch in connector
+            el(
+              "rect",
+              {
+                x: x + w * 0.62,
+                y: sy + sh - 1.6,
+                width: 1.4,
+                height: 1.4,
+                fill: "#0a3d1f",
+              },
+              g,
+            );
+          }
+        },
+
+        wlan: (g, c) => {
+          const { x, y, w, h } = c.geometry;
+          el(
+            "rect",
+            {
+              x,
+              y,
+              width: w,
+              height: h,
+              rx: 0.6,
+              fill: "url(#pcbGreen)",
+              stroke: "#082e16",
+              "stroke-width": 0.2,
+            },
+            g,
+          );
+          el(
+            "rect",
+            {
+              x,
+              y,
+              width: w,
+              height: h,
+              rx: 0.6,
+              filter: "url(#pcbNoise)",
+              opacity: 0.5,
+            },
+            g,
+          );
+          // Shielded can (RF shield) in center
+          el(
+            "rect",
+            {
+              x: x + 6,
+              y: y + 5,
+              width: w - 12,
+              height: h - 10,
+              rx: 0.4,
+              fill: "url(#brushedMetal)",
+              stroke: "#4a4e57",
+              "stroke-width": 0.2,
+            },
+            g,
+          );
+          el(
+            "text",
+            {
+              x: x + w / 2,
+              y: y + h / 2 + 1,
+              "font-size": 2.2,
+              fill: "#3a3e44",
+              "text-anchor": "middle",
+              "font-family": "ui-monospace,Menlo,Consolas,monospace",
+            },
+            g,
+          ).textContent = "WiFi";
+          // Two U.FL gold dots on top edge
+          el(
+            "circle",
+            {
+              cx: x + w * 0.3,
+              cy: y + 2.2,
+              r: 1,
+              fill: "url(#goldContact)",
+              stroke: "#7c5b0a",
+              "stroke-width": 0.15,
+            },
+            g,
+          );
+          el(
+            "circle",
+            {
+              cx: x + w * 0.7,
+              cy: y + 2.2,
+              r: 1,
+              fill: "url(#goldContact)",
+              stroke: "#7c5b0a",
+              "stroke-width": 0.15,
+            },
+            g,
+          );
+          // M.2 gold contacts on bottom
+          el(
+            "rect",
+            {
+              x: x + 5,
+              y: y + h - 1.2,
+              width: w - 10,
+              height: 1,
+              fill: "url(#goldContact)",
+            },
+            g,
+          );
+        },
+
+        fan: (g, c) => {
+          const { x, y, w, h } = c.geometry;
+          // Housing
+          el(
+            "rect",
+            {
+              x,
+              y,
+              width: w,
+              height: h,
+              rx: 4,
+              fill: "url(#fanHousing)",
+              stroke: "#000",
+              "stroke-width": 0.3,
+            },
+            g,
+          );
+          // Vent slot on right (exhaust)
+          el(
+            "rect",
+            {
+              x: x + w - 3,
+              y: y + 10,
+              width: 3,
+              height: h - 20,
+              fill: "#0a0c10",
+            },
+            g,
+          );
+          // Circular impeller cutout
+          const cx = x + w * 0.45,
+            cy = y + h * 0.5,
+            r = Math.min(w, h) * 0.4;
+          el("circle", { cx, cy, r, fill: "#0a0c10" }, g);
+          el("circle", { cx, cy, r: r - 0.4, fill: "url(#fanHub)" }, g);
+          // 9 curved blades (motion-blurred)
+          const blades = el(
+            "g",
+            { filter: "url(#motionBlur)", opacity: 0.85 },
+            g,
+          );
+          for (let i = 0; i < 9; i++) {
+            const a = (i / 9) * Math.PI * 2;
+            const x1 = cx + Math.cos(a) * 2.5;
+            const y1 = cy + Math.sin(a) * 2.5;
+            const x2 = cx + Math.cos(a + 0.6) * (r - 0.8);
+            const y2 = cy + Math.sin(a + 0.6) * (r - 0.8);
+            el(
+              "path",
+              {
+                d: `M${x1} ${y1} Q${cx + Math.cos(a + 0.3) * (r * 0.6)} ${cy + Math.sin(a + 0.3) * (r * 0.6)} ${x2} ${y2}`,
+                stroke: "#4a525e",
+                "stroke-width": 0.6,
+                fill: "none",
+                "stroke-linecap": "round",
+              },
+              blades,
+            );
+          }
+          // Central hub dot
+          el(
+            "circle",
+            {
+              cx,
+              cy,
+              r: 1.4,
+              fill: "#1a1d22",
+              stroke: "#3a3e44",
+              "stroke-width": 0.2,
+            },
+            g,
+          );
+          // Sticker on the housing
+          el(
+            "rect",
+            {
+              x: x + 3,
+              y: y + 3,
+              width: 14,
+              height: 6,
+              rx: 0.4,
+              fill: "#e8eaef",
+            },
+            g,
+          );
+          el(
+            "text",
+            {
+              x: x + 10,
+              y: y + 7.2,
+              "font-size": 2.4,
+              fill: "#3a3e44",
+              "text-anchor": "middle",
+              "font-family": "ui-monospace,Menlo,Consolas,monospace",
+            },
+            g,
+          ).textContent = "DC5V";
+        },
+
+        heatsink: (g, c) => {
+          el(
+            "polygon",
+            {
+              points: c.geometry.points,
+              fill: "url(#copper)",
+              stroke: "#5a2e0d",
+              "stroke-width": 0.3,
+            },
+            g,
+          );
+          el(
+            "polygon",
+            {
+              points: c.geometry.points,
+              fill: "url(#copperHorizontal)",
+              opacity: 0.35,
+            },
+            g,
+          );
+          // Fin lines along the heatpipe length
+          const pts = c.geometry.points
+            .split(/\s+/)
+            .map((p) => p.split(",").map(Number));
+          const minX = Math.min(...pts.map((p) => p[0])),
+            maxX = Math.max(...pts.map((p) => p[0]));
+          const minY = Math.min(...pts.map((p) => p[1])),
+            maxY = Math.max(...pts.map((p) => p[1]));
+          for (let xx = minX + 4; xx < maxX - 2; xx += 2.2) {
+            el(
+              "line",
+              {
+                x1: xx,
+                y1: minY + 2,
+                x2: xx,
+                y2: maxY - 2,
+                stroke: "#5a2e0d",
+                "stroke-width": 0.25,
+                opacity: 0.55,
+              },
+              g,
+            );
+          }
+          // Thermal-paste blob (silver-grey) at CPU contact (~ left end)
+          el(
+            "ellipse",
+            {
+              cx: minX + 12,
+              cy: (minY + maxY) / 2,
+              rx: 5.5,
+              ry: 4,
+              fill: "#9aa0aa",
+              opacity: 0.75,
+            },
+            g,
+          );
+          el(
+            "ellipse",
+            {
+              cx: minX + 12,
+              cy: (minY + maxY) / 2,
+              rx: 5.5,
+              ry: 4,
+              fill: "none",
+              stroke: "#3a3e44",
+              "stroke-width": 0.18,
+              opacity: 0.6,
+            },
+            g,
+          );
+          // Numbered captive screws 1..4
+          const captive = [
+            [minX + 8, minY + 2],
+            [minX + 18, minY + 2],
+            [minX + 8, maxY - 2],
+            [minX + 18, maxY - 2],
+          ];
+          captive.forEach(([sx, sy], i) => {
+            el(
+              "circle",
+              {
+                cx: sx,
+                cy: sy,
+                r: 1.4,
+                fill: "#3a2918",
+                stroke: "#000",
+                "stroke-width": 0.2,
+              },
+              g,
+            );
+            el(
+              "text",
+              {
+                x: sx,
+                y: sy + 0.9,
+                "font-size": 1.8,
+                fill: "#f0e0c0",
+                "text-anchor": "middle",
+                "font-family": "ui-monospace,Menlo,Consolas,monospace",
+              },
+              g,
+            ).textContent = String(i + 1);
+          });
+        },
+
+        "io-board": (g, c) => {
+          const { x, y, w, h } = c.geometry;
+          el(
+            "rect",
+            {
+              x,
+              y,
+              width: w,
+              height: h,
+              rx: 1,
+              fill: "url(#pcbGreenDark)",
+              stroke: "#082e16",
+              "stroke-width": 0.3,
+            },
+            g,
+          );
+          el(
+            "rect",
+            {
+              x,
+              y,
+              width: w,
+              height: h,
+              rx: 1,
+              filter: "url(#pcbNoise)",
+              opacity: 0.6,
+            },
+            g,
+          );
+          // Audio jack: black circle on left edge
+          el(
+            "circle",
+            {
+              cx: x + 2,
+              cy: y + 12,
+              r: 3.5,
+              fill: "#0a0c10",
+              stroke: "#3a3e44",
+              "stroke-width": 0.3,
+            },
+            g,
+          );
+          el("circle", { cx: x + 2, cy: y + 12, r: 1.8, fill: "#1a1d22" }, g);
+          // SD card slot (silver)
+          el(
+            "rect",
+            {
+              x: x - 1,
+              y: y + 26,
+              width: 12,
+              height: 10,
+              fill: "url(#brushedMetal)",
+              stroke: "#4a4e57",
+              "stroke-width": 0.2,
+            },
+            g,
+          );
+          el(
+            "line",
+            {
+              x1: x - 1,
+              y1: y + 31,
+              x2: x + 11,
+              y2: y + 31,
+              stroke: "#3a3e44",
+              "stroke-width": 0.2,
+            },
+            g,
+          );
+          // Ribbon connector on right edge
+          el(
+            "rect",
+            {
+              x: x + w - 5,
+              y: y + 18,
+              width: 4,
+              height: 14,
+              fill: "#1a1d22",
+              stroke: "#3a3e44",
+              "stroke-width": 0.2,
+            },
+            g,
+          );
+          el(
+            "rect",
+            {
+              x: x + w - 4,
+              y: y + 19,
+              width: 2,
+              height: 12,
+              fill: "url(#goldContact)",
+            },
+            g,
+          );
+          el(
+            "text",
+            {
+              x: x + w / 2,
+              y: y + h - 3,
+              "font-size": 2.4,
+              fill: "#e8d27c",
+              "text-anchor": "middle",
+              opacity: 0.6,
+              "font-family": "ui-monospace,Menlo,Consolas,monospace",
+            },
+            g,
+          ).textContent = "I/O";
+        },
+
+        "coin-cell": (g, c) => {
+          const { x, y, w, h } = c.geometry;
+          const cx = x + w / 2,
+            cy = y + h / 2,
+            r = Math.min(w, h) / 2 - 0.4;
+          el("circle", { cx, cy, r: r + 0.6, fill: "#3a3e44" }, g);
+          el(
+            "circle",
+            {
+              cx,
+              cy,
+              r,
+              fill: "url(#coinCell)",
+              stroke: "#5a5e66",
+              "stroke-width": 0.3,
+            },
+            g,
+          );
+          // Etched plus
+          el(
+            "line",
+            {
+              x1: cx - r * 0.45,
+              y1: cy,
+              x2: cx + r * 0.45,
+              y2: cy,
+              stroke: "#3a3e44",
+              "stroke-width": 0.5,
+            },
+            g,
+          );
+          el(
+            "line",
+            {
+              x1: cx,
+              y1: cy - r * 0.45,
+              x2: cx,
+              y2: cy + r * 0.45,
+              stroke: "#3a3e44",
+              "stroke-width": 0.5,
+            },
+            g,
+          );
+          el(
+            "text",
+            {
+              x: cx,
+              y: cy + r + 2,
+              "font-size": 2,
+              fill: "#3a3e44",
+              "text-anchor": "middle",
+              "font-family": "ui-monospace,Menlo,Consolas,monospace",
+            },
+            g,
+          ).textContent = "CR2032";
+        },
+
+        "speaker-left": (g, c) => drawSpeaker(g, c, "left"),
+        "speaker-right": (g, c) => drawSpeaker(g, c, "right"),
+
+        "power-button": (g, c) => {
+          const { x, y, w, h } = c.geometry;
+          el(
+            "rect",
+            {
+              x,
+              y,
+              width: w,
+              height: h,
+              rx: 1,
+              fill: "url(#pcbGreenDark)",
+              stroke: "#082e16",
+              "stroke-width": 0.25,
+            },
+            g,
+          );
+          el(
+            "rect",
+            {
+              x,
+              y,
+              width: w,
+              height: h,
+              rx: 1,
+              filter: "url(#pcbNoise)",
+              opacity: 0.5,
+            },
+            g,
+          );
+          // Tactile switch (silver square)
+          el(
+            "rect",
+            {
+              x: x + w / 2 - 3,
+              y: y + h / 2 - 3,
+              width: 6,
+              height: 6,
+              rx: 0.5,
+              fill: "url(#brushedMetal)",
+              stroke: "#3a3e44",
+              "stroke-width": 0.2,
+            },
+            g,
+          );
+          el(
+            "circle",
+            { cx: x + w / 2, cy: y + h / 2, r: 1.4, fill: "#3a3e44" },
+            g,
+          );
+          // Ribbon pad on bottom edge
+          el(
+            "rect",
+            {
+              x: x + 3,
+              y: y + h - 1.5,
+              width: w - 6,
+              height: 1.2,
+              fill: "url(#goldContact)",
+            },
+            g,
+          );
+        },
+
+        touchpad: (g, c) => {
+          const { x, y, w, h } = c.geometry;
+          // Brushed silver plate (ghosted because it's actually under the palmrest)
+          el(
+            "rect",
+            {
+              x,
+              y,
+              width: w,
+              height: h,
+              rx: 2,
+              fill: "url(#brushedMetal)",
+              stroke: "#7a7f88",
+              "stroke-width": 0.3,
+              opacity: 0.55,
+            },
+            g,
+          );
+          el(
+            "rect",
+            {
+              x,
+              y,
+              width: w,
+              height: h,
+              rx: 2,
+              fill: "url(#brushedStripes)",
+              opacity: 0.25,
+            },
+            g,
+          );
+          // Gasket border
+          el(
+            "rect",
+            {
+              x: x + 1.5,
+              y: y + 1.5,
+              width: w - 3,
+              height: h - 3,
+              rx: 1.6,
+              fill: "none",
+              stroke: "#3a3e44",
+              "stroke-width": 0.2,
+              "stroke-dasharray": "0.6 0.5",
+              opacity: 0.5,
+            },
+            g,
+          );
+          // Hint text
+          el(
+            "text",
+            {
+              x: x + w / 2,
+              y: y + h / 2 + 1,
+              "font-size": 3,
+              fill: "#3a3e44",
+              "text-anchor": "middle",
+              opacity: 0.45,
+              "font-family": "ui-monospace,Menlo,Consolas,monospace",
+            },
+            g,
+          ).textContent = "↑ touchpad under palmrest ↑";
+        },
+      };
+
+      function drawSpeaker(g, c, side) {
+        const { x, y, w, h } = c.geometry;
+        // Housing
+        el(
+          "rect",
+          {
+            x,
+            y,
+            width: w,
+            height: h,
+            rx: 2.5,
+            fill: "#0e0e10",
+            stroke: "#000",
+            "stroke-width": 0.3,
+          },
+          g,
+        );
+        // Rubber grommets at corners
+        [
+          [x + 2, y + 2],
+          [x + w - 2, y + 2],
+          [x + 2, y + h - 2],
+          [x + w - 2, y + h - 2],
+        ].forEach(([gx, gy]) =>
+          el(
+            "circle",
+            {
+              cx: gx,
+              cy: gy,
+              r: 1.4,
+              fill: "#3a2c1a",
+              stroke: "#1a1208",
+              "stroke-width": 0.2,
+            },
+            g,
+          ),
+        );
+        // Mesh-covered voice coil region
+        const meshX = x + (side === "left" ? 8 : 4);
+        const meshW = w - 12;
+        el(
+          "rect",
+          {
+            x: meshX,
+            y: y + 5,
+            width: meshW,
+            height: h - 10,
+            rx: 1.6,
+            fill: "url(#speakerMesh)",
+          },
+          g,
+        );
+        // Voice-coil copper circle showing through
+        el(
+          "circle",
+          {
+            cx: meshX + meshW * 0.5,
+            cy: y + h * 0.5,
+            r: 5,
+            fill: "none",
+            stroke: "#c98551",
+            "stroke-width": 0.5,
+            opacity: 0.55,
+          },
+          g,
+        );
+        el(
+          "circle",
+          {
+            cx: meshX + meshW * 0.5,
+            cy: y + h * 0.5,
+            r: 2.2,
+            fill: "#1a1208",
+            stroke: "#5a3a1a",
+            "stroke-width": 0.25,
+          },
+          g,
+        );
+      }
+
+      /* ====== Cables (realistic) — also serves the schematic view ====== */
+      const cableLayer = document.getElementById("cables");
+      function renderCables() {
+        CABLES.forEach((cab) => {
+          const d = cab.routing
+            .map((p, i) => (i === 0 ? "M" : "L") + p.join(" "))
+            .join(" ");
+          const start = cab.routing[0],
+            end = cab.routing[cab.routing.length - 1];
+          const g = el(
+            "g",
+            { "data-id": cab.id, class: "cable-group" },
+            cableLayer,
+          );
+
+          if (cab.kind === "ribbon") {
+            // Faint shadow under cable
+            el(
+              "path",
+              {
+                d,
+                fill: "none",
+                stroke: "rgba(0,0,0,.35)",
+                "stroke-width": 3.6,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round",
+                transform: "translate(0.3 0.6)",
+                filter: "url(#dropShadow)",
+              },
+              g,
+            );
+            // Ribbon body
+            el(
+              "path",
+              {
+                d,
+                fill: "none",
+                stroke: "url(#ribbon)",
+                "stroke-width": 3,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round",
+              },
+              g,
+            );
+            // Thin conductor lines on top
+            el(
+              "path",
+              {
+                d,
+                fill: "none",
+                stroke: "#7a5a18",
+                "stroke-width": 0.18,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round",
+                "stroke-dasharray": "0.4 0.3",
+                opacity: 0.7,
+              },
+              g,
+            );
+            // Stiffener rectangles at each end (blue)
+            stiffener(g, start[0], start[1]);
+            stiffener(g, end[0], end[1]);
+          } else if (cab.kind === "coax-black" || cab.kind === "coax-white") {
+            const color = cab.kind === "coax-black" ? "#1a1d22" : "#cfd2d6";
+            // Soft shadow
+            el(
+              "path",
+              {
+                d,
+                fill: "none",
+                stroke: "rgba(0,0,0,.3)",
+                "stroke-width": 1.5,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round",
+                transform: "translate(0.3 0.5)",
+              },
+              g,
+            );
+            el(
+              "path",
+              {
+                d,
+                fill: "none",
+                stroke: color,
+                "stroke-width": 1,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round",
+              },
+              g,
+            );
+            // Gold U.FL dots at each end
+            el(
+              "circle",
+              {
+                cx: start[0],
+                cy: start[1],
+                r: 0.9,
+                fill: "url(#goldContact)",
+                stroke: "#7c5b0a",
+                "stroke-width": 0.15,
+              },
+              g,
+            );
+            el(
+              "circle",
+              {
+                cx: end[0],
+                cy: end[1],
+                r: 0.9,
+                fill: "url(#goldContact)",
+                stroke: "#7c5b0a",
+                "stroke-width": 0.15,
+              },
+              g,
+            );
+          } else {
+            // wire bundle (power: red+black; signal: grey)
+            const isPower = cab.kind === "wire-power";
+            const main = isPower ? "#c43a3a" : "#5b6472";
+            const second = isPower ? "#1a1a1a" : "#9aa0aa";
+            el(
+              "path",
+              {
+                d,
+                fill: "none",
+                stroke: "rgba(0,0,0,.3)",
+                "stroke-width": 2.4,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round",
+                transform: "translate(0.3 0.6)",
+              },
+              g,
+            );
+            el(
+              "path",
+              {
+                d,
+                fill: "none",
+                stroke: main,
+                "stroke-width": 1.4,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round",
+              },
+              g,
+            );
+            el(
+              "path",
+              {
+                d,
+                fill: "none",
+                stroke: second,
+                "stroke-width": 0.7,
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round",
+                "stroke-dasharray": "1.2 0.8",
+                opacity: 0.85,
+              },
+              g,
+            );
+            // Connector blocks
+            connectorBlock(g, start[0], start[1]);
+            connectorBlock(g, end[0], end[1]);
+          }
+        });
+      }
+      function stiffener(g, x, y) {
+        el(
+          "rect",
+          {
+            x: x - 1.6,
+            y: y - 1.2,
+            width: 3.2,
+            height: 2.4,
+            rx: 0.3,
+            fill: "#2a4d8a",
+            stroke: "#0e2452",
+            "stroke-width": 0.2,
+          },
+          g,
+        );
+      }
+      function connectorBlock(g, x, y) {
+        el(
+          "rect",
+          {
+            x: x - 1.4,
+            y: y - 1.1,
+            width: 2.8,
+            height: 2.2,
+            rx: 0.3,
+            fill: "#1a1d22",
+            stroke: "#000",
+            "stroke-width": 0.2,
+          },
+          g,
+        );
+        el(
+          "rect",
+          { x: x - 1.0, y: y - 0.8, width: 2.0, height: 1.6, fill: "#3a3e44" },
+          g,
+        );
+      }
+
+      /* ====== Screws ====== */
+      const screwLayer = document.getElementById("screwmap");
+      SCREWS.forEach((s) => {
+        el(
+          "circle",
+          {
+            class: `screw-dot screw-${s.type}`,
+            cx: s.x,
+            cy: s.y,
+            r: 1.6,
+            "data-type": s.type,
+          },
+          screwLayer,
+        );
+      });
+
+      /* ====== Bottom-cover perimeter screw holes ====== */
+      const coverScrewsLayer = document.getElementById("coverScrews");
+      COVER_SCREWS.forEach(([x, y]) => {
+        el(
+          "circle",
+          {
+            cx: x,
+            cy: y,
+            r: 1.4,
+            fill: "#1a1d22",
+            stroke: "#4a4e57",
+            "stroke-width": 0.2,
+          },
+          coverScrewsLayer,
+        );
+        el(
+          "circle",
+          { cx: x - 0.3, cy: y - 0.3, r: 0.4, fill: "#666c75", opacity: 0.6 },
+          coverScrewsLayer,
+        );
+      });
+
+      /* ====== Render both layers ====== */
+      renderRealistic(document.getElementById("realistic-layer"));
+      renderSchematic(document.getElementById("schematic-layer"));
+      renderCables();
+
+      /* ====== Tooltip ====== */
+      const tip = document.getElementById("tooltip");
+      function showTip(e, text) {
+        tip.textContent = text;
+        tip.setAttribute("data-show", "true");
+        moveTip(e);
+      }
+      function moveTip(e) {
+        tip.style.left = e.clientX + 12 + "px";
+        tip.style.top = e.clientY + 12 + "px";
+      }
+      function hideTip() {
+        tip.setAttribute("data-show", "false");
+      }
+
+      /* ====== Selection / panel ====== */
+      const panelBody = document.getElementById("panelBody");
+      let currentId = null;
+      function select(id) {
+        currentId = id;
+        document
+          .querySelectorAll(".comp")
+          .forEach((g) => g.classList.toggle("selected", g.dataset.id === id));
+        const c = COMPONENTS.find((x) => x.id === id);
+        if (!c) return;
+        panelBody.innerHTML = renderDetail(c);
+      }
+      function renderDetail(c) {
+        const screws =
+          c.screws && c.screws.length
+            ? `<table><thead><tr><th>Type</th><th>Count</th></tr></thead><tbody>${c.screws
+                .map((s) => `<tr><td>${s.type}</td><td>${s.count}</td></tr>`)
+                .join("")}</tbody></table>`
+            : `<p style="color:var(--muted);font-size:12px">No screws — clip/adhesive/connector mounted.</p>`;
+        const warn =
+          c.warnings && c.warnings.length
+            ? `<section><h3>Warnings</h3>${c.warnings.map((w) => `<div class="warn">⚠ ${w}</div>`).join("")}</section>`
+            : "";
+        return `
+    <h2>${c.label}</h2>
+    <span class="badge" data-cat="${c.category}">${c.category}</span>
+    <section><h3>Function</h3><p style="margin:0">${c.function}</p></section>
+    <section><h3>Removal notes</h3><ol>${c.removalNotes.map((n) => `<li>${n}</li>`).join("")}</ol></section>
+    <section><h3>Screws</h3>${screws}</section>
+    ${warn}
+    <section><h3>Manual reference</h3><p class="manual-ref">${c.manualRef}</p></section>
+  `;
+      }
+
+      /* ====== Category filter ====== */
+      const activeCats = new Set([
+        "power",
+        "compute",
+        "storage",
+        "wireless",
+        "thermal",
+        "audio",
+      ]);
+      document.querySelectorAll("#filters .chip").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const cat = btn.dataset.cat;
+          if (activeCats.has(cat)) {
+            activeCats.delete(cat);
+            btn.setAttribute("aria-pressed", "false");
+          } else {
+            activeCats.add(cat);
+            btn.setAttribute("aria-pressed", "true");
+          }
+          applyFilter();
+        });
+      });
+      function applyFilter() {
+        document.querySelectorAll(".comp").forEach((g) => {
+          g.classList.toggle("dim", !activeCats.has(g.dataset.cat));
+        });
+      }
+
+      /* ====== View toggle (Realistic ↔ Schematic) ====== */
+      const realLayer = document.getElementById("realistic-layer");
+      const schLayer = document.getElementById("schematic-layer");
+      const tView = document.getElementById("toggleView");
+      function setView(mode) {
+        const realistic = mode === "realistic";
+        realLayer.dataset.show = realistic ? "true" : "false";
+        schLayer.dataset.show = realistic ? "false" : "true";
+        tView.textContent = "View: " + (realistic ? "Realistic" : "Schematic");
+        tView.setAttribute("aria-pressed", realistic ? "true" : "false");
+        try {
+          localStorage.setItem("insp5570.view", mode);
+        } catch (e) {}
+      }
+      tView.addEventListener("click", () => {
+        setView(realLayer.dataset.show === "true" ? "schematic" : "realistic");
+      });
+      try {
+        const saved = localStorage.getItem("insp5570.view");
+        if (saved === "schematic") setView("schematic");
+      } catch (e) {}
+
+      /* ====== Other toolbar buttons ====== */
+      const tCables = document.getElementById("toggleCables");
+      tCables.addEventListener("click", () => {
+        const on = cableLayer.dataset.show === "true";
+        cableLayer.dataset.show = on ? "false" : "true";
+        tCables.textContent = "Cables: " + (on ? "off" : "on");
+        tCables.setAttribute("aria-pressed", on ? "false" : "true");
+      });
+      const tScrews = document.getElementById("toggleScrews");
+      tScrews.addEventListener("click", () => {
+        const on = screwLayer.dataset.show === "true";
+        screwLayer.dataset.show = on ? "false" : "true";
+        tScrews.textContent = "Screw map: " + (on ? "off" : "on");
+        tScrews.setAttribute("aria-pressed", on ? "false" : "true");
+      });
+      const tTheme = document.getElementById("toggleTheme");
+      tTheme.addEventListener("click", () => {
+        const dark =
+          document.documentElement.getAttribute("data-theme") === "dark";
+        document.documentElement.setAttribute("data-theme", dark ? "" : "dark");
+        tTheme.textContent = dark ? "Dark" : "Light";
+        tTheme.setAttribute("aria-pressed", dark ? "false" : "true");
+      });
+      document.getElementById("reset").addEventListener("click", () => {
+        activeCats.clear();
+        ["power", "compute", "storage", "wireless", "thermal", "audio"].forEach(
+          (c) => activeCats.add(c),
+        );
+        document
+          .querySelectorAll("#filters .chip")
+          .forEach((b) => b.setAttribute("aria-pressed", "true"));
+        applyFilter();
+        cableLayer.dataset.show = "true";
+        tCables.textContent = "Cables: on";
+        tCables.setAttribute("aria-pressed", "true");
+        screwLayer.dataset.show = "false";
+        tScrews.textContent = "Screw map: off";
+        tScrews.setAttribute("aria-pressed", "false");
+        setView("realistic");
+        currentId = null;
+        panelBody.innerHTML = `<div class="empty">Click a component to see removal notes, screws, and warnings.<br><br>
+    <span class="manual-ref">Source: Dell Inspiron 5570 Service Manual (P75F001).</span></div>`;
+        document
+          .querySelectorAll(".comp")
+          .forEach((g) => g.classList.remove("selected"));
+      });
+
+      /* ====== Keyboard global ====== */
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
+          currentId = null;
+          document
+            .querySelectorAll(".comp")
+            .forEach((g) => g.classList.remove("selected"));
+          panelBody.innerHTML = `<div class="empty">Press Tab to cycle components, Enter to open.</div>`;
+        }
+      });
+    </script>
+  </body>
+</html>
