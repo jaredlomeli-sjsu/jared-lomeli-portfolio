@@ -323,3 +323,32 @@ is pending that blocks a deploy.
   - The two TECH 60 lab summaries publicly name Jared's lab partners (two classmates) — flagged to Jared, not yet confirmed as okay.
   - POLS C1000's full course title is still unknown — Jared said leave it as a bare
     code for now.
+
+## Security hardening (2026-10-02)
+
+Done per `D:\Documents\Website-Hardening-Playbook.md`. Public write-up: `/security`
+(`security.html`, linked from the footer); disclosure contact: `/.well-known/security.txt`
+(expires 2027-10-02 — renew it).
+
+- **Headers live in `vercel.json`.** Baseline on `/(.*)` (nosniff, XFO SAMEORIGIN,
+  Referrer-Policy, Permissions-Policy, COOP/CORP same-origin). Four **mutually exclusive**
+  CSP rules (exactly one must match any HTML path — `tests/security.spec.js` enforces it):
+  1. strict, everything outside `/public/` and `/demo/` (no inline script/style/handlers);
+  2. `/public/*` pages (`style-src 'unsafe-inline'`);
+  3. `/public/artifacts/*`, `/demo/*` (inline scripts + jsDelivr/Google Fonts/Wikimedia);
+  4. `linux-security-architecture` demo (blob: + unpkg React; loosest);
+  plus one for `/public/documents/*` HTML. PDFs/images/video get no CSP on purpose.
+- **Rules for new work:** root pages must not contain inline `<script>`, `<style>`, `style=`
+  or `on*=` (tests fail). Put JS/CSS in files. Any new third-party host needs a CSP edit and a
+  test. Pin versions and add SRI for CDN scripts.
+- `dev-server.js` replays `vercel.json` headers, so `npx playwright test` runs the site
+  under the real CSP. `OFFLINE=1` skips the CDN-dependent demo tests.
+- `escapeHtml` (grid.js) escapes quotes; `search.js` has `escapeAttr`; `nav.js` escapes labels.
+- **PII audit 2026-10-02:** removed `bus3-12/personal-wellness-plan.pdf` (health/religion/
+  finance disclosure); redacted classmate names in `comm-20/peer-reviews-persuasive-speech-1.pdf`
+  and `engl-1a/film-essay-draft-peer-reviews.pdf` (originals kept only in a session scratchpad).
+  Phone (408…) + city/ZIP on resumes/cover letters, and GPA 3.97 (PDFs) vs 3.96 (footer), left
+  as is by Jared's choice — the GPA mismatch is still unresolved.
+- The git repo is public and already has the old files in history (rework commit `a442d74`).
+  Hardening changes are Vercel-only per the push rule.
+- LinkedIn link corrected to `linkedin.com/in/jaredlomelicnsm`.

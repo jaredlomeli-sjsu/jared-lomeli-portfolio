@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="theme.js"></script>
+    <title>Security — Jared Lomeli</title>
+    <meta
+      name="description"
+      content="How this portfolio site is secured, what it stores, what was reviewed before publishing, the known limits, and how to report a vulnerability."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Security — Jared Lomeli" />
+    <meta
+      property="og:description"
+      content="Security practices, privacy review, and known limits for this portfolio site."
+    />
+    <meta
+      property="og:url"
+      content="https://jared-lomeli-portfolio.vercel.app/security"
+    />
+    <meta
+      property="og:image"
+      content="https://jared-lomeli-portfolio.vercel.app/public/images/og-image.png"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link
+      rel="canonical"
+      href="https://jared-lomeli-portfolio.vercel.app/security"
+    />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23d97706'/%3E%3Ctext x='32' y='43' font-family='Georgia,serif' font-size='30' font-weight='700' fill='%23ffffff' text-anchor='middle'%3EJL%3C/text%3E%3C/svg%3E"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="category-page">
+    <button type="button" class="btn theme-toggle-fixed" data-theme-toggle>
+      Dark Mode
+    </button>
+    <div class="category-hero">
+      <div class="category-head">
+        <a class="category-back" href="/">&larr; Back to Portfolio</a>
+        <p class="category-eyebrow">Transparency</p>
+        <h1 class="category-title">Security &amp; Privacy</h1>
+        <p class="category-dek">
+          How this site is protected, what it stores, what I checked before
+          publishing, and where the limits are. Last reviewed October 2026.
+        </p>
+      </div>
+    </div>
+    <main class="security-page">
+      <section aria-labelledby="sec-what">
+        <h2 id="sec-what">What this site is</h2>
+        <p>
+          A static site: HTML, CSS, JavaScript and PDFs served from Vercel.
+          There is no database, no login, no form that sends data to me, no
+          analytics and no advertising. It sets no cookies. The only thing it
+          stores in your browser is your light/dark preference (<code
+            >localStorage</code
+          >
+          key <code>theme</code>), which never leaves your device.
+        </p>
+        <p>
+          Two things can contact a third party, and only if you use them:
+          opening a project video loads a YouTube player from
+          <code>youtube-nocookie.com</code>, and a few demo pages under
+          <code>/demo/</code> load fonts, images or a chart/3D library from
+          Google Fonts, Wikimedia, jsDelivr or unpkg.
+        </p>
+      </section>
+
+      <section aria-labelledby="sec-defenses">
+        <h2 id="sec-defenses">Protections in place</h2>
+        <ul>
+          <li>
+            <strong>Content Security Policy.</strong> The main pages allow
+            scripts and styles only from this site: no inline scripts, no inline
+            event handlers, no inline styles. Framing is limited to this site
+            (and the YouTube privacy-enhanced player), plugins are blocked, and
+            the base URL and form targets are locked.
+          </li>
+          <li>
+            <strong>Transport.</strong> HTTPS only, with HSTS (two years,
+            including subdomains, preload) and
+            <code>upgrade-insecure-requests</code>.
+          </li>
+          <li>
+            <strong>Browser hardening headers.</strong>
+            <code>X-Content-Type-Options: nosniff</code>,
+            <code>X-Frame-Options: SAMEORIGIN</code>,
+            <code>Referrer-Policy: strict-origin-when-cross-origin</code>, a
+            restrictive <code>Permissions-Policy</code> (camera, microphone,
+            location, payment, USB, serial and Bluetooth off), and
+            <code>Cross-Origin-Opener-Policy</code> /
+            <code>Cross-Origin-Resource-Policy: same-origin</code>.
+          </li>
+          <li>
+            <strong>Output escaping.</strong> Text from the content file is
+            escaped before it is placed into the page, including inside quoted
+            attributes; most fields are written with <code>textContent</code>.
+          </li>
+          <li>
+            <strong>Safe external links.</strong> Links that open a new tab use
+            <code>rel="noopener"</code>.
+          </li>
+          <li>
+            <strong>Pinned third-party code.</strong> Demo pages that load
+            libraries from a CDN pin an exact version and verify it with
+            Subresource Integrity hashes.
+          </li>
+          <li>
+            <strong>Nothing extra published.</strong> Source notes, tests,
+            scripts and config are excluded from the deployed site, and the
+            repository contains no secrets or credentials.
+          </li>
+          <li>
+            <strong>Disclosure contact.</strong>
+            <a href="/.well-known/security.txt">/.well-known/security.txt</a>.
+          </li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="sec-review">
+        <h2 id="sec-review">Privacy review of published content</h2>
+        <p>
+          Before publishing coursework I check every PDF, image and page for
+          personal information, and re-ran a full audit in October 2026 (text,
+          metadata, image EXIF/GPS, unlinked files, git history).
+        </p>
+        <div class="security-table-wrap">
+          <table class="security-table">
+            <thead>
+              <tr>
+                <th scope="col">Check</th>
+                <th scope="col">Result</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Student ID, date of birth, SSN-style numbers</td>
+                <td>
+                  Redacted in the unofficial transcript; none found elsewhere.
+                </td>
+              </tr>
+              <tr>
+                <td>Other people's names</td>
+                <td>
+                  Classmate names removed from peer-review documents; lab
+                  partners are not named.
+                </td>
+              </tr>
+              <tr>
+                <td>Personal reflection content</td>
+                <td>One assignment of a personal nature was taken down.</td>
+              </tr>
+              <tr>
+                <td>Image metadata (EXIF, GPS, device)</td>
+                <td>None present in any published image.</td>
+              </tr>
+              <tr>
+                <td>Secrets, API keys, tokens, private paths</td>
+                <td>
+                  None in the site or its git history. Lab documents use
+                  private-range or textbook example addresses only.
+                </td>
+              </tr>
+              <tr>
+                <td>Contact details</td>
+                <td>
+                  My résumé and cover letters include my phone number and city
+                  (no street address). That is deliberate, for employers.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section aria-labelledby="sec-limits">
+        <h2 id="sec-limits">Known limits</h2>
+        <ul>
+          <li>
+            Document pages under <code>/public/</code> and the demo pages use
+            <code>style-src 'unsafe-inline'</code>, and the demos and one lab
+            write-up also use inline scripts. They are isolated from the main
+            pages by a separate policy but are not as strict. One demo (the
+            Linux security infographic) is an exported bundle that also needs
+            <code>blob:</code> URLs and React from unpkg, so its policy is the
+            loosest on the site.
+          </li>
+          <li>
+            There is no Trusted Types policy; adding a pass-through one would
+            look like protection without providing any.
+          </li>
+          <li>
+            Static files are served with Vercel's default
+            <code>Access-Control-Allow-Origin: *</code>. Everything on the site
+            is public by design.
+          </li>
+          <li>
+            The site's source is also in a public GitHub repository, so removed
+            or redacted files may still exist in its earlier history.
+          </li>
+          <li>
+            Hosting security (TLS, DDoS protection, platform patching) is
+            Vercel's responsibility, not mine.
+          </li>
+          <li>
+            This is a personal student site, not a hardened production service.
+            I have not had it independently penetration-tested.
+          </li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="sec-report">
+        <h2 id="sec-report">Report a problem</h2>
+        <p>
+          If you find a vulnerability, or personal information that should not
+          be public, email
+          <a href="mailto:jaredlomelicnsm@gmail.com"
+            >jaredlomelicnsm@gmail.com</a
+          >. Please include the page address and what you saw. I will respond as
+          quickly as I can and fix confirmed issues promptly.
+        </p>
+      </section>
+    </main>
+    <footer class="category-footer">
+      <a class="category-back" href="/">&larr; Back to Portfolio</a>
+    </footer>
+  </body>
+</html>

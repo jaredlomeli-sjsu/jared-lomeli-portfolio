@@ -1346,3 +1346,81 @@ dialog::backdrop {
     box-shadow: var(--shadow-card);
   }
 }
+
+/* --- Security & Privacy page (security.html) --- */
+.security-page {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 1rem 1.5rem 2rem;
+}
+
+.security-page h2 {
+  font-size: 1.25rem;
+  margin: 2rem 0 0.75rem;
+  color: var(--text-main);
+}
+
+.security-page p,
+.security-page li {
+  color: var(--text-main);
+  line-height: 1.65;
+}
+
+.security-page ul {
+  padding-left: 1.25rem;
+}
+
+.security-page li {
+  margin-bottom: 0.6rem;
+}
+
+.security-page li::marker {
+  color: var(--accent-color);
+}
+
+.security-page code {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  background: var(--bg-surface-hover);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  padding: 0.05em 0.35em;
+  overflow-wrap: anywhere;
+}
+
+.security-page a {
+  color: var(--accent-color-hover);
+}
+
+.security-table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background: var(--bg-surface);
+}
+
+.security-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.security-table th,
+.security-table td {
+  text-align: left;
+  vertical-align: top;
+  padding: 0.7rem 0.9rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.security-table th {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+}
+
+.security-table tr:last-child td {
+  border-bottom: 0;
+}

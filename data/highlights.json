@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "version": "1.0.0",
-  "lastUpdated": "2026-09-30",
+  "lastUpdated": "2026-10-02",
   "_dateNote": "An item's `date` is the date of the underlying work itself (when the lab/project/assignment was done or submitted), NOT the date the card was added to this site. Grids are sorted newest-first by this date.",
   "highlights": [
     {
@@ -360,11 +360,13 @@
       "starred": true,
       "semester": null,
       "course": "CompTIA Security+ SY0-701 Prep",
-      "summary": "Self-built exam-prep site covering all 5 weighted SY0-701 domains — 11 chapter study-note pages with original interactive diagrams, a quiz/flashcard/PBQ practice engine, a 1,090-term glossary, and a keyword-retrieval study assistant with an optional in-browser LLM. Built June 2026 while studying for the exam, then reopened and expanded through August 2026 with a Linux Lab: a simulated shell with guided lessons, free play, and SEC+ scenario challenges. Vanilla HTML/CSS/JS, no build step.",
+      "summary": "Self-built exam-prep site covering all 5 weighted SY0-701 domains — 11 chapter study-note pages with original interactive diagrams, a quiz/flashcard/PBQ practice engine, a 1,090-term glossary, and a keyword-retrieval study assistant with an optional in-browser LLM. Built June 2026 while studying for the exam, then reopened and expanded through August 2026 with a Linux Lab: a simulated shell with guided lessons, free play, and SEC+ scenario challenges. Vanilla HTML/CSS/JS, no build step. Reopened in October 2026 for a security hardening pass and optional accounts: inline scripts and event handlers were removed from the interactive diagrams so the Content-Security-Policy allows no inline script, and a small serverless API added username/password accounts that sync quiz and lab progress across devices. A public Security page documents the defenses, the audit findings, and the risks knowingly accepted.",
       "metrics": [
         "800-question bank, domain-weighted within ~1-4.5 points of the real SY0-701 exam distribution (verified via a full glossary cross-reference)",
         "50 PBQ labs (38 row-matching + 12 scenario) plus a simulated Linux shell with 8 lessons and 5 SEC+ challenges",
-        "1,090-term glossary and 11 interactive chapter diagrams"
+        "1,090-term glossary and 11 interactive chapter diagrams",
+        "Oct 2026 hardening: ~900 inline click handlers and 22 inline scripts moved out of the 11 diagrams, CSP now allows no inline script, and behavior was verified identical across all 918 handler clicks",
+        "Optional cross-device sync: scrypt-hashed passwords, HMAC-signed HttpOnly/Secure/SameSite=Strict session cookie, CSRF defense, account lockout and rate limits, private storage; 44 API tests plus 17 end-to-end checks, and a throwaway-account test against the live deployment"
       ],
       "tags": [
         "Security+",
@@ -372,7 +374,10 @@
         "JavaScript",
         "Study Tool",
         "Linux Lab",
-        "Web Design"
+        "Web Design",
+        "Web Security",
+        "Authentication",
+        "CSP"
       ],
       "media": {
         "type": "image",
@@ -384,6 +389,7 @@
       "links": {
         "github": "https://github.com/jaredlomeli-sjsu/comptia-secplus-study-guide",
         "liveDemo": "https://securityplus-studyguide.vercel.app",
+        "writeup": "https://securityplus-studyguide.vercel.app/security.html",
         "pdfReport": null
       },
       "featured": true,
@@ -1029,7 +1035,7 @@
       "subcategory": "Semester 3",
       "subsubcategory": "Technical",
       "subsubsubcategory": "Labs",
-      "date": "2026-11-28",
+      "date": "2026-10-01",
       "semester": "Semester 3 (San José State University)",
       "course": "TECH 60 — Introduction to Electronics",
       "courseCode": "TECH 60",
@@ -1925,9 +1931,9 @@
       "courseCode": "BUS3 12",
       "kind": "collection",
       "pinned": true,
-      "summary": "The full set of assignments from BUS3 12 — a first-year seminar covering academic planning, personal finance, career preparation, and personal wellness.",
+      "summary": "The full set of assignments from BUS3 12 — a first-year seminar covering academic planning, personal finance, and career preparation.",
       "metrics": [
-        "4 assignments — a four-year academic plan, a personal-budget case study, a résumé & cover letter, and a personal wellness plan"
+        "3 assignments — a four-year academic plan, a personal-budget case study, and a résumé & cover letter"
       ],
       "tags": [
         "BUS3 12",
@@ -1957,13 +1963,6 @@
           "size": "123 KB",
           "date": "2025-10-25",
           "path": "/public/documents/bus3-12/resume-cover-letter.pdf"
-        },
-        {
-          "label": "Personal Wellness Plan",
-          "type": "PDF",
-          "size": "50 KB",
-          "date": "2025-12-03",
-          "path": "/public/documents/bus3-12/personal-wellness-plan.pdf"
         }
       ],
       "links": {},

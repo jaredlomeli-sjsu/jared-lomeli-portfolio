@@ -43,10 +43,15 @@ function renderFooterUpdated() {
     date.toLocaleDateString("en-US", { month: "long", year: "numeric" });
 }
 
+// Escapes &, <, > and both quote characters so the result is safe in element
+// text AND inside quoted attribute values.
 function escapeHtml(str) {
-  const div = document.createElement("div");
-  div.textContent = str ?? "";
-  return div.innerHTML;
+  return String(str ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
 }
 
 // --- Tag accenting (site-wide, computed across every category) ---

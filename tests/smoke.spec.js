@@ -600,7 +600,7 @@ const ASSIGNMENT_COLLECTION_PAGES = [
   {
     slug: "semester-1-nontechnical-assignments",
     cards: {
-      "hl-bus3-12-assignments": 4,
+      "hl-bus3-12-assignments": 3,
       "hl-comm-20-assignments": 6,
       "hl-engl-1a-assignments": 10,
     },

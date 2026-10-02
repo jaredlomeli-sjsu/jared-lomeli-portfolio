@@ -34,8 +34,38 @@ const TYPES = {
   ".mp4": "video/mp4",
 };
 
-function send(res, code, body, type) {
-  res.writeHead(code, { "Content-Type": type || "text/plain" });
+// Mirror vercel.json "headers" so local runs (and the Playwright suite) enforce the
+// same security headers + CSP as production. Sources are path-to-regexp style;
+// only the forms used in vercel.json are handled ((regex) groups and :name).
+// Exported helper `headersFor(urlPath)` is also used by tests/security.spec.js.
+let HEADER_RULES = [];
+try {
+  const cfg = JSON.parse(
+    fs.readFileSync(path.join(ROOT, "vercel.json"), "utf8"),
+  );
+  HEADER_RULES = (cfg.headers || []).map((r) => ({
+    re: new RegExp("^" + r.source.replace(/\/:[A-Za-z]+/g, "/[^/]+") + "$"),
+    headers: r.headers,
+  }));
+} catch (e) {
+  /* no vercel.json -> no extra headers */
+}
+
+function headersFor(urlPath) {
+  const out = {};
+  for (const rule of HEADER_RULES) {
+    if (rule.re.test(urlPath)) {
+      for (const h of rule.headers) out[h.key] = h.value;
+    }
+  }
+  return out;
+}
+
+function send(res, code, body, type, urlPath) {
+  res.writeHead(code, {
+    ...headersFor(urlPath || "/"),
+    "Content-Type": type || "text/plain",
+  });
   res.end(body);
 }
 
@@ -43,19 +73,25 @@ const server = http.createServer((req, res) => {
   let urlPath = decodeURIComponent(req.url.split("?")[0]);
   if (urlPath.endsWith("/")) urlPath += "index.html";
   const file = path.join(ROOT, urlPath);
-  if (!file.startsWith(ROOT)) return send(res, 403, "forbidden");
+  if (!file.startsWith(ROOT)) return send(res, 403, "forbidden", null, urlPath);
 
   fs.readFile(file, (err, data) => {
     if (!err) {
-      return send(res, 200, data, TYPES[path.extname(file).toLowerCase()]);
+      return send(
+        res,
+        200,
+        data,
+        TYPES[path.extname(file).toLowerCase()],
+        urlPath,
+      );
     }
     if (!path.extname(file)) {
       fs.readFile(file + ".html", (e2, d2) => {
-        if (!e2) return send(res, 200, d2, TYPES[".html"]);
-        send(res, 404, "404 Not Found: " + urlPath);
+        if (!e2) return send(res, 200, d2, TYPES[".html"], urlPath);
+        send(res, 404, "404 Not Found: " + urlPath, null, urlPath);
       });
     } else {
-      send(res, 404, "404 Not Found: " + urlPath);
+      send(res, 404, "404 Not Found: " + urlPath, null, urlPath);
     }
   });
 });

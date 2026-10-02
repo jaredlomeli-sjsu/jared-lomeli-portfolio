@@ -14,10 +14,12 @@
     el.innerHTML = items
       .map((it) => {
         const active = it.slug === current;
+        const esc = (v) =>
+          String(v).replace(/[&<>"']/g, (c) => "&#" + c.charCodeAt(0) + ";");
         return (
-          `<a href="/${it.slug}" class="section-nav-link` +
+          `<a href="/${esc(it.slug)}" class="section-nav-link` +
           (active ? " section-nav-link--active" : "") +
-          `"${active ? ' aria-current="page"' : ""}>${it.label}</a>`
+          `"${active ? ' aria-current="page"' : ""}>${esc(it.label)}</a>`
         );
       })
       .join('<span class="section-nav-sep" aria-hidden="true">&middot;</span>');

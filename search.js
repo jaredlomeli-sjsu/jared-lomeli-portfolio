@@ -167,6 +167,11 @@
     return d.innerHTML;
   }
 
+  // For values placed inside a quoted HTML attribute (escapeHtml leaves quotes alone).
+  function escapeAttr(str) {
+    return escapeHtml(str).replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+  }
+
   function mark(text, terms) {
     var safe = escapeHtml(text);
     terms.forEach(function (t) {
@@ -227,7 +232,7 @@
           (i === state.active ? "true" : "false") +
           '">' +
           '<a class="search-result" href="' +
-          hrefFor(item) +
+          escapeAttr(hrefFor(item)) +
           '" data-i="' +
           i +
           '">' +
