@@ -337,7 +337,7 @@ Done per `D:\Documents\Website-Hardening-Playbook.md`. Public write-up: `/securi
   2. `/public/*` pages (`style-src 'unsafe-inline'`);
   3. `/public/artifacts/*`, `/demo/*` (inline scripts + jsDelivr/Google Fonts/Wikimedia);
   4. `linux-security-architecture` demo (blob: + unpkg React; loosest);
-  plus one for `/public/documents/*` HTML. PDFs/images/video get no CSP on purpose.
+     plus one for `/public/documents/*` HTML. PDFs/images/video get no CSP on purpose.
 - **Rules for new work:** root pages must not contain inline `<script>`, `<style>`, `style=`
   or `on*=` (tests fail). Put JS/CSS in files. Any new third-party host needs a CSP edit and a
   test. Pin versions and add SRI for CDN scripts.
@@ -352,3 +352,12 @@ Done per `D:\Documents\Website-Hardening-Playbook.md`. Public write-up: `/securi
 - The git repo is public and already has the old files in history (rework commit `a442d74`).
   Hardening changes are Vercel-only per the push rule.
 - LinkedIn link corrected to `linkedin.com/in/jaredlomelicnsm`.
+- **Independent-tool pass 2026-10-03:** gitleaks (tree + 32 commits of history) clean;
+  `npm audit` 0 vulns; Mozilla Observatory A+ (145, 12/12); exiftool over `public/` found no
+  GPS/device data (third-party author names only: Cisco/CompTIA/lab templates); PII regex +
+  PDF text sweep reviewed — the 9-digit hits are the public CompTIA verification code
+  (intentional) and PHYS 2A measurement data (false positives). Live: all dev files 404
+  (`CLAUDE.md`, `tests/`, `scripts/`, `package.json`, `.env`, `.git/`, removed wellness PDF).
+  Fixed: two cover-letter PDFs had a `.md` filename as PDF Title (now "Jared Lomeli - Cover
+  Letter"). securityheaders.com blocks scripted requests (403) — grade it in a browser.
+  Still open: GPA 3.96 vs 3.97 + transcript replacement (needs the new transcript).
