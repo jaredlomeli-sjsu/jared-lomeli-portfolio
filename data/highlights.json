@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "version": "1.0.0",
-  "lastUpdated": "2026-10-02",
+  "lastUpdated": "2026-10-08",
   "_dateNote": "An item's `date` is the date of the underlying work itself (when the lab/project/assignment was done or submitted), NOT the date the card was added to this site. Grids are sorted newest-first by this date.",
   "highlights": [
     {
@@ -1587,10 +1587,10 @@
       "courseCode": "TECH 65",
       "kind": "collection",
       "pinned": true,
-      "summary": "A running archive of every Cisco Packet Tracer activity (.pka) and network (.pkt) file from TECH 65 — Introduction to Networks. Download any file and open it in Packet Tracer. This one card holds every Packet Tracer file for the class — past, current, and future — so labs and assignments that use Packet Tracer link back here for their files instead of carrying their own copies.",
+      "summary": "A running archive of every Cisco Packet Tracer activity (.pka) and network (.pkt) file from TECH 65 — Introduction to Networks. Download any file and open it in Packet Tracer. This one card holds the Packet Tracer activity files for the class — past, current, and future — so labs and assignments that use Packet Tracer link back here for their files instead of carrying their own copies. Skills tests and quizzes live in their own collection card.",
       "metrics": [
-        "21 files — 1 Packet Tracer network (.pkt) file plus 20 Packet Tracer activities (.pka), including the end-of-Module-2 skills test in both of its versions, spanning Modules 1–9",
-        "Covers navigating the Cisco IOS, initial switch configuration, basic connectivity, end-device setup, the TCP/IP & OSI models in action, a wired-and-wireless LAN, physical-layer exploration and connection in physical mode, and identifying MAC/IP addresses and reading the ARP table",
+        "27 files — 1 Packet Tracer network (.pkt) file plus 26 Packet Tracer activities (.pka), spanning Modules 1–10, plus 1 PDF worksheet (the 9.1.3 assignment sheet, listed right beside the 9.1.3 files)",
+        "Covers navigating the Cisco IOS, initial switch and router configuration, basic connectivity, end-device setup, the TCP/IP & OSI models in action, a wired-and-wireless LAN, physical-layer exploration and connection in physical mode, identifying MAC/IP addresses and reading the ARP table, connecting a router to a LAN, troubleshooting default-gateway issues, and building a switch-and-router network in physical mode",
         "Grows as later modules add more Packet Tracer files"
       ],
       "tags": ["Cisco Packet Tracer", "TECH 65", "Networking"],
@@ -1693,14 +1693,6 @@
           "path": "/public/documents/tech-65/packet-tracer/3.5.5-investigate-tcp-ip-and-osi-models-attempt-2.pka"
         },
         {
-          "label": "Chapter 2 Test — Basic Switch Configuration",
-          "type": "Packet Tracer activity (.pka)",
-          "size": "287 KB",
-          "date": "2026-09-09",
-          "source": "TECH 65 skills test",
-          "path": "/public/documents/tech-65/packet-tracer/chapter-2-test-basic-switch-configuration.pka"
-        },
-        {
           "label": "4.6.5 — Connect a Wired and Wireless LAN",
           "type": "Packet Tracer activity (.pka)",
           "size": "574 KB",
@@ -1749,6 +1741,21 @@
           "path": "/public/documents/tech-65/packet-tracer/9.1.3-identify-mac-and-ip-addresses.pka"
         },
         {
+          "label": "9.1.3 — Identify MAC and IP Addresses — later attempt",
+          "type": "Packet Tracer activity (.pka)",
+          "size": "739 KB",
+          "date": "2026-10-05",
+          "source": "NetAcad",
+          "path": "/public/documents/tech-65/packet-tracer/9.1.3-identify-mac-and-ip-addresses-attempt-2.pka"
+        },
+        {
+          "label": "9.1.3 — Identify MAC and IP Addresses — worksheet (answers for the 9.1.3 files)",
+          "type": "PDF",
+          "size": "78 KB",
+          "date": "2026-10-05",
+          "path": "/public/documents/tech-65/packet-tracer/9.1.3-identify-mac-and-ip-addresses-worksheet.pdf"
+        },
+        {
           "label": "9.2.9 — Examine the ARP Table",
           "type": "Packet Tracer activity (.pka)",
           "size": "689 KB",
@@ -1757,12 +1764,60 @@
           "path": "/public/documents/tech-65/packet-tracer/9.2.9-examine-the-arp-table.pka"
         },
         {
-          "label": "Basic Switch Configuration v7.0 — Skills Test (no-checkmarks version)",
+          "label": "9.2.9 — Examine the ARP Table — later attempt",
           "type": "Packet Tracer activity (.pka)",
-          "size": "288 KB",
-          "date": "2026-09-30",
-          "source": "TECH 65 skills test",
-          "path": "/public/documents/tech-65/packet-tracer/basic-switch-config-v7-no-checkmarks.pka"
+          "size": "776 KB",
+          "date": "2026-10-05",
+          "source": "NetAcad",
+          "path": "/public/documents/tech-65/packet-tracer/9.2.9-examine-the-arp-table-attempt-2.pka"
+        },
+        {
+          "label": "10.1.4 — Configure Initial Router Settings",
+          "type": "Packet Tracer activity (.pka)",
+          "size": "196 KB",
+          "date": "2026-10-05",
+          "source": "NetAcad",
+          "path": "/public/documents/tech-65/packet-tracer/10.1.4-configure-initial-router-settings.pka"
+        },
+        {
+          "label": "10.3.4 — Connect a Router to a LAN",
+          "type": "Packet Tracer activity (.pka)",
+          "size": "776 KB",
+          "date": "2026-10-05",
+          "source": "NetAcad",
+          "path": "/public/documents/tech-65/packet-tracer/10.3.4-connect-a-router-to-a-lan.pka"
+        },
+        {
+          "label": "10.3.5 — Troubleshoot Default Gateway Issues",
+          "type": "Packet Tracer activity (.pka)",
+          "size": "319 KB",
+          "date": "2026-10-05",
+          "source": "NetAcad",
+          "path": "/public/documents/tech-65/packet-tracer/10.3.5-troubleshoot-default-gateway-issues.pka"
+        },
+        {
+          "label": "10.3.5 — Troubleshoot Default Gateway Issues — later attempt",
+          "type": "Packet Tracer activity (.pka)",
+          "size": "392 KB",
+          "date": "2026-10-05",
+          "source": "NetAcad",
+          "path": "/public/documents/tech-65/packet-tracer/10.3.5-troubleshoot-default-gateway-issues-attempt-2.pka"
+        },
+        {
+          "label": "10.4.3 — Build a Switch and Router Network (Physical Mode)",
+          "type": "Packet Tracer activity (.pka)",
+          "size": "649 KB",
+          "date": "2026-10-05",
+          "source": "NetAcad",
+          "path": "/public/documents/tech-65/packet-tracer/10.4.3-build-a-switch-and-router-network-physical-mode.pka"
+        },
+        {
+          "label": "10.4.4 — Build a Switch and Router Network (Physical Mode)",
+          "type": "Packet Tracer activity (.pka)",
+          "size": "678 KB",
+          "date": "2026-10-05",
+          "source": "NetAcad",
+          "path": "/public/documents/tech-65/packet-tracer/10.4.4-build-a-switch-and-router-network-physical-mode.pka"
         }
       ],
       "links": {},
@@ -1806,7 +1861,7 @@
       "courseCode": "TECH 30",
       "summary": "A running set of the graded Python activities from TECH 30 — Introduction to Python Programming, added as the course goes on. Download the source for any activity.",
       "metrics": [
-        "5 activities so far — arithmetic & I/O, built-in collection types, conditional logic, loop-based accumulation, and string counting & splitting"
+        "6 activities so far (1–5 and 7) — arithmetic & I/O, built-in collection types, conditional logic, loop-based accumulation, string counting & splitting, and functions with dictionary counting and a book-store purchase loop"
       ],
       "tags": ["Python", "TECH 30", "Programming"],
       "media": null,
@@ -1849,6 +1904,13 @@
           "size": "498 B",
           "date": "2026-09-22",
           "path": "/public/documents/tech-30/activity-5.py"
+        },
+        {
+          "label": "Activity 7 — Functions & Dictionary Counting",
+          "type": "Python source (.py)",
+          "size": "1 KB",
+          "date": "2026-10-01",
+          "path": "/public/documents/tech-30/activity-7.py"
         }
       ]
     },
@@ -1867,7 +1929,7 @@
       "pinned": true,
       "summary": "A running set of the written assignments from TECH 15 — Careers in Engineering Technology, a seminar on career planning, résumés, internships, and industry guest speakers. Added as the course goes on.",
       "metrics": [
-        "6 assignments so far — an introductory slideshow, a career-services résumé/ATS session summary, a study-abroad guest-speaker summary, a financial-aid & scholarships guest-speaker summary, a NETS / SME / augmented-reality guest-speaker summary, and an Archer Aviation guest-speaker summary"
+        "7 assignments so far — an introductory slideshow, a career-services résumé/ATS session summary, a study-abroad guest-speaker summary, a financial-aid & scholarships guest-speaker summary, a NETS / SME / augmented-reality guest-speaker summary, an Archer Aviation guest-speaker summary, and a manufacturing-engineer guest-speaker summary"
       ],
       "tags": ["Career Development", "TECH 15", "Professional Writing"],
       "media": null,
@@ -1913,6 +1975,13 @@
           "size": "39 KB",
           "date": "2026-09-28",
           "path": "/public/documents/tech-15/assignment-6-archer-aviation-speaker-summary.pdf"
+        },
+        {
+          "label": "Assignment 8 — Manufacturing Engineer Guest Speaker Summary",
+          "type": "PDF",
+          "size": "47 KB",
+          "date": "2026-10-08",
+          "path": "/public/documents/tech-15/assignment-8-manufacturing-engineer-speaker-summary.pdf"
         }
       ],
       "links": {},
@@ -2258,7 +2327,7 @@
       "kind": "collection",
       "pinned": true,
       "summary": "Every prior résumé version, kept as a record of how it evolved over the course of the internship/job search. The current résumé is on the site's Résumé page — this is the archive of everything before it.",
-      "metrics": ["7 versions, June–September 2026"],
+      "metrics": ["8 versions, June–September 2026"],
       "tags": ["Résumé", "Career"],
       "media": null,
       "links": {},
@@ -2311,21 +2380,28 @@
           "size": "96 KB",
           "date": "2026-09-07",
           "path": "/public/documents/professional/resumes/jared-lomeli-resume-v6.pdf"
+        },
+        {
+          "label": "Résumé v6.1",
+          "type": "PDF",
+          "size": "96 KB",
+          "date": "2026-09-13",
+          "path": "/public/documents/professional/resumes/jared-lomeli-resume-v6-1.pdf"
         }
       ],
       "featured": false
     },
     {
       "id": "hl-2026-professional-resume-current",
-      "title": "Résumé — Current (v6.1)",
+      "title": "Résumé — Current (v7)",
       "category": "Professional Documents",
       "subcategory": "Resumes",
       "subsubcategory": "Current",
-      "date": "2026-09-13",
+      "date": "2026-10-01",
       "semester": null,
       "course": null,
       "summary": "The current résumé, kept up to date as coursework and projects are added. Same file used everywhere else on the site (the homepage's Résumé button, /public/resume.html).",
-      "metrics": ["Jared_Lomeli_CNSM_v6.pdf"],
+      "metrics": ["Jared_Lomeli_CNSM_v7.pdf"],
       "tags": ["Résumé", "Career"],
       "media": {
         "type": "image",
@@ -2350,7 +2426,7 @@
       "kind": "collection",
       "pinned": true,
       "summary": "Cover letters written for internship and job applications, each tailored to the specific role and team.",
-      "metrics": ["11 cover letters, June–September 2026"],
+      "metrics": ["15 cover letters, June–October 2026"],
       "tags": ["Cover Letter", "Career"],
       "media": null,
       "links": {},
@@ -2431,6 +2507,34 @@
           "size": "40 KB",
           "date": "2026-09-13",
           "path": "/public/documents/professional/cover-letters/google-swe-sre-intern.pdf"
+        },
+        {
+          "label": "HPE — Cloud Engineer Intern",
+          "type": "PDF",
+          "size": "64 KB",
+          "date": "2026-10-01",
+          "path": "/public/documents/professional/cover-letters/hpe-cloud-engineer-intern.pdf"
+        },
+        {
+          "label": "Muon Space — Junior Help Desk Intern",
+          "type": "PDF",
+          "size": "63 KB",
+          "date": "2026-10-01",
+          "path": "/public/documents/professional/cover-letters/muon-space-junior-help-desk-intern.pdf"
+        },
+        {
+          "label": "SEMI — IT Applications Support Intern",
+          "type": "PDF",
+          "size": "64 KB",
+          "date": "2026-10-01",
+          "path": "/public/documents/professional/cover-letters/semi-it-applications-support-intern.pdf"
+        },
+        {
+          "label": "Blackhawk Network — Technology Intern",
+          "type": "PDF",
+          "size": "63 KB",
+          "date": "2026-10-02",
+          "path": "/public/documents/professional/cover-letters/blackhawk-network-technology-intern.pdf"
         }
       ],
       "featured": false
@@ -2664,6 +2768,78 @@
       "links": {},
       "featured": false,
       "subsubcategory": "NETS"
+    },
+    {
+      "id": "hl-tech65-quizzes-assessments-collection",
+      "title": "TECH 65 — Packet Tracer Quizzes & Assessments",
+      "category": "Coursework",
+      "subcategory": "Semester 3",
+      "subsubcategory": "Technical",
+      "subsubsubcategory": "Assignments",
+      "date": null,
+      "semester": "Semester 3 (San José State University)",
+      "course": "TECH 65 — Introduction to Networks",
+      "courseCode": "TECH 65",
+      "kind": "collection",
+      "pinned": true,
+      "summary": "A running archive of the graded Cisco Packet Tracer skills tests and quiz activities from TECH 65 — Introduction to Networks, kept apart from the regular Packet Tracer activities. Download any .pka and open it in Packet Tracer; the screenshots show the finished activity at 100% completion.",
+      "metrics": [
+        "4 graded Packet Tracer files — a Chapter 2 basic-switch-configuration test, the Basic Switch & Router Configuration v7.0 skills test (checkmarks and no-checkmarks versions), and a provisioning-and-cabling quiz",
+        "Skills tested: device hardening (hostnames, encrypted passwords, banners, console/VTY lines), management IPs and default gateways, a default static route, end-device configuration, rack-and-cable provisioning in physical mode, and connectivity testing with ping and DNS",
+        "Grows as later chapters add more tests and quizzes"
+      ],
+      "tags": ["Cisco Packet Tracer", "TECH 65", "Networking", "Skills Tests"],
+      "media": null,
+      "links": {},
+      "featured": false,
+      "downloads": [
+        {
+          "label": "Chapter 2 Test — Basic Switch Configuration",
+          "type": "Packet Tracer activity (.pka)",
+          "size": "287 KB",
+          "date": "2026-09-09",
+          "source": "TECH 65 skills test",
+          "path": "/public/documents/tech-65/quizzes/chapter-2-test-basic-switch-configuration.pka"
+        },
+        {
+          "label": "Basic Switch Configuration v7.0 — Skills Test (no-checkmarks version)",
+          "type": "Packet Tracer activity (.pka)",
+          "size": "288 KB",
+          "date": "2026-09-30",
+          "source": "TECH 65 skills test",
+          "path": "/public/documents/tech-65/quizzes/basic-switch-config-v7-no-checkmarks.pka"
+        },
+        {
+          "label": "Basic Switch & Router Configuration v7.0 — Skills Test (checkmarks version)",
+          "type": "Packet Tracer skills test (.pka)",
+          "size": "315 KB",
+          "date": "2026-10-07",
+          "source": "TECH 65 skills test",
+          "path": "/public/documents/tech-65/quizzes/basic-switch-and-router-config-v7-checkmarks.pka"
+        },
+        {
+          "label": "Basic Switch & Router Configuration v7.0 — 100% completion screenshot",
+          "type": "Screenshot (PNG)",
+          "size": "146 KB",
+          "date": "2026-10-07",
+          "path": "/public/documents/tech-65/quizzes/basic-switch-and-router-config-v7-checkmarks-completion.png"
+        },
+        {
+          "label": "Selecting, Provisioning and Cabling Routers, Switches and PCs — Quiz",
+          "type": "Packet Tracer quiz activity (.pka)",
+          "size": "284 KB",
+          "date": "2026-10-07",
+          "source": "TECH 65 quiz",
+          "path": "/public/documents/tech-65/quizzes/selecting-provisioning-and-cabling-routers-switches-and-pcs.pka"
+        },
+        {
+          "label": "Selecting, Provisioning and Cabling Routers, Switches and PCs — 100% completion screenshot",
+          "type": "Screenshot (PNG)",
+          "size": "208 KB",
+          "date": "2026-10-07",
+          "path": "/public/documents/tech-65/quizzes/selecting-provisioning-and-cabling-completion.png"
+        }
+      ]
     }
   ]
 }

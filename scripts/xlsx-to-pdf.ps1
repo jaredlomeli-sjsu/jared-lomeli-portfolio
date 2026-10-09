@@ -35,10 +35,15 @@ $xl.DisplayAlerts = $false
 try {
   $wb = $xl.Workbooks.Open($src, $false, $true)  # UpdateLinks=0, ReadOnly=$true
   foreach ($ws in $wb.Worksheets) {
-    $ws.PageSetup.Orientation = $xlLandscape
-    $ws.PageSetup.Zoom = $false
-    $ws.PageSetup.FitToPagesWide = 1
-    $ws.PageSetup.FitToPagesTall = $false
+    # PageSetup throws when no printer is installed; export still works without it.
+    try {
+      $ws.PageSetup.Orientation = $xlLandscape
+      $ws.PageSetup.Zoom = $false
+      $ws.PageSetup.FitToPagesWide = 1
+      $ws.PageSetup.FitToPagesTall = $false
+    } catch {
+      Write-Warning "PageSetup unavailable for sheet '$($ws.Name)': $($_.Exception.Message)"
+    }
   }
   $wb.ExportAsFixedFormat($xlTypePDF, $pdf)
   $wb.Close($false)

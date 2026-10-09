@@ -481,7 +481,8 @@ test.describe("collection cards (/semester-3-technical-assignments)", () => {
     await expect(cards.nth(0)).toHaveClass(/highlight-card--collection/);
     await expect(cards.nth(1)).toHaveClass(/highlight-card--collection/);
     await expect(cards.nth(2)).toHaveClass(/highlight-card--collection/);
-    await expect(page.locator(".highlight-card--collection")).toHaveCount(3);
+    await expect(cards.nth(3)).toHaveClass(/highlight-card--collection/);
+    await expect(page.locator(".highlight-card--collection")).toHaveCount(4);
 
     // --- TECH 65 Packet Tracer file collection ---
     const pt = page.locator("#hl-hl-tech65-packet-tracer-collection");
@@ -489,7 +490,7 @@ test.describe("collection cards (/semester-3-technical-assignments)", () => {
       "Ongoing collection",
     );
     const ptDl = pt.locator("a.download-item");
-    await expect(ptDl).toHaveCount(21);
+    await expect(ptDl).toHaveCount(27);
     for (const a of await ptDl.all()) {
       await expect(a).toHaveAttribute("download", "");
       const href = await a.getAttribute("href");
@@ -500,11 +501,49 @@ test.describe("collection cards (/semester-3-technical-assignments)", () => {
       expect(res.status(), `${href}`).toBe(200);
     }
 
+    // 9.1.3 worksheet PDF sits directly after the 9.1.3 .pka files and opens in-page
+    const items = pt.locator(".download-item");
+    const ws = pt.locator("button.download-item--view");
+    await expect(ws).toHaveCount(1);
+    await expect(ws).toContainText("9.1.3");
+    await expectViewItemOpensPdf(
+      page,
+      ws,
+      /^\/public\/documents\/tech-65\/packet-tracer\/9\.1\.3-.+-worksheet\.pdf$/,
+    );
+    const names = await items.locator(".download-item-name").allInnerTexts();
+    const i913 = names.findIndex((n) =>
+      n.startsWith("9.1.3 — Identify MAC and IP Addresses — worksheet"),
+    );
+    expect(names[i913 - 1]).toContain("9.1.3");
+    expect(names[i913 + 1]).toContain("9.2.9");
+
+    // --- TECH 65 quizzes & assessments collection ---
+    const qz = page.locator("#hl-hl-tech65-quizzes-assessments-collection");
+    await expect(qz).toHaveClass(/highlight-card--collection/);
+    const qzFiles = qz.locator("a.download-item");
+    await expect(qzFiles).toHaveCount(4);
+    await expect(qz.locator("button.download-item--view")).toHaveCount(2);
+    for (const a of await qzFiles.all()) {
+      const href = await a.getAttribute("href");
+      expect(href).toMatch(/^\/public\/documents\/tech-65\/quizzes\/.+\.pka$/);
+      expect(
+        (await page.request.get(href, { failOnStatusCode: false })).status(),
+        href,
+      ).toBe(200);
+    }
+    for (const b of await qz.locator("button.download-item--view").all()) {
+      await b.click();
+      await expect(page.locator("#lightbox")).toBeVisible();
+      await page.keyboard.press("Escape");
+      await expect(page.locator("#lightbox")).toBeHidden();
+    }
+
     // --- TECH 30 Python activities collection ---
     const py = page.locator("#hl-hl-2026-tech30-python-activities");
     await expect(py).toHaveClass(/highlight-card--collection/);
     const pyDl = py.locator("button.download-item--view");
-    await expect(pyDl).toHaveCount(5);
+    await expect(pyDl).toHaveCount(6);
     await expect(py.locator("a.download-item")).toHaveCount(0);
     for (const btn of await pyDl.all()) {
       await btn.click();
@@ -523,13 +562,13 @@ test.describe("collection cards (/semester-3-technical-assignments)", () => {
     const t15 = page.locator("#hl-hl-2026-tech15-assignments");
     await expect(t15).toHaveClass(/highlight-card--collection/);
     const t15Dl = t15.locator("button.download-item--view");
-    await expect(t15Dl).toHaveCount(6);
+    await expect(t15Dl).toHaveCount(7);
     await expect(t15.locator("a.download-item")).toHaveCount(0);
     for (const btn of await t15Dl.all()) {
       await expectViewItemOpensPdf(
         page,
         btn,
-        /^\/public\/documents\/tech-15\/assignment-[12346]-.+\.pdf$/,
+        /^\/public\/documents\/tech-15\/assignment-[123468]-.+\.pdf$/,
       );
     }
   });
@@ -561,15 +600,18 @@ test.describe("collection cards (/semester-3-technical-assignments)", () => {
     );
   });
 
-  test("filtering by the TECH 65 course keeps only its collection card", async ({
+  test("filtering by the TECH 65 course keeps only its collection cards", async ({
     page,
   }) => {
     await page.goto("/semester-3-technical-assignments");
     await page.locator("#filter-toggle").click();
     await page.locator('#filter-course-options input[value="TECH 65"]').check();
-    await expect(page.locator(".highlight-card--collection")).toHaveCount(1);
+    await expect(page.locator(".highlight-card--collection")).toHaveCount(2);
     await expect(
       page.locator("#hl-hl-tech65-packet-tracer-collection"),
+    ).toBeVisible();
+    await expect(
+      page.locator("#hl-hl-tech65-quizzes-assessments-collection"),
     ).toBeVisible();
   });
 
