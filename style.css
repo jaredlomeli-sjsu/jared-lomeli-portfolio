@@ -198,20 +198,45 @@ a {
 }
 
 .hero-currently {
-  color: var(--text-muted);
+  color: var(--text-main);
   font-family: var(--font-mono);
-  font-size: 0.82rem;
+  font-size: 1rem;
+  line-height: 1.65;
   letter-spacing: 0.01em;
-  margin: 0 0 1.5rem;
-  padding: 0.6rem 0.9rem;
+  margin: 0 0 1.75rem;
+  padding: 1.1rem 1.4rem;
   background: var(--accent-glow);
-  border-left: 2px solid var(--accent-color);
-  border-radius: 4px;
+  border-left: 4px solid var(--accent-color);
+  border-radius: 6px;
 }
 
+/* "Currently at SJSU" label: copper, uppercase eyebrow. */
 .hero-currently strong {
-  color: var(--text-main);
+  color: var(--accent-color);
   font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* "Now" line: its own row under a dashed divider, with a filled copper pill
+   (same fill as the Résumé button) so the two lines read as different things. */
+.hero-now {
+  display: block;
+  margin-top: 0.85rem;
+  padding-top: 0.85rem;
+  border-top: 1px dashed var(--accent-color);
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.hero-now strong {
+  display: inline-block;
+  margin-right: 0.35rem;
+  padding: 0.1rem 0.6rem;
+  background: var(--accent-color);
+  color: #fff;
+  border-radius: 4px;
+  font-size: 0.85rem;
 }
 
 .hero-actions {
@@ -1423,4 +1448,127 @@ dialog::backdrop {
 
 .security-table tr:last-child td {
   border-bottom: 0;
+}
+
+/* Featured Projects strip (home page) — 6-col grid: 3 cards on the first row,
+   2 wider cards on the second; stacks to 1 column on narrow screens. */
+.featured-projects {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 0;
+}
+
+.featured-title {
+  margin: 0 0 1.25rem;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.featured-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 1.25rem;
+}
+
+.featured-card {
+  grid-column: span 2;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  color: inherit;
+  text-decoration: none;
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.featured-card-main {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  color: inherit;
+  text-decoration: none;
+}
+
+.featured-card-code {
+  align-self: flex-start;
+  margin: 0 1.15rem 1.1rem;
+  padding: 0.3rem 0.7rem;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-main);
+  text-decoration: none;
+}
+
+.featured-card-code:hover,
+.featured-card-code:focus-visible {
+  border-color: var(--accent-color);
+  color: var(--accent-color);
+}
+
+.featured-card:nth-child(n + 4) {
+  grid-column: span 3;
+}
+
+.featured-card:hover,
+.featured-card:focus-visible {
+  transform: translateY(-2px);
+  border-color: var(--accent-color);
+  box-shadow: var(--shadow-card-hover);
+}
+
+.featured-card-img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  object-position: top left;
+  border-bottom: 1px solid var(--border-color);
+  background: var(--bg-surface-hover);
+}
+
+.featured-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 1rem 1.15rem 1.2rem;
+}
+
+.featured-card-tag {
+  font-family: var(--font-mono, "JetBrains Mono", monospace);
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent-color);
+}
+
+.featured-card-title {
+  margin: 0;
+  font-size: 1.05rem;
+  line-height: 1.3;
+  color: var(--text-main);
+}
+
+.featured-card-blurb {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+
+@media (max-width: 800px) {
+  .featured-grid {
+    grid-template-columns: 1fr;
+  }
+  .featured-card,
+  .featured-card:nth-child(n + 4) {
+    grid-column: auto;
+  }
 }

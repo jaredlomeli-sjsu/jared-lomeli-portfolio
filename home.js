@@ -27,6 +27,7 @@ async function initHome() {
   }
   const highlights = data.highlights || [];
   updateFooterUpdated(data.lastUpdated);
+  renderFeatured(highlights);
 
   const parentSlug = container.dataset.parent || "";
   let groups;
@@ -66,6 +67,129 @@ async function initHome() {
   container.replaceChildren(fragment);
 }
 
+// Hand-picked home-page tile thumbnails, keyed by top-level category slug.
+// A category listed here ignores "newest card with an image"; any category not
+// listed falls back to that rule. Images are small squares in
+// public/images/tiles/ (the tiles render at 112px).
+const TILE_IMAGES = {
+  credentials: "/public/images/tiles/credentials.png",
+  projects: "/public/images/tiles/projects.png",
+  professionaldocuments: "/public/images/tiles/professional-documents.svg",
+};
+
+// Featured Projects strip (home page only). Order = display order. Cards pull
+// their title + image from the matching highlights.json entry; `blurb` is a
+// one-line recruiter-facing summary and `page` is the grid page the full card
+// lives on (the #hl-<id> hash makes grid.js scroll to + flash it). An optional
+// `image` overrides the card's own screenshot with a tighter crop (16:9, in
+// public/images/featured/) so the thumbnail stays legible at strip size.
+// Rolling list — see the project-portfolio-featured-projects-strip memory.
+const FEATURED_PROJECTS = [
+  {
+    id: "hl-2026-kali-metasploitable-wazuh-labs",
+    image: "/public/images/featured/kali-nmap.png",
+    page: "/projects",
+    tag: "Security",
+    blurb:
+      "Offensive and defensive lab series: Kali attacks on Metasploitable, detected with a Wazuh SIEM.",
+  },
+  {
+    id: "hl-2026-nexus-helpdesk-triage-agent-project",
+    image: "/public/images/featured/nexus-test-suite.png",
+    page: "/projects",
+    tag: "AI & IT Support",
+    blurb:
+      "Multi-agent IT helpdesk triage system that routes tickets, with a 17-test offline suite.",
+  },
+  {
+    id: "hl-2026-secplus-study-guide-project",
+    image: "/public/images/featured/secplus-hero.png",
+    page: "/projects",
+    tag: "Security+",
+    blurb:
+      "Self-built SY0-701 study site with interactive diagrams, quizzes, flashcards, and PBQ practice.",
+  },
+  {
+    id: "hl-2026-packet-tracer-security-lab",
+    page: "/projects",
+    tag: "Networking",
+    blurb:
+      "Segmented 3-VLAN enterprise network with AAA, IDS, a honeypot, and a site-to-site IPSec VPN.",
+  },
+  {
+    id: "hl-2026-nets-pihole-dns-adblocking",
+    page: "/educational-nets",
+    tag: "Homelab",
+    blurb:
+      "Network-wide DNS ad-blocking on a headless Raspberry Pi, with 4,000+ queries blocked.",
+  },
+];
+
+function renderFeatured(highlights) {
+  const grid = document.getElementById("featured-grid");
+  if (!grid) return;
+  const section = document.getElementById("featured-projects");
+  const cards = FEATURED_PROJECTS.map((f) => {
+    const h = highlights.find((x) => x.id === f.id);
+    if (!h) return null;
+    const card = document.createElement("div");
+    card.className = "featured-card";
+    const a = document.createElement("a");
+    a.className = "featured-card-main";
+    a.href = f.page + "#hl-" + encodeURIComponent(f.id);
+
+    const imgSrc =
+      f.image ||
+      (h.media && h.media.type === "image" && h.media.localSourcePath);
+    if (imgSrc) {
+      const img = document.createElement("img");
+      img.className = "featured-card-img";
+      img.src = imgSrc;
+      img.alt = "";
+      img.loading = "lazy";
+      a.appendChild(img);
+    }
+    const body = document.createElement("div");
+    body.className = "featured-card-body";
+    const tag = document.createElement("span");
+    tag.className = "featured-card-tag";
+    tag.textContent = f.tag;
+    const title = document.createElement("h3");
+    title.className = "featured-card-title";
+    title.textContent = h.title;
+    const blurb = document.createElement("p");
+    blurb.className = "featured-card-blurb";
+    blurb.textContent = f.blurb;
+    body.append(tag, title, blurb);
+    a.appendChild(body);
+    card.appendChild(a);
+
+    // Separate "Code" link (sibling, not nested — anchors can't nest). Only
+    // cards whose highlights.json entry has a links.github get one.
+    const repo = h.links && h.links.github;
+    if (repo) {
+      const code = document.createElement("a");
+      code.className = "featured-card-code";
+      code.href = repo;
+      code.target = "_blank";
+      code.rel = "noopener noreferrer";
+      code.textContent = "Code ↗";
+      code.setAttribute(
+        "aria-label",
+        "View code for " + h.title + " on GitHub",
+      );
+      card.appendChild(code);
+    }
+    return card;
+  }).filter(Boolean);
+
+  if (!cards.length) {
+    if (section) section.hidden = true;
+    return;
+  }
+  grid.replaceChildren(...cards);
+}
+
 // `unit` is the noun the tile count is measured in: "item" everywhere except
 // under Coursework, where tiles count distinct classes ("class").
 function buildSectionTile({ slug, label, items }, isSub, unit = "item") {
@@ -78,11 +202,15 @@ function buildSectionTile({ slug, label, items }, isSub, unit = "item") {
   if (isSub) {
     a.classList.add("section-button--label-only");
   } else {
-    const preview = items
-      .filter(
-        (h) => h.media && h.media.type === "image" && h.media.localSourcePath,
-      )
-      .sort((a, b) => (b.date || "").localeCompare(a.date || ""))[0];
+    const override = TILE_IMAGES[slug];
+    const preview = override
+      ? { media: { localSourcePath: override } }
+      : items
+          .filter(
+            (h) =>
+              h.media && h.media.type === "image" && h.media.localSourcePath,
+          )
+          .sort((a, b) => (b.date || "").localeCompare(a.date || ""))[0];
 
     const media = document.createElement("div");
     media.className = "section-button-media";
