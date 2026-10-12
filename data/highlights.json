@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "version": "1.0.0",
-  "lastUpdated": "2026-10-08",
+  "lastUpdated": "2026-10-12",
   "_dateNote": "An item's `date` is the date of the underlying work itself (when the lab/project/assignment was done or submitted), NOT the date the card was added to this site. Grids are sorted newest-first by this date.",
   "highlights": [
     {
@@ -360,13 +360,14 @@
       "starred": true,
       "semester": null,
       "course": "CompTIA Security+ SY0-701 Prep",
-      "summary": "Self-built exam-prep site covering all 5 weighted SY0-701 domains — 11 chapter study-note pages with original interactive diagrams, a quiz/flashcard/PBQ practice engine, a 1,090-term glossary, and a keyword-retrieval study assistant with an optional in-browser LLM. Built June 2026 while studying for the exam, then reopened and expanded through August 2026 with a Linux Lab: a simulated shell with guided lessons, free play, and SEC+ scenario challenges. Vanilla HTML/CSS/JS, no build step. Reopened in October 2026 for a security hardening pass and optional accounts: inline scripts and event handlers were removed from the interactive diagrams so the Content-Security-Policy allows no inline script, and a small serverless API added username/password accounts that sync quiz and lab progress across devices. A public Security page documents the defenses, the audit findings, and the risks knowingly accepted.",
+      "summary": "Self-built exam-prep site covering all 5 weighted SY0-701 domains — 11 chapter study-note pages with original interactive diagrams, a quiz/flashcard/PBQ practice engine, a 1,090-term glossary, and a keyword-retrieval study assistant with an optional in-browser LLM. Built June 2026 while studying for the exam, then reopened and expanded through August 2026 with a Linux Lab: a simulated shell with guided lessons, free play, and SEC+ scenario challenges. Vanilla HTML/CSS/JS, no build step. Reopened in October 2026 for a security hardening pass and optional accounts: inline scripts and event handlers were removed from the interactive diagrams so the Content-Security-Policy allows no inline script, and a small serverless API added accounts that sync quiz and lab progress across devices. Sign-in was then moved to WorkOS AuthKit with required authenticator-app MFA (OAuth/OIDC authorization-code flow with PKCE and state), replacing the site's own password handling, and an Identity Lab was added: guided lessons, a flow simulator and scenario challenges covering SAML, OAuth 2.0, OpenID Connect, MFA and provisioning. A public Security page documents the defenses, the audit findings, and the risks knowingly accepted.",
       "metrics": [
         "800-question bank, domain-weighted within ~1-4.5 points of the real SY0-701 exam distribution (verified via a full glossary cross-reference)",
         "50 PBQ labs (38 row-matching + 12 scenario) plus a simulated Linux shell with 8 lessons and 5 SEC+ challenges",
         "1,090-term glossary and 11 interactive chapter diagrams",
         "Oct 2026 hardening: ~900 inline click handlers and 22 inline scripts moved out of the 11 diagrams, CSP now allows no inline script, and behavior was verified identical across all 918 handler clicks",
-        "Optional cross-device sync: scrypt-hashed passwords, HMAC-signed HttpOnly/Secure/SameSite=Strict session cookie, CSRF defense, account lockout and rate limits, private storage; 44 API tests plus 17 end-to-end checks, and a throwaway-account test against the live deployment"
+        "Optional cross-device sync behind WorkOS AuthKit sign-in: required TOTP MFA, verified email, breached-password check, state + PKCE on the OAuth/OIDC flow, HMAC-signed HttpOnly/Secure/SameSite=Strict session cookie, CSRF defense, rate limits, private storage; about 100 API tests and 33 end-to-end checks against a fake identity provider, plus a real sign-up, MFA, sign-out and delete walkthrough against WorkOS staging",
+        "Identity Lab: 5 lessons, 5 scenario challenges and a SAML / OIDC flow simulator that shows what an attacker gets when each defense is switched off; 420 automated checks, including every lesson answered through the real UI"
       ],
       "tags": [
         "Security+",
@@ -377,7 +378,12 @@
         "Web Design",
         "Web Security",
         "Authentication",
-        "CSP"
+        "CSP",
+        "MFA",
+        "OAuth / OIDC",
+        "SAML",
+        "WorkOS AuthKit",
+        "Identity Lab"
       ],
       "media": {
         "type": "image",
@@ -2393,15 +2399,15 @@
     },
     {
       "id": "hl-2026-professional-resume-current",
-      "title": "Résumé — Current (v7)",
+      "title": "Résumé — Current (v7.2)",
       "category": "Professional Documents",
       "subcategory": "Resumes",
       "subsubcategory": "Current",
-      "date": "2026-10-01",
+      "date": "2026-10-12",
       "semester": null,
       "course": null,
       "summary": "The current résumé, kept up to date as coursework and projects are added. Same file used everywhere else on the site (the homepage's Résumé button, /public/resume.html).",
-      "metrics": ["Jared_Lomeli_CNSM_v7.pdf"],
+      "metrics": ["Jared_Lomeli_CNSM_v7.2.pdf"],
       "tags": ["Résumé", "Career"],
       "media": {
         "type": "image",
@@ -2426,7 +2432,7 @@
       "kind": "collection",
       "pinned": true,
       "summary": "Cover letters written for internship and job applications, each tailored to the specific role and team.",
-      "metrics": ["15 cover letters, June–October 2026"],
+      "metrics": ["17 cover letters, June–October 2026"],
       "tags": ["Cover Letter", "Career"],
       "media": null,
       "links": {},
@@ -2535,6 +2541,20 @@
           "size": "63 KB",
           "date": "2026-10-02",
           "path": "/public/documents/professional/cover-letters/blackhawk-network-technology-intern.pdf"
+        },
+        {
+          "label": "InBounce — AI Research Intern",
+          "type": "PDF",
+          "size": "33 KB",
+          "date": "2026-10-12",
+          "path": "/public/documents/professional/cover-letters/inbounce-ai-research-intern.pdf"
+        },
+        {
+          "label": "Lawrence Livermore National Laboratory — Computing Summer Intern",
+          "type": "PDF",
+          "size": "35 KB",
+          "date": "2026-10-12",
+          "path": "/public/documents/professional/cover-letters/llnl-computing-summer-intern.pdf"
         }
       ],
       "featured": false
@@ -2840,6 +2860,47 @@
           "path": "/public/documents/tech-65/quizzes/selecting-provisioning-and-cabling-completion.png"
         }
       ]
+    },
+    {
+      "id": "hl-2026-nets-cyberlab-false-invoice",
+      "title": "NETS Incident Response Lab — Operation False Invoice (Docker)",
+      "category": "Extra Curricular",
+      "subcategory": "Educational",
+      "subsubcategory": "NETS",
+      "date": "2026-10-09",
+      "starred": false,
+      "semester": null,
+      "course": null,
+      "summary": "A hands-on digital forensics lab from the SJSU Network Engineering and Technology Society (NETS). The lab runs in an isolated Docker container and walks through a simulated phishing incident: a suspicious invoice email, a disguised attachment, and an employee who entered credentials into it. I built the container with Docker Compose and worked through the six missions, recording my findings and a timeline on the mission checklist.",
+      "metrics": [
+        "Built the lab image and started the analyst container with Docker Compose from WSL (Docker Desktop)",
+        "Email triage: Reply-To on a different domain than the sender, with SPF fail, DKIM none and DMARC fail",
+        "Attachment analysis: a double-extension file (Invoice_September.pdf.exe) whose SHA-256 did not match the known-good viewer",
+        "Persistence: found a scheduled task that relaunches the malware at every logon, and traced the credential prompt to the same executable",
+        "Built an evidence-based timeline (09:38–09:45) from 7 evidence files and listed 3 indicators of compromise and 3 recommended actions"
+      ],
+      "tags": [
+        "Digital Forensics",
+        "Incident Response",
+        "Phishing Analysis",
+        "Docker",
+        "Docker Compose",
+        "WSL",
+        "Linux CLI",
+        "NETS",
+        "Cybersecurity"
+      ],
+      "media": {
+        "type": "image",
+        "localSourcePath": "/public/images/nets-cyberlab-docker-setup.png",
+        "altText": "Terminal on the left showing docker compose build and up for the cyber-lab analyst container, next to Docker Desktop on the right showing the cyber-lab stack running",
+        "width": 1917,
+        "height": 1140
+      },
+      "links": {
+        "pdfReport": "/public/documents/nets/operation-false-invoice-mission-checklist.pdf"
+      },
+      "featured": false
     }
   ]
 }
