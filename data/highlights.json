@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "version": "1.0.0",
-  "lastUpdated": "2026-10-12",
+  "lastUpdated": "2026-10-13",
   "_dateNote": "An item's `date` is the date of the underlying work itself (when the lab/project/assignment was done or submitted), NOT the date the card was added to this site. Grids are sorted newest-first by this date.",
   "highlights": [
     {
@@ -2900,6 +2900,45 @@
       "links": {
         "pdfReport": "/public/documents/nets/operation-false-invoice-mission-checklist.pdf"
       },
+      "featured": false
+    },
+    {
+      "id": "hl-2026-bus2-90-assignments",
+      "title": "BUS2 90 â€” Group Presentation: Social Media & Mental Health",
+      "category": "Coursework",
+      "subcategory": "Semester 3",
+      "subsubcategory": "Non-technical",
+      "subsubsubcategory": "Assignments",
+      "date": "2026-10-12",
+      "semester": "Semester 3 (San JosÃ© State University)",
+      "course": "BUS2 90",
+      "courseCode": "BUS2 90",
+      "kind": "collection",
+      "pinned": true,
+      "summary": "Group 13's statistics presentation on social media and adolescent mental health, delivered in class on 10/12/2026 by a group of six. I presented section 2 (The Mental Health Numbers) and section 6 (Takeaways and Sources), covering a teammate's section.",
+      "metrics": [
+        "30 slides across six sections: usage, mental health numbers, the perception gap, a probability lens on risk, our own survey, takeaways",
+        "Own survey of 32 SJSU undergraduates: 77.8% of heavy users (3+ hrs/day) reported a mental health impact vs. 40% of light users",
+        "Applied course concepts: causal-link pitfall, convenience-sampling bias, measures of center and spread, frequency tables"
+      ],
+      "tags": [
+        "BUS2 90",
+        "Statistics",
+        "Presentation",
+        "Group Project",
+        "Data Analysis"
+      ],
+      "media": null,
+      "downloads": [
+        {
+          "label": "Group 13 Presentation: Social Media & Mental Health (slides)",
+          "type": "PDF",
+          "size": "1.0 MB",
+          "date": "2026-10-12",
+          "path": "/public/documents/bus2-90/group-13-social-media-mental-health.pdf"
+        }
+      ],
+      "links": {},
       "featured": false
     }
   ]

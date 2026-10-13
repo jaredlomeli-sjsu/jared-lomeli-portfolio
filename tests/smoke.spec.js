@@ -79,7 +79,7 @@ const CHOOSER_PAGES = [
   { slug: "extracurricular", nav: "Extra Curricular", tiles: 2, allFull: true },
   { slug: "educational", nav: "Extra Curricular", tiles: 2, allFull: true },
   { slug: "semester-2", nav: "Coursework", tiles: 2, allFull: true },
-  { slug: "semester-3", nav: "Coursework", tiles: 2 },
+  { slug: "semester-3", nav: "Coursework", tiles: 2, allFull: true },
   { slug: "semester-1", nav: "Coursework", tiles: 2 },
   { slug: "semester-3-technical", nav: "Coursework", tiles: 2, allFull: true },
   { slug: "semester-2-technical", nav: "Coursework", tiles: 2, allFull: true },
