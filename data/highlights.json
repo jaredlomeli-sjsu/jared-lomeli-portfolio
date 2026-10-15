@@ -1082,7 +1082,7 @@
       "pinned": true,
       "summary": "A running collection of every circuit-analysis lab from TECH 60 — Introduction to Electronics. Each lab is checked three ways — hand calculation, Multisim simulation, and a physical breadboard build — and the report opens right here on the page. This one card holds all of the class's labs — past, current, and future — instead of a separate card for each lab.",
       "metrics": [
-        "5 labs so far — Lab 0 (resistor color-code decoding + DMM verification), Lab 1 (LED circuit & Kirchhoff's Voltage Law), Lab 2 (3-resistor series circuit, Ohm's Law & KVL), Lab 4 (voltage-divider rule & loading effects), and Lab 6 (parallel circuit, Current Divider Rule & Kirchhoff's Current Law)",
+        "6 labs so far — Lab 0 (resistor color-code decoding + DMM verification), Lab 1 (LED circuit & Kirchhoff's Voltage Law), Lab 2 (3-resistor series circuit, Ohm's Law & KVL), Lab 4 (voltage-divider rule & loading effects), Lab 6 (parallel circuit, Current Divider Rule & Kirchhoff's Current Law), and Lab 7 (combined series/parallel circuit tying Ohm's Law, KVL, KCL and both divider rules together)",
         "Every lab cross-checked three ways — hand calculation, Multisim simulation, and a physical breadboard build — comparing predicted vs. measured error",
         "Grows as later modules add more TECH 60 labs"
       ],
@@ -1123,6 +1123,13 @@
           "size": "1.5 MB",
           "date": "2026-09-30",
           "path": "/public/documents/tech-60/lab-6.pdf"
+        },
+        {
+          "label": "Lab 7 — Series/Parallel Circuit, Voltage & Current Divider Rules, KVL & KCL",
+          "type": "PDF",
+          "size": "1.6 MB",
+          "date": "2026-10-14",
+          "path": "/public/documents/tech-60/lab-7.pdf"
         }
       ],
       "links": {},
@@ -1935,7 +1942,7 @@
       "pinned": true,
       "summary": "A running set of the written assignments from TECH 15 — Careers in Engineering Technology, a seminar on career planning, résumés, internships, and industry guest speakers. Added as the course goes on.",
       "metrics": [
-        "7 assignments so far — an introductory slideshow, a career-services résumé/ATS session summary, a study-abroad guest-speaker summary, a financial-aid & scholarships guest-speaker summary, a NETS / SME / augmented-reality guest-speaker summary, an Archer Aviation guest-speaker summary, and a manufacturing-engineer guest-speaker summary"
+        "8 assignments so far — an introductory slideshow, a career-services résumé/ATS session summary, a study-abroad guest-speaker summary, a financial-aid & scholarships guest-speaker summary, a NETS / SME / augmented-reality guest-speaker summary, an Archer Aviation guest-speaker summary, a time-management summary with a weekly time log and daily targets, and a manufacturing-engineer guest-speaker summary"
       ],
       "tags": ["Career Development", "TECH 15", "Professional Writing"],
       "media": null,
@@ -1981,6 +1988,13 @@
           "size": "39 KB",
           "date": "2026-09-28",
           "path": "/public/documents/tech-15/assignment-6-archer-aviation-speaker-summary.pdf"
+        },
+        {
+          "label": "Assignment 7 — Time Management (summary, weekly time log & daily targets)",
+          "type": "PDF",
+          "size": "12 KB",
+          "date": "2026-10-06",
+          "path": "/public/documents/tech-15/assignment-7-time-management.pdf"
         },
         {
           "label": "Assignment 8 — Manufacturing Engineer Guest Speaker Summary",
@@ -2804,7 +2818,7 @@
       "pinned": true,
       "summary": "A running archive of the graded Cisco Packet Tracer skills tests and quiz activities from TECH 65 — Introduction to Networks, kept apart from the regular Packet Tracer activities. Download any .pka and open it in Packet Tracer; the screenshots show the finished activity at 100% completion.",
       "metrics": [
-        "4 graded Packet Tracer files — a Chapter 2 basic-switch-configuration test, the Basic Switch & Router Configuration v7.0 skills test (checkmarks and no-checkmarks versions), and a provisioning-and-cabling quiz",
+        "5 graded Packet Tracer files — a Chapter 2 basic-switch-configuration test, the Basic Switch & Router Configuration v7.0 skills test (checkmarks and no-checkmarks versions), a provisioning-and-cabling quiz, and the CCNA 1 v7.0 midterm exam file",
         "Skills tested: device hardening (hostnames, encrypted passwords, banners, console/VTY lines), management IPs and default gateways, a default static route, end-device configuration, rack-and-cable provisioning in physical mode, and connectivity testing with ping and DNS",
         "Grows as later chapters add more tests and quizzes"
       ],
@@ -2858,6 +2872,14 @@
           "size": "208 KB",
           "date": "2026-10-07",
           "path": "/public/documents/tech-65/quizzes/selecting-provisioning-and-cabling-completion.png"
+        },
+        {
+          "label": "CCNA 1 v7.0 Mid-Term (rev C) — Packet Tracer exam file",
+          "type": "Packet Tracer exam activity (.pka)",
+          "size": "495 KB",
+          "date": "2026-10-12",
+          "source": "TECH 65 midterm",
+          "path": "/public/documents/tech-65/quizzes/ccna-1v7-midterm-rev-c.pka"
         }
       ]
     },

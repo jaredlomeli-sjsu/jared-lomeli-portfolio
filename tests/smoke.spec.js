@@ -453,7 +453,7 @@ test.describe("TECH 60 labs collection (/semester-3-technical-labs)", () => {
     );
     // Labs 0, 1, 2, 4, and 6 live in this card — no standalone TECH 60 lab cards remain
     const dl = t60.locator("button.download-item--view");
-    await expect(dl).toHaveCount(5);
+    await expect(dl).toHaveCount(6);
     await expect(t60.locator("a.download-item")).toHaveCount(0);
     for (const btn of await dl.all()) {
       await expectViewItemOpensPdf(
@@ -522,7 +522,7 @@ test.describe("collection cards (/semester-3-technical-assignments)", () => {
     const qz = page.locator("#hl-hl-tech65-quizzes-assessments-collection");
     await expect(qz).toHaveClass(/highlight-card--collection/);
     const qzFiles = qz.locator("a.download-item");
-    await expect(qzFiles).toHaveCount(4);
+    await expect(qzFiles).toHaveCount(5);
     await expect(qz.locator("button.download-item--view")).toHaveCount(2);
     for (const a of await qzFiles.all()) {
       const href = await a.getAttribute("href");
@@ -562,13 +562,13 @@ test.describe("collection cards (/semester-3-technical-assignments)", () => {
     const t15 = page.locator("#hl-hl-2026-tech15-assignments");
     await expect(t15).toHaveClass(/highlight-card--collection/);
     const t15Dl = t15.locator("button.download-item--view");
-    await expect(t15Dl).toHaveCount(7);
+    await expect(t15Dl).toHaveCount(8);
     await expect(t15.locator("a.download-item")).toHaveCount(0);
     for (const btn of await t15Dl.all()) {
       await expectViewItemOpensPdf(
         page,
         btn,
-        /^\/public\/documents\/tech-15\/assignment-[123468]-.+\.pdf$/,
+        /^\/public\/documents\/tech-15\/assignment-[1234678]-.+\.pdf$/,
       );
     }
   });
