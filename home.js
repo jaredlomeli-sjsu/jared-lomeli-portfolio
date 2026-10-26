@@ -117,11 +117,11 @@ const FEATURED_PROJECTS = [
       "Segmented 3-VLAN enterprise network with AAA, IDS, a honeypot, and a site-to-site IPSec VPN.",
   },
   {
-    id: "hl-2026-nets-pihole-dns-adblocking",
-    page: "/educational-nets",
+    id: "hl-2026-cisco-home-lab",
+    page: "/projects",
     tag: "Homelab",
     blurb:
-      "Network-wide DNS ad-blocking on a headless Raspberry Pi, with 4,000+ queries blocked.",
+      "Physical Cisco lab: a 1941 router and Catalyst 2960 switch, configured by hand with SSHv2-only management.",
   },
 ];
 

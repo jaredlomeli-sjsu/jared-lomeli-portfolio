@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "version": "1.0.0",
-  "lastUpdated": "2026-10-13",
+  "lastUpdated": "2026-10-26",
   "_dateNote": "An item's `date` is the date of the underlying work itself (when the lab/project/assignment was done or submitted), NOT the date the card was added to this site. Grids are sorted newest-first by this date.",
   "highlights": [
     {
@@ -1082,7 +1082,7 @@
       "pinned": true,
       "summary": "A running collection of every circuit-analysis lab from TECH 60 — Introduction to Electronics. Each lab is checked three ways — hand calculation, Multisim simulation, and a physical breadboard build — and the report opens right here on the page. This one card holds all of the class's labs — past, current, and future — instead of a separate card for each lab.",
       "metrics": [
-        "6 labs so far — Lab 0 (resistor color-code decoding + DMM verification), Lab 1 (LED circuit & Kirchhoff's Voltage Law), Lab 2 (3-resistor series circuit, Ohm's Law & KVL), Lab 4 (voltage-divider rule & loading effects), Lab 6 (parallel circuit, Current Divider Rule & Kirchhoff's Current Law), and Lab 7 (combined series/parallel circuit tying Ohm's Law, KVL, KCL and both divider rules together)",
+        "7 labs so far — Lab 0 (resistor color-code decoding + DMM verification), Lab 1 (LED circuit & Kirchhoff's Voltage Law), Lab 2 (3-resistor series circuit, Ohm's Law & KVL), Lab 4 (voltage-divider rule & loading effects), Lab 6 (parallel circuit, Current Divider Rule & Kirchhoff's Current Law), Lab 7 (combined series/parallel circuit tying Ohm's Law, KVL, KCL and both divider rules together), and Lab 8 (an unbalanced Wheatstone bridge on a 9 V supply, with a hand-calculated V_OUT of 0.932 V compared against Multisim and a breadboard, both unloaded and with a 10 kΩ load)",
         "Every lab cross-checked three ways — hand calculation, Multisim simulation, and a physical breadboard build — comparing predicted vs. measured error",
         "Grows as later modules add more TECH 60 labs"
       ],
@@ -1130,6 +1130,13 @@
           "size": "1.6 MB",
           "date": "2026-10-14",
           "path": "/public/documents/tech-60/lab-7.pdf"
+        },
+        {
+          "label": "Lab 8 — Unbalanced Wheatstone Bridge (Hand Calculations, Multisim & Breadboard)",
+          "type": "PDF",
+          "size": "1.2 MB",
+          "date": "2026-10-21",
+          "path": "/public/documents/tech-60/lab-8.pdf"
         }
       ],
       "links": {},
@@ -1602,8 +1609,8 @@
       "pinned": true,
       "summary": "A running archive of every Cisco Packet Tracer activity (.pka) and network (.pkt) file from TECH 65 — Introduction to Networks. Download any file and open it in Packet Tracer. This one card holds the Packet Tracer activity files for the class — past, current, and future — so labs and assignments that use Packet Tracer link back here for their files instead of carrying their own copies. Skills tests and quizzes live in their own collection card.",
       "metrics": [
-        "27 files — 1 Packet Tracer network (.pkt) file plus 26 Packet Tracer activities (.pka), spanning Modules 1–10, plus 1 PDF worksheet (the 9.1.3 assignment sheet, listed right beside the 9.1.3 files)",
-        "Covers navigating the Cisco IOS, initial switch and router configuration, basic connectivity, end-device setup, the TCP/IP & OSI models in action, a wired-and-wireless LAN, physical-layer exploration and connection in physical mode, identifying MAC/IP addresses and reading the ARP table, connecting a router to a LAN, troubleshooting default-gateway issues, and building a switch-and-router network in physical mode",
+        "31 files — 2 Packet Tracer networks (.pkt) plus 28 Packet Tracer activities (.pka), spanning Modules 1–11, plus 2 PDF worksheets (the 9.1.3 and 11.5.5 assignment sheets, each listed right beside its Packet Tracer file)",
+        "Covers navigating the Cisco IOS, initial switch and router configuration, basic connectivity, end-device setup, the TCP/IP & OSI models in action, a wired-and-wireless LAN, physical-layer exploration and connection in physical mode, identifying MAC/IP addresses and reading the ARP table, connecting a router to a LAN, troubleshooting default-gateway issues, and building a switch-and-router network in physical mode, subnetting an IPv4 network from a host-count requirement, a multi-subnet subnetting scenario, and a hands-on LAN/WAN build with two routers and two switches",
         "Grows as later modules add more Packet Tracer files"
       ],
       "tags": ["Cisco Packet Tracer", "TECH 65", "Networking"],
@@ -1831,6 +1838,37 @@
           "date": "2026-10-05",
           "source": "NetAcad",
           "path": "/public/documents/tech-65/packet-tracer/10.4.4-build-a-switch-and-router-network-physical-mode.pka"
+        },
+        {
+          "label": "11.5.5 — Subnet an IPv4 Network",
+          "type": "Packet Tracer activity (.pka)",
+          "size": "324 KB",
+          "date": "2026-10-20",
+          "source": "NetAcad",
+          "path": "/public/documents/tech-65/packet-tracer/11.5.5-subnet-an-ipv4-network.pka"
+        },
+        {
+          "label": "11.5.5 — Subnet an IPv4 Network — worksheet (addressing table and subnetting scheme for the 11.5.5 file)",
+          "type": "PDF",
+          "size": "196 KB",
+          "date": "2026-10-20",
+          "path": "/public/documents/tech-65/packet-tracer/11.5.5-subnet-an-ipv4-network-worksheet.pdf"
+        },
+        {
+          "label": "11.7.5 — Subnetting Scenario",
+          "type": "Packet Tracer activity (.pka)",
+          "size": "750 KB",
+          "date": "2026-10-21",
+          "source": "NetAcad",
+          "path": "/public/documents/tech-65/packet-tracer/11.7.5-subnetting-scenario.pka"
+        },
+        {
+          "label": "Hands-on Lab — Build a LAN/WAN Network (two routers, two switches)",
+          "type": "Packet Tracer network (.pkt)",
+          "size": "54 KB",
+          "date": "2026-10-19",
+          "source": "NetAcad",
+          "path": "/public/documents/tech-65/packet-tracer/lan-wan-network-hands-on-lab.pkt"
         }
       ],
       "links": {},
@@ -1872,9 +1910,9 @@
       "semester": "Semester 3 (San José State University)",
       "course": "TECH 30 — Introduction to Python Programming",
       "courseCode": "TECH 30",
-      "summary": "A running set of the graded Python activities from TECH 30 — Introduction to Python Programming, added as the course goes on. Download the source for any activity.",
+      "summary": "A running set of the graded Python activities and assignments from TECH 30 — Introduction to Python Programming, added as the course goes on. Download the source for any item.",
       "metrics": [
-        "6 activities so far (1–5 and 7) — arithmetic & I/O, built-in collection types, conditional logic, loop-based accumulation, string counting & splitting, and functions with dictionary counting and a book-store purchase loop"
+        "8 activities and 1 assignment so far (Activities 1–5 and 7–9, plus Assignment 1) — arithmetic & I/O, built-in collection types, conditional logic, loop-based accumulation, string counting & splitting, functions with dictionary counting and a book-store purchase loop, functions with input checking, graph topologies built with NetworkX, and a multi-problem assignment covering string reversal, leap years, list slicing, an overtime-pay function with input validation, set symmetric difference, and connection-log analysis with dictionaries"
       ],
       "tags": ["Python", "TECH 30", "Programming"],
       "media": null,
@@ -1924,6 +1962,34 @@
           "size": "1 KB",
           "date": "2026-10-01",
           "path": "/public/documents/tech-30/activity-7.py"
+        },
+        {
+          "label": "Activity 8 — Functions (greeting & discount)",
+          "type": "Python source (.py)",
+          "size": "608 B",
+          "date": "2026-10-08",
+          "path": "/public/documents/tech-30/activity-8.py"
+        },
+        {
+          "label": "Activity 8 — program run output (screenshot)",
+          "type": "Screenshot (.png)",
+          "size": "140 KB",
+          "date": "2026-10-08",
+          "path": "/public/documents/tech-30/activity-8-output.png"
+        },
+        {
+          "label": "Assignment 1 — Python Fundamentals (loops, functions, lists, sets & dictionaries)",
+          "type": "Python source (.py)",
+          "size": "5 KB",
+          "date": "2026-10-16",
+          "path": "/public/documents/tech-30/assignment-1.py"
+        },
+        {
+          "label": "Activity 9 — Graph Topologies with NetworkX (mesh & star)",
+          "type": "Python source (.py)",
+          "size": "503 B",
+          "date": "2026-10-20",
+          "path": "/public/documents/tech-30/activity-9.py"
         }
       ]
     },
@@ -1942,7 +2008,7 @@
       "pinned": true,
       "summary": "A running set of the written assignments from TECH 15 — Careers in Engineering Technology, a seminar on career planning, résumés, internships, and industry guest speakers. Added as the course goes on.",
       "metrics": [
-        "8 assignments so far — an introductory slideshow, a career-services résumé/ATS session summary, a study-abroad guest-speaker summary, a financial-aid & scholarships guest-speaker summary, a NETS / SME / augmented-reality guest-speaker summary, an Archer Aviation guest-speaker summary, a time-management summary with a weekly time log and daily targets, and a manufacturing-engineer guest-speaker summary"
+        "9 assignments so far — an introductory slideshow, a career-services résumé/ATS session summary, a study-abroad guest-speaker summary, a financial-aid & scholarships guest-speaker summary, a NETS / SME / augmented-reality guest-speaker summary, an Archer Aviation guest-speaker summary, a time-management summary with a weekly time log and daily targets, a manufacturing-engineer guest-speaker summary, and a Siemens guest-speaker summary"
       ],
       "tags": ["Career Development", "TECH 15", "Professional Writing"],
       "media": null,
@@ -2002,6 +2068,13 @@
           "size": "47 KB",
           "date": "2026-10-08",
           "path": "/public/documents/tech-15/assignment-8-manufacturing-engineer-speaker-summary.pdf"
+        },
+        {
+          "label": "Assignment 10 — Siemens Guest Speaker Summary",
+          "type": "PDF",
+          "size": "42 KB",
+          "date": "2026-10-21",
+          "path": "/public/documents/tech-15/assignment-10-siemens-speaker-summary.pdf"
         }
       ],
       "links": {},
@@ -2961,6 +3034,167 @@
         }
       ],
       "links": {},
+      "featured": false
+    },
+    {
+      "id": "hl-tech65-routing-subnetting-labs",
+      "title": "TECH 65 — Routing & IP Addressing Labs",
+      "category": "Coursework",
+      "subcategory": "Semester 3",
+      "subsubcategory": "Technical",
+      "subsubsubcategory": "Labs",
+      "date": null,
+      "semester": "Semester 3 (San José State University)",
+      "course": "TECH 65 — Introduction to Networks",
+      "courseCode": "TECH 65",
+      "kind": "collection",
+      "pinned": true,
+      "summary": "A running collection of the router-configuration and IPv4-addressing labs from TECH 65 — Introduction to Networks: building and configuring a small routed LAN/WAN from scratch, and calculating IPv4 subnets by hand. This one card holds all of the class's routing and addressing labs — past, current, and future — instead of a separate card for each lab.",
+      "metrics": [
+        "2 labs so far — the comprehensive LAN/WAN build (cable and configure two routers and two switches across three subnets, then verify connectivity and answer device-information questions) and 11.6.6 (calculate network, broadcast, and host ranges from an IPv4 address and subnet mask)",
+        "Skills: Cisco IOS router and switch configuration, IPv4 addressing tables, default gateways, subnet-mask and prefix-length analysis, verifying connectivity with ping and show commands",
+        "Grows as later modules add more routing and addressing labs"
+      ],
+      "tags": [
+        "Networking",
+        "TECH 65",
+        "Cisco IOS",
+        "Routing",
+        "IPv4 Subnetting"
+      ],
+      "media": null,
+      "downloads": [
+        {
+          "label": "Lab — Build a LAN/WAN Network (the Packet Tracer file is in the Packet Tracer collection)",
+          "type": "PDF",
+          "size": "217 KB",
+          "date": "2026-10-19",
+          "source": "NetAcad",
+          "path": "/public/documents/tech-65/routing-subnetting/lab-9-build-a-lan-wan-network.pdf"
+        },
+        {
+          "label": "Lab 11.6.6 — Calculate IPv4 Subnets",
+          "type": "PDF",
+          "size": "134 KB",
+          "date": "2026-10-20",
+          "source": "NetAcad",
+          "path": "/public/documents/tech-65/routing-subnetting/11.6.6-calculate-ipv4-subnets.pdf"
+        }
+      ],
+      "links": {},
+      "featured": false
+    },
+    {
+      "id": "hl-2026-cisco-home-lab",
+      "title": "Cisco Home Lab — Router & Switch Build (Ongoing)",
+      "category": "Project",
+      "date": "2026-10-17",
+      "semester": null,
+      "course": "TECH 65 — Introduction to Networks (applied)",
+      "summary": "A physical Cisco home lab I'm building and configuring by hand to apply what I learned in TECH 65: a Cisco 1941 router with two routed /24 networks and Catalyst 2960 switches, managed over SSH and console. This is a living card — it will be updated as the lab grows (second switch, routing and VLAN design, and the follow-on TECH 66 and TECH 68 work).",
+      "metrics": [
+        "Cisco 1941 router (R1) with two routed networks — 192.168.0.0/24 and 192.168.1.0/24 — and SSHv2 plus console access",
+        "Catalyst 2960 switch (S1) configured with a management SVI, default gateway, hostname and domain, login banner, and SSHv2-only access (RSA 2048-bit key), with the HTTP/HTTPS servers and Smart Install turned off and leftover default accounts and line passwords removed",
+        "Troubleshot a link that showed up/up but passed no traffic by checking ARP tables, interface counters, the cable type and the Windows firewall until the cause was isolated",
+        "Next: bring up the second switch (S2), finish S1 port hardening, and decide the routing and VLAN design"
+      ],
+      "tags": [
+        "Cisco IOS",
+        "Home Lab",
+        "Networking",
+        "SSH",
+        "Catalyst 2960",
+        "Cisco 1941",
+        "TECH 65"
+      ],
+      "media": null,
+      "links": {},
+      "featured": false
+    },
+    {
+      "id": "hl-2026-nets-events-collection",
+      "title": "NETS Events — Verkada, King of the Hill & More",
+      "category": "Extra Curricular",
+      "subcategory": "Educational",
+      "subsubcategory": "NETS",
+      "date": null,
+      "starred": false,
+      "semester": null,
+      "course": null,
+      "kind": "collection",
+      "pinned": true,
+      "summary": "A running log of the events I attend through the SJSU Network Engineering Technology Society (NETS). Fall 2026 so far: a live Verkada talk at SJSU on their access-control and camera platform, a Verkada office tour with NETS, and NETS' King of the Hill cybersecurity challenge. This card is updated as more events happen.",
+      "metrics": [
+        "King of the Hill (Oct 16, 2026): teams compete to take control of a vulnerable Linux machine by placing a Python-scripted bot on it, with a live scoreboard tracking points — no prior pentesting experience going in, finished 2nd of about 10 NETS members",
+        "Verkada talk (Oct 15, 2026): a live walkthrough of Verkada's access-control and camera platform, including the admin dashboard",
+        "Verkada office tour with NETS (Oct 22, 2026)"
+      ],
+      "tags": [
+        "NETS",
+        "Networking",
+        "Cybersecurity",
+        "Events",
+        "King of the Hill",
+        "Verkada"
+      ],
+      "media": null,
+      "links": {},
+      "featured": false,
+      "downloads": [
+        {
+          "label": "King of the Hill — event flyer",
+          "type": "PDF",
+          "size": "179 KB",
+          "date": "2026-10-16",
+          "source": "NETS",
+          "path": "/public/documents/nets/king-of-the-hill-flyer.pdf"
+        },
+        {
+          "label": "King of the Hill — my bot's terminal output (IPs and hostnames blurred)",
+          "type": "PDF",
+          "size": "166 KB",
+          "date": "2026-10-16",
+          "source": "NETS",
+          "path": "/public/documents/nets/king-of-the-hill-bot-terminal-redacted.pdf"
+        },
+        {
+          "label": "King of the Hill — player profile (rank 2)",
+          "type": "PDF",
+          "size": "70 KB",
+          "date": "2026-10-16",
+          "source": "NETS",
+          "path": "/public/documents/nets/king-of-the-hill-player-profile.pdf"
+        },
+        {
+          "label": "Verkada office tour with NETS",
+          "type": "PDF",
+          "size": "198 KB",
+          "date": "2026-10-22",
+          "source": "NETS",
+          "path": "/public/documents/nets/verkada-office-tour.pdf"
+        }
+      ]
+    },
+    {
+      "id": "hl-2026-micron-etch-career-event",
+      "title": "Micron ETCH — Careers That Power Micron (Virtual Event)",
+      "category": "Extra Curricular",
+      "subcategory": "Educational",
+      "subsubcategory": "Extra",
+      "date": "2026-10-16",
+      "starred": false,
+      "semester": null,
+      "course": null,
+      "summary": "Attended Micron Technology's virtual ETCH event, \"From Innovation to Execution — Careers That Power Micron,\" on my own outside of SJSU. It was more of a look at career paths into Micron than a seminar with person-to-person networking, and a useful way to see how engineers and managers ended up where they are.",
+      "metrics": [
+        "Virtual event on October 16, 2026 (2:00–3:30 PM EDT)",
+        "Focus: career paths into Micron and the semiconductor industry, told through speakers' own career stories"
+      ],
+      "tags": ["Career Development", "Semiconductors", "Micron", "Events"],
+      "media": null,
+      "links": {
+        "pdfReport": "/public/documents/events/micron-etch-event-page.pdf"
+      },
       "featured": false
     }
   ]
