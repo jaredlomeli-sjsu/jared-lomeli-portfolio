@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "version": "1.0.0",
-  "lastUpdated": "2026-10-26",
+  "lastUpdated": "2026-10-29",
   "_dateNote": "An item's `date` is the date of the underlying work itself (when the lab/project/assignment was done or submitted), NOT the date the card was added to this site. Grids are sorted newest-first by this date.",
   "highlights": [
     {
@@ -1082,7 +1082,7 @@
       "pinned": true,
       "summary": "A running collection of every circuit-analysis lab from TECH 60 — Introduction to Electronics. Each lab is checked three ways — hand calculation, Multisim simulation, and a physical breadboard build — and the report opens right here on the page. This one card holds all of the class's labs — past, current, and future — instead of a separate card for each lab.",
       "metrics": [
-        "7 labs so far — Lab 0 (resistor color-code decoding + DMM verification), Lab 1 (LED circuit & Kirchhoff's Voltage Law), Lab 2 (3-resistor series circuit, Ohm's Law & KVL), Lab 4 (voltage-divider rule & loading effects), Lab 6 (parallel circuit, Current Divider Rule & Kirchhoff's Current Law), Lab 7 (combined series/parallel circuit tying Ohm's Law, KVL, KCL and both divider rules together), and Lab 8 (an unbalanced Wheatstone bridge on a 9 V supply, with a hand-calculated V_OUT of 0.932 V compared against Multisim and a breadboard, both unloaded and with a 10 kΩ load)",
+        "8 labs so far — Lab 0 (resistor color-code decoding + DMM verification), Lab 1 (LED circuit & Kirchhoff's Voltage Law), Lab 2 (3-resistor series circuit, Ohm's Law & KVL), Lab 4 (voltage-divider rule & loading effects), Lab 6 (parallel circuit, Current Divider Rule & Kirchhoff's Current Law), Lab 7 (combined series/parallel circuit tying Ohm's Law, KVL, KCL and both divider rules together), Lab 8 (an unbalanced Wheatstone bridge on a 9 V supply, with a hand-calculated V_OUT of 0.932 V compared against Multisim and a breadboard, both unloaded and with a 10 kΩ load), and Lab 9 (a balanced Wheatstone bridge — the potentiometer set to 903.85 Ω so V_A = V_B = 3.079 V and V_OUT = 0 V, checked by hand, in Multisim and on a breadboard, unloaded and with a 10 kΩ load)",
         "Every lab cross-checked three ways — hand calculation, Multisim simulation, and a physical breadboard build — comparing predicted vs. measured error",
         "Grows as later modules add more TECH 60 labs"
       ],
@@ -1137,6 +1137,13 @@
           "size": "1.2 MB",
           "date": "2026-10-21",
           "path": "/public/documents/tech-60/lab-8.pdf"
+        },
+        {
+          "label": "Lab 9 — Balanced Wheatstone Bridge (Hand Calculations, Multisim & Breadboard)",
+          "type": "PDF",
+          "size": "1.4 MB",
+          "date": "2026-10-28",
+          "path": "/public/documents/tech-60/lab-9.pdf"
         }
       ],
       "links": {},
@@ -1609,8 +1616,8 @@
       "pinned": true,
       "summary": "A running archive of every Cisco Packet Tracer activity (.pka) and network (.pkt) file from TECH 65 — Introduction to Networks. Download any file and open it in Packet Tracer. This one card holds the Packet Tracer activity files for the class — past, current, and future — so labs and assignments that use Packet Tracer link back here for their files instead of carrying their own copies. Skills tests and quizzes live in their own collection card.",
       "metrics": [
-        "31 files — 2 Packet Tracer networks (.pkt) plus 28 Packet Tracer activities (.pka), spanning Modules 1–11, plus 2 PDF worksheets (the 9.1.3 and 11.5.5 assignment sheets, each listed right beside its Packet Tracer file)",
-        "Covers navigating the Cisco IOS, initial switch and router configuration, basic connectivity, end-device setup, the TCP/IP & OSI models in action, a wired-and-wireless LAN, physical-layer exploration and connection in physical mode, identifying MAC/IP addresses and reading the ARP table, connecting a router to a LAN, troubleshooting default-gateway issues, and building a switch-and-router network in physical mode, subnetting an IPv4 network from a host-count requirement, a multi-subnet subnetting scenario, and a hands-on LAN/WAN build with two routers and two switches",
+        "33 files — 2 Packet Tracer networks (.pkt) plus 30 Packet Tracer activities (.pka), spanning Modules 1–11, plus 2 PDF worksheets (the 9.1.3 and 11.5.5 assignment sheets, each listed right beside its Packet Tracer file)",
+        "Covers navigating the Cisco IOS, initial switch and router configuration, basic connectivity, end-device setup, the TCP/IP & OSI models in action, a wired-and-wireless LAN, physical-layer exploration and connection in physical mode, identifying MAC/IP addresses and reading the ARP table, connecting a router to a LAN, troubleshooting default-gateway issues, and building a switch-and-router network in physical mode, subnetting an IPv4 network from a host-count requirement, a multi-subnet subnetting scenario, VLSM design and implementation (practice and graded), and a hands-on LAN/WAN build with two routers and two switches",
         "Grows as later modules add more Packet Tracer files"
       ],
       "tags": ["Cisco Packet Tracer", "TECH 65", "Networking"],
@@ -1861,6 +1868,22 @@
           "date": "2026-10-21",
           "source": "NetAcad",
           "path": "/public/documents/tech-65/packet-tracer/11.7.5-subnetting-scenario.pka"
+        },
+        {
+          "label": "11.9.3 — VLSM Design and Implementation Practice",
+          "type": "Packet Tracer activity (.pka)",
+          "size": "396 KB",
+          "date": "2026-10-26",
+          "source": "NetAcad",
+          "path": "/public/documents/tech-65/packet-tracer/11.9.3-vlsm-design-and-implementation-practice.pka"
+        },
+        {
+          "label": "11.10.1 — Design and Implement a VLSM Addressing Scheme",
+          "type": "Packet Tracer activity (.pka)",
+          "size": "754 KB",
+          "date": "2026-10-28",
+          "source": "NetAcad",
+          "path": "/public/documents/tech-65/packet-tracer/11.10.1-design-and-implement-a-vlsm-addressing-scheme.pka"
         },
         {
           "label": "Hands-on Lab — Build a LAN/WAN Network (two routers, two switches)",

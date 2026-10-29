@@ -454,9 +454,9 @@ test.describe("TECH 60 labs collection (/semester-3-technical-labs)", () => {
     await expect(t60.locator(".highlight-card-collection-badge")).toHaveText(
       "Ongoing collection",
     );
-    // Labs 0, 1, 2, 4, 6, 7, and 8 live in this card — no standalone TECH 60 lab cards remain
+    // Labs 0, 1, 2, 4, 6, 7, 8, and 9 live in this card — no standalone TECH 60 lab cards remain
     const dl = t60.locator("button.download-item--view");
-    await expect(dl).toHaveCount(7);
+    await expect(dl).toHaveCount(8);
     await expect(t60.locator("a.download-item")).toHaveCount(0);
     for (const btn of await dl.all()) {
       await expectViewItemOpensPdf(
@@ -493,7 +493,7 @@ test.describe("collection cards (/semester-3-technical-assignments)", () => {
       "Ongoing collection",
     );
     const ptDl = pt.locator("a.download-item");
-    await expect(ptDl).toHaveCount(30);
+    await expect(ptDl).toHaveCount(32);
     for (const a of await ptDl.all()) {
       await expect(a).toHaveAttribute("download", "");
       const href = await a.getAttribute("href");
