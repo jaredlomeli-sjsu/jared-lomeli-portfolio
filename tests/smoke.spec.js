@@ -454,9 +454,9 @@ test.describe("TECH 60 labs collection (/semester-3-technical-labs)", () => {
     await expect(t60.locator(".highlight-card-collection-badge")).toHaveText(
       "Ongoing collection",
     );
-    // Labs 0, 1, 2, 4, 6, 7, 8, and 9 live in this card — no standalone TECH 60 lab cards remain
+    // Labs 0, 1, 2, 4, 6, 7, 8, 9, and 10 live in this card — no standalone TECH 60 lab cards remain
     const dl = t60.locator("button.download-item--view");
-    await expect(dl).toHaveCount(8);
+    await expect(dl).toHaveCount(9);
     await expect(t60.locator("a.download-item")).toHaveCount(0);
     for (const btn of await dl.all()) {
       await expectViewItemOpensPdf(
@@ -493,7 +493,7 @@ test.describe("collection cards (/semester-3-technical-assignments)", () => {
       "Ongoing collection",
     );
     const ptDl = pt.locator("a.download-item");
-    await expect(ptDl).toHaveCount(32);
+    await expect(ptDl).toHaveCount(36);
     for (const a of await ptDl.all()) {
       await expect(a).toHaveAttribute("download", "");
       const href = await a.getAttribute("href");
@@ -507,7 +507,7 @@ test.describe("collection cards (/semester-3-technical-assignments)", () => {
     // worksheet PDFs (9.1.3 and 11.5.5) sit right after their .pka files and open in-page
     const items = pt.locator(".download-item");
     const wsAll = pt.locator("button.download-item--view");
-    await expect(wsAll).toHaveCount(2);
+    await expect(wsAll).toHaveCount(3);
     const ws = wsAll.filter({ hasText: "9.1.3" });
     await expect(ws).toHaveCount(1);
     await expect(wsAll.filter({ hasText: "11.5.5" })).toHaveCount(1);
@@ -515,6 +515,12 @@ test.describe("collection cards (/semester-3-technical-assignments)", () => {
       page,
       ws,
       /^\/public\/documents\/tech-65\/packet-tracer\/9\.1\.3-.+-worksheet\.pdf$/,
+    );
+    await expect(wsAll.filter({ hasText: "13.2.7" })).toHaveCount(1);
+    await expectViewItemOpensPdf(
+      page,
+      wsAll.filter({ hasText: "13.2.7" }),
+      /^\/public\/documents\/tech-65\/packet-tracer\/13\.2\.7-.+-worksheet\.pdf$/,
     );
     await expectViewItemOpensPdf(
       page,
@@ -553,9 +559,13 @@ test.describe("collection cards (/semester-3-technical-assignments)", () => {
     const py = page.locator("#hl-hl-2026-tech30-python-activities");
     await expect(py).toHaveClass(/highlight-card--collection/);
     const pyDl = py.locator("button.download-item--view");
-    await expect(pyDl).toHaveCount(10); // 9 .py sources + the Activity 8 output screenshot
+    await expect(pyDl).toHaveCount(13); // 10 .py sources + the Activity 8 output screenshot + 2 Activity 9 / OS-module PDFs
     await expect(py.locator("a.download-item")).toHaveCount(0);
     for (const btn of await pyDl.all()) {
+      if (/\.pdf$/i.test((await btn.getAttribute("data-path")) || "") || /code and output screenshots|true\/false answers/.test(await btn.innerText())) {
+        await expectViewItemOpensPdf(page, btn, /^\/public\/documents\/tech-30\/.+\.pdf$/);
+        continue;
+      }
       if ((await btn.innerText()).includes("screenshot")) {
         await btn.click();
         await expect(page.locator("#lightbox")).toBeVisible();
@@ -579,13 +589,13 @@ test.describe("collection cards (/semester-3-technical-assignments)", () => {
     const t15 = page.locator("#hl-hl-2026-tech15-assignments");
     await expect(t15).toHaveClass(/highlight-card--collection/);
     const t15Dl = t15.locator("button.download-item--view");
-    await expect(t15Dl).toHaveCount(9);
+    await expect(t15Dl).toHaveCount(11);
     await expect(t15.locator("a.download-item")).toHaveCount(0);
     for (const btn of await t15Dl.all()) {
       await expectViewItemOpensPdf(
         page,
         btn,
-        /^\/public\/documents\/tech-15\/assignment-(?:[1234678]|10)-.+\.pdf$/,
+        /^\/public\/documents\/tech-15\/(?:assignment-(?:[1234678]|1[01])-.+|project-management-assignment)\.pdf$/,
       );
     }
   });

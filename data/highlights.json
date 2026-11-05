@@ -1082,7 +1082,7 @@
       "pinned": true,
       "summary": "A running collection of every circuit-analysis lab from TECH 60 — Introduction to Electronics. Each lab is checked three ways — hand calculation, Multisim simulation, and a physical breadboard build — and the report opens right here on the page. This one card holds all of the class's labs — past, current, and future — instead of a separate card for each lab.",
       "metrics": [
-        "8 labs so far — Lab 0 (resistor color-code decoding + DMM verification), Lab 1 (LED circuit & Kirchhoff's Voltage Law), Lab 2 (3-resistor series circuit, Ohm's Law & KVL), Lab 4 (voltage-divider rule & loading effects), Lab 6 (parallel circuit, Current Divider Rule & Kirchhoff's Current Law), Lab 7 (combined series/parallel circuit tying Ohm's Law, KVL, KCL and both divider rules together), Lab 8 (an unbalanced Wheatstone bridge on a 9 V supply, with a hand-calculated V_OUT of 0.932 V compared against Multisim and a breadboard, both unloaded and with a 10 kΩ load), and Lab 9 (a balanced Wheatstone bridge — the potentiometer set to 903.85 Ω so V_A = V_B = 3.079 V and V_OUT = 0 V, checked by hand, in Multisim and on a breadboard, unloaded and with a 10 kΩ load)",
+        "9 labs so far — Lab 0 (resistor color-code decoding + DMM verification), Lab 1 (LED circuit & Kirchhoff's Voltage Law), Lab 2 (3-resistor series circuit, Ohm's Law & KVL), Lab 4 (voltage-divider rule & loading effects), Lab 6 (parallel circuit, Current Divider Rule & Kirchhoff's Current Law), Lab 7 (combined series/parallel circuit tying Ohm's Law, KVL, KCL and both divider rules together), Lab 8 (an unbalanced Wheatstone bridge on a 9 V supply, with a hand-calculated V_OUT of 0.932 V compared against Multisim and a breadboard, both unloaded and with a 10 kΩ load), Lab 9 (a balanced Wheatstone bridge — the potentiometer set to 903.85 Ω so V_A = V_B = 3.079 V and V_OUT = 0 V, checked by hand, in Multisim and on a breadboard, unloaded and with a 10 kΩ load), and Lab 10 (the Superposition Theorem — the voltage across R2 found with each source acting alone, 5.107 V from the 12 V source and 1.106 V from the 5 V source, which add to the 6.213 V of the full circuit; the breadboard measured 6.188 V, a 0.53% error)",
         "Every lab cross-checked three ways — hand calculation, Multisim simulation, and a physical breadboard build — comparing predicted vs. measured error",
         "Grows as later modules add more TECH 60 labs"
       ],
@@ -1144,6 +1144,13 @@
           "size": "1.4 MB",
           "date": "2026-10-28",
           "path": "/public/documents/tech-60/lab-9.pdf"
+        },
+        {
+          "label": "Lab 10 — Superposition Theorem (Hand Calculations, Multisim & Breadboard)",
+          "type": "PDF",
+          "size": "2.2 MB",
+          "date": "2026-11-04",
+          "path": "/public/documents/tech-60/lab-10.pdf"
         }
       ],
       "links": {},
@@ -1616,8 +1623,8 @@
       "pinned": true,
       "summary": "A running archive of every Cisco Packet Tracer activity (.pka) and network (.pkt) file from TECH 65 — Introduction to Networks. Download any file and open it in Packet Tracer. This one card holds the Packet Tracer activity files for the class — past, current, and future — so labs and assignments that use Packet Tracer link back here for their files instead of carrying their own copies. Skills tests and quizzes live in their own collection card.",
       "metrics": [
-        "33 files — 2 Packet Tracer networks (.pkt) plus 30 Packet Tracer activities (.pka), spanning Modules 1–11, plus 2 PDF worksheets (the 9.1.3 and 11.5.5 assignment sheets, each listed right beside its Packet Tracer file)",
-        "Covers navigating the Cisco IOS, initial switch and router configuration, basic connectivity, end-device setup, the TCP/IP & OSI models in action, a wired-and-wireless LAN, physical-layer exploration and connection in physical mode, identifying MAC/IP addresses and reading the ARP table, connecting a router to a LAN, troubleshooting default-gateway issues, and building a switch-and-router network in physical mode, subnetting an IPv4 network from a host-count requirement, a multi-subnet subnetting scenario, VLSM design and implementation (practice and graded), and a hands-on LAN/WAN build with two routers and two switches",
+        "39 files — 2 Packet Tracer networks (.pkt) plus 34 Packet Tracer activities (.pka), spanning Modules 1–13, plus 3 PDF worksheets (the 9.1.3, 11.5.5 and 13.2.7 assignment sheets, each listed right beside its Packet Tracer file)",
+        "Covers navigating the Cisco IOS, initial switch and router configuration, basic connectivity, end-device setup, the TCP/IP & OSI models in action, a wired-and-wireless LAN, physical-layer exploration and connection in physical mode, identifying MAC/IP addresses and reading the ARP table, connecting a router to a LAN, troubleshooting default-gateway issues, and building a switch-and-router network in physical mode, subnetting an IPv4 network from a host-count requirement, a multi-subnet subnetting scenario, VLSM design and implementation (practice and graded), IPv6 addressing and subnetted IPv6 addressing schemes, testing connectivity with ping, traceroute and ICMP, and a hands-on LAN/WAN build with two routers and two switches",
         "Grows as later modules add more Packet Tracer files"
       ],
       "tags": ["Cisco Packet Tracer", "TECH 65", "Networking"],
@@ -1886,6 +1893,45 @@
           "path": "/public/documents/tech-65/packet-tracer/11.10.1-design-and-implement-a-vlsm-addressing-scheme.pka"
         },
         {
+          "label": "12.6.6 — Configure IPv6 Addressing",
+          "type": "Packet Tracer activity (.pka)",
+          "size": "767 KB",
+          "date": "2026-11-02",
+          "source": "NetAcad",
+          "path": "/public/documents/tech-65/packet-tracer/12.6.6-configure-ipv6-addressing.pka"
+        },
+        {
+          "label": "12.9.1 — Implement a Subnetted IPv6 Addressing Scheme",
+          "type": "Packet Tracer activity (.pka)",
+          "size": "380 KB",
+          "date": "2026-11-02",
+          "source": "NetAcad",
+          "path": "/public/documents/tech-65/packet-tracer/12.9.1-implement-a-subnetted-ipv6-addressing-scheme.pka"
+        },
+        {
+          "label": "13.2.7 — Use Ping and Traceroute to Test Network Connectivity",
+          "type": "Packet Tracer activity (.pka)",
+          "size": "808 KB",
+          "date": "2026-11-03",
+          "source": "NetAcad",
+          "path": "/public/documents/tech-65/packet-tracer/13.2.7-use-ping-and-traceroute-to-test-network-connectivity.pka"
+        },
+        {
+          "label": "13.2.7 — Use Ping and Traceroute — worksheet (addressing table and answers for the 13.2.7 file)",
+          "type": "PDF",
+          "size": "393 KB",
+          "date": "2026-11-04",
+          "path": "/public/documents/tech-65/packet-tracer/13.2.7-use-ping-and-traceroute-worksheet.pdf"
+        },
+        {
+          "label": "13.3.1 — Use ICMP to Test and Correct Network Connectivity",
+          "type": "Packet Tracer activity (.pka)",
+          "size": "591 KB",
+          "date": "2026-11-03",
+          "source": "NetAcad",
+          "path": "/public/documents/tech-65/packet-tracer/13.3.1-use-icmp-to-test-and-correct-network-connectivity.pka"
+        },
+        {
           "label": "Hands-on Lab — Build a LAN/WAN Network (two routers, two switches)",
           "type": "Packet Tracer network (.pkt)",
           "size": "54 KB",
@@ -1935,7 +1981,7 @@
       "courseCode": "TECH 30",
       "summary": "A running set of the graded Python activities and assignments from TECH 30 — Introduction to Python Programming, added as the course goes on. Download the source for any item.",
       "metrics": [
-        "8 activities and 1 assignment so far (Activities 1–5 and 7–9, plus Assignment 1) — arithmetic & I/O, built-in collection types, conditional logic, loop-based accumulation, string counting & splitting, functions with dictionary counting and a book-store purchase loop, functions with input checking, graph topologies built with NetworkX, and a multi-problem assignment covering string reversal, leap years, list slicing, an overtime-pay function with input validation, set symmetric difference, and connection-log analysis with dictionaries"
+        "9 activities and 1 assignment so far (Activities 1–5 and 7–9 — Activity 9 has two parts — plus Assignment 1) — arithmetic & I/O, built-in collection types, conditional logic, loop-based accumulation, string counting & splitting, functions with dictionary counting and a book-store purchase loop, functions with input checking, graph topologies built with NetworkX, file handling (writing, reading, and appending text files and reading a file in a loop), the Python OS module (creating directories and pinging a host), and a multi-problem assignment covering string reversal, leap years, list slicing, an overtime-pay function with input validation, set symmetric difference, and connection-log analysis with dictionaries"
       ],
       "tags": ["Python", "TECH 30", "Programming"],
       "media": null,
@@ -2013,6 +2059,27 @@
           "size": "503 B",
           "date": "2026-10-20",
           "path": "/public/documents/tech-30/activity-9.py"
+        },
+        {
+          "label": "Activity 9 — File Handling (write, read, append & looped reads)",
+          "type": "Python source (.py)",
+          "size": "855 B",
+          "date": "2026-10-27",
+          "path": "/public/documents/tech-30/activity-9-file-io.py"
+        },
+        {
+          "label": "Activity 9 — File Handling program: code and output screenshots",
+          "type": "PDF",
+          "size": "221 KB",
+          "date": "2026-10-27",
+          "path": "/public/documents/tech-30/activity-9-file-io-screenshots.pdf"
+        },
+        {
+          "label": "OS Module exercises (directories & ping) and Activity 9 file-handling true/false answers",
+          "type": "PDF",
+          "size": "219 KB",
+          "date": "2026-11-03",
+          "path": "/public/documents/tech-30/os-module-and-activity-9-answers.pdf"
         }
       ]
     },
@@ -2031,7 +2098,7 @@
       "pinned": true,
       "summary": "A running set of the written assignments from TECH 15 — Careers in Engineering Technology, a seminar on career planning, résumés, internships, and industry guest speakers. Added as the course goes on.",
       "metrics": [
-        "9 assignments so far — an introductory slideshow, a career-services résumé/ATS session summary, a study-abroad guest-speaker summary, a financial-aid & scholarships guest-speaker summary, a NETS / SME / augmented-reality guest-speaker summary, an Archer Aviation guest-speaker summary, a time-management summary with a weekly time log and daily targets, a manufacturing-engineer guest-speaker summary, and a Siemens guest-speaker summary"
+        "11 assignments so far — an introductory slideshow, a career-services résumé/ATS session summary, a study-abroad guest-speaker summary, a financial-aid & scholarships guest-speaker summary, a NETS / SME / augmented-reality guest-speaker summary, an Archer Aviation guest-speaker summary, a time-management summary with a weekly time log and daily targets, a manufacturing-engineer guest-speaker summary, a Siemens guest-speaker summary, a project-management summary, and an Opera guest-speaker summary"
       ],
       "tags": ["Career Development", "TECH 15", "Professional Writing"],
       "media": null,
@@ -2098,6 +2165,20 @@
           "size": "42 KB",
           "date": "2026-10-21",
           "path": "/public/documents/tech-15/assignment-10-siemens-speaker-summary.pdf"
+        },
+        {
+          "label": "Project Management Assignment — Summary",
+          "type": "PDF",
+          "size": "36 KB",
+          "date": "2026-10-29",
+          "path": "/public/documents/tech-15/project-management-assignment.pdf"
+        },
+        {
+          "label": "Assignment 11 — Opera Guest Speaker Summary",
+          "type": "PDF",
+          "size": "42 KB",
+          "date": "2026-10-30",
+          "path": "/public/documents/tech-15/assignment-11-opera-speaker-summary.pdf"
         }
       ],
       "links": {},
@@ -3074,7 +3155,7 @@
       "pinned": true,
       "summary": "A running collection of the router-configuration and IPv4-addressing labs from TECH 65 — Introduction to Networks: building and configuring a small routed LAN/WAN from scratch, and calculating IPv4 subnets by hand. This one card holds all of the class's routing and addressing labs — past, current, and future — instead of a separate card for each lab.",
       "metrics": [
-        "2 labs so far — the comprehensive LAN/WAN build (cable and configure two routers and two switches across three subnets, then verify connectivity and answer device-information questions) and 11.6.6 (calculate network, broadcast, and host ranges from an IPv4 address and subnet mask)",
+        "3 labs so far — the comprehensive LAN/WAN build (cable and configure two routers and two switches across three subnets, then verify connectivity and answer device-information questions), 11.6.6 (calculate network, broadcast, and host ranges from an IPv4 address and subnet mask), and a second run of the LAN/WAN build on the E490 lab's physical equipment racks — reached over console cables and patch panels — with end-to-end pings and the router's routing table captured as verification",
         "Skills: Cisco IOS router and switch configuration, IPv4 addressing tables, default gateways, subnet-mask and prefix-length analysis, verifying connectivity with ping and show commands",
         "Grows as later modules add more routing and addressing labs"
       ],
@@ -3102,6 +3183,29 @@
           "date": "2026-10-20",
           "source": "NetAcad",
           "path": "/public/documents/tech-65/routing-subnetting/11.6.6-calculate-ipv4-subnets.pdf"
+        },
+        {
+          "label": "Lab — Build a LAN/WAN Network (Equipment Racks version, run on the E490 lab's physical routers and switches)",
+          "type": "PDF",
+          "size": "286 KB",
+          "date": "2026-11-02",
+          "source": "NetAcad",
+          "path": "/public/documents/tech-65/routing-subnetting/lab-build-a-lan-wan-network-equipment-racks.pdf"
+        },
+        {
+          "label": "Hands-on Lab — E490 Equipment Rack Access (console-cable and patch-panel setup)",
+          "type": "PDF",
+          "size": "1.2 MB",
+          "date": "2026-11-02",
+          "source": "NetAcad",
+          "path": "/public/documents/tech-65/routing-subnetting/e490-equipment-rack-access.pdf"
+        },
+        {
+          "label": "Equipment-rack lab — connectivity verification screenshots (pings between hosts and the OAK router's routing table)",
+          "type": "PDF",
+          "size": "72 KB",
+          "date": "2026-11-02",
+          "path": "/public/documents/tech-65/routing-subnetting/equipment-rack-verification-screenshots.pdf"
         }
       ],
       "links": {},
