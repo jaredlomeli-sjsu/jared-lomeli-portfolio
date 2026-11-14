@@ -46,6 +46,7 @@ test.describe("security headers config (vercel.json)", () => {
       "/public/artifacts/linux-security-architecture",
       "/public/artifacts/linux-security-architecture/index.html",
       "/demo/simon-says-wiring",
+      "/demo/simon-says-dmm",
       "/public/documents/kali-metasploitable-wazuh-linux/Portfolio.html",
       "/public/documents/self-study/cisco-linux-unhatched/course-report",
     ];
@@ -286,7 +287,9 @@ test.describe("runtime under the enforced CSP", () => {
     await page.route("**/data/highlights.json", async (route) => {
       const res = await route.fetch();
       const json = await res.json();
-      const h = json.highlights.find((x) => x.category === "Credential");
+      const h = json.highlights
+        .filter((x) => x.category === "Credential")
+        .sort((x, y) => y.date.localeCompare(x.date))[0]; // newest first, like the grid
       h.title = payload;
       h.summary = payload;
       h.course = payload;
@@ -356,6 +359,7 @@ test.describe("demo and document pages under their own CSP", () => {
     "/public/artifacts/inspiron-15-internals/index.html",
     "/public/artifacts/linux-security-architecture/index.html",
     "/public/artifacts/simon-says-wiring/index.html",
+    "/public/artifacts/simon-says-dmm/index.html",
     "/public/artifacts/us-markets-30yr-explorer/index.html",
   ];
   for (const p of PAGES) {

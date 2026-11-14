@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "version": "1.0.0",
-  "lastUpdated": "2026-10-29",
+  "lastUpdated": "2026-11-13",
   "_dateNote": "An item's `date` is the date of the underlying work itself (when the lab/project/assignment was done or submitted), NOT the date the card was added to this site. Grids are sorted newest-first by this date.",
   "highlights": [
     {
@@ -18,7 +18,11 @@
         "5 weighted domains: General Security Concepts, Threats/Vulnerabilities/Mitigations, Security Architecture, Security Operations, Security Program Management",
         "Credential ID 57fca5bf-06f2-4057-9cbb-ba98dc3d1bca · issued July 2026"
       ],
-      "tags": ["Security+", "Certification", "CompTIA"],
+      "tags": [
+        "Security+",
+        "Certification",
+        "CompTIA"
+      ],
       "media": {
         "type": "image",
         "localSourcePath": "/public/images/secplus-badge.png",
@@ -48,7 +52,13 @@
         "Self-paced, browser-based labs on a live Linux VM — no local install",
         "Issued July 2026 by Cisco Networking Academy, verifiable via Credly"
       ],
-      "tags": ["Linux", "Cisco", "NDG", "Certificate", "Command Line"],
+      "tags": [
+        "Linux",
+        "Cisco",
+        "NDG",
+        "Certificate",
+        "Command Line"
+      ],
       "media": {
         "type": "image",
         "localSourcePath": "/public/images/linux-unhatched-cert.png",
@@ -78,7 +88,13 @@
         "Capstone submitted and reviewed — a multi-agent IT helpdesk triage system on Google ADK 2.0",
         "Badge issued July 30, 2026 by Kaggle and Google"
       ],
-      "tags": ["AI Agents", "Kaggle", "Google", "LLM", "Certificate"],
+      "tags": [
+        "AI Agents",
+        "Kaggle",
+        "Google",
+        "LLM",
+        "Certificate"
+      ],
       "media": {
         "type": "image",
         "localSourcePath": "/public/images/kaggle-google-ai-agents-vibe-coding-badge.png",
@@ -108,7 +124,12 @@
         "Self-paced Cisco Networking Academy course, browser-based",
         "Issued September 2025 by Cisco Networking Academy"
       ],
-      "tags": ["Cybersecurity", "Cisco", "Fundamentals", "Certificate"],
+      "tags": [
+        "Cybersecurity",
+        "Cisco",
+        "Fundamentals",
+        "Certificate"
+      ],
       "media": {
         "type": "image",
         "localSourcePath": "/public/images/intro-to-cybersecurity-cert.png",
@@ -283,7 +304,13 @@
         "Condensed command cheat sheet for fast reference",
         "Mapped to current SY0-701 exam domains, including direct command reuse in a Log Analysis SIEM lab"
       ],
-      "tags": ["Linux", "Cisco", "NDG", "Security+", "Documentation"],
+      "tags": [
+        "Linux",
+        "Cisco",
+        "NDG",
+        "Security+",
+        "Documentation"
+      ],
       "media": {
         "type": "image",
         "localSourcePath": "/public/images/linux-unhatched-course-report.png",
@@ -563,7 +590,12 @@
         "FIM: SHA-256 fingerprinting in 8192-byte chunks, baseline + verify workflow",
         "Brute-force parser: flagged 2 of 4 source IPs as attackers on a 41-line sample auth log (192.168.1.10 at 23 attempts, 10.0.0.5 at 13, threshold 10)"
       ],
-      "tags": ["Python", "Security", "Log Analysis", "Cryptography"],
+      "tags": [
+        "Python",
+        "Security",
+        "Log Analysis",
+        "Cryptography"
+      ],
       "media": {
         "type": "image",
         "localSourcePath": "/public/images/toolkit-fim-demo.png",
@@ -594,7 +626,12 @@
         "9-part narrated video walkthrough",
         "Companion site built with vanilla web tech and published live"
       ],
-      "tags": ["Web Design", "Interactive", "Thermodynamics", "Physics"],
+      "tags": [
+        "Web Design",
+        "Interactive",
+        "Thermodynamics",
+        "Physics"
+      ],
       "media": {
         "type": "image",
         "localSourcePath": "/public/images/phys2a-engine-explorer.png",
@@ -681,7 +718,11 @@
         "5 of 6 NetAcad interactive labs completed",
         "Labs covered: asking the right analytics questions, data-portfolio research requirements, and Excel fundamentals through basic data implementation and practice"
       ],
-      "tags": ["Cisco NetAcad", "Data Analytics", "Excel"],
+      "tags": [
+        "Cisco NetAcad",
+        "Data Analytics",
+        "Excel"
+      ],
       "media": null,
       "links": {},
       "featured": false,
@@ -702,7 +743,12 @@
         "Component coordinates placed from the Dell service manual's exploded view on a 380 x 260 mm / 10 mm grid, so sizes check against the real chassis with a ruler",
         "Category filters (Power / Compute / Storage / Wireless / Thermal / Audio), full keyboard navigation, a one-page landscape print layout, dark mode, and a localStorage-persisted view"
       ],
-      "tags": ["HTML", "SVG", "Hardware", "Reference"],
+      "tags": [
+        "HTML",
+        "SVG",
+        "Hardware",
+        "Reference"
+      ],
       "media": null,
       "links": {
         "liveDemo": "https://inspiron-15-internals.vercel.app"
@@ -725,7 +771,12 @@
         "Four question formats - flashcard, fill-in-the-blank, scenario, and type-the-command - each with a hint, a worked explanation, and a realistic example",
         "One self-contained HTML file, keyboard-driven, no framework or build step; runs offline in any browser"
       ],
-      "tags": ["JavaScript", "Cybersecurity", "Linux", "Game"],
+      "tags": [
+        "JavaScript",
+        "Cybersecurity",
+        "Linux",
+        "Game"
+      ],
       "media": null,
       "links": {
         "liveDemo": "https://cybersec-practice-terminal.vercel.app"
@@ -748,7 +799,12 @@
         "A drawdown tab plots peak-to-trough declines; a simulator tab compares a monthly dollar-cost-averaged contribution against an equivalent lump sum from any start month",
         "Single HTML file with canvas-drawn charts; values are illustrative monthly approximations and exclude dividends, fees, and taxes"
       ],
-      "tags": ["JavaScript", "Data Visualization", "Finance", "Canvas"],
+      "tags": [
+        "JavaScript",
+        "Data Visualization",
+        "Finance",
+        "Canvas"
+      ],
       "media": null,
       "links": {
         "liveDemo": "https://us-markets-30yr-explorer.vercel.app"
@@ -771,7 +827,12 @@
         "Each concept is grounded with a real-world application and an explicit self-check of what the reader should be able to explain",
         "Cited industry figures (breach cost, workforce gap, phishing share) plus inline data tables — global cybercrime cost, Moore's-Law transistor counts, and brute-force crack times"
       ],
-      "tags": ["HTML", "Cybersecurity", "Networking", "Curriculum"],
+      "tags": [
+        "HTML",
+        "Cybersecurity",
+        "Networking",
+        "Curriculum"
+      ],
       "media": null,
       "links": {
         "liveDemo": "https://jared-lomeli-portfolio.vercel.app/demo/beginner-cybersecurity-curriculum"
@@ -794,7 +855,12 @@
         "A phase-by-phase walk through 1996–2026 with deep-dive case studies (Cisco, Amazon, NVIDIA, the semiconductor cycle, Black Monday, COVID)",
         "Figures cite their sources (S&P SPIVA, Morningstar, Shiller, Siegel, FRED, Vanguard/Fidelity); ~28-page embedded PDF"
       ],
-      "tags": ["Finance", "Markets", "Curriculum", "Self-Study"],
+      "tags": [
+        "Finance",
+        "Markets",
+        "Curriculum",
+        "Self-Study"
+      ],
       "media": null,
       "links": {
         "pdfReport": "/public/documents/us-markets-curriculum/long-term-us-markets-curriculum.pdf"
@@ -817,7 +883,11 @@
         "Full visual spec: a 9-category colour system, exploded-stack layer order, a layout wireframe, and photo-integration instructions (base64-embedded SVG image layers under ~0.4-opacity part overlays)",
         "Implementation plan: a JS state machine (removed set + history stack), unlock/lock dependency logic, and a 16-item build checklist"
       ],
-      "tags": ["Spec", "Hardware", "UX Design"],
+      "tags": [
+        "Spec",
+        "Hardware",
+        "UX Design"
+      ],
       "media": null,
       "links": {
         "pdfReport": "/public/documents/iphone11-teardown-spec/iphone11-teardown-spec.pdf"
@@ -873,7 +943,13 @@
         "Hardening: inbound mail treated as untrusted data and never as instructions (prompt-injection defense); UTC-to-Pacific conversion before taking a calendar date so due dates don't land a day late; Gmail-safe rendering as colored monospace text bars because Gmail strips images and background-only divs; mandatory post-send integrity check with a one-corrected-resend cap",
         "Always-send contract — every routine emails even on a zero-result run, because a silent run is indistinguishable from a broken one"
       ],
-      "tags": ["Automation", "AI Agents", "Claude Code", "Scheduling", "APIs"],
+      "tags": [
+        "Automation",
+        "AI Agents",
+        "Claude Code",
+        "Scheduling",
+        "APIs"
+      ],
       "media": null,
       "links": {},
       "featured": false,
@@ -923,7 +999,13 @@
         "Coloring engine with palette swatches, an eraser, a 'solve it' shortcut, per-region progress, and a confetti completion celebration",
         "Progress saved to localStorage, finished art exports to PNG, static build deployed on Vercel"
       ],
-      "tags": ["JavaScript", "Vite", "SVG", "Game", "Vercel"],
+      "tags": [
+        "JavaScript",
+        "Vite",
+        "SVG",
+        "Game",
+        "Vercel"
+      ],
       "media": null,
       "links": {
         "liveDemo": "https://pandas-color-by-number.vercel.app"
@@ -944,7 +1026,13 @@
         "Two standalone animated HTML/CSS/JS card pages (~31 KB each), hand-built",
         "Deployed on Vercel, each shared through its own bit.ly short link"
       ],
-      "tags": ["HTML", "CSS", "JavaScript", "Animation", "Vercel"],
+      "tags": [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "Animation",
+        "Vercel"
+      ],
       "media": null,
       "links": {},
       "featured": false
@@ -1018,7 +1106,12 @@
         "Interactive 3D ICE vs. EV engine explorer with quiz mode",
         "Live companion site published for the class"
       ],
-      "tags": ["Physics", "Thermodynamics", "Web Design", "Presentation"],
+      "tags": [
+        "Physics",
+        "Thermodynamics",
+        "Web Design",
+        "Presentation"
+      ],
       "media": {
         "type": "image",
         "localSourcePath": "/public/images/phys2a-engine-explorer.png",
@@ -1049,9 +1142,15 @@
       "metrics": [
         "Hardware — 4 LEDs with resistors (D2–D5), 4 push buttons (D6–D9) using the internal pull-up resistors with 20 ms debouncing, and a buzzer (D10), all on a half-size breadboard",
         "Game logic — stores up to 50 steps, replays the whole sequence every round, and speeds up 25 ms per round from 500 ms to a 200 ms floor (reached at round 13)",
-        "Interactive hole-by-hole 3D wiring guide, 33-second demo video, and a two-page project summary"
+        "Interactive hole-by-hole 3D wiring guide, 33-second demo video, and a two-page project summary",
+        "Second interactive 3D page: the Multisim DMM measurements repeated on the real breadboard, with a test sketch standing in for the Multisim switches"
       ],
-      "tags": ["Electronics", "TECH 60", "Arduino", "Embedded C++"],
+      "tags": [
+        "Electronics",
+        "TECH 60",
+        "Arduino",
+        "Embedded C++"
+      ],
       "media": {
         "type": "image",
         "localSourcePath": "/public/images/tech60-final-simon-says.jpg",
@@ -1063,7 +1162,8 @@
         "github": null,
         "liveDemo": "https://jared-lomeli-portfolio.vercel.app/demo/simon-says-wiring",
         "pdfReport": "/public/documents/tech-60/final-simon-says-project-summary.pdf",
-        "video": "/public/videos/tech60-final-simon-says-demo.mp4"
+        "video": "/public/videos/tech60-final-simon-says-demo.mp4",
+        "writeup": "https://jared-lomeli-portfolio.vercel.app/demo/simon-says-dmm"
       },
       "featured": false
     },
@@ -1086,7 +1186,12 @@
         "Every lab cross-checked three ways — hand calculation, Multisim simulation, and a physical breadboard build — comparing predicted vs. measured error",
         "Grows as later modules add more TECH 60 labs"
       ],
-      "tags": ["Electronics", "TECH 60", "Circuit Analysis", "Multisim"],
+      "tags": [
+        "Electronics",
+        "TECH 60",
+        "Circuit Analysis",
+        "Multisim"
+      ],
       "media": null,
       "downloads": [
         {
@@ -1173,7 +1278,12 @@
         "Verified the crossover wiring against the 568-A/568-B pinout tables for all four wire pairs",
         "Connected two PCs point-to-point over the finished cable (192.168.1.1 / .2, /24) and confirmed connectivity with a successful ping in both directions"
       ],
-      "tags": ["Networking", "TECH 65", "Cabling", "TIA/EIA 568"],
+      "tags": [
+        "Networking",
+        "TECH 65",
+        "Cabling",
+        "TIA/EIA 568"
+      ],
       "media": {
         "type": "image",
         "localSourcePath": "/public/images/tech65-lab3-crossover-cable.jpeg",
@@ -1312,7 +1422,11 @@
         "Total propagated uncertainty of roughly 13.9% from three sources: baseline, stick, and string measurements",
         "Reflection identifies fixes — finer markings, repeated trials with averaging, measuring in daylight"
       ],
-      "tags": ["Physics", "PHYS 2A", "Measurement"],
+      "tags": [
+        "Physics",
+        "PHYS 2A",
+        "Measurement"
+      ],
       "media": null,
       "links": {
         "github": null,
@@ -1338,7 +1452,11 @@
         "Constant-acceleration motion measured with a Smart Cart and analyzed against a kinematic model in PASCO Capstone",
         "Discusses error propagation and the trade-offs of mathematical modeling — assumed-constant forces, sensitivity to poor data"
       ],
-      "tags": ["Physics", "PHYS 2A", "Kinematics"],
+      "tags": [
+        "Physics",
+        "PHYS 2A",
+        "Kinematics"
+      ],
       "media": null,
       "links": {
         "github": null,
@@ -1365,7 +1483,11 @@
         "Statistical analysis — mean, standard deviation of the mean, standard error — separating random from systematic error",
         "Finding: precise but not accurate; systematic error and Capstone data failures shifted the whole cluster off target"
       ],
-      "tags": ["Physics", "PHYS 2A", "Kinematics"],
+      "tags": [
+        "Physics",
+        "PHYS 2A",
+        "Kinematics"
+      ],
       "media": null,
       "links": {
         "github": null,
@@ -1391,7 +1513,11 @@
         "Experiment 1: net force versus acceleration measured across seven hanging-mass values with a force sensor and PASCO Capstone",
         "Experiment 2 (a vs. m) planned and predicted (inverse proportionality from a = F/m) but not collected — noted as a time constraint"
       ],
-      "tags": ["Physics", "PHYS 2A", "Newton's Laws"],
+      "tags": [
+        "Physics",
+        "PHYS 2A",
+        "Newton's Laws"
+      ],
       "media": null,
       "links": {
         "github": null,
@@ -1417,7 +1543,11 @@
         "Free-body analysis plus a Capstone force-versus-time trace marking static, maximum-static, and kinetic-friction regions",
         "Static and kinetic friction characterized from inclined-plane and tabletop trials"
       ],
-      "tags": ["Physics", "PHYS 2A", "Newton's Laws"],
+      "tags": [
+        "Physics",
+        "PHYS 2A",
+        "Newton's Laws"
+      ],
       "media": null,
       "links": {
         "github": null,
@@ -1443,7 +1573,11 @@
         "Centripetal acceleration and force computed from period, radius, and mass, with free-body diagrams for each mass in the system",
         "The group's first lab turning circular-motion observations into analyzed data; reflection traces outliers to the spinning mass drifting downward"
       ],
-      "tags": ["Physics", "PHYS 2A", "Circular Motion"],
+      "tags": [
+        "Physics",
+        "PHYS 2A",
+        "Circular Motion"
+      ],
       "media": null,
       "links": {
         "github": null,
@@ -1469,7 +1603,11 @@
         "Angular position, velocity, and acceleration graphs read and compared to their linear x/v/a analogues from kinematics",
         "Sliding condition derived: the penny slips once the required friction exceeds maximum static friction, at which point net force and acceleration become nonzero"
       ],
-      "tags": ["Physics", "PHYS 2A", "Circular Motion"],
+      "tags": [
+        "Physics",
+        "PHYS 2A",
+        "Circular Motion"
+      ],
       "media": null,
       "links": {
         "github": null,
@@ -1495,7 +1633,11 @@
         "Cart speed predicted with the work-energy theorem and compared against a Newton's-second-law approach",
         "Spring constant from the launch (1.11) vs. the force-sensor value (1.15) — a 3.4% difference; the force sensor is trusted more for excluding external forces"
       ],
-      "tags": ["Physics", "PHYS 2A", "Energy"],
+      "tags": [
+        "Physics",
+        "PHYS 2A",
+        "Energy"
+      ],
       "media": null,
       "links": {
         "github": null,
@@ -1521,7 +1663,11 @@
         "Unknown mass predicted from a torque-balance equation using the meter stick's mass, its center of mass, and two known masses' positions",
         "Explains why the pivot's normal force drops out of the torque calculation, with extended free-body diagrams showing action/reaction pairs"
       ],
-      "tags": ["Physics", "PHYS 2A", "Torque"],
+      "tags": [
+        "Physics",
+        "PHYS 2A",
+        "Torque"
+      ],
       "media": null,
       "links": {
         "github": null,
@@ -1547,7 +1693,11 @@
         "Rotational inertia determined from measured angular acceleration for several mass positions; I-vs-r shows a linear best fit — resistance to rotation rises as mass moves outward",
         "Sample calculations for net force, tension, net torque, and rotational inertia; discusses extending the setup to test energy conservation (Mgh = 1/2 mv^2 + 1/2 Iw^2)"
       ],
-      "tags": ["Physics", "PHYS 2A", "Rotational Motion"],
+      "tags": [
+        "Physics",
+        "PHYS 2A",
+        "Rotational Motion"
+      ],
       "media": null,
       "links": {
         "github": null,
@@ -1573,7 +1723,11 @@
         "Four rotating stations, roughly 30-45 minutes each, with measurements and observations recorded per station",
         "Applied questions — why rice cooks slower at altitude (lower atmospheric pressure lowers the boiling point), and Archimedes' displacement test of King Hiero's crown"
       ],
-      "tags": ["Physics", "PHYS 2A", "Thermodynamics"],
+      "tags": [
+        "Physics",
+        "PHYS 2A",
+        "Thermodynamics"
+      ],
       "media": null,
       "links": {
         "github": null,
@@ -1599,7 +1753,11 @@
         "Solo assessment: mass, weight, applied force, and acceleration recorded and analyzed per trial",
         "Checks the linear net-force vs. acceleration relationship (a = F/m) from the individual data"
       ],
-      "tags": ["Physics", "PHYS 2A", "Newton's Laws"],
+      "tags": [
+        "Physics",
+        "PHYS 2A",
+        "Newton's Laws"
+      ],
       "media": null,
       "links": {
         "github": null,
@@ -1623,11 +1781,15 @@
       "pinned": true,
       "summary": "A running archive of every Cisco Packet Tracer activity (.pka) and network (.pkt) file from TECH 65 — Introduction to Networks. Download any file and open it in Packet Tracer. This one card holds the Packet Tracer activity files for the class — past, current, and future — so labs and assignments that use Packet Tracer link back here for their files instead of carrying their own copies. Skills tests and quizzes live in their own collection card.",
       "metrics": [
-        "39 files — 2 Packet Tracer networks (.pkt) plus 34 Packet Tracer activities (.pka), spanning Modules 1–13, plus 3 PDF worksheets (the 9.1.3, 11.5.5 and 13.2.7 assignment sheets, each listed right beside its Packet Tracer file)",
-        "Covers navigating the Cisco IOS, initial switch and router configuration, basic connectivity, end-device setup, the TCP/IP & OSI models in action, a wired-and-wireless LAN, physical-layer exploration and connection in physical mode, identifying MAC/IP addresses and reading the ARP table, connecting a router to a LAN, troubleshooting default-gateway issues, and building a switch-and-router network in physical mode, subnetting an IPv4 network from a host-count requirement, a multi-subnet subnetting scenario, VLSM design and implementation (practice and graded), IPv6 addressing and subnetted IPv6 addressing schemes, testing connectivity with ping, traceroute and ICMP, and a hands-on LAN/WAN build with two routers and two switches",
+        "40 files — 2 Packet Tracer networks (.pkt) plus 35 Packet Tracer activities (.pka), spanning Modules 1–13, plus 3 PDF worksheets (the 9.1.3, 11.5.5 and 13.2.7 assignment sheets, each listed right beside its Packet Tracer file)",
+        "Covers navigating the Cisco IOS, initial switch and router configuration, basic connectivity, end-device setup, the TCP/IP & OSI models in action, a wired-and-wireless LAN, physical-layer exploration and connection in physical mode, identifying MAC/IP addresses and reading the ARP table, connecting a router to a LAN, troubleshooting default-gateway issues, and building a switch-and-router network in physical mode, subnetting an IPv4 network from a host-count requirement, a multi-subnet subnetting scenario, VLSM design and implementation (practice and graded), IPv6 addressing and subnetted IPv6 addressing schemes, testing connectivity with ping, traceroute and ICMP, selecting and connecting the correct Ethernet cable types from a cut-sheet, and a hands-on LAN/WAN build with two routers and two switches",
         "Grows as later modules add more Packet Tracer files"
       ],
-      "tags": ["Cisco Packet Tracer", "TECH 65", "Networking"],
+      "tags": [
+        "Cisco Packet Tracer",
+        "TECH 65",
+        "Networking"
+      ],
       "media": null,
       "downloads": [
         {
@@ -1932,6 +2094,14 @@
           "path": "/public/documents/tech-65/packet-tracer/13.3.1-use-icmp-to-test-and-correct-network-connectivity.pka"
         },
         {
+          "label": "Selecting and Properly Connecting Ethernet Cables",
+          "type": "Packet Tracer activity (.pka)",
+          "size": "369 KB",
+          "date": "2026-11-09",
+          "source": "NetAcad",
+          "path": "/public/documents/tech-65/packet-tracer/selecting-and-properly-connecting-ethernet-cables.pka"
+        },
+        {
           "label": "Hands-on Lab — Build a LAN/WAN Network (two routers, two switches)",
           "type": "Packet Tracer network (.pkt)",
           "size": "54 KB",
@@ -1960,7 +2130,11 @@
         "Four files: one .pkt starter network plus three auto-graded .pka activities (Intro Exercise 1–3)",
         "Cisco Packet Tracer v9.0.1; lab work done in teams, in person in room E490 and remotely"
       ],
-      "tags": ["Cisco Packet Tracer", "TECH 65", "Networking"],
+      "tags": [
+        "Cisco Packet Tracer",
+        "TECH 65",
+        "Networking"
+      ],
       "media": null,
       "links": {
         "related": "/semester-3-technical-assignments#hl-hl-tech65-packet-tracer-collection",
@@ -1983,7 +2157,11 @@
       "metrics": [
         "9 activities and 1 assignment so far (Activities 1–5 and 7–9 — Activity 9 has two parts — plus Assignment 1) — arithmetic & I/O, built-in collection types, conditional logic, loop-based accumulation, string counting & splitting, functions with dictionary counting and a book-store purchase loop, functions with input checking, graph topologies built with NetworkX, file handling (writing, reading, and appending text files and reading a file in a loop), the Python OS module (creating directories and pinging a host), and a multi-problem assignment covering string reversal, leap years, list slicing, an overtime-pay function with input validation, set symmetric difference, and connection-log analysis with dictionaries"
       ],
-      "tags": ["Python", "TECH 30", "Programming"],
+      "tags": [
+        "Python",
+        "TECH 30",
+        "Programming"
+      ],
       "media": null,
       "links": {},
       "featured": false,
@@ -2098,9 +2276,13 @@
       "pinned": true,
       "summary": "A running set of the written assignments from TECH 15 — Careers in Engineering Technology, a seminar on career planning, résumés, internships, and industry guest speakers. Added as the course goes on.",
       "metrics": [
-        "11 assignments so far — an introductory slideshow, a career-services résumé/ATS session summary, a study-abroad guest-speaker summary, a financial-aid & scholarships guest-speaker summary, a NETS / SME / augmented-reality guest-speaker summary, an Archer Aviation guest-speaker summary, a time-management summary with a weekly time log and daily targets, a manufacturing-engineer guest-speaker summary, a Siemens guest-speaker summary, a project-management summary, and an Opera guest-speaker summary"
+        "12 assignments so far — an introductory slideshow, a career-services résumé/ATS session summary, a study-abroad guest-speaker summary, a financial-aid & scholarships guest-speaker summary, a NETS / SME / augmented-reality guest-speaker summary, an Archer Aviation guest-speaker summary, a time-management summary with a weekly time log and daily targets, a manufacturing-engineer guest-speaker summary, a Siemens guest-speaker summary, a project-management summary, an Opera guest-speaker summary, and a Fortinet guest-speaker summary"
       ],
-      "tags": ["Career Development", "TECH 15", "Professional Writing"],
+      "tags": [
+        "Career Development",
+        "TECH 15",
+        "Professional Writing"
+      ],
       "media": null,
       "downloads": [
         {
@@ -2179,6 +2361,13 @@
           "size": "42 KB",
           "date": "2026-10-30",
           "path": "/public/documents/tech-15/assignment-11-opera-speaker-summary.pdf"
+        },
+        {
+          "label": "Assignment 12 — Fortinet Guest Speaker Summary",
+          "type": "PDF",
+          "size": "44 KB",
+          "date": "2026-11-06",
+          "path": "/public/documents/tech-15/assignment-12-fortinet-speaker-summary.pdf"
         }
       ],
       "links": {},
@@ -2251,7 +2440,11 @@
       "metrics": [
         "6 assignments — a first-speech self-evaluation, a storytelling-speech reflection, an informative speech, a group persuasive speech, and two peer-review sets"
       ],
-      "tags": ["COMM 20", "Public Speaking", "Peer Review"],
+      "tags": [
+        "COMM 20",
+        "Public Speaking",
+        "Peer Review"
+      ],
       "media": null,
       "downloads": [
         {
@@ -2317,7 +2510,12 @@
       "metrics": [
         "10 assignments — 4 rhetorical-analysis essays, 2 reflections, 2 peer-review sets, a rhetorical scavenger hunt, and a final advocacy webpage"
       ],
-      "tags": ["ENGL 1A", "Rhetoric", "Essay", "Peer Review"],
+      "tags": [
+        "ENGL 1A",
+        "Rhetoric",
+        "Essay",
+        "Peer Review"
+      ],
       "media": null,
       "downloads": [
         {
@@ -2411,7 +2609,12 @@
       "metrics": [
         "5 assignments — 3 argument essays, an annotated bibliography, and a portfolio reflection"
       ],
-      "tags": ["ENGL 2", "Rhetoric", "Essay", "Research"],
+      "tags": [
+        "ENGL 2",
+        "Rhetoric",
+        "Essay",
+        "Research"
+      ],
       "media": null,
       "downloads": [
         {
@@ -2470,7 +2673,12 @@
       "metrics": [
         "5 assignments — 3 Modern Connection comparative essays, a participation essay, and an extra-credit essay"
       ],
-      "tags": ["HIST 15", "History", "Comparative Essay", "Essay"],
+      "tags": [
+        "HIST 15",
+        "History",
+        "Comparative Essay",
+        "Essay"
+      ],
       "media": null,
       "downloads": [
         {
@@ -2524,8 +2732,13 @@
       "kind": "collection",
       "pinned": true,
       "summary": "Every prior résumé version, kept as a record of how it evolved over the course of the internship/job search. The current résumé is on the site's Résumé page — this is the archive of everything before it.",
-      "metrics": ["8 versions, June–September 2026"],
-      "tags": ["Résumé", "Career"],
+      "metrics": [
+        "9 versions, June–October 2026"
+      ],
+      "tags": [
+        "Résumé",
+        "Career"
+      ],
       "media": null,
       "links": {},
       "downloads": [
@@ -2584,22 +2797,34 @@
           "size": "96 KB",
           "date": "2026-09-13",
           "path": "/public/documents/professional/resumes/jared-lomeli-resume-v6-1.pdf"
+        },
+        {
+          "label": "Résumé v7.2",
+          "type": "PDF",
+          "size": "105 KB",
+          "date": "2026-10-12",
+          "path": "/public/documents/professional/resumes/jared-lomeli-resume-v7-2.pdf"
         }
       ],
       "featured": false
     },
     {
       "id": "hl-2026-professional-resume-current",
-      "title": "Résumé — Current (v7.2)",
+      "title": "Résumé — Current (v7.3)",
       "category": "Professional Documents",
       "subcategory": "Resumes",
       "subsubcategory": "Current",
-      "date": "2026-10-12",
+      "date": "2026-11-09",
       "semester": null,
       "course": null,
       "summary": "The current résumé, kept up to date as coursework and projects are added. Same file used everywhere else on the site (the homepage's Résumé button, /public/resume.html).",
-      "metrics": ["Jared_Lomeli_CNSM_v7.2.pdf"],
-      "tags": ["Résumé", "Career"],
+      "metrics": [
+        "Jared_Lomeli_CNSM_v7.3.pdf"
+      ],
+      "tags": [
+        "Résumé",
+        "Career"
+      ],
       "media": {
         "type": "image",
         "localSourcePath": "/public/images/resume-current-preview.png",
@@ -2623,8 +2848,13 @@
       "kind": "collection",
       "pinned": true,
       "summary": "Cover letters written for internship and job applications, each tailored to the specific role and team.",
-      "metrics": ["17 cover letters, June–October 2026"],
-      "tags": ["Cover Letter", "Career"],
+      "metrics": [
+        "17 cover letters, June–October 2026"
+      ],
+      "tags": [
+        "Cover Letter",
+        "Career"
+      ],
       "media": null,
       "links": {},
       "downloads": [
@@ -2761,8 +2991,13 @@
       "kind": "collection",
       "pinned": true,
       "summary": "Supporting documents used alongside the résumé — transcripts and the current class schedule.",
-      "metrics": ["3 documents"],
-      "tags": ["Transcript", "Career"],
+      "metrics": [
+        "3 documents"
+      ],
+      "tags": [
+        "Transcript",
+        "Career"
+      ],
       "media": null,
       "links": {},
       "downloads": [
@@ -2875,7 +3110,12 @@
         "9-part narrated video walkthrough",
         "Companion site built with vanilla web tech and published live"
       ],
-      "tags": ["Web Design", "Interactive", "Thermodynamics", "Physics"],
+      "tags": [
+        "Web Design",
+        "Interactive",
+        "Thermodynamics",
+        "Physics"
+      ],
       "media": {
         "type": "image",
         "localSourcePath": "/public/images/phys2a-engine-explorer.png",
@@ -2904,7 +3144,11 @@
         "Built and run across two VirtualBox VMs — an existing Kali Linux VM (CLI) and a newly built Ubuntu Desktop 26.04 LTS VM (GUI)",
         "Written as a companion resource, not a replacement — assumes command syntax is covered by the course itself and focuses on building the CLI/GUI mental model"
       ],
-      "tags": ["Linux", "Cisco Networking Academy", "VirtualBox"],
+      "tags": [
+        "Linux",
+        "Cisco Networking Academy",
+        "VirtualBox"
+      ],
       "media": null,
       "links": {
         "github": null,
@@ -2929,7 +3173,13 @@
         "Migrated the Pi from wired Ethernet to sjsu_guest Wi-Fi without losing the active session",
         "Installed eza, bat, btop, and ncdu for day-to-day CLI use"
       ],
-      "tags": ["Raspberry Pi", "Linux", "SSH", "Networking", "NETS"],
+      "tags": [
+        "Raspberry Pi",
+        "Linux",
+        "SSH",
+        "Networking",
+        "NETS"
+      ],
       "media": {
         "type": "image",
         "localSourcePath": "/public/images/nets-raspberry-pi-workshop.jpg",
@@ -2999,7 +3249,12 @@
         "Skills tested: device hardening (hostnames, encrypted passwords, banners, console/VTY lines), management IPs and default gateways, a default static route, end-device configuration, rack-and-cable provisioning in physical mode, and connectivity testing with ping and DNS",
         "Grows as later chapters add more tests and quizzes"
       ],
-      "tags": ["Cisco Packet Tracer", "TECH 65", "Networking", "Skills Tests"],
+      "tags": [
+        "Cisco Packet Tracer",
+        "TECH 65",
+        "Networking",
+        "Skills Tests"
+      ],
       "media": null,
       "links": {},
       "featured": false,
@@ -3317,11 +3572,89 @@
         "Virtual event on October 16, 2026 (2:00–3:30 PM EDT)",
         "Focus: career paths into Micron and the semiconductor industry, told through speakers' own career stories"
       ],
-      "tags": ["Career Development", "Semiconductors", "Micron", "Events"],
+      "tags": [
+        "Career Development",
+        "Semiconductors",
+        "Micron",
+        "Events"
+      ],
       "media": null,
       "links": {
         "pdfReport": "/public/documents/events/micron-etch-event-page.pdf"
       },
+      "featured": false
+    },
+    {
+      "id": "hl-2026-cisco-linux-essentials-cert",
+      "title": "Cisco NDG Linux Essentials",
+      "category": "Credential",
+      "date": "2026-11-10",
+      "starred": false,
+      "semester": null,
+      "course": "Cisco Networking Academy",
+      "summary": "Student-level Statement of Achievement from Cisco Networking Academy (in collaboration with NDG) for completing Linux Essentials, the follow-on to Linux Unhatched. Covers the Linux operating system, navigating a Linux system, the power of the command line, and Linux security and file permissions.",
+      "metrics": [
+        "Four certified outcomes: understand the Linux OS, navigate a Linux system, use the command line, and apply Linux security and file permissions",
+        "Issued November 10, 2026 by Cisco Networking Academy, with a scannable verification QR code on the certificate",
+        "Builds on Linux Unhatched (July 2026) and pairs with the self-authored Linux CLI vs. GUI comparison lab"
+      ],
+      "tags": [
+        "Linux",
+        "Cisco",
+        "NDG",
+        "Certificate",
+        "Command Line"
+      ],
+      "media": {
+        "type": "image",
+        "localSourcePath": "/public/images/linux-essentials-cert.png",
+        "altText": "Cisco Networking Academy / NDG Statement of Achievement certifying Jared Lomeli completed the Linux Essentials course, issued November 10, 2026",
+        "width": 1650,
+        "height": 1275
+      },
+      "links": {
+        "github": null,
+        "liveDemo": null,
+        "pdfReport": "/public/documents/credentials/linux-essentials-certificate.pdf",
+        "verify": null
+      },
+      "featured": false
+    },
+    {
+      "id": "hl-2026-bus2-90-master-notes",
+      "title": "BUS2 90 — Master Lecture Notes (Chapters 1–11)",
+      "category": "Coursework",
+      "subcategory": "Semester 3",
+      "subsubcategory": "Non-technical",
+      "subsubsubcategory": "Assignments",
+      "date": "2026-11-10",
+      "semester": "Semester 3 (San José State University)",
+      "course": "BUS2 90",
+      "courseCode": "BUS2 90",
+      "kind": "collection",
+      "pinned": true,
+      "summary": "One searchable, open-notes study reference for BUS2 90 (Business Statistics), compiled from every chapter's lecture notes, class notes, and worked-example spreadsheets. Built to be searched with Ctrl+F and grows as new chapters are added.",
+      "metrics": [
+        "298 pages covering Chapters 1–11, with slide images, formulas, and worked examples in order",
+        "Includes class-note write-ups plus the Ninja Spreadsheet, Bayes' Theorem, and CDF cheat-sheet pages",
+        "Version 3.2, with the newest chapters merged in as they are taught"
+      ],
+      "tags": [
+        "BUS2 90",
+        "Statistics",
+        "Study Notes"
+      ],
+      "media": null,
+      "downloads": [
+        {
+          "label": "Master Lecture Notes — BUS2 90 v3.2 (Full, Searchable)",
+          "type": "PDF",
+          "size": "9.6 MB",
+          "date": "2026-11-10",
+          "path": "/public/documents/bus2-90/master-lecture-notes-v3-2.pdf"
+        }
+      ],
+      "links": {},
       "featured": false
     }
   ]

@@ -477,6 +477,7 @@ test.describe("collection cards (/semester-3-technical-assignments)", () => {
   test("collection cards lead the grid, each with a badge and a downloads list", async ({
     page,
   }) => {
+    test.setTimeout(90000); // many PDF fetches; grows with each new collection entry
     await page.goto("/semester-3-technical-assignments");
 
     // the pinned "collection" cards float ahead of any dated cards
@@ -493,7 +494,7 @@ test.describe("collection cards (/semester-3-technical-assignments)", () => {
       "Ongoing collection",
     );
     const ptDl = pt.locator("a.download-item");
-    await expect(ptDl).toHaveCount(36);
+    await expect(ptDl).toHaveCount(37);
     for (const a of await ptDl.all()) {
       await expect(a).toHaveAttribute("download", "");
       const href = await a.getAttribute("href");
@@ -589,13 +590,13 @@ test.describe("collection cards (/semester-3-technical-assignments)", () => {
     const t15 = page.locator("#hl-hl-2026-tech15-assignments");
     await expect(t15).toHaveClass(/highlight-card--collection/);
     const t15Dl = t15.locator("button.download-item--view");
-    await expect(t15Dl).toHaveCount(11);
+    await expect(t15Dl).toHaveCount(12);
     await expect(t15.locator("a.download-item")).toHaveCount(0);
     for (const btn of await t15Dl.all()) {
       await expectViewItemOpensPdf(
         page,
         btn,
-        /^\/public\/documents\/tech-15\/(?:assignment-(?:[1234678]|1[01])-.+|project-management-assignment)\.pdf$/,
+        /^\/public\/documents\/tech-15\/(?:assignment-(?:[1234678]|1[012])-.+|project-management-assignment)\.pdf$/,
       );
     }
   });
